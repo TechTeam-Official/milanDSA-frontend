@@ -148,13 +148,13 @@ export function TeamSphere() {
   // Sphere configuration - EDIT HERE to adjust sphere radius
   // Current: 0.50 for mobile, 0.45 for desktop
   // Increase value for larger sphere, decrease for smaller
-  const sphereRadius = dimensions.width * (isMobile ? 0.50 : 0.45);
+  const sphereRadius = dimensions.width * (isMobile ? 0.40 : 0.45);
 
   // Image scale configuration - EDIT HERE to adjust team member image sizes
   // Current: 0.28 for mobile (larger images), 0.20 for desktop
   // Increase value for larger images, decrease for smaller
   // Mobile images are larger to improve visibility on small screens
-  const baseImageScale = isMobile ? 0.40 : 0.20;
+  const baseImageScale = isMobile ? 0.60 : 0.20;
 
   // Toggle expanded state - only one item can be expanded at a time
   const toggleItem = (itemId: string) => {
@@ -407,8 +407,8 @@ export function TeamSphere() {
 
       {/* MOBILE: Convenor Lists - Positioned between text and sphere */}
       {/* EDIT HERE: Adjust itemsPerPage (line 115) to change how many items show per page */}
-      {/* EDIT HERE: Adjust mt-24 and mb-4 to change vertical spacing */}
-      <div className="flex md:hidden w-full px-4 gap-4 mt-24 mb-8">
+      {/* EDIT HERE: Adjust mt-24 and mb-2 to change vertical spacing */}
+      <div className="flex md:hidden w-full px-4 gap-4 mt-24 mb-0">
         {/* Core Team Convenors - Left Side */}
         <div className="flex-1 flex flex-col">
           <h2 className="text-sm font-bold text-gray-900 mb-2">Core Team Convenors</h2>
@@ -495,7 +495,7 @@ export function TeamSphere() {
       </div>
 
       {/* MOBILE: Sphere positioned above bottom, Desktop: centered */}
-      <div className="flex flex-col items-center justify-center gap-8 pb-8 md:pb-0 md:w-full">
+      <div className="flex flex-col items-center justify-center gap-8 pb-0 md:pb-0 md:w-full">
 
         <SphereImageGrid
           images={IMAGES}
