@@ -1,9 +1,8 @@
-"use client";
+    "use client";
 
 import SphereImageGrid, { ImageData } from "@/components/ui/img-sphere";
 import React, { useState, useEffect } from 'react';
-import Image from "next/image";
-import { ChevronRight, X } from 'lucide-react';
+import { ChevronRight, ChevronDown, X } from 'lucide-react';
 
 // ==========================================
 // IMAGE DATA CONFIGURATION
@@ -226,6 +225,7 @@ export function TeamSphere() {
             {['Convenor 1', 'Convenor 2'].map((convenorName, idx) => {
               const convenorId = `${itemId}-${idx}`;
               const convenorImage = getRandomImage(convenorId);
+              const isHovered = hoveredConvenor === convenorId;
 
               const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
                 const rect = e.currentTarget.getBoundingClientRect();
@@ -290,12 +290,10 @@ export function TeamSphere() {
           }}
         >
           <div className="relative aspect-square">
-            <Image
+            <img
               src={selectedConvenor.src}
               alt={selectedConvenor.alt}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 400px"
+              className="w-full h-full object-cover"
             />
             <button
               onClick={() => setSelectedConvenor(null)}
@@ -327,6 +325,15 @@ export function TeamSphere() {
           from { transform: scale(0.8); opacity: 0; }
           to { transform: scale(1); opacity: 1; }
         }
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .overflow-y-auto::-webkit-scrollbar {
+          display: none;
+        }
+        /* Hide scrollbar for IE, Edge and Firefox */
+        .overflow-y-auto {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
       `}</style>
       <main className="w-full min-h-screen flex justify-center items-start bg-gradient-to-br from-gray-50 to-gray-100 pt-22 relative">
         <h1 className="absolute top-6 left-10 text-[10rem] font-bold text-gray-900 tracking-tight">Our</h1>
@@ -357,19 +364,31 @@ export function TeamSphere() {
       </div>
 
       {/* Core Team Convenors & Club Convenors */}
-      <div className="fixed bottom-30 right-6 flex flex-col gap-8 max-w-md" style={{ transformOrigin: 'bottom right' }}>
+      <div className="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-6 max-w-md" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
         {/* Core Team Convenors */}
-        <div className="flex flex-col">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Core Team Convenors</h2>
-          <div className="space-y-0">
+        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 6rem)' }}>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Core Team Convenors</h2>
+          <div
+            className="space-y-0 overflow-y-auto pr-2"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
             {coreTeamRoles.map(role => renderExpandableItem(role, 'core'))}
           </div>
         </div>
 
         {/* Club Convenors */}
-        <div className="flex flex-col">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Club Convenors</h2>
-          <div className="space-y-0">
+        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 6rem)' }}>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Club Convenors</h2>
+          <div
+            className="space-y-0 overflow-y-auto pr-2"
+            style={{
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
             {clubConvenors.map(club => renderExpandableItem(club, 'club'))}
           </div>
         </div>
@@ -386,13 +405,11 @@ export function TeamSphere() {
             opacity: hoveredConvenor ? 1 : 0
           }}
         >
-          <div className="bg-white rounded-xl shadow-2xl overflow-hidden w-24 h-24 border-2 border-gray-200 relative">
-            <Image
+          <div className="bg-white rounded-xl shadow-2xl overflow-hidden w-24 h-24 border-2 border-gray-200">
+            <img
               src={getRandomImage(hoveredConvenor).src}
               alt={getRandomImage(hoveredConvenor).alt}
-              fill
-              className="object-cover"
-              sizes="96px"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
