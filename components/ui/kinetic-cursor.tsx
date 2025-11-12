@@ -20,9 +20,11 @@ export function KineticCursor() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Only show cursor on devices with mouse (not touch devices)
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    if (isTouchDevice) {
+    // Only show cursor on desktop screens (not mobile)
+    // Check screen size instead of touch capability since many desktops have touch but use mouse
+    const isMobile = window.innerWidth < 768;
+
+    if (isMobile) {
       return;
     }
 
@@ -36,10 +38,21 @@ export function KineticCursor() {
       cursorY.set(e.clientY);
     };
 
+    const handleResize = () => {
+      // Hide cursor if window is resized to mobile size, show if resized to desktop
+      if (window.innerWidth < 768) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+    };
+
     window.addEventListener("mousemove", moveCursor);
+    window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("mousemove", moveCursor);
+      window.removeEventListener("resize", handleResize);
     };
   }, [cursorX, cursorY]);
 

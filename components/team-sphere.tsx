@@ -284,7 +284,7 @@ export function TeamSphere() {
     return (
       <div className="fixed bottom-6 left-6 z-50">
         <div
-          className="bg-white rounded-xl max-w-md w-full overflow-hidden shadow-2xl border-2 border-gray-200"
+          className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border-2 border-gray-200"
           style={{
             animation: 'scaleIn 0.3s ease-out'
           }}

@@ -104,13 +104,21 @@ const allImages = [milan25Images, milan24Images, milan23Images, milan22Images];
 
 export function MilanTimelineSection() {
   const [activeTimelineIndex, setActiveTimelineIndex] = useState(0);
-  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [carouselIndices, setCarouselIndices] = useState([0, 0, 0, 0]);
 
   const handleTimelineIndexChange = (index: number) => {
     setActiveTimelineIndex(index);
-    // Reset carousel to first image when timeline changes
-    setCarouselIndex(0);
   };
+
+  const handleCarouselIndexChange = (timelineIndex: number, carouselIndex: number) => {
+    setCarouselIndices(prev => {
+      const newIndices = [...prev];
+      newIndices[timelineIndex] = carouselIndex;
+      return newIndices;
+    });
+  };
+
+  const currentImages = allImages[activeTimelineIndex] || milan25Images;
 
   const timelineData = [
     {
@@ -120,6 +128,14 @@ export function MilanTimelineSection() {
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
             Themed &quot;Cosmic Odyssey&quot;, featured a stellar performance by Sunidhi Chauhan and hosted the national finals of RoboWars.
           </p>
+          {/* Mobile Carousel - appears below content */}
+          <div className="lg:hidden -ml-8 ml-0 relative z-50 max-w-[calc(100%-2rem)]">
+            <FramerCarousel
+              items={allImages[0]}
+              currentIndex={carouselIndices[0]}
+              onIndexChange={(index) => handleCarouselIndexChange(0, index)}
+            />
+          </div>
           <div className="h-32 md:h-48"></div>
         </div>
       ),
@@ -131,6 +147,14 @@ export function MilanTimelineSection() {
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
             &quot;Retro Revival&quot; brought back the 80s and 90s, with a memorable concert by the band The Local Train and a vintage gaming expo.
           </p>
+          {/* Mobile Carousel - appears below content */}
+          <div className="lg:hidden -ml-8 ml-0 relative z-50 max-w-[calc(100%-2rem)]">
+            <FramerCarousel
+              items={allImages[1]}
+              currentIndex={carouselIndices[1]}
+              onIndexChange={(index) => handleCarouselIndexChange(1, index)}
+            />
+          </div>
           <div className="h-32 md:h-48"></div>
         </div>
       ),
@@ -142,6 +166,14 @@ export function MilanTimelineSection() {
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
             With the theme &quot;Digital Dreams&quot;, this edition saw Nucleya headline the EDM night and introduced a massive 48-hour hackathon.
           </p>
+          {/* Mobile Carousel - appears below content */}
+          <div className="lg:hidden -ml-8 ml-0 relative z-50 max-w-[calc(100%-2rem)]">
+            <FramerCarousel
+              items={allImages[2]}
+              currentIndex={carouselIndices[2]}
+              onIndexChange={(index) => handleCarouselIndexChange(2, index)}
+            />
+          </div>
           <div className="h-32 md:h-48"></div>
         </div>
       ),
@@ -153,13 +185,19 @@ export function MilanTimelineSection() {
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
             &quot;Aqueous Realms&quot; explored the mysteries of the deep, with a stunning laser show and a keynote by a renowned marine biologist.
           </p>
+          {/* Mobile Carousel - appears below content */}
+          <div className="lg:hidden -ml-8 ml-0 relative z-50 max-w-[calc(100%-2rem)]">
+            <FramerCarousel
+              items={allImages[3]}
+              currentIndex={carouselIndices[3]}
+              onIndexChange={(index) => handleCarouselIndexChange(3, index)}
+            />
+          </div>
           <div className="h-32 md:h-48"></div>
         </div>
       ),
     },
   ];
-
-  const currentImages = allImages[activeTimelineIndex] || milan25Images;
 
   return (
     <section className="w-full min-h-screen bg-white dark:bg-neutral-950">
@@ -175,12 +213,12 @@ export function MilanTimelineSection() {
             />
           </div>
 
-          {/* Right Side - Carousel */}
-          <div className="order-1 lg:order-2 lg:sticky lg:top-40 h-fit lg:pt-25">
+          {/* Right Side - Carousel (Desktop only) */}
+          <div className="hidden lg:block order-1 lg:order-2 lg:sticky lg:top-40 h-fit lg:pt-25 relative z-50">
             <FramerCarousel
               items={currentImages}
-              currentIndex={carouselIndex}
-              onIndexChange={setCarouselIndex}
+              currentIndex={carouselIndices[activeTimelineIndex]}
+              onIndexChange={(index) => handleCarouselIndexChange(activeTimelineIndex, index)}
             />
           </div>
         </div>

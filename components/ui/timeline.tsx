@@ -91,7 +91,7 @@ export const Timeline = ({ data, onActiveIndexChange, heading, description }: Ti
               {/* Timeline dot and title section */}
               <div className="flex items-start gap-4 md:gap-0 flex-shrink-0">
                 <div className="relative flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                  <div className="h-10 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-full bg-white dark:bg-black flex items-center justify-center z-10">
                     <div className={`h-4 w-4 rounded-full border p-2 transition-colors ${
                       index === activeIndex
                         ? 'bg-purple-500 border-purple-600 dark:bg-purple-500 dark:border-purple-400'
@@ -108,7 +108,7 @@ export const Timeline = ({ data, onActiveIndexChange, heading, description }: Ti
               </div>
 
               {/* Content section - also sticky */}
-              <div className="flex-1 pl-0 md:pl-4 py-8 md:py-0 md:-mt-1 md:flex md:items-start">
+              <div className="flex-1 pl-15 md:pl-4 py-8 md:py-0 md:-mt-1 md:flex md:items-start">
                 <div className="w-full">
                   {item.content}
                 </div>
@@ -120,7 +120,7 @@ export const Timeline = ({ data, onActiveIndexChange, heading, description }: Ti
           style={{
             height: height + "px",
           }}
-          className="absolute left-5 md:left-5 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] "
+          className="absolute left-5 md:left-5 top-0 overflow-hidden w-[2px] bg-[linear-gradient(to_bottom,var(--tw-gradient-stops))] from-transparent from-[0%] via-neutral-200 dark:via-neutral-700 to-transparent to-[99%]  [mask-image:linear-gradient(to_bottom,transparent_0%,black_10%,black_90%,transparent_100%)] z-0"
         >
           <motion.div
             style={{

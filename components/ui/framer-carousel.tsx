@@ -54,12 +54,12 @@ export function FramerCarousel({ items, currentIndex = 0, onIndexChange }: Frame
   };
 
   return (
-    <div className='lg:p-10 sm:p-4 p-2 w-full'>
+    <div className='lg:p-10 sm:p-4 p-0 w-full'>
       <div className='flex flex-col gap-3'>
         <div className='relative overflow-hidden rounded-lg' ref={containerRef}>
           <motion.div className='flex' style={{ x }}>
             {items.map((item) => (
-              <div key={item.id} className='shrink-0 w-full aspect-video relative'>
+              <div key={item.id} className='shrink-0 w-full h-48 lg:aspect-video lg:h-auto relative'>
                 <Image
                   src={item.url}
                   alt={item.title}

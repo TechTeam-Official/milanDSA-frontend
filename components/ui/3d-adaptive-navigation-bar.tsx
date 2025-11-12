@@ -29,6 +29,7 @@ export const PillBase: React.FC = () => {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const [isMobile, setIsMobile] = useState(false)
 
   const navItems: NavItem[] = useMemo(() => [
     { label: 'Milan Home', id: 'home', path: '/' },
@@ -36,6 +37,16 @@ export const PillBase: React.FC = () => {
     { label: 'Gallery', id: 'gallery', path: '/gallery' },
     { label: 'Tickets', id: 'tickets', path: '/tickets' },
   ], [])
+
+  // Detect mobile screen size
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Get active section based on current pathname - use useMemo to derive state
   const activeSection = useMemo(() => {
@@ -58,7 +69,8 @@ export const PillBase: React.FC = () => {
       requestAnimationFrame(() => {
         setExpanded(true)
       })
-      pillWidth.set(580)
+      // Use smaller width on mobile
+      pillWidth.set(isMobile ? 350 : 580)
 
       if (hoverTimeoutRef.current) {
         clearTimeout(hoverTimeoutRef.current)
@@ -77,7 +89,7 @@ export const PillBase: React.FC = () => {
         clearTimeout(hoverTimeoutRef.current)
       }
     }
-  }, [hovering, pillWidth])
+  }, [hovering, pillWidth, isMobile])
 
   const handleMouseEnter = () => {
 
@@ -463,7 +475,7 @@ export const PillBase: React.FC = () => {
 
         ref={containerRef}
 
-        className="relative z-10 h-full flex items-center justify-center px-6"
+        className="relative z-10 h-full flex items-center justify-center px-2 md:px-6"
 
         style={{
 
@@ -551,7 +563,7 @@ export const PillBase: React.FC = () => {
 
         {expanded && (
 
-          <div className="flex items-center justify-evenly w-full">
+          <div className="flex items-center justify-center gap-1 md:gap-0 md:justify-evenly w-full">
 
             {navItems.map((item, index) => {
 
@@ -601,7 +613,7 @@ export const PillBase: React.FC = () => {
 
                     border: 'none',
 
-                    padding: '10px 16px',
+                    padding: isMobile ? '10px 8px' : '10px 16px',
 
                     outline: 'none',
 
