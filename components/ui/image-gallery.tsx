@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 export default function ImageGallery({
   title = "Our Latest Creations",
@@ -22,6 +25,15 @@ export default function ImageGallery({
   ];
 
   const galleryImages = images.length > 0 ? images : defaultImages;
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+
+  const handleImageClick = (idx: number) => {
+    if (expandedIndex === idx) {
+      setExpandedIndex(null);
+    } else {
+      setExpandedIndex(idx);
+    }
+  };
 
   return (
     <>
@@ -40,11 +52,19 @@ export default function ImageGallery({
         </div>
 
         {/* Галерея снизу */}
-        <div className="flex items-center gap-2 flex-1 w-full px-4 pb-4">
+        <div className="flex flex-col md:flex-row items-center gap-2 flex-1 w-full px-4 pb-4 overflow-y-auto md:overflow-hidden">
           {galleryImages.map((src, idx) => (
             <div
               key={idx}
-              className="relative group flex-grow transition-all w-56 rounded-lg overflow-hidden h-full duration-500 hover:w-full"
+              onClick={() => handleImageClick(idx)}
+              className={cn(
+                "relative group flex-grow transition-all rounded-lg overflow-hidden duration-500 cursor-pointer",
+                // Mobile: vertical layout with click expansion (height changes)
+                "w-full",
+                expandedIndex === idx ? "h-250" : "h-32",
+                // Desktop: horizontal layout with hover expansion (width changes)
+                "md:h-full md:w-56 md:hover:w-full"
+              )}
             >
               <Image
                 className="object-cover object-center"
