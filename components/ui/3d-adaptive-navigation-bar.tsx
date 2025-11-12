@@ -32,7 +32,7 @@ export const PillBase: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   const navItems: NavItem[] = useMemo(() => [
-    { label: 'Milan Home', id: 'home', path: '/' },
+    { label: 'Home', id: 'home', path: '/' },
     { label: 'Team', id: 'team', path: '/team' },
     { label: 'Gallery', id: 'gallery', path: '/gallery' },
     { label: 'Tickets', id: 'tickets', path: '/tickets' },
@@ -70,7 +70,7 @@ export const PillBase: React.FC = () => {
         setExpanded(true)
       })
       // Use smaller width on mobile
-      pillWidth.set(isMobile ? 350 : 580)
+      pillWidth.set(isMobile ? 300 : 600)
 
       if (hoverTimeoutRef.current) {
         clearTimeout(hoverTimeoutRef.current)

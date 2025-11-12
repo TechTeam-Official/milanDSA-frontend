@@ -2,7 +2,7 @@
 
 import SphereImageGrid, { ImageData } from "@/components/ui/img-sphere";
 import React, { useState, useEffect } from 'react';
-import { ChevronRight, ChevronDown, X } from 'lucide-react';
+import { ChevronRight, ChevronDown, ChevronUp, X } from 'lucide-react';
 
 // ==========================================
 // IMAGE DATA CONFIGURATION
@@ -101,6 +101,7 @@ for (let i = 0; i < 60; i++) {
 
 export function TeamSphere() {
   const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
+  const [isMobile, setIsMobile] = useState(false);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [hoveredConvenor, setHoveredConvenor] = useState<string | null>(null);
   const [selectedConvenor, setSelectedConvenor] = useState<ImageData | null>(null);
@@ -108,14 +109,26 @@ export function TeamSphere() {
   const [popupPosition, setPopupPosition] = useState<{ x: number; y: number } | null>(null);
   const convenorRefs = React.useRef<{ [key: string]: HTMLDivElement | null }>({});
 
+  // Mobile pagination state - EDIT HERE: Change 7 to adjust items per page
+  const [corePage, setCorePage] = useState(0);
+  const [clubPage, setClubPage] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState({ core: false, club: false });
+  const itemsPerPage = 7;
+
   useEffect(() => {
     // Calculate dimensions based on viewport
     const updateDimensions = () => {
       const width = window.innerWidth;
       const height = window.innerHeight;
 
-      // Use the smaller dimension to ensure sphere fits in viewport
-      const size = Math.min(width, height) * 0.9;
+      // MOBILE: Use viewport dimensions, ensure no overflow
+      // For mobile, use a smaller multiplier to fit better
+      const mobile = width < 768; // Tailwind's md breakpoint
+      setIsMobile(mobile);
+
+      const size = mobile
+        ? Math.min(width, height) * 0.85  // Slightly smaller for mobile
+        : Math.min(width, height) * 0.9;  // Desktop size
 
       setDimensions({
         width: size,
@@ -132,9 +145,16 @@ export function TeamSphere() {
     return () => window.removeEventListener('resize', updateDimensions);
   }, []);
 
-  // Sphere configuration - adjusted for larger viewport
-  const sphereRadius = dimensions.width * 0.45;
-  const baseImageScale = 0.20;
+  // Sphere configuration - EDIT HERE to adjust sphere radius
+  // Current: 0.50 for mobile, 0.45 for desktop
+  // Increase value for larger sphere, decrease for smaller
+  const sphereRadius = dimensions.width * (isMobile ? 0.50 : 0.45);
+
+  // Image scale configuration - EDIT HERE to adjust team member image sizes
+  // Current: 0.28 for mobile (larger images), 0.20 for desktop
+  // Increase value for larger images, decrease for smaller
+  // Mobile images are larger to improve visibility on small screens
+  const baseImageScale = isMobile ? 0.40 : 0.20;
 
   // Toggle expanded state - only one item can be expanded at a time
   const toggleItem = (itemId: string) => {
@@ -157,11 +177,11 @@ export function TeamSphere() {
     'Hospitality',
     'Public Relations',
     'Publicity & Social Media',
-    'Transport & Accomodation',
+    'Transport & Acc',
     'Content',
     'EMCEE',
     'Media',
-    'Certificate & Prize Distribution',
+    'Certificate & Prizes',
     'Sponsorship',
     'Treasurer'
   ];
@@ -192,8 +212,8 @@ export function TeamSphere() {
     return IMAGES[index];
   };
 
-  // Render expandable item
-  const renderExpandableItem = (item: string, category: 'core' | 'club') => {
+  // Render expandable item - Desktop version with hover
+  const renderExpandableItem = (item: string, category: 'core' | 'club', disableHover: boolean = false) => {
     const itemId = `${category}-${item}`;
     const isExpanded = expandedItems.has(itemId);
 
@@ -228,6 +248,7 @@ export function TeamSphere() {
               const isHovered = hoveredConvenor === convenorId;
 
               const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+                if (disableHover) return; // Disable hover on mobile
                 const rect = e.currentTarget.getBoundingClientRect();
                 setPopupPosition({
                   x: rect.left - 120, // Position to the left (96px image + 24px margin)
@@ -237,6 +258,7 @@ export function TeamSphere() {
               };
 
               const handleMouseLeave = () => {
+                if (disableHover) return; // Disable hover on mobile
                 setHoveredConvenor(null);
                 setPopupPosition(null);
               };
@@ -248,8 +270,8 @@ export function TeamSphere() {
                     convenorRefs.current[convenorId] = el;
                   }}
                   className="relative flex items-center min-h-[1.5rem]"
-                  onMouseEnter={handleMouseEnter}
-                  onMouseLeave={handleMouseLeave}
+                  onMouseEnter={disableHover ? undefined : handleMouseEnter}
+                  onMouseLeave={disableHover ? undefined : handleMouseLeave}
                 >
                   <div
                     className="text-gray-600 text-sm cursor-pointer hover:text-gray-900 transition-colors flex items-center"
@@ -265,7 +287,7 @@ export function TeamSphere() {
                     }}
                   >
                     <span className="mr-2">⤷</span>
-                    <span>Person Name ( {convenorName} )</span>
+                    <span>Person Name</span>
                   </div>
                 </div>
               );
@@ -281,8 +303,9 @@ export function TeamSphere() {
   const renderConvenorModal = () => {
     if (!selectedConvenor) return null;
 
+    // EDIT HERE: Modal positioning - bottom-4 for mobile, bottom-6 for desktop
     return (
-      <div className="fixed bottom-6 left-6 z-50">
+      <div className="fixed bottom-4 left-4 right-4 z-50 md:bottom-6 md:left-6 md:right-auto md:max-w-md">
         <div
           className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border-2 border-gray-200"
           style={{
@@ -334,11 +357,145 @@ export function TeamSphere() {
           -ms-overflow-style: none;
           scrollbar-width: none;
         }
+        /* MOBILE: Prevent scrolling - EDIT HERE if you need to adjust scroll behavior */
+        @media (max-width: 767px) {
+          html, body {
+            overflow: hidden !important;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+          }
+        }
+        /* Smooth pagination transitions */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        @keyframes fadeOutDown {
+          from {
+            opacity: 1;
+            transform: translateY(0);
+          }
+          to {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+        }
+        .pagination-item-enter {
+          animation: fadeInUp 0.3s ease-out forwards;
+        }
+        .pagination-item-exit {
+          animation: fadeOutDown 0.2s ease-in forwards;
+        }
+        .arrow-transition {
+          transition: transform 0.3s ease-out, opacity 0.2s ease-out;
+        }
       `}</style>
-      <main className="w-full min-h-screen flex justify-center items-start bg-gradient-to-br from-gray-50 to-gray-100 pt-22 relative">
-        <h1 className="absolute top-6 left-10 text-[10rem] font-bold text-gray-900 tracking-tight">Our</h1>
-        <h1 className="absolute top-37 left-12 text-[10rem] font-bold text-gray-900 tracking-tight">Team</h1>
-      <div className="flex flex-col items-center gap-8">
+      {/* MOBILE VIEW: Fixed container, no scrolling */}
+      <main className="w-full h-screen flex flex-col justify-end items-center bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden md:min-h-screen md:justify-center md:items-center md:pt-22">
+        {/* EDIT HERE: Text sizes for "Our" and "Team" */}
+        {/* Mobile: text-5xl (reduced from 10rem), Desktop: text-[10rem] */}
+        {/* Adjust text-5xl value to make text smaller/larger on mobile */}
+        <h1 className="absolute top-18 left-4 text-6xl font-bold text-gray-900 tracking-tight md:top-15 md:left-10 md:text-[10rem]">Our</h1>
+        <h1 className="absolute top-30 left-5 text-6xl font-bold text-gray-900 tracking-tight md:top-46 md:left-12 md:text-[10rem]">Team</h1>
+
+      {/* MOBILE: Convenor Lists - Positioned between text and sphere */}
+      {/* EDIT HERE: Adjust itemsPerPage (line 115) to change how many items show per page */}
+      {/* EDIT HERE: Adjust mt-24 and mb-4 to change vertical spacing */}
+      <div className="flex md:hidden w-full px-4 gap-4 mt-24 mb-8">
+        {/* Core Team Convenors - Left Side */}
+        <div className="flex-1 flex flex-col">
+          <h2 className="text-sm font-bold text-gray-900 mb-2">Core Team Convenors</h2>
+          <div className="space-y-1 relative min-h-[200px]">
+            {coreTeamRoles
+              .slice(corePage * itemsPerPage, (corePage + 1) * itemsPerPage)
+              .map((role, index) => (
+                <div key={`${corePage}-${role}`} className="pagination-item-enter" style={{ animationDelay: `${index * 0.03}s` }}>
+                  {renderExpandableItem(role, 'core', true)}
+                </div>
+              ))}
+          </div>
+          {coreTeamRoles.length > itemsPerPage && (
+            <button
+              onClick={() => {
+                const maxPage = Math.ceil(coreTeamRoles.length / itemsPerPage) - 1;
+                setIsTransitioning(prev => ({ ...prev, core: true }));
+                setTimeout(() => {
+                  if (corePage < maxPage) {
+                    setCorePage(prev => prev + 1);
+                  } else {
+                    setCorePage(0);
+                  }
+                  setTimeout(() => {
+                    setIsTransitioning(prev => ({ ...prev, core: false }));
+                  }, 50);
+                }, 200);
+              }}
+              className="mt-2 flex items-center justify-center gap-1 text-gray-600 hover:text-gray-900 transition-colors text-xs"
+            >
+              <span className="arrow-transition">{corePage < Math.ceil(coreTeamRoles.length / itemsPerPage) - 1 ? 'More' : 'Back'}</span>
+              <div className="arrow-transition inline-flex">
+                {corePage < Math.ceil(coreTeamRoles.length / itemsPerPage) - 1 ? (
+                  <ChevronDown size={14} className="arrow-transition" />
+                ) : (
+                  <ChevronUp size={14} className="arrow-transition" />
+                )}
+              </div>
+            </button>
+          )}
+        </div>
+
+        {/* Club Convenors - Right Side */}
+        <div className="flex-1 flex flex-col">
+          <h2 className="text-sm font-bold text-gray-900 mb-2">Club Convenors</h2>
+          <div className="space-y-1 relative min-h-[200px]">
+            {clubConvenors
+              .slice(clubPage * itemsPerPage, (clubPage + 1) * itemsPerPage)
+              .map((club, index) => (
+                <div key={`${clubPage}-${club}`} className="pagination-item-enter" style={{ animationDelay: `${index * 0.03}s` }}>
+                  {renderExpandableItem(club, 'club', true)}
+                </div>
+              ))}
+          </div>
+          {clubConvenors.length > itemsPerPage && (
+            <button
+              onClick={() => {
+                const maxPage = Math.ceil(clubConvenors.length / itemsPerPage) - 1;
+                setIsTransitioning(prev => ({ ...prev, club: true }));
+                setTimeout(() => {
+                  if (clubPage < maxPage) {
+                    setClubPage(prev => prev + 1);
+                  } else {
+                    setClubPage(0);
+                  }
+                  setTimeout(() => {
+                    setIsTransitioning(prev => ({ ...prev, club: false }));
+                  }, 50);
+                }, 200);
+              }}
+              className="mt-2 flex items-center justify-center gap-1 text-gray-600 hover:text-gray-900 transition-colors text-xs"
+            >
+              <span className="arrow-transition">{clubPage < Math.ceil(clubConvenors.length / itemsPerPage) - 1 ? 'More' : 'Back'}</span>
+              <div className="arrow-transition inline-flex">
+                {clubPage < Math.ceil(clubConvenors.length / itemsPerPage) - 1 ? (
+                  <ChevronDown size={14} className="arrow-transition" />
+                ) : (
+                  <ChevronUp size={14} className="arrow-transition" />
+                )}
+              </div>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* MOBILE: Sphere positioned above bottom, Desktop: centered */}
+      <div className="flex flex-col items-center justify-center gap-8 pb-8 md:pb-0 md:w-full">
 
         <SphereImageGrid
           images={IMAGES}
@@ -363,10 +520,12 @@ export function TeamSphere() {
         />
       </div>
 
-      {/* Core Team Convenors & Club Convenors */}
-      <div className="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-6 max-w-md" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
+      {/* Core Team Convenors & Club Convenors - DESKTOP VIEW ONLY */}
+      {/* Desktop: Fixed position on right side with hover preview */}
+      {/* EDIT HERE: Adjust maxHeight values to change container size if needed */}
+      <div className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 flex-col gap-6 max-w-md" style={{ maxHeight: 'calc(100vh - 4rem)' }}>
         {/* Core Team Convenors */}
-        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 6rem)' }}>
+        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 2rem)' }}>
           <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Core Team Convenors</h2>
           <div
             className="space-y-0 overflow-y-auto pr-2"
@@ -375,12 +534,12 @@ export function TeamSphere() {
               msOverflowStyle: 'none'
             }}
           >
-            {coreTeamRoles.map(role => renderExpandableItem(role, 'core'))}
+            {coreTeamRoles.map(role => renderExpandableItem(role, 'core', false))}
           </div>
         </div>
 
         {/* Club Convenors */}
-        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 6rem)' }}>
+        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 2rem)' }}>
           <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Club Convenors</h2>
           <div
             className="space-y-0 overflow-y-auto pr-2"
@@ -389,7 +548,7 @@ export function TeamSphere() {
               msOverflowStyle: 'none'
             }}
           >
-            {clubConvenors.map(club => renderExpandableItem(club, 'club'))}
+            {clubConvenors.map(club => renderExpandableItem(club, 'club', false))}
           </div>
         </div>
       </div>
@@ -415,7 +574,8 @@ export function TeamSphere() {
         </div>
       )}
 
-      {/* Convenor Modal */}
+      {/* Convenor Modal - Responsive positioning */}
+      {/* EDIT HERE: Adjust bottom-6 and left-6 values to change modal position on mobile */}
       {renderConvenorModal()}
       </main>
     </>
