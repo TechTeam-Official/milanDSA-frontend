@@ -118,7 +118,7 @@ export function MilanTimelineSection() {
       content: (
         <div className="space-y-4">
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
-            Themed "Cosmic Odyssey", featured a stellar performance by Sunidhi Chauhan and hosted the national finals of RoboWars.
+            Themed &quot;Cosmic Odyssey&quot;, featured a stellar performance by Sunidhi Chauhan and hosted the national finals of RoboWars.
           </p>
           <div className="h-32 md:h-48"></div>
         </div>
@@ -129,7 +129,7 @@ export function MilanTimelineSection() {
       content: (
         <div className="space-y-4">
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
-            "Retro Revival" brought back the 80s and 90s, with a memorable concert by the band The Local Train and a vintage gaming expo.
+            &quot;Retro Revival&quot; brought back the 80s and 90s, with a memorable concert by the band The Local Train and a vintage gaming expo.
           </p>
           <div className="h-32 md:h-48"></div>
         </div>
@@ -140,7 +140,7 @@ export function MilanTimelineSection() {
       content: (
         <div className="space-y-4">
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
-            With the theme "Digital Dreams", this edition saw Nucleya headline the EDM night and introduced a massive 48-hour hackathon.
+            With the theme &quot;Digital Dreams&quot;, this edition saw Nucleya headline the EDM night and introduced a massive 48-hour hackathon.
           </p>
           <div className="h-32 md:h-48"></div>
         </div>
@@ -151,7 +151,7 @@ export function MilanTimelineSection() {
       content: (
         <div className="space-y-4">
           <p className="text-neutral-800 dark:text-neutral-200 text-sm md:text-base font-normal leading-relaxed md:mt-0">
-            "Aqueous Realms" explored the mysteries of the deep, with a stunning laser show and a keynote by a renowned marine biologist.
+            &quot;Aqueous Realms&quot; explored the mysteries of the deep, with a stunning laser show and a keynote by a renowned marine biologist.
           </p>
           <div className="h-32 md:h-48"></div>
         </div>

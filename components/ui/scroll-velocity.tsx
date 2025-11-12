@@ -28,16 +28,6 @@ const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
     const directionFactor = React.useRef<number>(1)
     const scrollThreshold = React.useRef<number>(5)
 
-    useAnimationFrame((t, delta) => {
-      if (movable) {
-        move(delta)
-      } else {
-        if (Math.abs(scrollVelocity.get()) >= scrollThreshold.current) {
-          move(delta)
-        }
-      }
-    })
-
     function move(delta: number) {
       let moveBy = directionFactor.current * velocity * (delta / 1000)
       if (velocityFactor.get() < 0) {
@@ -48,6 +38,16 @@ const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
       moveBy += directionFactor.current * moveBy * velocityFactor.get()
       baseX.set(baseX.get() + moveBy)
     }
+
+    useAnimationFrame((t, delta) => {
+      if (movable) {
+        move(delta)
+      } else {
+        if (Math.abs(scrollVelocity.get()) >= scrollThreshold.current) {
+          move(delta)
+        }
+      }
+    })
 
     // Calculate wrap range based on content type
     // For text with 20 duplicates, wrap at -50% (half the content)

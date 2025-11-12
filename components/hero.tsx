@@ -36,7 +36,7 @@ export function Hero() {
       </div>
       <h1 className="text-center text-7xl md:text-9xl font-bold z-10 select-none bg-clip-text text-transparent bg-gradient-to-r from-neutral-950 to-neutral-500 dark:from-neutral-50 dark:to-neutral-400">
         Welcome to <br/>
-        MILAN 26'
+        MILAN 26&apos;
       </h1>
     </div>
   )

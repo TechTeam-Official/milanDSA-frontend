@@ -19,13 +19,18 @@ interface FramerCarouselProps {
 export function FramerCarousel({ items, currentIndex = 0, onIndexChange }: FramerCarouselProps) {
   const [index, setIndex] = useState(currentIndex);
   const containerRef = useRef<HTMLDivElement>(null);
+  const prevIndexRef = useRef(currentIndex);
 
   const x = useMotionValue(0);
 
-  // Sync with external currentIndex prop
+  // Sync with external currentIndex prop - use ref to track previous value
   useEffect(() => {
-    if (currentIndex !== index) {
-      setIndex(currentIndex);
+    if (currentIndex !== prevIndexRef.current) {
+      prevIndexRef.current = currentIndex;
+      // Use requestAnimationFrame to defer state update
+      requestAnimationFrame(() => {
+        setIndex(currentIndex);
+      });
     }
   }, [currentIndex]);
 

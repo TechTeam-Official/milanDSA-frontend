@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { motion, useSpring, AnimatePresence } from 'framer-motion'
 
@@ -30,26 +30,18 @@ export const PillBase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const navItems: NavItem[] = [
+  const navItems: NavItem[] = useMemo(() => [
     { label: 'Milan Home', id: 'home', path: '/' },
     { label: 'Team', id: 'team', path: '/team' },
     { label: 'Gallery', id: 'gallery', path: '/gallery' },
     { label: 'Tickets', id: 'tickets', path: '/tickets' },
-  ]
+  ], [])
 
-  // Get active section based on current pathname
-  const getActiveSection = () => {
+  // Get active section based on current pathname - use useMemo to derive state
+  const activeSection = useMemo(() => {
     const currentItem = navItems.find(item => item.path === pathname)
     return currentItem?.id || 'home'
-  }
-
-  const [activeSection, setActiveSection] = useState(getActiveSection())
-
-  // Sync active section with pathname changes
-  useEffect(() => {
-    const currentItem = navItems.find(item => item.path === pathname)
-    setActiveSection(currentItem?.id || 'home')
-  }, [pathname])
+  }, [pathname, navItems])
 
   // Spring animations for smooth motion
 
@@ -59,44 +51,32 @@ export const PillBase: React.FC = () => {
 
   // No scroll detection - purely click-based navigation
 
-  // Handle hover expansion
-
-  useEffect(() => {
-
+  // Handle hover expansion - use callback to avoid setState in effect
+  React.useEffect(() => {
     if (hovering) {
-
-      setExpanded(true)
-
+      // Use requestAnimationFrame to defer state update
+      requestAnimationFrame(() => {
+        setExpanded(true)
+      })
       pillWidth.set(580)
 
       if (hoverTimeoutRef.current) {
-
         clearTimeout(hoverTimeoutRef.current)
-
       }
-
     } else {
-
       hoverTimeoutRef.current = setTimeout(() => {
-
-        setExpanded(false)
-
+        requestAnimationFrame(() => {
+          setExpanded(false)
+        })
         pillWidth.set(140)
-
       }, 600)
-
     }
 
     return () => {
-
       if (hoverTimeoutRef.current) {
-
         clearTimeout(hoverTimeoutRef.current)
-
       }
-
     }
-
   }, [hovering, pillWidth])
 
   const handleMouseEnter = () => {
@@ -114,7 +94,6 @@ export const PillBase: React.FC = () => {
   const handleSectionClick = (item: NavItem) => {
     // Trigger transition state
     setIsTransitioning(true)
-    setActiveSection(item.id)
 
     // Navigate to the route
     router.push(item.path)
