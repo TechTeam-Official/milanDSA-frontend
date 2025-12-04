@@ -113,7 +113,7 @@ export function TeamSphere() {
   const [corePage, setCorePage] = useState(0);
   const [clubPage, setClubPage] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState({ core: false, club: false });
-  const [mobileView, setMobileView] = useState<'club' | 'core'>('club'); // Toggle between club and core views
+  const [mobileView, setMobileView] = useState<'club' | 'core' | 'directors'>('directors'); // Toggle between club, core, and directors views
   const [isViewTransitioning, setIsViewTransitioning] = useState(false);
   const itemsPerPage = 5;
 
@@ -204,6 +204,25 @@ export function TeamSphere() {
     'Social Club',
     'Literary Club',
     'Rotaract Club'
+  ];
+
+  // Directors data
+  const directors = [
+    {
+      name: 'Nisha Ashokan',
+      role: 'Director - Directorate Student Affairs',
+      image: '/Directors_Images/NishaAshokan.png'
+    },
+    {
+      name: 'Prince Kalyanasundaram',
+      role: 'Deputy Director',
+      image: '/Directors_Images/PrinceKalyanasundaram.png'
+    },
+    {
+      name: 'S Pradeep',
+      role: 'Assistant Director',
+      image: '/Directors_Images/SPradeep.png'
+    }
   ];
 
   // Get random image from sphere for convenor
@@ -448,12 +467,14 @@ export function TeamSphere() {
         <div className="flex flex-col items-end max-w-[50%]">
           {/* Small dim indicator text above heading */}
           <div className="text-xs font-medium text-gray-400 mb-1 mr-3">
-            {mobileView === 'core' ? 'Open Clubs ⤵' : 'Open Core team ⤵'}
+            {mobileView === 'directors' ? 'Open Core team ⤵' : mobileView === 'core' ? 'Open Clubs ⤵' : 'Open Directors ⤵'}
           </div>
 
-          {/* Header with toggle icon - switches between Core and Club headings */}
+          {/* Header with toggle icon - switches between Directors, Core and Club headings */}
           <div className="flex items-center gap-2 mb-2">
-            {mobileView === 'core' ? (
+            {mobileView === 'directors' ? (
+              <h2 className="text-base font-bold text-gray-900">Directors</h2>
+            ) : mobileView === 'core' ? (
               <h2 className="text-base font-bold text-gray-900">Core Team Convenors</h2>
             ) : (
               <h2 className="text-base font-bold text-gray-900">Club Convenors</h2>
@@ -462,14 +483,18 @@ export function TeamSphere() {
               onClick={() => {
                 setIsViewTransitioning(true);
                 setTimeout(() => {
-                  setMobileView(prev => prev === 'club' ? 'core' : 'club');
+                  setMobileView(prev => {
+                    if (prev === 'directors') return 'core';
+                    if (prev === 'core') return 'club';
+                    return 'directors';
+                  });
                   setTimeout(() => {
                     setIsViewTransitioning(false);
                   }, 50);
                 }, 200);
               }}
               className="p-1 hover:bg-gray-100 rounded transition-colors"
-              aria-label="Toggle between Club and Core views"
+              aria-label="Toggle between Directors, Core and Club views"
             >
               <RefreshCw size={16} className="text-gray-600 refresh-icon" />
             </button>
@@ -477,7 +502,41 @@ export function TeamSphere() {
 
           {/* Content area with smooth transitions - Right aligned */}
           <div className="space-y-1 relative min-h-[200px] w-full">
-            {mobileView === 'club' ? (
+            {mobileView === 'directors' ? (
+              <div key="directors-view" className="view-content-enter">
+                {directors.map((director, index) => {
+                  const directorId = `mobile-director-${index}`;
+                  return (
+                    <div key={directorId} className="pagination-item-enter mb-3" style={{ animationDelay: `${index * 0.03}s` }}>
+                      <div
+                        className="text-gray-600 text-base cursor-pointer hover:text-gray-900 transition-colors flex items-center"
+                        onClick={() => {
+                          // Create a mock ImageData object for the modal
+                          const directorImageData = {
+                            id: directorId,
+                            src: director.image,
+                            alt: director.name,
+                            title: director.name,
+                            description: director.role
+                          };
+                          // Close any previously opened modal and open new one
+                          if (selectedConvenor?.id === directorImageData.id) {
+                            setSelectedConvenor(null);
+                          } else {
+                            setSelectedConvenor(directorImageData);
+                            // Close sphere modal when director is clicked
+                            setSelectedSphereImage(null);
+                          }
+                        }}
+                      >
+                        <span className="mr-2">⤷</span>
+                        <span>{director.role}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : mobileView === 'club' ? (
               <div key="club-view" className="view-content-enter">
                 {clubConvenors
                   .slice(clubPage * itemsPerPage, (clubPage + 1) * itemsPerPage)
@@ -587,35 +646,100 @@ export function TeamSphere() {
         />
       </div>
 
-      {/* Core Team Convenors & Club Convenors - DESKTOP VIEW ONLY */}
+      {/* Directors, Core Team Convenors & Club Convenors - DESKTOP VIEW ONLY */}
       {/* Desktop: Fixed position on right side with hover preview */}
       {/* EDIT HERE: Adjust maxHeight values to change container size if needed */}
-      <div className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 flex-col gap-6 max-w-md" style={{ maxHeight: 'calc(100vh - 4rem)' }}>
-        {/* Core Team Convenors */}
-        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 2rem)' }}>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Core Team Convenors</h2>
-          <div
-            className="space-y-0 overflow-y-auto pr-2"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
-            {coreTeamRoles.map(role => renderExpandableItem(role, 'core', false))}
+      <div className="hidden md:flex fixed right-6 top-1/2 -translate-y-1/2 flex-row gap-12 max-w-2xl" style={{ maxHeight: 'calc(100vh - 4rem)' }}>
+        {/* Directors */}
+        <div className="flex flex-col">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Directors</h2>
+          <div className="space-y-2">
+            {directors.map((director, index) => {
+              const directorId = `director-${index}`;
+              const isHovered = hoveredConvenor === directorId;
+
+              const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement>) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setPopupPosition({
+                  x: rect.left - 120, // Position to the left (96px image + 24px margin)
+                  y: rect.top + rect.height / 2
+                });
+                setHoveredConvenor(directorId);
+              };
+
+              const handleMouseLeave = () => {
+                setHoveredConvenor(null);
+                setPopupPosition(null);
+              };
+
+              return (
+                <div
+                  key={directorId}
+                  ref={(el) => {
+                    convenorRefs.current[directorId] = el;
+                  }}
+                  className="relative flex items-center min-h-[1.5rem]"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div
+                    className="text-gray-600 text-base cursor-pointer hover:text-gray-900 transition-colors flex items-center"
+                    onClick={() => {
+                      // Create a mock ImageData object for the modal
+                      const directorImageData = {
+                        id: directorId,
+                        src: director.image,
+                        alt: director.name,
+                        title: director.name,
+                        description: director.role
+                      };
+                      // Close any previously opened modal and open new one
+                      if (selectedConvenor?.id === directorImageData.id) {
+                        setSelectedConvenor(null);
+                      } else {
+                        setSelectedConvenor(directorImageData);
+                        // Close sphere modal when director is clicked
+                        setSelectedSphereImage(null);
+                      }
+                    }}
+                  >
+                    <span className="mr-2">⤷</span>
+                    <span>{director.role}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Club Convenors */}
-        <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 2rem)' }}>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Club Convenors</h2>
-          <div
-            className="space-y-0 overflow-y-auto pr-2"
-            style={{
-              scrollbarWidth: 'none',
-              msOverflowStyle: 'none'
-            }}
-          >
-            {clubConvenors.map(club => renderExpandableItem(club, 'club', false))}
+        {/* Core Team Convenors & Club Convenors */}
+        <div className="flex flex-col gap-6">
+          {/* Core Team Convenors */}
+          <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 2rem)' }}>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Core Team Convenors</h2>
+            <div
+              className="space-y-0 overflow-y-auto pr-2"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
+              {coreTeamRoles.map(role => renderExpandableItem(role, 'core', false))}
+            </div>
+          </div>
+
+          {/* Club Convenors */}
+          <div className="flex flex-col" style={{ maxHeight: 'calc(50vh - 2rem)' }}>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4 flex-shrink-0">Club Convenors</h2>
+            <div
+              className="space-y-0 overflow-y-auto pr-2"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none'
+              }}
+            >
+              {clubConvenors.map(club => renderExpandableItem(club, 'club', false))}
+            </div>
           </div>
         </div>
       </div>

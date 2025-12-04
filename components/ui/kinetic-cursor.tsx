@@ -88,9 +88,14 @@ export function KineticCursor() {
         setIsMorphing(true);
         setIsHovering(true);
 
-        // Set cursor text for links
+        // Set cursor text for links (only if not disabled)
         if (link) {
-          setCursorText(link.textContent?.trim() || "");
+          const noTextElement = link.closest("[data-no-cursor-text]");
+          if (noTextElement) {
+            setCursorText("");
+          } else {
+            setCursorText(link.textContent?.trim() || "");
+          }
         } else {
           setCursorText("");
         }

@@ -30,13 +30,41 @@ export const PillBase: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null)
   const hoverTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const [isMobile, setIsMobile] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
-  const navItems: NavItem[] = useMemo(() => [
-    { label: 'Home', id: 'home', path: '/' },
-    { label: 'Team', id: 'team', path: '/team' },
-    { label: 'Gallery', id: 'gallery', path: '/gallery' },
-    { label: 'Tickets', id: 'tickets', path: '/tickets' },
-  ], [])
+  // Check if user is logged in
+  React.useEffect(() => {
+    const checkLoginStatus = () => {
+      const studentEmail = localStorage.getItem('studentEmail')
+      setIsLoggedIn(!!studentEmail)
+    }
+
+    checkLoginStatus()
+    // Listen for storage changes (e.g., when user logs in/out in another tab)
+    window.addEventListener('storage', checkLoginStatus)
+
+    return () => {
+      window.removeEventListener('storage', checkLoginStatus)
+    }
+  }, [pathname]) // Also check when pathname changes (e.g., after login redirect)
+
+  const navItems: NavItem[] = useMemo(() => {
+    const baseItems: NavItem[] = [
+      { label: 'Home', id: 'home', path: '/' },
+      { label: 'Team', id: 'team', path: '/team' },
+      { label: 'Gallery', id: 'gallery', path: '/gallery' },
+      { label: 'Tickets', id: 'tickets', path: '/tickets' },
+    ]
+
+    // Add login/account item based on login status
+    if (isLoggedIn) {
+      baseItems.push({ label: 'Account', id: 'account', path: '/account' })
+    } else {
+      baseItems.push({ label: 'Log in', id: 'login', path: '/login' })
+    }
+
+    return baseItems
+  }, [isLoggedIn])
 
   // Detect mobile screen size
   React.useEffect(() => {
@@ -51,8 +79,12 @@ export const PillBase: React.FC = () => {
   // Get active section based on current pathname - use useMemo to derive state
   const activeSection = useMemo(() => {
     const currentItem = navItems.find(item => item.path === pathname)
+    // Handle account page when logged in
+    if (pathname === '/account' && isLoggedIn) {
+      return 'account'
+    }
     return currentItem?.id || 'home'
-  }, [pathname, navItems])
+  }, [pathname, navItems, isLoggedIn])
 
   // Spring animations for smooth motion
 

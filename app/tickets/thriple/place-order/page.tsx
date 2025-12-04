@@ -1,0 +1,208 @@
+'use client'
+
+import Image from "next/image"
+import { useState } from "react"
+import Link from "next/link"
+
+export default function ThriplePlaceOrder() {
+  const [showFullDescription, setShowFullDescription] = useState(false)
+  const [showFullTips, setShowFullTips] = useState(false)
+
+  // Event data extracted from database
+  const eventData = {
+    name: "Thriple Live Performance",
+    title: "Thriple Live Performance - MILAN 26'",
+    description: "Get ready for an unforgettable night with Thriple at MILAN 26! Experience the energy and passion of this incredible performance that will leave you wanting more.",
+    fullDescription: "Get ready for an unforgettable night with Thriple at MILAN 26! Experience the energy and passion of this incredible performance that will leave you wanting more. Thriple brings their unique style and electrifying stage presence to create a memorable experience for all music lovers. This is a performance you don't want to miss - join us for an evening of exceptional music and entertainment that will be the talk of MILAN 26!",
+    date: "Sun 16 Feb 2026",
+    time: "7:00 PM",
+    duration: "2.5 Hours",
+    ageGroup: "All age groups",
+    languages: "Telugu, Tamil, Hindi, English",
+    genres: "Live Performance, Pop, Contemporary",
+    location: "Main Stage: MILAN 26",
+    venue: "Main Stage",
+    price: "₹1200",
+    priceRange: "₹1200 onwards",
+    availability: "Filling Fast",
+    bookingStatus: "Bookings are filling fast for this event",
+    imageUrl: "/ProShowTickets/Thriple/ThripleFullTransparent.png",
+    categories: ["Concerts", "Music Festivals", "Pro Shows"],
+    tips: [
+      "VIP, Gold, and Silver sections available - choose your preferred seating!",
+      "Doors open 30 minutes before the show. Arrive early to avoid queues.",
+      "Photography and videography allowed, but please be respectful of other attendees.",
+      "Food and beverages will be available at the venue.",
+      "Parking facilities are available near the venue."
+    ]
+  }
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header with Share Icon */}
+      <div className="container mx-auto px-4 py-6">
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-4">
+            <Link href="/tickets" className="text-gray-600 hover:text-black transition-colors">
+              ← Back to Tickets
+            </Link>
+            <h1 className="text-3xl md:text-4xl font-bold text-black">{eventData.title}</h1>
+          </div>
+          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Event Banner and Content */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Event Banner */}
+            <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden bg-gray-100">
+              <Image
+                src={eventData.imageUrl}
+                alt={eventData.name}
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            {/* Category Tags */}
+            <div className="flex flex-wrap gap-3">
+              {eventData.categories.map((category, index) => (
+                <span
+                  key={index}
+                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-full text-sm font-medium text-gray-700 cursor-pointer transition-colors"
+                >
+                  {category}
+                </span>
+              ))}
+            </div>
+
+            {/* About The Event */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-black">About The Event</h2>
+              <p className="text-gray-700 leading-relaxed">
+                {showFullDescription ? eventData.fullDescription : eventData.description}
+                {!showFullDescription && eventData.fullDescription.length > eventData.description.length && (
+                  <span>...</span>
+                )}
+              </p>
+              {eventData.fullDescription.length > eventData.description.length && (
+                <button
+                  onClick={() => setShowFullDescription(!showFullDescription)}
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  {showFullDescription ? "Read Less" : "Read More"}
+                </button>
+              )}
+            </div>
+
+            {/* You Should Know */}
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold text-black">You Should Know</h2>
+              <div className="space-y-3">
+                {eventData.tips.slice(0, showFullTips ? eventData.tips.length : 1).map((tip, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <svg className="w-5 h-5 text-yellow-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
+                      <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
+                    </svg>
+                    <p className="text-gray-700">{tip}</p>
+                  </div>
+                ))}
+              </div>
+              {eventData.tips.length > 1 && (
+                <button
+                  onClick={() => setShowFullTips(!showFullTips)}
+                  className="text-blue-600 hover:text-blue-800 font-medium"
+                >
+                  {showFullTips ? "See Less" : "See More"}
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Right Column - Booking Information */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-6 bg-white border border-gray-200 rounded-lg p-6 shadow-lg space-y-6">
+              {/* Event Details */}
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Date</p>
+                  <p className="text-lg font-semibold text-black">{eventData.date}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Time</p>
+                  <p className="text-lg font-semibold text-black">{eventData.time}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Duration</p>
+                  <p className="text-lg font-semibold text-black">{eventData.duration}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Age Group</p>
+                  <p className="text-lg font-semibold text-black">{eventData.ageGroup}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Languages</p>
+                  <p className="text-lg font-semibold text-black">{eventData.languages}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Genres</p>
+                  <p className="text-lg font-semibold text-black">{eventData.genres}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-500 mb-1">Location</p>
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    <p className="text-lg font-semibold text-black">{eventData.location}</p>
+                    <button className="ml-2 p-1 hover:bg-gray-100 rounded">
+                      <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Booking Status */}
+              <div className="flex items-start gap-2 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+                <svg className="w-5 h-5 text-yellow-600 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                </svg>
+                <p className="text-sm text-yellow-800">{eventData.bookingStatus}</p>
+              </div>
+
+              {/* Pass Option */}
+              <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                <h3 className="font-semibold text-black mb-2">Buy All Days Pass Now</h3>
+                <p className="text-sm text-gray-600 mb-4">Enjoy the event across all days!</p>
+                <div className="space-y-2">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-2xl font-bold text-black">{eventData.priceRange}</span>
+                  </div>
+                  <p className={`text-sm font-medium ${eventData.availability === "Filling Fast" ? "text-orange-600" : "text-green-600"}`}>
+                    {eventData.availability}
+                  </p>
+                </div>
+              </div>
+
+              {/* Book Now Button */}
+              <button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg text-lg transition-colors shadow-lg">
+                Book Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
