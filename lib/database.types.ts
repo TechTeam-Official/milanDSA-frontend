@@ -220,6 +220,59 @@ export interface Database {
           updated_at?: string
         }
       }
+      ticket_confirmations: {
+        Row: {
+          id: string
+          name: string
+          registration_number: string
+          email: string
+          batch: string | null
+          event_name: string
+          event_date: string | null
+          ticket_price: number
+          razorpay_order_id: string
+          razorpay_payment_id: string | null
+          razorpay_signature: string | null
+          payment_status: 'pending' | 'completed' | 'failed'
+          booking_reference: string
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          registration_number: string
+          email: string
+          batch?: string | null
+          event_name: string
+          event_date?: string | null
+          ticket_price: number
+          razorpay_order_id: string
+          razorpay_payment_id?: string | null
+          razorpay_signature?: string | null
+          payment_status?: 'pending' | 'completed' | 'failed'
+          booking_reference: string
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          registration_number?: string
+          email?: string
+          batch?: string | null
+          event_name?: string
+          event_date?: string | null
+          ticket_price?: number
+          razorpay_order_id?: string
+          razorpay_payment_id?: string | null
+          razorpay_signature?: string | null
+          payment_status?: 'pending' | 'completed' | 'failed'
+          booking_reference?: string
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
     Views: {
       [_ in never]: never
