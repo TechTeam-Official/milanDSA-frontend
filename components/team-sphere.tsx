@@ -452,12 +452,12 @@ export function TeamSphere() {
         }
       `}</style>
       {/* MOBILE VIEW: Fixed container, no scrolling */}
-      <main className="w-full h-screen flex flex-col justify-end items-center bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden md:min-h-screen md:justify-center md:items-center md:pt-22">
+      <main className="w-full h-screen flex flex-col justify-end items-center bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden md:min-h-screen md:justify-center md:items-center md:pt-22 animate-in fade-in duration-1000">
         {/* EDIT HERE: Text sizes for "Our" and "Team" */}
         {/* Mobile: text-5xl (reduced from 10rem), Desktop: text-[10rem] */}
         {/* Adjust text-5xl value to make text smaller/larger on mobile */}
-        <h1 className="absolute top-18 left-4 text-6xl font-bold text-gray-900 tracking-tight md:top-15 md:left-10 md:text-[10rem]">Our</h1>
-        <h1 className="absolute top-30 left-5 text-6xl font-bold text-gray-900 tracking-tight md:top-46 md:left-12 md:text-[10rem]">Team</h1>
+        <h1 className="absolute top-18 left-4 text-6xl font-bold text-gray-900 tracking-tight md:top-15 md:left-10 md:text-[10rem] z-50 animate-in fade-in duration-1000">Our</h1>
+        <h1 className="absolute top-30 left-5 text-6xl font-bold text-gray-900 tracking-tight md:top-46 md:left-12 md:text-[10rem] z-50 animate-in fade-in duration-1000">Team</h1>
 
       {/* MOBILE: Convenor Lists - Toggle between Club and Core views */}
       {/* EDIT HERE: Adjust itemsPerPage (line 115) to change how many items show per page */}
