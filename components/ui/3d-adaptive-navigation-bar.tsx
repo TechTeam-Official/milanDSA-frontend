@@ -3,119 +3,146 @@
 import React, { useState, useRef, useMemo, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { motion, AnimatePresence, useSpring } from 'framer-motion'
+import { Home, Image as ImageIcon, Users, Calendar, Menu } from 'lucide-react'
 
 interface NavItem {
   label: string
   id: string
   path: string
+  icon: React.ElementType
 }
 
 export const PillBase = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const containerRef = useRef<HTMLDivElement>(null)
 
   const [expanded, setExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const containerRef = useRef<HTMLDivElement>(null)
 
+  // 1. Mobile Detection
   useEffect(() => {
-    const update = () => setIsMobile(window.innerWidth < 768)
-    update()
-    window.addEventListener('resize', update)
-    return () => window.removeEventListener('resize', update)
+    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const navItems: NavItem[] = useMemo(() => [
-    { label: 'Home', id: 'home', path: '/' },
-    { label: 'Gallery', id: 'gallery', path: '/gallery' },
-    { label: 'Team', id: 'team', path: '/team' },
-    { label: 'Events', id: 'events', path: '/events' },
-  ], [])
-
-  const activeItem = navItems.find(i => i.path === pathname) || navItems[0]
-
-  const width = useSpring(140, { stiffness: 260, damping: 28 })
-  const height = useSpring(52, { stiffness: 260, damping: 28 })
-
-  useEffect(() => {
-    if (expanded) {
-      width.set(isMobile ? 220 : 480)
-      height.set(isMobile ? navItems.length * 44 + 16 : 52)
-    } else {
-      width.set(140)
-      height.set(52)
-    }
-  }, [expanded, isMobile, navItems.length, width, height])
-
+  // 2. Click Outside Logic
   useEffect(() => {
     if (!expanded) return
-    const close = (e: MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setExpanded(false)
       }
     }
-    document.addEventListener('click', close)
-    return () => document.removeEventListener('click', close)
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [expanded])
 
-  const navigate = (path: string) => {
+  const navItems: NavItem[] = useMemo(() => [
+    { label: 'Home', id: 'home', path: '/', icon: Home },
+    { label: 'Gallery', id: 'gallery', path: '/gallery', icon: ImageIcon },
+    { label: 'Team', id: 'team', path: '/team', icon: Users },
+    { label: 'Events', id: 'events', path: '/events', icon: Calendar },
+  ], [])
+
+  const activeItem = navItems.find((i) => i.path === pathname) || navItems[0]
+
+  const handleNavigate = (path: string) => {
     setExpanded(false)
     router.push(path)
   }
 
+  // 3. Spring Physics (Restored for smoothness & no Type Errors)
+  // We use numbers here to avoid the 'variants' red line issues
+  const width = useSpring(160, { stiffness: 300, damping: 30 })
+  const height = useSpring(56, { stiffness: 300, damping: 30 })
+
+  useEffect(() => {
+    if (expanded) {
+      // Expanded: Wide on Desktop, bit narrower on Mobile
+      width.set(isMobile ? 260 : 520)
+      // Expanded: Tall on Mobile, Single row on Desktop
+      height.set(isMobile ? navItems.length * 50 + 24 : 56)
+    } else {
+      // Collapsed: Standard pill size
+      width.set(160)
+      height.set(56)
+    }
+  }, [expanded, isMobile, navItems.length, width, height])
+
   if (pathname?.startsWith('/operator')) return null
 
   return (
-    <motion.nav
-      ref={containerRef}
-      className="relative select-none"
-      style={{
-        width,
-        height,
-        backdropFilter: 'blur(14px)',
-        WebkitBackdropFilter: 'blur(14px)',
-        background: 'rgba(15, 15, 15, 0.55)',
-        border: '1px solid rgba(255,255,255,0.15)',
-        borderRadius: 999,
-        boxShadow: '0 12px 40px rgba(0,0,0,0.45)',
-        overflow: 'hidden'
-      }}
-      onClick={() => setExpanded(v => !v)}
-      onMouseEnter={() => !isMobile && setExpanded(true)}
-      onMouseLeave={() => !isMobile && setExpanded(false)}
-    >
-      <div className="relative z-10 h-full w-full flex items-center justify-center px-4">
-        {!expanded && (
-          <span className="text-sm font-semibold tracking-wide text-white">
-            {activeItem.label}
-          </span>
-        )}
-
-        <AnimatePresence>
-          {expanded && (
+    // FIX: 'fixed' positioning keeps it floating on top of the image
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none">
+      <motion.nav
+        ref={containerRef}
+        // Bind the springs directly to the style
+        style={{ width, height }}
+        className="pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-white/10 shadow-2xl backdrop-blur-xl bg-black/60 rounded-[50px]"
+        onClick={() => {
+          if (isMobile) setExpanded(!expanded)
+        }}
+        onMouseEnter={() => !isMobile && setExpanded(true)}
+        onMouseLeave={() => !isMobile && setExpanded(false)}
+      >
+        <div className={`relative z-10 w-full h-full flex ${isMobile && expanded ? 'flex-col justify-center py-4' : 'items-center justify-center'}`}>
+          
+          {/* STATE 1: COLLAPSED VIEW */}
+          {!expanded && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className={`flex ${isMobile ? 'flex-col items-center gap-2' : 'flex-row gap-6'}`}
+              className="absolute inset-0 flex items-center justify-center gap-2"
             >
-              {navItems.map(item => (
-                <button
-                  key={item.id}
-                  onClick={() => navigate(item.path)}
-                  className={`text-sm transition ${
-                    pathname === item.path
-                      ? 'text-white font-semibold'
-                      : 'text-white/70 hover:text-white'
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
+              <activeItem.icon size={18} className="text-white" />
+              <span className="text-sm font-semibold tracking-wide text-white">
+                {activeItem.label}
+              </span>
+              {/* Mobile Hint */}
+              {isMobile && <Menu size={16} className="text-white/50 ml-2" />}
             </motion.div>
           )}
-        </AnimatePresence>
-      </div>
-    </motion.nav>
+
+          {/* STATE 2: EXPANDED VIEW */}
+          <AnimatePresence>
+            {expanded && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className={`flex ${isMobile ? 'flex-col items-center w-full gap-2' : 'flex-row items-center justify-between w-full px-6'}`}
+              >
+                {navItems.map((item) => {
+                  const isActive = pathname === item.path
+                  return (
+                    <button
+                      key={item.id}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleNavigate(item.path)
+                      }}
+                      className={`
+                        flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300
+                        ${isMobile ? 'w-[90%]' : ''}
+                        ${isActive 
+                            ? 'bg-white/20 text-white font-medium' 
+                            : 'text-white/60 hover:text-white hover:bg-white/10'}
+                      `}
+                    >
+                      <item.icon size={18} />
+                      <span className="text-sm">{item.label}</span>
+                    </button>
+                  )
+                })}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.nav>
+    </div>
   )
 }
