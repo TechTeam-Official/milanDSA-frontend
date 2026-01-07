@@ -8,7 +8,7 @@ import * as THREE from 'three'
 const editions = [
   {
     year: "Milan '25",
-    facts: ['Trime Travel Theme', '₹15 Lakh Prize Pool', '40+ Electrifying Events'],
+    facts: ['Time Travel Theme', '₹15 Lakh Prize Pool', '40+ Electrifying Events'],
     image: '/milan/timeline/2025.png'
   },
   {
