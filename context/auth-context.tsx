@@ -63,61 +63,55 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   }, [])
 
   const sendOtp = async (email: string) => {
-    // In a real app, strict domain checking might happen here or in backend.
-    // For now, we allow sending OTP to anyone, restriction applies on Purchase.
-    
-    if (supabase) {
-      const { error } = await supabase.auth.signInWithOtp({ email })
-      if (error) return { success: false, message: error.message }
-      return { success: true }
-    } else {
-      // MOCK
-      await new Promise(resolve => setTimeout(resolve, 1000))
-      // Store email temporarily for verify step
-      sessionStorage.setItem('mock_otp_email', email)
-      return { success: true, message: "OTP sent to console (Dev Mode)" } 
+    try {
+      // Use Custom API for OTP (Nodemailer)
+      const res = await fetch('/api/auth/send-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+      const data = await res.json()
+      
+      if (!res.ok) {
+        return { success: false, message: data.message || 'Failed to send OTP' }
+      }
+
+      return { success: true, message: data.message }
+    } catch (err) {
+       return { success: false, message: 'Network error sending OTP' }
     }
   }
 
   const verifyOtp = async (email: string, token: string) => {
-     if (supabase) {
-        const { error } = await supabase.auth.verifyOtp({
-            email,
-            token,
-            type: 'email'
+    try {
+        const res = await fetch('/api/auth/verify-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, otp: token }),
         })
-        if (error) return { success: false, message: error.message }
-        // User state will be updated by onAuthStateChange
-        return { success: true }
-     } else {
-        // MOCK
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        const pendingEmail = sessionStorage.getItem('mock_otp_email')
-        
-        if (!pendingEmail || pendingEmail !== email) {
-            return { success: false, message: "Email mismatch or session expired" }
+        const data = await res.json()
+
+        if (!res.ok) {
+            return { success: false, message: data.message || 'Invalid code' }
         }
 
-        if (token !== "123456") {
-            return { success: false, message: "Invalid OTP (Use 123456)" }
-        }
-
-        const newUser = {
+        // Successfully verified
+        const newUser = data.user || {
             email,
-            name: email.split('@')[0]
+            name: email.split('@')[0],
+            id: 'custom-otp-user'
         }
+        
         setUser(newUser)
         localStorage.setItem('srm_user', JSON.stringify(newUser))
-        sessionStorage.removeItem('mock_otp_email')
         
         return { success: true }
-     }
+    } catch (err) {
+        return { success: false, message: 'Verification error' }
+    }
   }
 
   const loginWithGoogle = async () => {
-    // We allow any Google login here.
-    // Restrictions for Pro/Single passes are handled at the purchase/button level.
-    
     if (supabase) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
@@ -135,10 +129,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     } else {
       // MOCK OAUTH
       await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      // Randomly decide if it's SRM or not for testing variety? 
-      // Or just default to SRM. Let's default to SRM as it's the happy path.
-      // But developer might want to test rejection.
       
       const mockGoogleEmail = "student@srmist.edu.in" 
       
