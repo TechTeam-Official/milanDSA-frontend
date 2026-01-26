@@ -9,55 +9,149 @@ interface Guest {
   thumbnail: string
 }
 
-const guests: Guest[] = [
+const row1Guests: Guest[] = [
   {
-    name: "Dr. Sarah Johnson",
-    designation: "Tech Innovation Leader",
-    thumbnail: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=640&auto=format&fit=crop",
+    name: "Shreya Ghoshal",
+    designation: "Playback Singer",
+    thumbnail: "/milan/guests/Shreya Ghoshal_processed_by_imagy.png",
   },
   {
-    name: "Michael Chen",
-    designation: "Creative Director",
-    thumbnail: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=640&auto=format&fit=crop",
+    name: "Asha Bhosle",
+    designation: "Legendary Singer",
+    thumbnail: "/milan/guests/Asha Bhosle_processed_by_imagy.png",
   },
   {
-    name: "Emily Rodriguez",
-    designation: "Entrepreneur & Speaker",
-    thumbnail: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=640&auto=format&fit=crop",
+    name: "Vijay Deverakonda",
+    designation: "Actor",
+    thumbnail: "/milan/guests/Vijay Deverakonda_processed_by_imagy.png",
   },
   {
-    name: "David Kumar",
-    designation: "Industry Expert",
-    thumbnail: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=640&auto=format&fit=crop",
+    name: "Kamal Haasan",
+    designation: "Legendary Actor",
+    thumbnail: "/milan/guests/Kamal Hassan_processed_by_imagy.png",
   },
   {
-    name: "Lisa Anderson",
-    designation: "Thought Leader",
-    thumbnail: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=640&auto=format&fit=crop",
+    name: "Aditya Roy Kapur",
+    designation: "Actor",
+    thumbnail: "/milan/guests/Aditya Roy Kapur_processed_by_imagy.png",
   },
   {
-    name: "James Wilson",
-    designation: "Innovation Strategist",
-    thumbnail: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=640&auto=format&fit=crop",
+    name: "John Abraham",
+    designation: "Actor",
+    thumbnail: "/milan/guests/John Abraham_processed_by_imagy.png",
   },
   {
-    name: "Priya Sharma",
-    designation: "Digital Transformation Expert",
-    thumbnail: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=640&auto=format&fit=crop",
+    name: "Amit Trivedi",
+    designation: "Music Composer",
+    thumbnail: "/milan/guests/Amit Trivedi_processed_by_imagy.png",
   },
   {
-    name: "Robert Taylor",
-    designation: "Business Consultant",
-    thumbnail: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=640&auto=format&fit=crop",
+    name: "Bassjackers",
+    designation: "DJ Duo",
+    thumbnail: "/milan/guests/Bassjackers_processed_by_imagy.png",
+  },
+  {
+    name: "Vishal–Shekhar",
+    designation: "Music Duo",
+    thumbnail: "/milan/guests/Vishal–Shekhar_processed_by_imagy.png",
+  },
+  {
+    name: "Mammootty",
+    designation: "Legendary Actor",
+    thumbnail: "/milan/guests/Mammootty_processed_by_imagy.png",
+  },
+  {
+    name: "Devi Sri Prasad",
+    designation: "Music Composer",
+    thumbnail: "/milan/guests/Devi Sri Prasad_processed_by_imagy.png",
+  },
+  {
+    name: "Jonita Gandhi",
+    designation: "Playback Singer",
+    thumbnail: "/milan/guests/Jonita Gandhi_processed_by_imagy.png",
+  },
+  {
+    name: "Vidya Vox",
+    designation: "Singer",
+    thumbnail: "/milan/guests/Vidya Vox_processed_by_imagy.png",
   },
 ]
 
-// Duplicate guests multiple times for seamless infinite scrolling
-const duplicatedGuests = [...guests, ...guests, ...guests, ...guests]
+const row2Guests: Guest[] = [
+  {
+    name: "Nani",
+    designation: "Natural Star",
+    thumbnail: "/milan/guests/Nani_processed_by_imagy.png",
+  },
+  {
+    name: "Shruti Haasan",
+    designation: "Actor & Singer",
+    thumbnail: "/milan/guests/Shruti Haasan_processed_by_imagy.png",
+  },
+  {
+    name: "Kayadu Lohar",
+    designation: "Actor",
+    thumbnail: "/milan/guests/Kayadu Lohar_processed_by_imagy.png",
+  },
+  {
+    name: "Thaman S",
+    designation: "Music Composer",
+    thumbnail: "/milan/guests/Thaman S_processed_by_imagy.png",
+  },
+  {
+    name: "Taapsee Pannu",
+    designation: "Actor",
+    thumbnail: "/milan/guests/Taapsee Pannu_processed_by_imagy.png",
+  },
+  {
+    name: "Rakul Preet Singh",
+    designation: "Actor",
+    thumbnail: "/milan/guests/Rakul Preet Singh_processed_by_imagy.png",
+  },
+  {
+    name: "Abish Mathew",
+    designation: "Comedian",
+    thumbnail: "/milan/guests/Abish Mathew_processed_by_imagy.png",
+  },
+  {
+    name: "Sorabh Pant",
+    designation: "Comedian",
+    thumbnail: "/milan/guests/Sorabh Pant_processed_by_imagy.png",
+  },
+  {
+    name: "Diego Miranda",
+    designation: "DJ",
+    thumbnail: "/milan/guests/Diego Miranda_processed_by_imagy.png",
+  },
+  {
+    name: "KEVU",
+    designation: "DJ",
+    thumbnail: "/milan/guests/KEVU_processed_by_imagy.png",
+  },
+  {
+    name: "Ritviz",
+    designation: "Musician",
+    thumbnail: "/milan/guests/Ritviz_processed_by_imagy.png",
+  },
+  {
+    name: "Thaikkudam Bridge",
+    designation: "Band",
+    thumbnail: "/milan/guests/Thaikkudam Bridge_processed_by_imagy.png",
+  },
+  {
+    name: "Andrea Jeremiah",
+    designation: "Actor & Singer",
+    thumbnail: "/milan/guests/Andrea Jeremiah_processed_by_imagy.png",
+  },
+]
 
 const velocity = [0.5, -0.5]
 
 export function GuestShowcase() {
+  // Duplicate for seamless infinite scroll motion matching previous behavior
+  const row1 = [...row1Guests, ...row1Guests, ...row1Guests, ...row1Guests]
+  const row2 = [...row2Guests, ...row2Guests, ...row2Guests, ...row2Guests]
+
   return (
     <section className="relative w-full py-24 overflow-hidden bg-white text-black">
       {/* Dynamic Background */}
@@ -67,10 +161,10 @@ export function GuestShowcase() {
         {/* Section Header */}
         <div className="text-center px-4">
              <h2 className="text-3xl md:text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-br from-black to-neutral-600 mb-4">
-               Past Speakers & Guests
+               Our Past Headliners
              </h2>
              <p className="text-neutral-600 max-w-2xl mx-auto">
-               Inspiring minds that have graced our stages
+               The stars who made Milan unforgettable
              </p>
         </div>
 
@@ -85,7 +179,7 @@ export function GuestShowcase() {
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
           
           <ScrollVelocity velocity={velocity[0]} className="py-4">
-            {duplicatedGuests.map((guest, index) => (
+            {row1.map((guest, index) => (
               <div
                 key={`${guest.name}-${index}`}
                 className="relative h-[280px] w-[220px] md:h-[320px] md:w-[260px] flex-shrink-0 group mx-4 rounded-xl overflow-hidden border border-white/10 bg-neutral-900/50 backdrop-blur-sm"
@@ -113,7 +207,7 @@ export function GuestShowcase() {
           <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
           <ScrollVelocity velocity={velocity[1]} className="py-4">
-            {duplicatedGuests.map((guest, index) => (
+            {row2.map((guest, index) => (
               <div
                 key={`${guest.name}-reverse-${index}`}
                  className="relative h-[280px] w-[220px] md:h-[320px] md:w-[260px] flex-shrink-0 group mx-4 rounded-xl overflow-hidden border border-white/10 bg-neutral-900/50 backdrop-blur-sm"
