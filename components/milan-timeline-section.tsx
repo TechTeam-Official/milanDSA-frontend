@@ -18,14 +18,10 @@ const editions = [
   },
   {
     year: "Milan '23",
-    facts: ['₹9 Lakh Prize Pool', 'Celebrity Guests', 'Dynamic Student Showcases'],
+    facts: ['Paralogism Theme', '₹9 Lakh Prize Pool', 'Dynamic Student Showcases'],
     image: '/milan/timeline/2023.png'
   },
-  {
-    year: "Milan '22",
-    facts: ['Legacy Rebuilt', 'South India Talent Hub', 'Multi-Disciplinary Arts'],
-    image: '/milan/timeline/2022.png'
-  }
+
 ]
 
 export function MilanTimelineSection() {
@@ -34,7 +30,7 @@ export function MilanTimelineSection() {
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ['start end', 'end start']
+    offset: ['start center', 'end center']
   })
 
   const pathLength = useTransform(scrollYProgress, [0, 1], [0, 1])
@@ -127,8 +123,8 @@ export function MilanTimelineSection() {
       <div className="absolute inset-0 flex justify-center pointer-events-none z-20">
         <svg
           width="600"
-          height="3200"
-          viewBox="0 0 600 3200"
+          height="2400"
+          viewBox="0 0 600 2400"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           className="opacity-80"
@@ -137,8 +133,7 @@ export function MilanTimelineSection() {
             d="M300 0
                C 500 250, 100 550, 300 800
                C 500 1050, 100 1350, 300 1600
-               C 500 1850, 100 2150, 300 2400
-               C 500 2650, 100 2950, 300 3200"
+               C 500 1850, 100 2150, 300 2400"
             stroke="url(#pulse)"
             strokeWidth="6"
             strokeLinecap="round"
@@ -146,7 +141,7 @@ export function MilanTimelineSection() {
             style={{ pathLength }}
           />
           <defs>
-            <linearGradient id="pulse" x1="0" y1="0" x2="0" y2="3200">
+            <linearGradient id="pulse" x1="0" y1="0" x2="0" y2="2400">
               <stop offset="0%" stopColor="#ffffff" />
               <stop offset="50%" stopColor="#a855f7" />
               <stop offset="100%" stopColor="#ffffff" />

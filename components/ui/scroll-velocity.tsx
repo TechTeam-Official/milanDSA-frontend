@@ -28,8 +28,13 @@ const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
     const directionFactor = React.useRef<number>(1)
     const scrollThreshold = React.useRef<number>(5)
 
+    const [isHovered, setIsHovered] = React.useState(false)
+
     function move(delta: number) {
-      let moveBy = directionFactor.current * velocity * (delta / 1000)
+      // Slow down significantly on hover (10% speed)
+      const currentVelocity = isHovered ? velocity * 0.1 : velocity
+      
+      let moveBy = directionFactor.current * currentVelocity * (delta / 1000)
       if (velocityFactor.get() < 0) {
         directionFactor.current = -1
       } else if (velocityFactor.get() > 0) {
@@ -53,13 +58,15 @@ const ScrollVelocity = React.forwardRef<HTMLDivElement, ScrollVelocityProps>(
     // For text with 20 duplicates, wrap at -50% (half the content)
     // For other content with 3 duplicates, wrap at -33.33%
     const isString = typeof children === "string"
-    const wrapRange = isString ? -50 : -33.33
+    const wrapRange = isString ? -50 : -25 // Adjusted wrap range for 4 copies (100/4 = 25%)
     const x = useTransform(baseX, (v) => `${wrap(0, wrapRange, v)}%`)
 
     return (
       <div
         ref={ref}
-        className={cn("relative m-0 flex flex-nowrap overflow-hidden whitespace-nowrap leading-[0.8] tracking-[-2px]", className)}
+        className={cn("relative m-0 flex flex-nowrap overflow-hidden whitespace-nowrap leading-[0.8]", className)}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
         {...props}
       >
         <motion.div
