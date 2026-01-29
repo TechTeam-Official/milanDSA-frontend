@@ -1,193 +1,86 @@
-"use client";
+import React from "react";
+import { Mail, ArrowRight } from "lucide-react";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRouter } from "next/navigation";
-import { useAuth } from "@/context/auth-context";
-import { Button } from "@/components/ui/button";
-import { Loader2, AlertCircle, CheckCircle2 } from "lucide-react";
-
-export default function LoginClient() {
-  const [email, setEmail] = useState("");
-  const [otp, setOtp] = useState("");
-  const [step, setStep] = useState<"email" | "otp">("email");
-  const [error, setError] = useState("");
-  const [otpSentMsg, setOtpSentMsg] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [returnUrl, setReturnUrl] = useState("/");
-
-  const { sendOtp, verifyOtp, loginWithGoogle, user } = useAuth();
-  const router = useRouter();
-
-  /* ✅ SAFE: browser-only query parsing */
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    const params = new URLSearchParams(window.location.search);
-    const urlParam = params.get("returnUrl");
-
-    if (urlParam) {
-      setReturnUrl(urlParam);
-    } else {
-      const localUrl = localStorage.getItem("redirectAfterLogin");
-      if (localUrl) {
-        setReturnUrl(localUrl);
-        localStorage.removeItem("redirectAfterLogin");
-      }
-    }
-  }, []);
-
-  /* Redirect if already logged in */
-  useEffect(() => {
-    if (user) {
-      router.push(returnUrl);
-    }
-  }, [user, router, returnUrl]);
-
-  const handleSendOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-    setOtpSentMsg("");
-
-    if (!email) {
-      setError("Please enter your email address");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const result = await sendOtp(email);
-      if (result.success) {
-        setStep("otp");
-        setOtpSentMsg(result.message || "OTP sent! Check your inbox.");
-      } else {
-        setError(result.message || "Failed to send OTP");
-      }
-    } catch {
-      setError("An unexpected error occurred");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleVerifyOtp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
-
-    if (!otp) {
-      setError("Please enter the OTP");
-      return;
-    }
-
-    setIsSubmitting(true);
-
-    try {
-      const result = await verifyOtp(email, otp);
-      if (result.success) {
-        setSuccess(true);
-        setTimeout(() => router.push(returnUrl), 1000);
-      } else {
-        setError(result.message || "Verification failed");
-      }
-    } catch {
-      setError("An unexpected error occurred");
-    } finally {
-      if (!success) setIsSubmitting(false);
-    }
-  };
-
-  const handleGoogleLogin = async () => {
-    setError("");
-    setIsSubmitting(true);
-
-    try {
-      const result = await loginWithGoogle();
-      if (!result.success) {
-        setError(result.message || "Google Login failed");
-        setIsSubmitting(false);
-      }
-    } catch {
-      setError("An unexpected error occurred");
-      setIsSubmitting(false);
-    }
-  };
-
+export default function LoginPage() {
   return (
-    <main className="relative min-h-screen bg-neutral-950 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95, y: 20 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "circOut" }}
-        className="w-full max-w-md">
-        <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-2xl p-8">
-          <AnimatePresence mode="wait">
-            {step === "email" ? (
-              <motion.form
-                key="email"
-                onSubmit={handleSendOtp}
-                className="space-y-6">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="student@srmist.edu.in"
-                  className="w-full p-3 rounded-xl bg-white/5 text-white"
-                />
+    <div className="min-h-screen w-full bg-black flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Background gradients for that subtle glow */}
+      <div className="absolute top-[-20%] left-[-10%] w-[500px] h-[500px] bg-purple-900/20 rounded-full blur-[120px]" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-blue-900/10 rounded-full blur-[120px]" />
 
-                {error && (
-                  <div className="flex gap-2 text-red-400 text-sm">
-                    <AlertCircle /> {error}
-                  </div>
-                )}
-
-                <Button
-                  disabled={isSubmitting}
-                  className="w-full">
-                  {isSubmitting ? (
-                    <Loader2 className="animate-spin" />
-                  ) : (
-                    "Send OTP"
-                  )}
-                </Button>
-              </motion.form>
-            ) : (
-              <motion.form
-                key="otp"
-                onSubmit={handleVerifyOtp}
-                className="space-y-6">
-                <input
-                  value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  placeholder="123456"
-                  className="w-full p-3 rounded-xl bg-white/5 text-white tracking-widest"
-                  maxLength={6}
-                />
-
-                {success && (
-                  <div className="flex gap-2 text-green-400 text-sm">
-                    <CheckCircle2 /> Verified! Redirecting…
-                  </div>
-                )}
-
-                <Button
-                  disabled={isSubmitting || success}
-                  className="w-full">
-                  Verify & Login
-                </Button>
-              </motion.form>
-            )}
-          </AnimatePresence>
-
-          <Button
-            variant="outline"
-            onClick={handleGoogleLogin}
-            className="w-full mt-6">
-            Sign in with Google
-          </Button>
+      <div className="w-full max-w-md bg-[#0a0a0a] border border-white/5 rounded-3xl p-8 relative z-10 shadow-2xl backdrop-blur-xl">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 tracking-tight">
+            MILAN &apos;26
+          </h1>
+          <p className="text-zinc-500 text-xs font-medium tracking-[0.2em] mt-2 uppercase">
+            Secure Login
+          </p>
         </div>
-      </motion.div>
-    </main>
+
+        {/* Email Form */}
+        <div className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-zinc-500 text-xs font-bold tracking-wider uppercase block">
+              Email Address
+            </label>
+            <div className="relative group">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                <Mail className="h-5 w-5 text-zinc-500 group-focus-within:text-purple-400 transition-colors" />
+              </div>
+              <input
+                type="email"
+                placeholder="student@srmist.edu.in"
+                className="w-full bg-[#111] border border-white/10 text-white rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-zinc-700"
+              />
+            </div>
+            <p className="text-zinc-600 text-xs">
+              Use your SRM email for Pro Passes.
+            </p>
+          </div>
+
+          <button className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group">
+            Get Verification Code
+            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </div>
+
+        {/* Divider */}
+        <div className="relative my-8">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-white/5"></div>
+          </div>
+          <div className="relative flex justify-center text-xs">
+            <span className="px-4 text-zinc-600 bg-[#0a0a0a] uppercase tracking-widest">
+              Or
+            </span>
+          </div>
+        </div>
+
+        {/* Google Signup */}
+        <button className="w-full bg-white/5 hover:bg-white/10 border border-white/5 text-white font-medium rounded-2xl py-3.5 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98]">
+          <svg className="h-5 w-5" viewBox="0 0 24 24">
+            <path
+              d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+              fill="#4285F4"
+            />
+            <path
+              d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+              fill="#34A853"
+            />
+            <path
+              d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+              fill="#FBBC05"
+            />
+            <path
+              d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+              fill="#EA4335"
+            />
+          </svg>
+          <span className="text-zinc-300">Sign in with Google</span>
+        </button>
+      </div>
+    </div>
   );
 }
