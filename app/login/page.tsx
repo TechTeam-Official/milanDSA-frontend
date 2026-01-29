@@ -1,7 +1,72 @@
-import React from "react";
-import { Mail, ArrowRight } from "lucide-react";
+"use client";
+
+import Image from "next/image";
+import { Mail, ArrowRight, Loader2, CheckCircle } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/auth-context";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [verifying, setVerifying] = useState(false);
+  const { sendOtp, verifyOtp, loginWithGoogle, user } = useAuth();
+  const router = useRouter();
+
+  // Redirect if already logged in
+  useEffect(() => {
+    if (user) {
+      router.push("/");
+    }
+  }, [user, router]);
+
+  const handleSendOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setLoading(true);
+    const res = await sendOtp(email);
+    setLoading(false);
+
+    if (res.success) {
+      setOtpSent(true);
+    } else {
+      alert(res.message || "Failed to send OTP");
+    }
+  };
+
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!otp) return;
+
+    setVerifying(true);
+    const res = await verifyOtp(email, otp);
+    setVerifying(false);
+
+    if (res.success) {
+      // Redirect to dashboard or home on success
+      router.push("/");
+    } else {
+      alert(res.message || "Invalid OTP");
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const res = await loginWithGoogle();
+      if (!res.success) {
+        alert(res.message || "Google Login Failed");
+      }
+      // If success, the AuthContext state change will trigger the useEffect redirect
+      // or the OAuth flow will redirect the page.
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong with Google Login");
+    }
+  };
+
   return (
     <div className="min-h-screen w-full bg-black flex items-center justify-center p-4 relative overflow-hidden">
       {/* Background gradients for that subtle glow */}
@@ -11,40 +76,115 @@ export default function LoginPage() {
       <div className="w-full max-w-md bg-[#0a0a0a] border border-white/5 rounded-3xl p-8 relative z-10 shadow-2xl backdrop-blur-xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white to-white/70 tracking-tight">
-            MILAN &apos;26
-          </h1>
+          <div className="flex justify-center mb-4">
+            <Image
+              src="/Sprites/MilanLogo.png"
+              alt="MILAN '26"
+              width={300}
+              height={120}
+              className="h-24 w-auto object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.15)]"
+              priority
+            />
+          </div>
           <p className="text-zinc-500 text-xs font-medium tracking-[0.2em] mt-2 uppercase">
-            Secure Login
+            {otpSent ? "Verify Identity" : "Secure Login"}
           </p>
         </div>
 
-        {/* Email Form */}
-        <div className="space-y-6">
-          <div className="space-y-2">
-            <label className="text-zinc-500 text-xs font-bold tracking-wider uppercase block">
-              Email Address
-            </label>
-            <div className="relative group">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-zinc-500 group-focus-within:text-purple-400 transition-colors" />
+        {/* Form Container */}
+        {!otpSent ? (
+          <form onSubmit={handleSendOtp} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-zinc-500 text-xs font-bold tracking-wider uppercase block">
+                Email Address
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <Mail className="h-5 w-5 text-zinc-500 group-focus-within:text-purple-400 transition-colors" />
+                </div>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="student@srmist.edu.in"
+                  className="w-full bg-[#111] border border-white/10 text-white rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-zinc-700"
+                  required
+                />
               </div>
-              <input
-                type="email"
-                placeholder="student@srmist.edu.in"
-                className="w-full bg-[#111] border border-white/10 text-white rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all placeholder:text-zinc-700"
-              />
+              <p className="text-zinc-600 text-xs">
+                Use your SRM email for Pro Passes.
+              </p>
             </div>
-            <p className="text-zinc-600 text-xs">
-              Use your SRM email for Pro Passes.
-            </p>
-          </div>
 
-          <button className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group">
-            Get Verification Code
-            <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </div>
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Sending Code...
+                </>
+              ) : (
+                <>
+                  Get Verification Code
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
+            </button>
+          </form>
+        ) : (
+          <form onSubmit={handleVerifyOtp} className="space-y-6">
+            <div className="space-y-2">
+              <label className="text-zinc-500 text-xs font-bold tracking-wider uppercase block">
+                Verification Code
+              </label>
+              <div className="relative group">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                  <CheckCircle className="h-5 w-5 text-zinc-500 group-focus-within:text-green-400 transition-colors" />
+                </div>
+                <input
+                  type="text"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  placeholder="Enter 6-digit code"
+                  className="w-full bg-[#111] border border-white/10 text-white rounded-2xl py-3.5 pl-12 pr-4 focus:outline-none focus:ring-2 focus:ring-green-500/50 focus:border-green-500/50 transition-all placeholder:text-zinc-700 tracking-widest"
+                  required
+                  maxLength={6}
+                />
+              </div>
+              <p className="text-zinc-600 text-xs">
+                Check your inbox at <span className="text-zinc-400">{email}</span>
+              </p>
+            </div>
+
+            <button
+              type="submit"
+              disabled={verifying}
+              className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {verifying ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Verifying...
+                </>
+              ) : (
+                <>
+                  Verify & Login
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </>
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={() => setOtpSent(false)}
+              className="w-full text-zinc-500 text-xs hover:text-white transition-colors"
+            >
+              Entered wrong email? Go back
+            </button>
+          </form>
+        )}
 
         {/* Divider */}
         <div className="relative my-8">
@@ -59,7 +199,10 @@ export default function LoginPage() {
         </div>
 
         {/* Google Signup */}
-        <button className="w-full bg-white/5 hover:bg-white/10 border border-white/5 text-white font-medium rounded-2xl py-3.5 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98]">
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full bg-white/5 hover:bg-white/10 border border-white/5 text-white font-medium rounded-2xl py-3.5 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98]"
+        >
           <svg className="h-5 w-5" viewBox="0 0 24 24">
             <path
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"

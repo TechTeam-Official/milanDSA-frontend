@@ -35,151 +35,55 @@ export async function POST(request: Request) {
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Milan '26 Verification Code</title>
-          <style>
-              body {
-                  margin: 0;
-                  padding: 0;
-                  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-                  background-color: #000000;
-                  color: #ffffff;
-              }
-              .wrapper {
-                  width: 100%;
-                  table-layout: fixed;
-                  background-color: #000000;
-                  padding-bottom: 40px;
-              }
-              .main-table {
-                  background-color: #0a0a0a;
-                  margin: 0 auto;
-                  width: 100%;
-                  max-width: 600px;
-                  border-spacing: 0;
-                  font-family: sans-serif;
-                  color: #e5e5e5;
-                  border: 1px solid #262626;
-                  border-radius: 20px;
-                  overflow: hidden;
-                  box-shadow: 0 0 50px rgba(139, 92, 246, 0.1); 
-              }
-              .header-bg {
-                  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
-                  padding: 40px 0;
-                  text-align: center;
-                  position: relative;
-              }
-              .header-glow {
-                  position: absolute;
-                  top: -50%;
-                  left: 50%;
-                  transform: translateX(-50%);
-                  width: 200px;
-                  height: 200px;
-                  background: radial-gradient(circle, rgba(147, 51, 234, 0.3) 0%, rgba(0,0,0,0) 70%);
-                  filter: blur(40px);
-                  z-index: 0;
-              }
-              .brand-text {
-                  font-size: 36px;
-                  font-weight: 800;
-                  margin: 0;
-                  position: relative;
-                  z-index: 1;
-                  background: linear-gradient(to bottom, #ffffff, #9ca3af);
-                  -webkit-background-clip: text;
-                  -webkit-text-fill-color: transparent;
-                  letter-spacing: -1px;
-              }
-              .brand-sub {
-                  font-size: 12px;
-                  text-transform: uppercase;
-                  letter-spacing: 3px;
-                  color: #6d28d9;
-                  margin-top: 5px;
-                  font-weight: 600;
-                  position: relative;
-                  z-index: 1;
-              }
-              .content-section {
-                  padding: 40px 40px 20px 40px;
-                  text-align: center;
-              }
-              .welcome-text {
-                  font-size: 18px;
-                  color: #e5e5e5;
-                  margin-bottom: 24px;
-                  line-height: 1.5;
-              }
-              .otp-container {
-                  margin: 30px auto;
-                  background: #171717;
-                  border: 1px solid #333;
-                  border-radius: 16px;
-                  padding: 24px;
-                  max-width: 280px;
-                  position: relative;
-              }
-              .otp-code {
-                  font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
-                  font-size: 32px;
-                  color: #ffffff;
-                  font-weight: 700;
-                  letter-spacing: 8px;
-                  margin: 0;
-                  text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-              }
-              .expiry-text {
-                  font-size: 13px;
-                  color: #737373;
-                  margin-top: 24px;
-              }
-              .divider {
-                  height: 1px;
-                  background-color: #262626;
-                  margin: 30px 40px;
-              }
-              .footer {
-                  text-align: center;
-                  padding: 0 20px 30px 20px;
-                  color: #525252;
-                  font-size: 12px;
-              }
-          </style>
       </head>
-      <body>
-          <div class="wrapper">
-              <table class="main-table">
+      <body style="margin: 0; padding: 0; background-color: #fce7f3; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;">
+          
+          <!-- Outer Wrapper / Background Pattern -->
+          <div style="width: 100%; background-color: #f3e8ff; background-image: repeating-linear-gradient(45deg, #f3e8ff 0, #f3e8ff 10px, #fdf4ff 0, #fdf4ff 50px); padding: 40px 0;">
+              
+              <!-- Main Red Card -->
+              <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 480px; background-color: #4a0404; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
+                  
+                  <!-- Top Header with Logo Area (Black Curve effect simulation) -->
                   <tr>
-                      <td class="header-bg">
-                          <div class="header-glow"></div>
-                          <h1 class="brand-text">MILAN '26</h1>
-                          <div class="brand-sub">Secure Login</div>
+                      <td style="background-color: #000000; padding: 30px 20px; text-align: center; border-bottom: 4px solid #b91c1c;">
+                          <h1 style="color: #ffffff; font-size: 38px; font-weight: 800; margin: 0; letter-spacing: -1px; font-family: sans-serif;">MILAN</h1>
+                          <p style="color: #a3a3a3; font-size: 10px; text-transform: uppercase; letter-spacing: 3px; margin: 5px 0 0 0;">National Level Cultural Fest</p>
+                          <p style="color: #ffffff; font-size: 14px; font-style: italic; margin: 5px 0 0 0; opacity: 0.8;">#LiveTheChange</p>
                       </td>
                   </tr>
+
+                  <!-- Content Section -->
                   <tr>
-                      <td class="content-section">
-                          <p class="welcome-text">Here is your verification code to access your Milan '26 account.</p>
+                      <td style="padding: 40px 30px; text-align: center;">
                           
-                          <div class="otp-container">
-                              <div class="otp-code">${otp}</div>
+                          <h2 style="color: #ffffff; font-size: 22px; font-weight: 700; line-height: 1.4; margin: 0 0 30px 0;">
+                              Here is your verification code<br>to access your account for<br>MILAN'26
+                          </h2>
+
+                          <!-- OTP Pill -->
+                          <div style="background-color: #000000; border-radius: 50px; padding: 20px 40px; display: inline-block; margin-bottom: 30px; border: 1px solid #333;">
+                              <span style="color: #ffffff; font-size: 32px; font-weight: 700; letter-spacing: 6px; font-family: 'Courier New', monospace;">${otp}</span>
                           </div>
-  
-                          <p class="expiry-text">This code is valid for 10 minutes. Do not share it with anyone.</p>
+
+                          <p style="color: #e5e5e5; font-size: 14px; margin: 0; font-weight: 500;">
+                              The code is valid for 10 minutes.<br>Do not share it with anyone.
+                          </p>
                       </td>
                   </tr>
+
+                  <!-- Footer Section -->
                   <tr>
-                      <td>
-                          <div class="divider"></div>
+                      <td style="padding: 0 30px 40px 30px; text-align: center;">
+                          <p style="color: #999999; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin: 0;">&copy; 2026 SRM Milan.</p>
+                          <p style="color: #666666; font-size: 10px; margin: 5px 0 0 0;">All rights reserved.</p>
+                          <p style="color: #555555; font-size: 10px; margin: 15px 0 0 0; line-height: 1.4;">This is an automated message,<br>please do not reply.</p>
                       </td>
                   </tr>
-                  <tr>
-                      <td class="footer">
-                          <p style="margin: 5px 0;">&copy; 2026 SRM Milan. All rights reserved.</p>
-                          <p style="margin: 5px 0;">This is an automated message, please do not reply.</p>
-                      </td>
-                  </tr>
+
               </table>
           </div>
+
       </body>
       </html>
     `;

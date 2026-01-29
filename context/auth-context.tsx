@@ -40,7 +40,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             id: session.user.id
           })
         } else {
-          setUser(null)
+          // Check for custom OTP user in localStorage if no Supabase session
+          const storedUser = localStorage.getItem('srm_user')
+          if (storedUser) {
+            try {
+              setUser(JSON.parse(storedUser))
+            } catch {
+              setUser(null)
+            }
+          } else {
+            setUser(null)
+          }
         }
         setIsLoading(false)
       })
