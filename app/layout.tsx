@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ConditionalLayout } from "@/components/conditional-layout";
-import { Footer } from "@/components/footer";
+import { ConditionalFooter } from "@/components/conditional-footer";
 import { AuthProvider } from "@/context/auth-context";
 
 const grotesk = localFont({
@@ -35,7 +35,7 @@ export default function RootLayout({
         <AuthProvider>
           <ConditionalLayout />
           {children}
-          <Footer />
+          <ConditionalFooter />
         </AuthProvider>
       </body>
     </html>

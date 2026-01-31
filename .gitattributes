@@ -1,2 +1,10 @@
+# --- .gitattributes ---
+
+# 1. Global Rule: Send all images to LFS (Keep this for the 2GB full folder)
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.png filter=lfs diff=lfs merge=lfs -text
+
+# 2. EXCEPTION: Keep Thumbs in regular Git (Standard storage)
+# This overrides the rule above for the thumbs folder
+public/Teams/thumbs/**/*.jpg !filter !diff !merge
+public/Teams/thumbs/**/*.png !filter !diff !mergegit reset

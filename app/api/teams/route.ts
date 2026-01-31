@@ -1,8 +1,12 @@
 import { NextResponse } from "next/server";
 
-// 1. DIRECT IMPORTS
+// 1. DIRECT IMPORTS (static at build time)
 import clubTeamData from "../../team/club-team.json";
 import coreTeamData from "../../team/core-team.json";
+
+export const runtime = "nodejs";
+export const dynamic = "force-static";
+export const revalidate = 60 * 60; // 1 hour ISR
 
 // --- TYPES ---
 type RawMember = {
@@ -31,7 +35,7 @@ type TeamJSON = Record<string, TeamBlock>;
 const RAW_DATA: Record<string, RawTeamBlock> = {
   ...clubTeamData,
   ...coreTeamData,
-} as unknown as Record<string, RawTeamBlock>;
+} as Record<string, RawTeamBlock>;
 
 const KEY_TO_FOLDER: Record<string, string> = {
   // --- CLUBS ---
@@ -67,45 +71,30 @@ const KEY_TO_FOLDER: Record<string, string> = {
 };
 
 export async function GET() {
-  const mergedResult: TeamJSON = {};
+  const result: TeamJSON = {};
 
-  try {
-    for (const [teamKey, teamData] of Object.entries(RAW_DATA)) {
-      // 1. Resolve Folder Name
-      let folderName = KEY_TO_FOLDER[teamKey];
-      if (!folderName) folderName = teamKey;
+  for (const [teamKey, teamData] of Object.entries(RAW_DATA)) {
+    const folderName = KEY_TO_FOLDER[teamKey] ?? teamKey;
+    const encodedFolder = encodeURIComponent(folderName);
 
-      const encodedFolder = encodeURIComponent(folderName);
+    const members: Member[] = teamData.members.map((member) => ({
+      ...member,
+      // 🔥 Uppercase JPG as requested
+      image: `/Teams/${encodedFolder}/${member.code}.JPG`,
+    }));
 
-      // 2. Process Members
-      // Note: We cannot use fs.access here in Vercel production.
-      // We generate the path assuming the file exists.
-      // If the file is missing, the Frontend <SphereNode> must handle the 404
-      // by returning null (hiding the node).
-      const validMembers: Member[] = teamData.members.map((member) => {
-        // 🔥 CHANGED to .JPG (Uppercase) based on your request
-        const imageFilename = `${member.code}.JPG`;
-
-        return {
-          ...member,
-          image: `/Teams/${encodedFolder}/${imageFilename}`,
-        };
-      });
-
-      if (validMembers.length > 0) {
-        mergedResult[teamKey] = {
-          label: teamData.label,
-          members: validMembers,
-        };
-      }
+    if (members.length > 0) {
+      result[teamKey] = {
+        label: teamData.label,
+        members,
+      };
     }
-
-    return NextResponse.json(mergedResult);
-  } catch (error) {
-    console.error(`❌ Error processing team data:`, error);
-    return NextResponse.json(
-      { error: "Failed to load team data" },
-      { status: 500 },
-    );
   }
+
+  return NextResponse.json(result, {
+    headers: {
+      // Extra CDN friendliness
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+    },
+  });
 }

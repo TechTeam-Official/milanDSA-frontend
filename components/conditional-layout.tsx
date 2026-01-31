@@ -8,7 +8,7 @@ import { PillBase } from "./navbar"
 export function ConditionalLayout() {
   const pathname = usePathname()
 
-  if (pathname?.startsWith("/studio")) {
+  if (pathname?.startsWith("/studio") || pathname?.startsWith("/login")) {
     return null
   }
 
