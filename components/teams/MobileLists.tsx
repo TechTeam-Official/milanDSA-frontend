@@ -2,6 +2,7 @@
 
 import ExpandableItem from "./ExpandableItem";
 import { ImageData } from "@/components/ui/img-sphere";
+import { TeamJSON } from "@/lib/team-data";
 
 interface Props {
   isMobile: boolean;
@@ -12,22 +13,8 @@ interface Props {
   getRandomImage: (id: string) => ImageData;
   setSelectedConvenor: (img: ImageData | null) => void;
   setSelectedSphereImage: (img: ImageData | null) => void;
-  teamData: TeamData;
+  teamData: TeamJSON;
 }
-
-type ApiMember = {
-  code: string;
-  name: string;
-  position: string;
-  image: string;
-};
-
-type TeamBlock = {
-  label: string;
-  members: ApiMember[];
-};
-
-type TeamData = Record<string, TeamBlock>;
 
 // 🔥 MAP: UI Sidebar Name -> JSON Label Name
 const LABEL_MAP: Record<string, string> = {
@@ -77,8 +64,9 @@ export default function MobileLists(props: Props) {
     const searchTarget = normalize(targetLabel);
 
     // 3. Find the matching team in JSON
+    // Fix: Use `[, team]` to ignore the key without creating an unused variable
     const foundEntry = Object.entries(props.teamData).find(
-      ([_, team]) => normalize(team.label) === searchTarget,
+      ([, team]) => normalize(team.label) === searchTarget,
     );
 
     if (!foundEntry) {
@@ -90,6 +78,10 @@ export default function MobileLists(props: Props) {
     return team.members.map((member) => ({
       ...member,
       teamKey: key,
+      // Fix: Polyfill 'image' without @ts-ignore.
+      // Use member.thumb, or check if 'image' exists on member (casted to unknown first to avoid TS error if type is missing it)
+      image:
+        member.thumb || (member as unknown as { image: string }).image || "",
     }));
   };
 
@@ -103,6 +95,7 @@ export default function MobileLists(props: Props) {
             key={role}
             item={role}
             category="core"
+            // Fix: Removed `as any`. The return type now satisfies the structure.
             members={getMembersForLabel(role)}
             {...props}
             disableHover
@@ -118,6 +111,7 @@ export default function MobileLists(props: Props) {
             key={club}
             item={club}
             category="club"
+            // Fix: Removed `as any`.
             members={getMembersForLabel(club)}
             {...props}
             disableHover

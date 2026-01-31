@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
-import { Loader2 } from "lucide-react";
 
-import { ImageData } from "@/components/ui/img-sphere";
+import type { ImageData } from "@/components/ui/img-sphere";
+import { TeamJSON, Member } from "@/lib/team-data";
 import "./styles.css";
 
 import MobileLists from "@/components/teams/MobileLists";
@@ -12,6 +12,7 @@ import DesktopLists from "@/components/teams/DesktopLists";
 import HoverPreview from "@/components/teams/HoverPreview";
 import ConvenorModal from "@/components/teams/ConvenorModal";
 
+// Dynamically import sphere component to avoid SSR issues
 const SphereImageGrid = dynamic(() => import("@/components/ui/img-sphere"), {
   ssr: false,
   loading: () => <div className="w-full h-full" />,
@@ -51,29 +52,10 @@ const CLUB_CONVENORS = [
   "Festival Club",
 ];
 
-// --- TYPES ---
-type ApiMember = {
-  code: string;
-  name: string;
-  position: string;
-  image: string;
-};
-
-type TeamBlock = {
-  label: string;
-  members: ApiMember[];
-};
-
-type TeamData = Record<string, TeamBlock>;
-
-export default function TeamClient() {
+export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
   const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
   const [isMobile, setIsMobile] = useState(false);
-  const [loading, setLoading] = useState(true);
 
-  // Data & UI States
-  const [teamData, setTeamData] = useState<TeamData>({});
-  const [sphereImages, setSphereImages] = useState<ImageData[]>([]);
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
   const [hoveredConvenor, setHoveredConvenor] = useState<string | null>(null);
   const [popupPosition, setPopupPosition] = useState<{
@@ -86,32 +68,24 @@ export default function TeamClient() {
   const [selectedSphereImage, setSelectedSphereImage] =
     useState<ImageData | null>(null);
 
-  // --- FETCH DATA ---
-  useEffect(() => {
-    fetch("/api/teams")
-      .then((res) => res.json())
-      .then((data: TeamData) => {
-        setTeamData(data);
-        const allMembers: ImageData[] = [];
-        Object.values(data).forEach((team) => {
-          team.members.forEach((member) => {
-            allMembers.push({
-              id: member.code,
-              src: member.image,
-              alt: member.name,
-              title: member.name,
-              description: member.position,
-            });
+  // --- BUILD SPHERE IMAGES ONCE ---
+  const sphereImages = useMemo<ImageData[]>(() => {
+    const images: ImageData[] = [];
+    Object.values(teamData).forEach((team: TeamJSON[string]) => {
+      team.members.forEach((member: Member) => {
+        if (member.thumb && member.thumb.length > 0) {
+          images.push({
+            id: member.code,
+            src: member.thumb,
+            alt: member.name,
+            title: member.name,
+            description: member.position,
           });
-        });
-        if (allMembers.length > 0) setSphereImages(allMembers);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("❌ Failed to fetch teams:", err);
-        setLoading(false);
+        }
       });
-  }, []);
+    });
+    return images;
+  }, [teamData]);
 
   // --- RESIZE HANDLER ---
   useEffect(() => {
@@ -135,11 +109,9 @@ export default function TeamClient() {
   const getMemberImage = (id: string): ImageData => {
     const found = sphereImages.find((img) => img.id === id);
     if (found) return found;
-
-    // 🔥 FIX 1: Provide a valid fallback image so HoverPreview doesn't crash
     return {
       id: "placeholder",
-      src: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&h=400&fit=crop", // Generic fallback
+      src: "/Teams/thumbs/placeholder.jpg",
       alt: "Loading...",
       title: "Loading...",
       description: "",
@@ -150,29 +122,15 @@ export default function TeamClient() {
     if (img) {
       setHoveredConvenor(null);
       setPopupPosition(null);
-      setSelectedConvenor(img);
+      setSelectedConvenor({
+        ...img,
+        src: img.src.replace("/thumbs/", "/full/"),
+      });
       setSelectedSphereImage(img);
     } else {
       setSelectedConvenor(null);
     }
   };
-
-  // --- LOADING SCREEN ---
-  if (loading) {
-    return (
-      <main className="w-full h-screen flex flex-col items-center justify-center bg-[#F5F5F7]">
-        <div className="relative flex items-center justify-center">
-          <div className="absolute w-32 h-32 bg-purple-400/20 rounded-full blur-xl animate-pulse" />
-          <div className="relative w-16 h-16 bg-neutral-900 rounded-full shadow-[0_0_40px_rgba(168,85,247,0.4)] flex items-center justify-center animate-bounce">
-            <Loader2 className="text-white w-8 h-8 animate-spin" />
-          </div>
-        </div>
-        <p className="mt-8 text-neutral-500 font-medium animate-pulse">
-          Loading Team...
-        </p>
-      </main>
-    );
-  }
 
   // --- MAIN UI ---
   return (
@@ -185,15 +143,13 @@ export default function TeamClient() {
 
       {/* Heading */}
       <div className="absolute top-8 left-6 md:top-12 md:left-12 z-20 pointer-events-none">
-        <h1 className="text-6xl md:text-9xl font-bold tracking-tighter text-neutral-900 animate-in fade-in slide-in-from-top-4 duration-1000">
-          Our
-        </h1>
-        <h1 className="text-6xl md:text-9xl font-bold tracking-tighter text-neutral-900 animate-in fade-in slide-in-from-top-8 duration-1000 delay-100">
+        <h1 className="text-6xl md:text-9xl font-bold tracking-tighter">Our</h1>
+        <h1 className="text-6xl md:text-9xl font-bold tracking-tighter">
           Team<span className="text-purple-600">.</span>
         </h1>
       </div>
 
-      {/* 📱 MOBILE LISTS */}
+      {/* Mobile Lists */}
       {isMobile && (
         <MobileLists
           isMobile
@@ -208,7 +164,7 @@ export default function TeamClient() {
         />
       )}
 
-      {/* 🔒 SPHERE */}
+      {/* Sphere */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
         <div className="pointer-events-auto">
           <SphereImageGrid
@@ -222,22 +178,12 @@ export default function TeamClient() {
             maxRotationSpeed={6}
             perspective={1000}
             selectedImage={selectedSphereImage}
-            onImageSelect={(img) => {
-              // Clicking the sphere logic
-              setSelectedSphereImage(img);
-
-              // 🔥 FIX 2: Pass the image to the modal handler instead of null
-              if (img) {
-                handleMemberSelect(img);
-              } else {
-                handleMemberSelect(null);
-              }
-            }}
+            onImageSelect={handleMemberSelect}
           />
         </div>
       </div>
 
-      {/* 🖥 DESKTOP LISTS */}
+      {/* Desktop Lists */}
       {!isMobile && (
         <DesktopLists
           teamData={teamData}
@@ -253,8 +199,7 @@ export default function TeamClient() {
         />
       )}
 
-      {/* 🔥 HOVER PREVIEW */}
-      {/* Logic: Show only if NO modal is open AND we are hovering over someone */}
+      {/* Hover Preview */}
       {!selectedConvenor && hoveredConvenor && popupPosition && (
         <HoverPreview
           hoveredConvenor={hoveredConvenor}
@@ -263,7 +208,7 @@ export default function TeamClient() {
         />
       )}
 
-      {/* MODAL */}
+      {/* Modal */}
       {selectedConvenor && (
         <ConvenorModal
           convenor={selectedConvenor}
