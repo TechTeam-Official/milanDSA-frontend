@@ -7,4 +7,4 @@
 # 2. EXCEPTION: Keep Thumbs in regular Git (Standard storage)
 # This overrides the rule above for the thumbs folder
 public/Teams/thumbs/**/*.jpg !filter !diff !merge
-public/Teams/thumbs/**/*.png !filter !diff !merge
+public/Teams/thumbs/**/*.png !filter !diff !mergegit reset
