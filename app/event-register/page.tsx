@@ -42,7 +42,7 @@ export default function EventRegisterPage() {
     
     // For now, let's simulate sending to the details page after "verification"
     setTimeout(() => {
-        router.push('/event-registration-details')
+        router.push('/checkout/events')
     }, 1500)
   }
 
