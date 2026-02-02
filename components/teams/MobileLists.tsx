@@ -71,19 +71,19 @@ export default function MobileLists(props: Props) {
   };
 
   return (
-    <div className="relative w-full px-4 pb-20">
-      {/* SPACING FIX: 
-         mt-[25vh] pushes the list down by 25% of the screen height.
-         This guarantees the "Our Team" header (which is fixed at the top) is visible.
-      */}
-      <div className="flex flex-col gap-6 mt-[25vh]">
+    <div className="relative w-full px-6 pb-40">
+      <div className="flex flex-col gap-8 mt-[25vh]">
         {/* CORE TEAM SECTION */}
-        {/* Removed backdrop-blur. Using bg-white/40 for transparency without fuzziness */}
-        <div className="bg-white/50 dark:bg-black/40 border border-white/30 rounded-2xl p-5 shadow-lg">
-          <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">
+        {/* CLEAR GLASS EFFECT: 
+            - bg-white/50: 50% opacity (no blur)
+            - border-white/60: Subtle crisp edge
+            - shadow-xl: Lifts it off the globe
+        */}
+        <div className="bg-white/50 border border-white/60 rounded-3xl p-6 shadow-xl">
+          <h3 className="font-black text-4xl mb-6 text-gray-900 tracking-tight border-b border-gray-900/10 pb-4">
             Core Team
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-6 text-gray-900 font-medium text-lg">
             {props.coreRoles.map((role) => (
               <ExpandableItem
                 key={role}
@@ -98,11 +98,11 @@ export default function MobileLists(props: Props) {
         </div>
 
         {/* CLUBS SECTION */}
-        <div className="bg-white/50 dark:bg-black/40 border border-white/30 rounded-2xl p-5 shadow-lg">
-          <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">
+        <div className="bg-white/50 border border-white/60 rounded-3xl p-6 shadow-xl">
+          <h3 className="font-black text-4xl mb-6 text-gray-900 tracking-tight border-b border-gray-900/10 pb-4">
             Clubs
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-6 text-gray-900 font-medium text-lg">
             {props.clubs.map((club) => (
               <ExpandableItem
                 key={club}
