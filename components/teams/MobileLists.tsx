@@ -16,9 +16,7 @@ interface Props {
   teamData: TeamJSON;
 }
 
-// 🔥 MAP: UI Sidebar Name -> JSON Label Name
 const LABEL_MAP: Record<string, string> = {
-  // CORE
   "Operations & Resources": "Operations and Resource Management",
   "Publicity & Social Media": "Publicity",
   "Public Relations": "Public Relations",
@@ -32,8 +30,6 @@ const LABEL_MAP: Record<string, string> = {
   "Certificate & Prizes": "Certificate and Prize Distribution",
   Treasurer: "Treasurer",
   Discipline: "Discipline",
-
-  // CLUBS
   "Music Club": "Music",
   "Dance Club": "Dance",
   "Astrophillia Club": "Astrophillia",
@@ -55,68 +51,70 @@ export default function MobileLists(props: Props) {
 
   const getMembersForLabel = (uiLabel: string) => {
     if (!props.teamData) return [];
-
-    // 1. Resolve the correct label using the map, or fallback to the original
     const targetLabel = LABEL_MAP[uiLabel] || uiLabel;
-
-    // 2. Normalize for comparison (lowercase, trim)
     const normalize = (str: string) => str.toLowerCase().trim();
     const searchTarget = normalize(targetLabel);
 
-    // 3. Find the matching team in JSON
-    // Fix: Use `[, team]` to ignore the key without creating an unused variable
     const foundEntry = Object.entries(props.teamData).find(
       ([, team]) => normalize(team.label) === searchTarget,
     );
 
-    if (!foundEntry) {
-      return [];
-    }
+    if (!foundEntry) return [];
 
     const [key, team] = foundEntry;
-
     return team.members.map((member) => ({
       ...member,
       teamKey: key,
-      // Fix: Polyfill 'image' without @ts-ignore.
-      // Use member.thumb, or check if 'image' exists on member (casted to unknown first to avoid TS error if type is missing it)
       image:
         member.thumb || (member as unknown as { image: string }).image || "",
     }));
   };
 
   return (
-    <div className="absolute right-4 top-32 w-1/2 md:hidden space-y-6">
-      {/* CORE TEAM */}
-      <div>
-        <h3 className="font-semibold mb-2">Core Team</h3>
-        {props.coreRoles.slice(0, 5).map((role) => (
-          <ExpandableItem
-            key={role}
-            item={role}
-            category="core"
-            // Fix: Removed `as any`. The return type now satisfies the structure.
-            members={getMembersForLabel(role)}
-            {...props}
-            disableHover
-          />
-        ))}
-      </div>
+    <div className="relative w-full px-4 pb-20">
+      {/* SPACING FIX: 
+         mt-[25vh] pushes the list down by 25% of the screen height.
+         This guarantees the "Our Team" header (which is fixed at the top) is visible.
+      */}
+      <div className="flex flex-col gap-6 mt-[25vh]">
+        {/* CORE TEAM SECTION */}
+        {/* Removed backdrop-blur. Using bg-white/40 for transparency without fuzziness */}
+        <div className="bg-white/50 dark:bg-black/40 border border-white/30 rounded-2xl p-5 shadow-lg">
+          <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">
+            Core Team
+          </h3>
+          <div className="space-y-3">
+            {props.coreRoles.map((role) => (
+              <ExpandableItem
+                key={role}
+                item={role}
+                category="core"
+                members={getMembersForLabel(role)}
+                {...props}
+                disableHover
+              />
+            ))}
+          </div>
+        </div>
 
-      {/* CLUBS */}
-      <div>
-        <h3 className="font-semibold mb-2">Clubs</h3>
-        {props.clubs.map((club) => (
-          <ExpandableItem
-            key={club}
-            item={club}
-            category="club"
-            // Fix: Removed `as any`.
-            members={getMembersForLabel(club)}
-            {...props}
-            disableHover
-          />
-        ))}
+        {/* CLUBS SECTION */}
+        <div className="bg-white/50 dark:bg-black/40 border border-white/30 rounded-2xl p-5 shadow-lg">
+          <h3 className="font-bold text-xl mb-4 text-gray-900 dark:text-white">
+            Clubs
+          </h3>
+          <div className="space-y-3">
+            {props.clubs.map((club) => (
+              <ExpandableItem
+                key={club}
+                item={club}
+                category="club"
+                members={getMembersForLabel(club)}
+                {...props}
+                disableHover
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
