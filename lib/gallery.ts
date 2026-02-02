@@ -4,9 +4,13 @@ import path from "path";
 const IMAGE_REGEX = /\.(png|jpe?g|webp|avif)$/i;
 
 function getImagesRecursively(dir: string, publicPath = ""): string[] {
+  // Check if directory exists before reading to avoid crashes
+  if (!fs.existsSync(dir)) return [];
+
   return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const abs = path.join(dir, entry.name);
-    const pub = `${publicPath}/${entry.name}`;
+    // Ensure path separators are standardized for web URLs (forward slashes)
+    const pub = `${publicPath}/${entry.name}`.replace(/\\/g, "/");
 
     if (entry.isDirectory()) {
       return getImagesRecursively(abs, pub);
@@ -16,7 +20,7 @@ function getImagesRecursively(dir: string, publicPath = ""): string[] {
   });
 }
 
-// 🔥 This runs at BUILD TIME
+// 🔥 This runs at BUILD TIME on the server
 const galleryRoot = path.join(process.cwd(), "public/GalleryPage");
 
 export const galleryImages: string[] = fs.existsSync(galleryRoot)

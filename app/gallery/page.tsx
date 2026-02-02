@@ -1,43 +1,30 @@
-export const dynamic = "force-dynamic";
-
+import { galleryImages } from "@/lib/gallery";
 import { GalleryClient } from "./GalleryClient";
 
-export default async function GalleryPage() {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+// We don't need "force-dynamic" anymore because we aren't fetching an API.
+// We are reading files directly, which is faster and safer.
 
-  let images: string[] = [];
-  let error = false;
+export default function GalleryPage() {
+  // Directly access the data from your library
+  const images = galleryImages;
 
-  try {
-    const res = await fetch(`${baseUrl}/api/gallery`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      throw new Error(`Status: ${res.status}`);
-    }
-
-    images = await res.json();
-  } catch (e) {
-    console.error("Failed to fetch gallery images:", e);
-    error = true;
-  }
-
-  if (error) {
+  // Optional: Handle the case where no images are found
+  if (!images || images.length === 0) {
     return (
       <main className="relative min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center space-y-4">
-          <h2 className="text-2xl font-bold text-red-400">
-            Unable to Load Gallery
+          <h2 className="text-2xl font-bold text-neutral-400">
+            Gallery is Empty
           </h2>
-          <p className="text-neutral-400">
-            We couldn&apos;t retrieve the moments right now.
+          <p className="text-neutral-600">
+            No images found in the gallery folder.
           </p>
         </div>
       </main>
     );
   }
 
+  // Pass the data straight to the client
   return (
     <main className="relative min-h-screen bg-black text-white overflow-hidden">
       <GalleryClient initialImages={images} />
