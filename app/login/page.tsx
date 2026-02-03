@@ -47,7 +47,9 @@ export default function LoginPage() {
 
     if (res.success) {
       // Redirect to dashboard or home on success
-      router.push("/");
+      // Check for returnUrl or default to event-register
+      const returnUrl = new URLSearchParams(window.location.search).get('returnUrl')
+      router.push(returnUrl || "/event-register");
     } else {
       alert(res.message || "Invalid OTP");
     }
@@ -171,7 +173,7 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  Verify & Login
+                  Verify & Register
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </>
               )}

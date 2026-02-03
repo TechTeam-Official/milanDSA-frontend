@@ -64,7 +64,12 @@ const GlassSurface: React.FC<GlassSurfaceProps> = ({
   className = '',
   style = {}
 }) => {
-  const [isClient] = useState(true); // Client-side only component
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsClient(true), 0);
+    return () => clearTimeout(timer);
+  }, []);
   const id = useId();
   const filterId = `glass-filter-${id}`;
   const redGradId = `red-grad-${id}`;

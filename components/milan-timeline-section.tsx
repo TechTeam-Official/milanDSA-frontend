@@ -153,15 +153,15 @@ export function MilanTimelineSection() {
 
       <div className="relative z-30 max-w-7xl mx-auto flex flex-col gap-32 px-6">
         {/* Section Header */}
-        <div className="text-center mb-10 pt-10">
+        <div className="text-center mb-20 space-y-4 pt-10">
              <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6"
+                className="text-4xl md:text-6xl font-black tracking-tighter uppercase"
              >
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
-                  The Legacy
+                  Timeline
                 </span>
              </motion.h2>
              <motion.p 
