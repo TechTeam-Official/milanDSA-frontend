@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Facebook, Twitter, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
+import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
 
 export function Footer() {
   return (
@@ -14,25 +14,24 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-xl md:text-2xl font-light text-neutral-300 leading-relaxed max-w-sm">
-              Live the moment. <br />
-              <span className="text-white font-medium">Relive the memories.</span>
+              #Live the Change
             </p>
             <div className="flex gap-4">
-              <SocialLink href="#" icon={<Instagram size={20} />} />
-              <SocialLink href="#" icon={<Twitter size={20} />} />
-              <SocialLink href="#" icon={<Facebook size={20} />} />
-              <SocialLink href="#" icon={<Youtube size={20} />} />
+              <SocialLink href="https://www.youtube.com/@DSAEVENTS" icon={<Youtube size={20} />} />
+              <SocialLink href="https://www.instagram.com/srmist_dsa" icon={<Instagram size={20} />} />
+              <SocialLink href="https://www.instagram.com/srmist_milan" icon={<Instagram size={20} />} />
+              <SocialLink href="https://www.facebook.com/SRMUniversityOfficial" icon={<Facebook size={20} />} />
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="lg:col-span-2 space-y-6">
-            <h4 className="text-lg font-semibold text-white">Explore</h4>
+            <h4 className="text-lg font-semibold text-white">Quick Links</h4>
             <ul className="space-y-4 text-neutral-400">
               <FooterLink href="/events">Events</FooterLink>
-              <FooterLink href="/gallery">Gallery</FooterLink>
               <FooterLink href="/sponsors">Sponsors</FooterLink>
-              <FooterLink href="/team">Our Team</FooterLink>
+              <FooterLink href="/gallery">Gallery</FooterLink>
+              <FooterLink href="/team">Team</FooterLink>
             </ul>
           </div>
 
@@ -71,9 +70,9 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-neutral-500 text-sm">
-          <p>© 2026 Directorate of Student Affairs, SRMIST. All rights reserved.</p>
-          <p>Designed & Developed by Milan Tech Team</p>
+        <div className="pt-8 border-t border-white/5 flex flex-col items-center justify-center gap-4 text-neutral-500 text-sm text-center">
+          <p>© Copyright Directorate of Student Affairs, SRMIST. All rights reserved.</p>
+          <p className="font-medium text-neutral-400">Developed By DSA Tech and Graphic Design Team.</p>
         </div>
       </div>
     </footer>
@@ -84,6 +83,8 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
   return (
     <a 
       href={href} 
+      target="_blank"
+      rel="noopener noreferrer"
       className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/50 transition-all duration-300"
     >
       {icon}
