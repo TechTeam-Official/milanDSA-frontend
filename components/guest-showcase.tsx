@@ -193,14 +193,14 @@ export function GuestShowcase() {
       
       <div className="w-full flex flex-col space-y-16 relative z-10">
         {/* Section Header */}
-        <div className="text-center px-4">
+        <div className="text-center px-4 max-w-4xl mx-auto">
              <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-neutral-800 to-blue-600">
-                  Our Past Headliners
+                  Showstoppers over the years
                 </span>
              </h2>
-             <p className="text-neutral-600 max-w-2xl mx-auto text-lg font-light">
-               The stars who made Milan unforgettable
+             <p className="text-neutral-600 text-lg md:text-xl font-light">
+               Celebrating icons who have graced MILAN with their presence over the years.
              </p>
         </div>
 
