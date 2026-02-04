@@ -42,12 +42,6 @@
         "name": "B Shiv Karthikeyan",
         "position": "Convenor",
         "image": "/Teams/SO/SO1.jpg"
-      },
-      {
-        "code": "SO2",
-        "name": "Umasankari.S",
-        "position": "Convenor",
-        "image": "/Teams/SO/SO2.jpg"
       }
     ]
   },
@@ -112,12 +106,6 @@
   "LIT": {
     "label": "Literary",
     "members": [
-      {
-        "code": "LIT1",
-        "name": "Anuj Tiwari",
-        "position": "Convenor",
-        "image": "/Teams/LIT/LIT1.jpg"
-      },
       {
         "code": "LIT2",
         "name": "Harsh Tiwari",
