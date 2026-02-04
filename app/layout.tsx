@@ -1,8 +1,9 @@
-import type { Metadata } from "next"
-import localFont from "next/font/local"
-import "./globals.css"
-import { ConditionalLayout } from "@/components/conditional-layout"
-import { Footer } from "@/components/footer"
+import type { Metadata } from "next";
+import localFont from "next/font/local";
+import "./globals.css";
+import { ConditionalLayout } from "@/components/conditional-layout";
+import { ConditionalFooter } from "@/components/conditional-footer";
+import { AuthProvider } from "@/context/auth-context";
 
 const grotesk = localFont({
   src: [
@@ -12,25 +13,31 @@ const grotesk = localFont({
   ],
   variable: "--font-grotesk",
   display: "swap",
-})
+});
 
 export const metadata: Metadata = {
   title: "MILAN 2026 | SRMIST",
-  description: "National Cultural Festival of SRM Institute of Science and Technology",
-}
+  description:
+    "National Cultural Festival of SRM Institute of Science and Technology",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={grotesk.variable}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={grotesk.variable}>
       <body className="antialiased font-sans">
-        <ConditionalLayout />
-        {children}
-        <Footer />
+        <AuthProvider>
+          <ConditionalLayout />
+          {children}
+          <ConditionalFooter />
+        </AuthProvider>
       </body>
     </html>
-  )
+  );
 }

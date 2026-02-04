@@ -2,23 +2,10 @@
 
 import ExpandableItem from "./ExpandableItem";
 import { ImageData } from "@/components/ui/img-sphere";
-
-type ApiMember = {
-  code: string;
-  name: string;
-  position: string;
-  image: string;
-};
-
-type TeamBlock = {
-  label: string;
-  members: ApiMember[];
-};
-
-type TeamData = Record<string, TeamBlock>;
+import { TeamJSON } from "@/lib/team-data";
 
 interface Props {
-  teamData: TeamData;
+  teamData: TeamJSON;
   expandedItems: Set<string>;
   setExpandedItems: React.Dispatch<React.SetStateAction<Set<string>>>;
   coreRoles: string[];
@@ -32,28 +19,36 @@ interface Props {
 
 // 🔥 MAP: UI Sidebar Name -> JSON Label Name
 const LABEL_MAP: Record<string, string> = {
-  // Core Mismatches
+  // CORE
   "Operations & Resources": "Operations and Resource Management",
-  "Tech Team": "Tech Team and GD",
-  "Publicity & Social Media": "Publicity", // Maps to 'P' key
+  "Publicity & Social Media": "Publicity",
+  "Public Relations": "Public Relations",
+  Media: "Media",
+  EMCEE: "EMCEE",
+  Hospitality: "Hospitality",
+  Sponsorship: "Sponsorship",
+  Content: "Content",
   "Transport & Acc": "Transportation and Accommodation",
+  "Tech Team and GD": "Tech and Graphic Design",
   "Certificate & Prizes": "Certificate and Prize Distribution",
+  Treasurer: "Treasurer",
+  Discipline: "Discipline",
 
-  // Club Mismatches (Removing ' Club' suffix)
+  // CLUBS
   "Music Club": "Music",
   "Dance Club": "Dance",
-  "Astrophilia Club": "Astrophilia",
-  "Sports Club": "Sports", // Ensure JSON has this Label
+  "Astrophillia Club": "Astrophillia",
   "Quiz Club": "Quiz",
-  "Creative Arts Club": "Creative arts", // JSON uses lowercase 'arts'
+  "Creative Arts Club": "Creative Arts",
   "Gaming Club": "Gaming",
-  "Self Defence Club": "Self defence", // JSON uses lowercase 'defence'
+  "Self Defence Club": "Self Defence",
   "Fashion Club": "Fashion",
   "Movie & Dramatics Club": "Movies and Dramatics",
-  "Rubiks Cube Club": "Rubiks Cube",
-  "Social Club": "Social",
   "Literary Club": "Literary",
   "Rotaract Club": "Rotaract",
+  "Social Club": "Social",
+  "Women Empowerment Club": "Women Empowerment",
+  "Festival Club": "Festival",
 };
 
 export default function DesktopLists({
@@ -73,13 +68,12 @@ export default function DesktopLists({
     const searchTarget = normalize(targetLabel);
 
     // 3. Find the matching team in JSON
+    // Fix: Use `[, team]` to ignore the first element (key) without creating an unused variable
     const foundEntry = Object.entries(teamData).find(
-      ([_, team]) => normalize(team.label) === searchTarget,
+      ([, team]) => normalize(team.label) === searchTarget,
     );
 
     if (!foundEntry) {
-      // Optional: Log mismatches to help debug
-      // console.warn(`Mismatch: UI "${uiLabel}" -> Mapped "${targetLabel}" not found in JSON.`);
       return [];
     }
 
@@ -88,6 +82,11 @@ export default function DesktopLists({
     return team.members.map((member) => ({
       ...member,
       teamKey: key,
+      // Fix: Removed @ts-ignore. If member.thumb exists on the type, this is valid.
+      // If `image` is missing on Member type but exists in runtime, we cast as `unknown` first or assume `thumb` is the primary source.
+      // We explicitly define `image` string to satisfy the downstream component.
+      image:
+        member.thumb || (member as unknown as { image: string }).image || "",
     }));
   };
 
@@ -110,6 +109,8 @@ export default function DesktopLists({
               key={role}
               item={role}
               category="core"
+              // Fix: Removed `as any`. The return type of `getMembersForLabel` now structurally matches what is expected (has `image`).
+              // If strict typing issues persist, `@ts-expect-error` is preferred over `any`.
               members={getMembersForLabel(role)}
               {...props}
               onHover={(id, rect) => {
