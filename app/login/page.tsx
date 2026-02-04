@@ -48,7 +48,9 @@ export default function LoginPage() {
     if (res.success) {
       // Redirect to dashboard or home on success
       // Check for returnUrl or default to event-register
-      const returnUrl = new URLSearchParams(window.location.search).get('returnUrl')
+      const returnUrl = new URLSearchParams(window.location.search).get(
+        "returnUrl",
+      );
       router.push(returnUrl || "/event-register");
     } else {
       alert(res.message || "Invalid OTP");
@@ -95,7 +97,9 @@ export default function LoginPage() {
 
         {/* Form Container */}
         {!otpSent ? (
-          <form onSubmit={handleSendOtp} className="space-y-6">
+          <form
+            onSubmit={handleSendOtp}
+            className="space-y-6">
             <div className="space-y-2">
               <label className="text-zinc-500 text-xs font-bold tracking-wider uppercase block">
                 Email Address
@@ -121,8 +125,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+              className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed">
               {loading ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -137,7 +140,9 @@ export default function LoginPage() {
             </button>
           </form>
         ) : (
-          <form onSubmit={handleVerifyOtp} className="space-y-6">
+          <form
+            onSubmit={handleVerifyOtp}
+            className="space-y-6">
             <div className="space-y-2">
               <label className="text-zinc-500 text-xs font-bold tracking-wider uppercase block">
                 Verification Code
@@ -157,15 +162,15 @@ export default function LoginPage() {
                 />
               </div>
               <p className="text-zinc-600 text-xs">
-                Check your inbox at <span className="text-zinc-400">{email}</span>
+                Check your inbox at{" "}
+                <span className="text-zinc-400">{email}</span>
               </p>
             </div>
 
             <button
               type="submit"
               disabled={verifying}
-              className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed"
-            >
+              className="w-full bg-white text-black font-semibold rounded-2xl py-3.5 flex items-center justify-center gap-2 hover:bg-gray-200 transition-colors group disabled:opacity-50 disabled:cursor-not-allowed">
               {verifying ? (
                 <>
                   <Loader2 className="h-4 w-4 animate-spin" />
@@ -181,8 +186,7 @@ export default function LoginPage() {
             <button
               type="button"
               onClick={() => setOtpSent(false)}
-              className="w-full text-zinc-500 text-xs hover:text-white transition-colors"
-            >
+              className="w-full text-zinc-500 text-xs hover:text-white transition-colors">
               Entered wrong email? Go back
             </button>
           </form>
@@ -203,9 +207,10 @@ export default function LoginPage() {
         {/* Google Signup */}
         <button
           onClick={handleGoogleLogin}
-          className="w-full bg-white/5 hover:bg-white/10 border border-white/5 text-white font-medium rounded-2xl py-3.5 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98]"
-        >
-          <svg className="h-5 w-5" viewBox="0 0 24 24">
+          className="w-full bg-white/5 hover:bg-white/10 border border-white/5 text-white font-medium rounded-2xl py-3.5 flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98]">
+          <svg
+            className="h-5 w-5"
+            viewBox="0 0 24 24">
             <path
               d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
               fill="#4285F4"

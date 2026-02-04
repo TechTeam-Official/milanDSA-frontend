@@ -2,23 +2,12 @@
   "ORM": {
     "label": "Operations and Resource Management",
     "members": [
-      { "code": "ORM1", "name": "Abishek D", "position": "Domain Secretary" },
       {
         "code": "ORM2",
         "name": "Bugata Chanakya Sri Vinayaka",
         "position": "Domain Secretary"
       },
-      { "code": "ORM3", "name": "NandhaKumar R", "position": "Convenor" },
-      { "code": "ORM4", "name": "Naveen Kumar S", "position": "Convenor" },
-      { "code": "ORM5", "name": "M.Mohammed Irfan", "position": "Convenor" },
-      { "code": "ORM6", "name": "Sasikanth. A", "position": "Convenor" },
-      {
-        "code": "ORM7",
-        "name": "Jyothi Shasti Dharan S",
-        "position": "Convenor"
-      },
-      { "code": "ORM8", "name": "Mahendiran M", "position": "Convenor" },
-      { "code": "ORM9", "name": "Sanjay P", "position": "Convenor" },
+
       {
         "code": "ORM10",
         "name": "N.Guru Vishwal Yadav",
@@ -146,7 +135,6 @@
         "name": "Puli Srinish Goud",
         "position": "Domain Secretary"
       },
-      { "code": "S3", "name": "Dhanush Mamillapally", "position": "Convenor" },
       { "code": "S4", "name": "Dhiya Raj", "position": "Convenor" },
       { "code": "S5", "name": "Karthik Sai Ambati", "position": "Convenor" },
       { "code": "S6", "name": "Divyansh Singh", "position": "Convenor" },
