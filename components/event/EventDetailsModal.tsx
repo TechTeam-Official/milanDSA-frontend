@@ -111,12 +111,12 @@ export default function EventDetailsModal({
                           {item.is_srm_only ? (
                             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-medium">
                               <CheckCircle2 className="w-3.5 h-3.5" />
-                              <span>Open to All</span>
+                              <span>SRM Only</span>
                             </div>
                           ) : (
                             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
                               <Globe2 className="w-3.5 h-3.5" />
-                              <span>Non-SRM Students</span>
+                              <span>Open to All</span>
                             </div>
                           )}
                         </div>
