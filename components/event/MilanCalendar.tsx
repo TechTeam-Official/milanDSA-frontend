@@ -1,346 +1,267 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import clsx from "clsx";
+import { X, MapPin, Clock, Calendar as CalIcon } from "lucide-react";
+
 import {
-  X,
-  Clock,
-  MapPin,
-  Calendar as CalendarIcon,
-  ChevronRight,
-} from "lucide-react";
+  getCalendarSchedule,
+  type CalendarEvent,
+} from "../../app/events/calendarAdapter";
 
-// --- CONFIGURATION & DATA ---
+/* ---------------- CONFIG ---------------- */
 
-const MONTH_NAME = "February";
 const YEAR = 2026;
 const DAYS_IN_MONTH = 28;
-const FIRST_DAY_OFFSET = 0; // Feb 1 is Sunday
-const HIGHLIGHT_DAYS = [19, 20, 21, 22];
+// February 1st, 2026 is a Sunday, so offset is 0.
+const FIRST_DAY_OFFSET = 0;
 const DAYS_OF_WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-// Mock Data for the Timeline
-const FEST_SCHEDULE: Record<
-  number,
-  Array<{ time: string; title: string; category: string; location: string }>
-> = {
-  19: [
-    {
-      time: "09:00 AM",
-      title: "Inauguration Ceremony",
-      category: "General",
-      location: "Main Auditorium",
-    },
-    {
-      time: "11:00 AM",
-      title: "Hack the Stars (Start)",
-      category: "Technical",
-      location: "Tech Park",
-    },
-    {
-      time: "02:00 PM",
-      title: "Street Play: Nukkad",
-      category: "Dramatics",
-      location: "Java Green",
-    },
-    {
-      time: "06:00 PM",
-      title: "Classical Solo Dance",
-      category: "Dance",
-      location: "Mini Hall 1",
-    },
-  ],
-  20: [
-    {
-      time: "10:00 AM",
-      title: "Shipwreck Debate",
-      category: "Literary",
-      location: "MBA Seminar Hall",
-    },
-    {
-      time: "01:00 PM",
-      title: "Battle of Bands (Eastern)",
-      category: "Music",
-      location: "Main Stage",
-    },
-    {
-      time: "04:00 PM",
-      title: "Fashion Show Prelims",
-      category: "Fashion",
-      location: "Auditorium",
-    },
-    {
-      time: "08:00 PM",
-      title: "DJ Night",
-      category: "Pro Show",
-      location: "Grounds",
-    },
-  ],
-  21: [
-    {
-      time: "09:00 AM",
-      title: "Valorant Finals",
-      category: "Gaming",
-      location: "Lab 404",
-    },
-    {
-      time: "12:00 PM",
-      title: "Rap Battle",
-      category: "Music",
-      location: "Food Court",
-    },
-    {
-      time: "05:00 PM",
-      title: "Choreonite (Group Dance)",
-      category: "Dance",
-      location: "Main Stage",
-    },
-  ],
-  22: [
-    {
-      time: "10:00 AM",
-      title: "Mr. & Miss Milan",
-      category: "Fashion",
-      location: "Main Auditorium",
-    },
-    {
-      time: "03:00 PM",
-      title: "Closing Ceremony",
-      category: "General",
-      location: "Main Auditorium",
-    },
-    {
-      time: "07:00 PM",
-      title: "Celebrity Night",
-      category: "Pro Show",
-      location: "Main Grounds",
-    },
-  ],
+/* ---------------- INAUGURATION ---------------- */
+
+const INAUG_DAY = 19;
+const INAUGURAL_EVENT: CalendarEvent = {
+  day: INAUG_DAY,
+  time: "09:00 AM",
+  title: "Inauguration Ceremony",
+  category: "General",
+  location: "Main Auditorium",
 };
 
-// --- SUB-COMPONENT: TIMELINE MODAL ---
+/* ---------------- MODAL COMPONENT (TIMELINE DESIGN) ---------------- */
 
 function ScheduleModal({
   isOpen,
   onClose,
   day,
+  schedule,
 }: {
   isOpen: boolean;
   onClose: () => void;
   day: number | null;
+  schedule: Record<number, CalendarEvent[]>;
 }) {
   if (!isOpen || day === null) return null;
 
-  const events = FEST_SCHEDULE[day] || [];
-  const hasEvents = events.length > 0;
+  const events = schedule[day] ?? [];
 
   return (
     <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[60]"
-          />
+      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        {/* Backdrop */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
+          className="absolute inset-0 bg-black/90 backdrop-blur-md"
+        />
 
-          {/* Modal Content */}
-          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-[#121212] border border-white/10 w-full max-w-lg max-h-[80vh] rounded-3xl shadow-2xl overflow-hidden flex flex-col pointer-events-auto">
-              {/* Header */}
-              <div className="p-6 border-b border-white/10 bg-neutral-900 flex justify-between items-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10" />
-                <div className="relative z-10">
-                  <h3 className="text-2xl font-bold text-white flex items-center gap-2">
-                    <CalendarIcon className="w-5 h-5 text-purple-400" />
-                    February {day}, {YEAR}
-                  </h3>
-                  <p className="text-neutral-400 text-sm mt-1">
-                    {hasEvents
-                      ? `${events.length} events scheduled`
-                      : "No events scheduled"}
-                  </p>
-                </div>
-                <button
-                  onClick={onClose}
-                  className="relative z-10 p-2 bg-white/5 hover:bg-white/10 rounded-full text-neutral-400 hover:text-white transition-colors">
-                  <X className="w-5 h-5" />
-                </button>
+        {/* Modal Window */}
+        <motion.div
+          initial={{ scale: 0.9, y: 20, opacity: 0 }}
+          animate={{ scale: 1, y: 0, opacity: 1 }}
+          exit={{ scale: 0.9, y: 20, opacity: 0 }}
+          className="relative bg-[#18181B] border border-white/10 w-full max-w-xl max-h-[85vh] rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col">
+          {/* Header */}
+          <div className="p-8 border-b border-white/5 bg-white/[0.02] flex justify-between items-center">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-purple-500/10 rounded-2xl">
+                <CalIcon className="w-6 h-6 text-purple-500" />
               </div>
-
-              {/* Timeline Body */}
-              <div className="flex-1 overflow-y-auto p-6 custom-scrollbar bg-[#0a0a0a]">
-                {!hasEvents ? (
-                  <div className="h-full flex flex-col items-center justify-center text-neutral-500 gap-4">
-                    <CalendarIcon className="w-12 h-12 opacity-20" />
-                    <p>No events found for this date.</p>
-                  </div>
-                ) : (
-                  <div className="space-y-6 relative pl-4">
-                    {/* Vertical Line */}
-                    <div className="absolute left-[23px] top-2 bottom-2 w-0.5 bg-gradient-to-b from-purple-500/50 via-blue-500/20 to-transparent rounded-full" />
-
-                    {events.map((event, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.1 }}
-                        className="relative flex gap-6 group">
-                        {/* Dot */}
-                        <div className="absolute left-[5px] top-3 w-3 h-3 rounded-full bg-neutral-900 border-2 border-purple-500 z-10 group-hover:scale-125 transition-transform shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
-
-                        {/* Content Card */}
-                        <div className="flex-1 bg-neutral-900/50 border border-white/5 p-4 rounded-xl hover:bg-neutral-800/80 hover:border-purple-500/30 transition-all duration-300">
-                          <div className="flex justify-between items-start mb-2">
-                            <span className="text-xs font-bold text-purple-400 uppercase tracking-wider flex items-center gap-1">
-                              <Clock className="w-3 h-3" /> {event.time}
-                            </span>
-                            <span className="text-[10px] px-2 py-1 rounded bg-white/5 text-neutral-400 border border-white/5">
-                              {event.category}
-                            </span>
-                          </div>
-                          <h4 className="text-white font-semibold text-lg mb-1 group-hover:text-purple-300 transition-colors">
-                            {event.title}
-                          </h4>
-                          <div className="flex items-center gap-1 text-neutral-500 text-xs">
-                            <MapPin className="w-3 h-3" />
-                            {event.location}
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
+              <div>
+                <h3 className="text-2xl font-bold text-white tracking-tight">
+                  February {day}, {YEAR}
+                </h3>
+                <p className="text-neutral-500 text-sm font-medium">
+                  {events.length} {events.length === 1 ? "event" : "events"}{" "}
+                  scheduled
+                </p>
               </div>
-            </motion.div>
+            </div>
+            <button
+              onClick={onClose}
+              className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-neutral-400 hover:text-white transition-colors">
+              <X className="w-5 h-5" />
+            </button>
           </div>
-        </>
-      )}
+
+          {/* Timeline Body */}
+          <div className="flex-1 overflow-y-auto p-8 relative custom-scrollbar">
+            {events.length > 0 ? (
+              <div className="relative">
+                {/* Vertical Timeline Line */}
+                <div className="absolute left-[13px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-purple-500/50 via-purple-500/20 to-transparent" />
+
+                <div className="space-y-6">
+                  {events.map((event, idx) => (
+                    <motion.div
+                      key={`${event.title}-${idx}`}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: idx * 0.1 }}
+                      className="relative pl-12">
+                      {/* Timeline Node (Circle) */}
+                      <div className="absolute left-[-2px] top-5 w-4 h-4 rounded-full bg-[#18181B] border-[3px] border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)] z-10" />
+
+                      {/* Event Card */}
+                      <div className="group bg-neutral-900/40 border border-white/5 p-6 rounded-[2rem] hover:bg-neutral-800/60 transition-all duration-300">
+                        <div className="flex justify-between items-center mb-4">
+                          <div className="flex items-center gap-2 text-purple-400 font-bold text-xs tracking-widest uppercase">
+                            <Clock className="w-3.5 h-3.5" /> {event.time}
+                          </div>
+                          <span className="px-3 py-1 rounded-lg bg-neutral-800 text-[10px] text-neutral-400 uppercase font-black tracking-tight">
+                            {event.category}
+                          </span>
+                        </div>
+
+                        <h4 className="text-white font-bold text-xl mb-3 group-hover:text-purple-400 transition-colors leading-tight">
+                          {event.title}
+                        </h4>
+
+                        <div className="flex items-center gap-2 text-neutral-500 text-sm">
+                          <MapPin className="w-4 h-4 text-neutral-600" />
+                          {event.location}
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-20 text-neutral-600 font-medium">
+                No events scheduled for this day.
+              </div>
+            )}
+          </div>
+        </motion.div>
+      </div>
     </AnimatePresence>
   );
 }
 
-// --- MAIN COMPONENT: CALENDAR ---
+/* ---------------- MAIN CALENDAR PAGE ---------------- */
 
 export default function MilanCalendar() {
   const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
+  const schedule = useMemo(() => {
+    const base = getCalendarSchedule();
+    if (!base[INAUG_DAY]) base[INAUG_DAY] = [];
+
+    const alreadyAdded = base[INAUG_DAY].some(
+      (ev) => ev.title === INAUGURAL_EVENT.title,
+    );
+    if (!alreadyAdded) {
+      base[INAUG_DAY].unshift(INAUGURAL_EVENT);
+    }
+
+    return base;
+  }, []);
+
+  const highlightDays = useMemo(() => {
+    return Object.keys(schedule).map(Number);
+  }, [schedule]);
+
   const calendarCells = useMemo(() => {
-    const cells = [];
-    for (let i = 0; i < FIRST_DAY_OFFSET; i++)
-      cells.push({ type: "padding", day: null });
-    for (let d = 1; d <= DAYS_IN_MONTH; d++)
-      cells.push({ type: "day", day: d });
-    while (cells.length < 35) cells.push({ type: "padding", day: null });
+    const cells: (number | null)[] = [];
+    for (let i = 0; i < FIRST_DAY_OFFSET; i++) cells.push(null);
+    for (let d = 1; d <= DAYS_IN_MONTH; d++) cells.push(d);
+    while (cells.length < 35) cells.push(null);
     return cells;
   }, []);
 
   return (
-    <>
-      <div className="w-full max-w-5xl mx-auto p-8 bg-[#0F0F0F] border border-white/5 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
-        {/* Decorative Background Blurs */}
-        <div className="absolute top-0 left-0 w-64 h-64 bg-purple-600/10 rounded-full blur-[80px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 right-0 w-64 h-64 bg-blue-600/10 rounded-full blur-[80px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
+    <div className="w-full max-w-5xl mx-auto p-10 bg-[#0F0F0F] border border-white/5 rounded-[3rem] shadow-3xl">
+      {/* Header */}
+      <div className="text-center mb-14">
+        <motion.h2
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-6xl font-black text-white tracking-tighter">
+          February{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
+            {YEAR}
+          </span>
+        </motion.h2>
+        <p className="text-[11px] text-neutral-500 mt-4 tracking-[0.3em] font-bold uppercase">
+          OFFICIAL SCHEDULE · SRM IST
+        </p>
+      </div>
 
-        {/* Header */}
-        <div className="text-center mb-10 relative z-10">
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter">
-            {MONTH_NAME}{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-              {YEAR}
-            </span>
-          </h2>
-          <div className="flex items-center justify-center gap-2 mt-3 text-neutral-500 text-sm font-medium uppercase tracking-widest">
-            <span>Official Schedule</span>
-            <div className="w-1 h-1 rounded-full bg-neutral-700" />
-            <span>SRM IST</span>
+      {/* Grid */}
+      <div className="grid grid-cols-7 gap-4">
+        {DAYS_OF_WEEK.map((d) => (
+          <div
+            key={d}
+            className="text-center text-[10px] font-black text-neutral-600 pb-6 uppercase tracking-widest">
+            {d}
           </div>
-        </div>
+        ))}
 
-        {/* Grid */}
-        <div className="grid grid-cols-7 gap-3 md:gap-4 relative z-10">
-          {/* Days Header */}
-          {DAYS_OF_WEEK.map((day) => (
-            <div
-              key={day}
-              className="text-center text-[10px] md:text-xs font-bold text-neutral-600 uppercase tracking-widest py-2">
-              {day}
-            </div>
-          ))}
+        {calendarCells.map((day, idx) => {
+          const isHighlighted = day !== null && highlightDays.includes(day);
 
-          {/* Days Cells */}
-          {calendarCells.map((cell, idx) => {
-            if (cell.type === "padding") {
-              return (
-                <div
-                  key={idx}
-                  className="aspect-square opacity-0"
-                />
-              );
-            }
+          return day ? (
+            <motion.div
+              key={`day-${day}`}
+              whileHover={isHighlighted ? { scale: 1.05, y: -2 } : {}}
+              whileTap={isHighlighted ? { scale: 0.95 } : {}}
+              onClick={() => isHighlighted && setSelectedDay(day)}
+              className={`
+                aspect-square rounded-[1.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative
+                ${
+                  isHighlighted
+                    ? "bg-gradient-to-br from-purple-600/30 to-blue-600/30 border border-purple-500/40 text-white shadow-xl shadow-purple-500/10"
+                    : "bg-white/[0.03] border border-white/[0.05] text-neutral-700 hover:bg-white/[0.08]"
+                }
+              `}>
+              <span
+                className={`text-2xl font-black ${isHighlighted ? "text-white" : "opacity-30"}`}>
+                {day}
+              </span>
 
-            const isHighlight = HIGHLIGHT_DAYS.includes(cell.day as number);
-
-            return (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setSelectedDay(cell.day as number)}
-                className={clsx(
-                  "relative aspect-square rounded-2xl flex flex-col items-center justify-center cursor-pointer transition-all duration-300 group overflow-hidden border",
-                  isHighlight
-                    ? "bg-gradient-to-br from-purple-900/80 to-blue-900/80 border-purple-500/50 shadow-[0_8px_32px_rgba(88,28,135,0.25)]"
-                    : "bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/10",
-                )}>
-                {/* Glow Effect for Highlights */}
-                {isHighlight && (
-                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                )}
-
-                {/* Milan Badge */}
-                {isHighlight && (
-                  <div className="absolute top-2 right-2 md:top-3 md:right-3 w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-green-400 shadow-[0_0_8px_#4ade80]" />
-                )}
-
-                {/* Day Number */}
-                <span
-                  className={clsx(
-                    "text-lg md:text-3xl font-bold z-10",
-                    isHighlight
-                      ? "text-white"
-                      : "text-neutral-500 group-hover:text-neutral-300",
-                  )}>
-                  {cell.day}
-                </span>
-
-                {/* Context Text on Hover */}
-                {isHighlight && (
-                  <span className="absolute bottom-2 md:bottom-4 text-[8px] md:text-[10px] font-medium text-purple-200 uppercase tracking-wide opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0">
+              {isHighlighted && (
+                <>
+                  <span className="text-[8px] mt-1 font-bold opacity-60 uppercase tracking-tighter">
                     View Events
                   </span>
-                )}
-              </motion.div>
-            );
-          })}
+                  {/* Status Indicator Dot */}
+                  <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.7)]" />
+                </>
+              )}
+            </motion.div>
+          ) : (
+            <div
+              key={`pad-${idx}`}
+              className="aspect-square"
+            />
+          );
+        })}
+      </div>
+
+      {/* Legend */}
+      <div className="mt-12 pt-8 border-t border-white/5 flex justify-center gap-8">
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 rounded-full bg-purple-500/40 border border-purple-500" />
+          <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
+            Events Available
+          </span>
+        </div>
+        <div className="flex items-center gap-3">
+          <div className="w-3 h-3 rounded-full bg-white/5 border border-white/10" />
+          <span className="text-[10px] font-bold text-neutral-600 uppercase tracking-widest">
+            Empty Day
+          </span>
         </div>
       </div>
 
-      {/* The Timeline Modal */}
       <ScheduleModal
-        isOpen={!!selectedDay}
+        isOpen={selectedDay !== null}
         day={selectedDay}
+        schedule={schedule}
         onClose={() => setSelectedDay(null)}
       />
-    </>
+    </div>
   );
 }
