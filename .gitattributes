@@ -1,0 +1,9 @@
+# Force images to be standard binary files (Not LFS, Not Text)
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.webp binary
+
+# Disable LFS globally
+* !filter !diff !merge
