@@ -47,7 +47,7 @@ function ScheduleModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-100 flex items-center justify-center p-4">
         {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
@@ -64,7 +64,7 @@ function ScheduleModal({
           exit={{ scale: 0.9, y: 20, opacity: 0 }}
           className="relative bg-[#18181B] border border-white/10 w-full max-w-xl max-h-[85vh] rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col">
           {/* Header */}
-          <div className="p-8 border-b border-white/5 bg-white/[0.02] flex justify-between items-center">
+          <div className="p-8 border-b border-white/5 bg-white/2 flex justify-between items-center">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-purple-500/10 rounded-2xl">
                 <CalIcon className="w-6 h-6 text-purple-500" />
@@ -91,7 +91,7 @@ function ScheduleModal({
             {events.length > 0 ? (
               <div className="relative">
                 {/* Vertical Timeline Line */}
-                <div className="absolute left-[13px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-purple-500/50 via-purple-500/20 to-transparent" />
+                <div className="absolute left-[13px] top-6 bottom-6 w-0.5 bg-linear-to-b from-purple-500/50 via-purple-500/20 to-transparent" />
 
                 <div className="space-y-6">
                   {events.map((event, idx) => (
@@ -102,10 +102,10 @@ function ScheduleModal({
                       transition={{ delay: idx * 0.1 }}
                       className="relative pl-12">
                       {/* Timeline Node (Circle) */}
-                      <div className="absolute left-[-2px] top-5 w-4 h-4 rounded-full bg-[#18181B] border-[3px] border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)] z-10" />
+                      <div className="absolute -left-0.5 top-5 w-4 h-4 rounded-full bg-[#18181B] border-[3px] border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)] z-10" />
 
                       {/* Event Card */}
-                      <div className="group bg-neutral-900/40 border border-white/5 p-6 rounded-[2rem] hover:bg-neutral-800/60 transition-all duration-300">
+                      <div className="group bg-neutral-900/40 border border-white/5 p-6 rounded-4xl hover:bg-neutral-800/60 transition-all duration-300">
                         <div className="flex justify-between items-center mb-4">
                           <div className="flex items-center gap-2 text-purple-400 font-bold text-xs tracking-widest uppercase">
                             <Clock className="w-3.5 h-3.5" /> {event.time}
@@ -180,7 +180,7 @@ export default function MilanCalendar() {
           animate={{ opacity: 1, y: 0 }}
           className="text-6xl font-black text-white tracking-tighter">
           February{" "}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-blue-500">
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-blue-500">
             {YEAR}
           </span>
         </motion.h2>
@@ -209,11 +209,11 @@ export default function MilanCalendar() {
               whileTap={isHighlighted ? { scale: 0.95 } : {}}
               onClick={() => isHighlighted && setSelectedDay(day)}
               className={`
-                aspect-square rounded-[1.5rem] flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative
+                aspect-square rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative
                 ${
                   isHighlighted
-                    ? "bg-gradient-to-br from-purple-600/30 to-blue-600/30 border border-purple-500/40 text-white shadow-xl shadow-purple-500/10"
-                    : "bg-white/[0.03] border border-white/[0.05] text-neutral-700 hover:bg-white/[0.08]"
+                    ? "bg-linear-to-br from-purple-600/30 to-blue-600/30 border border-purple-500/40 text-white shadow-xl shadow-purple-500/10"
+                    : "bg-white/3 border border-white/5 text-neutral-700 hover:bg-white/8"
                 }
               `}>
               <span
