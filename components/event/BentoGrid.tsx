@@ -12,15 +12,7 @@ interface BentoGridProps {
 }
 
 export function BentoGrid({ children, className }: BentoGridProps) {
-  return (
-    <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-3 auto-rows-[18rem] gap-6",
-        className,
-      )}>
-      {children}
-    </div>
-  );
+  return <div className={cn("flex flex-col gap-6", className)}>{children}</div>;
 }
 
 /* ----------------------------------
@@ -49,13 +41,11 @@ export function BentoCard({
   return (
     <div
       className={cn(
-        "group relative overflow-hidden rounded-3xl border border-neutral-200 bg-white p-6 transition hover:shadow-xl",
+        "group relative h-full overflow-hidden rounded-3xl border border-neutral-200 bg-white p-6 transition-all hover:shadow-xl",
         className,
       )}>
-      {/* Background Decoration */}
       {background}
 
-      {/* Content */}
       <div className="relative z-10 flex h-full flex-col justify-between">
         <div>
           <Icon className="h-8 w-8 text-neutral-900 mb-4" />

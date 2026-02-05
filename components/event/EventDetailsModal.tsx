@@ -4,13 +4,20 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Globe2 } from "lucide-react";
 
-// NEW: Clean Interface matching the new JSON structure
+/* ----------------------------------
+   Updated EventItem (extended safely)
+----------------------------------- */
 export type EventItem = {
   id: number;
   format: string;
   title: string;
   description: string;
   is_srm_only: boolean;
+
+  // 👇 NEW (used only if present)
+  mode?: string;
+  team_size?: string;
+  participation_type?: string;
 };
 
 interface EventDetailsModalProps {
@@ -28,13 +35,8 @@ export default function EventDetailsModal({
   description,
   events,
 }: EventDetailsModalProps) {
-  // Prevent scrolling on body when modal is open
   React.useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "unset";
     return () => {
       document.body.style.overflow = "unset";
     };
@@ -52,11 +54,11 @@ export default function EventDetailsModal({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60]"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-60"
           />
 
-          {/* Modal Container */}
-          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 sm:p-6 pointer-events-none">
+          {/* Modal */}
+          <div className="fixed inset-0 z-70 flex items-center justify-center p-4 sm:p-6 pointer-events-none">
             <motion.div
               initial={{ scale: 0.95, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -78,7 +80,7 @@ export default function EventDetailsModal({
                 </button>
               </div>
 
-              {/* Scrollable Content */}
+              {/* Content */}
               <div className="overflow-y-auto p-6 space-y-4 custom-scrollbar bg-[#121212]">
                 {events.length === 0 ? (
                   <p className="text-neutral-500 text-center py-10">
@@ -92,7 +94,8 @@ export default function EventDetailsModal({
                       animate={{ opacity: 1, y: 0 }}
                       className="group p-5 rounded-2xl bg-neutral-900/30 border border-white/5 hover:border-purple-500/30 hover:bg-neutral-900/60 transition-all duration-300">
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <div className="space-y-1">
+                        <div className="space-y-2">
+                          {/* Title */}
                           <div className="flex items-center gap-3">
                             <h3 className="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">
                               {item.title}
@@ -101,12 +104,29 @@ export default function EventDetailsModal({
                               {item.format}
                             </span>
                           </div>
+
+                          {/* Description */}
                           <p className="text-neutral-400 text-sm leading-relaxed max-w-xl">
                             {item.description}
                           </p>
+
+                          {/* 👇 NEW Metadata Row (subtle, non-invasive) */}
+                          {(item.mode ||
+                            item.team_size ||
+                            item.participation_type) && (
+                            <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-neutral-500 pt-1">
+                              {item.mode && <span>Mode: {item.mode}</span>}
+                              {item.participation_type && (
+                                <span>Type: {item.participation_type}</span>
+                              )}
+                              {item.team_size && (
+                                <span>Team: {item.team_size}</span>
+                              )}
+                            </div>
+                          )}
                         </div>
 
-                        {/* Eligibility Badge */}
+                        {/* Eligibility */}
                         <div className="shrink-0">
                           {item.is_srm_only ? (
                             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-medium">
