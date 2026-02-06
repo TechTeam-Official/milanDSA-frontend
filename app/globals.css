@@ -3,6 +3,21 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ---------- Scrollbar Hide + Smooth Inertial Scroll ---------- */
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE & Edge */
+  scroll-behavior: smooth; /* Smooth scrolling */
+  -webkit-overflow-scrolling: touch; /* iOS inertial scroll */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+/* ------------------------------------------------------------- */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -115,12 +130,11 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground font-sans overflow-x-hidden;
     font-family: var(--font-grotesk), sans-serif;
   }
-
-  /* I REMOVED THE CURSOR:NONE CODE FROM HERE */
 
   /* Restore normal cursor on admin pages */
   body:has([data-admin-page]) *,
