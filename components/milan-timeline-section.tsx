@@ -165,7 +165,7 @@ export function MilanTimelineSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-7xl font-black tracking-tighter uppercase im-text-shadow-dark"
+            className="text-5xl md:text-7xl tracking-tighter uppercase im-text-shadow-dark"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#0F766E]">
               Timeline
@@ -196,7 +196,7 @@ export function MilanTimelineSection() {
               {/* Content Side */}
               <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
                 <div className="space-y-6">
-                  <h3 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]">
+                  <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]">
                     {item.year}
                   </h3>
                   <div className="h-1 w-24 bg-gradient-to-r from-[#0F766E] to-[#C9A24D] rounded-full" />

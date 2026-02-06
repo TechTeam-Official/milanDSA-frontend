@@ -6,6 +6,7 @@
 /* ---------- Scrollbar Hide + Smooth Inertial Scroll ---------- */
 html,
 body {
+  font-family: var(--font-stamp-press), sans-serif;
   scrollbar-width: none;
   /* Firefox */
   -ms-overflow-style: none;
@@ -24,7 +25,18 @@ body::-webkit-scrollbar {
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-stamp-press), ui-sans-serif, system-ui, sans-serif;
+  /* ... */
+  --font-sans: var(--font-stamp-press),
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  --font-serif: var(--font-foglihten),
+    ui-serif,
+    Georgia,
+    Cambria,
+    "Times New Roman",
+    Times,
+    serif;
   --font-foglihten: var(--font-foglihten);
   --font-stamp: var(--font-stamp-press);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -60,6 +72,19 @@ body::-webkit-scrollbar {
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-foglihten), serif;
+    font-weight: normal;
+  }
 }
 
 :root {

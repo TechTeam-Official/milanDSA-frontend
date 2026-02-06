@@ -63,7 +63,7 @@ export default function EventDetailsModal({
               {/* Header */}
               <div className="p-6 border-b border-[#C9A24D]/20 flex justify-between items-start bg-[#0B0B0F]/90 relative z-10">
                 <div>
-                  <h2 className="text-2xl font-black text-white tracking-tight font-serif uppercase">
+                  <h2 className="text-2xl text-white tracking-tight font-serif uppercase">
                     {title}
                   </h2>
                   <p className="text-[#C9A24D]/80 text-sm mt-1 font-medium tracking-wide">{description}</p>
@@ -94,7 +94,7 @@ export default function EventDetailsModal({
                         <div className="space-y-2">
                           {/* Title */}
                           <div className="flex items-center gap-3">
-                            <h3 className="text-lg font-bold text-white group-hover:text-[#C9A24D] transition-colors uppercase tracking-tight">
+                            <h3 className="text-lg text-white group-hover:text-[#C9A24D] transition-colors uppercase tracking-tight">
                               {item.title}
                             </h3>
                             <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-[#C9A24D]/10 text-[#C9A24D] border border-[#C9A24D]/20">

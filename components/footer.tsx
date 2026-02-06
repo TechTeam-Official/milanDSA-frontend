@@ -17,7 +17,7 @@ export function Footer() {
           {/* Brand & Slogan */}
           <div className="lg:col-span-4 space-y-3">
             <Link href="/" className="inline-block">
-              <span className="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] to-[#D97706]">
+              <span className="text-3xl font-serif tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] to-[#D97706]">
                 MILAN &apos;26
               </span>
             </Link>
@@ -55,7 +55,7 @@ export function Footer() {
 
           {/* Contact */}
           <div className="lg:col-span-4 space-y-3">
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Contact Us</h4>
+            <h4 className="text-sm text-white uppercase tracking-wider">Contact Us</h4>
             <ul className="space-y-3 text-sm text-neutral-400">
               <li className="flex items-start gap-3">
                 <MapPin className="text-[#C9A24D] shrink-0 mt-0.5" size={16} />

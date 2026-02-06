@@ -86,7 +86,7 @@ export function IntroductionSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-neutral-800 to-[#0F766E] mb-4 im-text-shadow">
+            <h2 className="text-5xl md:text-7xl font-serif tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-neutral-800 to-[#0F766E] mb-4 im-text-shadow">
               About MILAN
             </h2>
             <div className="inline-block relative">

@@ -70,7 +70,7 @@ export function PosterGeneratorSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl font-black tracking-tighter text-white leading-[1.1] drop-shadow-[0_4px_12px_rgba(201,162,77,0.3)]"
+              className="text-4xl md:text-6xl tracking-tighter text-white leading-[1.1] drop-shadow-[0_4px_12px_rgba(201,162,77,0.3)]"
             >
               Celebrate <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#B87333]">
@@ -128,7 +128,7 @@ export function PosterGeneratorSection() {
               <div className="absolute inset-0 flex flex-col justify-between p-8 z-20 border-[1px] border-[#C9A24D]/30 m-4 shadow-[inset_0_0_20px_rgba(201,162,77,0.1)]">
                 <div className="text-center pt-8">
                   <div className="text-[10px] font-bold tracking-[0.4em] text-[#C9A24D] uppercase mb-3">Est. 1985</div>
-                  <h3 className="text-5xl font-black text-white drop-shadow-lg font-serif">
+                  <h3 className="text-5xl text-white drop-shadow-lg font-serif">
                     40
                   </h3>
                   <p className="text-xl text-[#F5F2EC] font-serif italic">Years of Excellence</p>

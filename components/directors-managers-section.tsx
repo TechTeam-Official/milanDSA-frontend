@@ -70,7 +70,7 @@ export function DirectorsManagersSection() {
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-6xl font-black tracking-tighter uppercase im-text-shadow"
+                        className="text-4xl md:text-6xl font-serif tracking-tighter uppercase im-text-shadow"
                     >
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-[#0B0B0F] to-[#0F766E]">
                             The Visionaries
@@ -110,7 +110,7 @@ export function DirectorsManagersSection() {
                                     />
                                 </div>
 
-                                <h3 className={`font-bold text-[#3B2D5F] mb-2 ${person?.featured ? 'text-2xl' : 'text-xl'}`}>
+                                <h3 className={`text-[#3B2D5F] mb-2 ${person?.featured ? 'text-2xl' : 'text-xl'}`}>
                                     {person?.name}
                                 </h3>
 
@@ -149,7 +149,7 @@ export function DirectorsManagersSection() {
                                     />
                                 </div>
                                 <div className="text-left">
-                                    <h4 className="text-neutral-900 font-bold text-xl group-hover:text-purple-600 transition-colors">{person.name}</h4>
+                                    <h4 className="text-neutral-900 text-xl group-hover:text-purple-600 transition-colors">{person.name}</h4>
                                     <p className="text-neutral-500 text-sm uppercase tracking-wider">{person.role}</p>
                                 </div>
                             </motion.div>

@@ -133,7 +133,7 @@ export function SponsorsSection() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative z-30 text-8xl md:text-[10rem] font-black text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
+          className="relative z-30 text-8xl md:text-[10rem] font-serif text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
           Sponsors<span className="text-[#556B2F]">.</span>
         </motion.h1>
 
@@ -152,7 +152,7 @@ export function SponsorsSection() {
       <section className="relative z-10 w-full bg-[#EFF2EE] py-24 -mt-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12 flex items-center justify-between">
-            <h2 className="text-3xl md:text-5xl font-black text-[#022C22] tracking-tighter">
+            <h2 className="text-3xl md:text-5xl font-serif text-[#022C22] tracking-tighter">
               Current Partners<span className="text-[#C9A24D]">.</span>
             </h2>
             <div className="hidden md:block h-px flex-1 bg-[#556B2F]/20 ml-8" />
@@ -220,10 +220,10 @@ export function SponsorsSection() {
 
           {/* Header */}
           <div className="relative z-10 text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter mb-6 im-text-shadow">
+            <h2 className="text-3xl md:text-5xl font-serif text-white tracking-tighter mb-6 im-text-shadow">
               Legacy Partners<span className="text-[#C9A24D]">.</span>
             </h2>
-            <p className="text-[#E2D4B7]/80 text-xl font-serif max-w-2xl mx-auto">
+            <p className="text-[#E2D4B7]/80 text-xl max-w-2xl mx-auto">
               Trusted by over 100+ brands throughout our history.
             </p>
           </div>

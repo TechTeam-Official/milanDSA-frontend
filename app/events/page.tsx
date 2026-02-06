@@ -143,7 +143,7 @@ export default function EventsPage() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative z-30 text-8xl md:text-[10rem] font-black text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
+          className="relative z-30 text-8xl md:text-[10rem] font-serif text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
           Events<span className="text-[#D97706]">.</span>
         </motion.h1>
 
