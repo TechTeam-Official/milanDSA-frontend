@@ -9,11 +9,10 @@ import { AIGeneratorModal } from "@/components/explore/ai-generator-modal";
 // --------------------------------------------------------------------------
 // CONFIGURATION
 // --------------------------------------------------------------------------
-// Set this to false when you are ready to launch the real page
 const IS_COMING_SOON = true;
 
 // --------------------------------------------------------------------------
-// COMPONENT 1: COMING SOON (Updated with SRMIST Text)
+// COMPONENT 1: COMING SOON (Email Section Removed)
 // --------------------------------------------------------------------------
 const ComingSoon = () => {
   return (
@@ -45,7 +44,6 @@ const ComingSoon = () => {
           Brewing<span className="text-purple-500">.</span>
         </h1>
 
-        {/* Updated SRMIST Text */}
         <p className="text-base md:text-xl text-neutral-400 font-light max-w-4xl mx-auto leading-relaxed mb-10">
           As SRMIST celebrates 40 years of excellence, create your own memories
           by blending creativity with responsible AI.
@@ -58,20 +56,7 @@ const ComingSoon = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <div className="relative group w-full sm:w-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full sm:w-80 px-6 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all backdrop-blur-sm"
-            />
-            <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
-          </div>
-          <button className="px-8 py-4 rounded-full bg-white text-black font-medium hover:scale-105 transition-transform flex items-center gap-2 group">
-            Notify Me
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </motion.div>
+          className="flex justify-center"></motion.div>
       </motion.div>
 
       <div className="absolute bottom-8 text-neutral-600 text-xs tracking-widest uppercase text-center w-full">
@@ -116,23 +101,18 @@ const Polaroid = ({ rotate, label, delay, artId }: PolaroidProps) => (
 );
 
 // --------------------------------------------------------------------------
-// COMPONENT 3: MAIN CONTENT (The Real Page)
+// COMPONENT 3: MAIN CONTENT
 // --------------------------------------------------------------------------
 const MainContent = () => {
-  // 1. Mounted State
   const [mounted, setMounted] = useState(false);
 
-  // 2. Safe Hydration Fix
   useEffect(() => {
-    // We use setTimeout to push the state update to the next tick
-    // ensuring we don't trigger the "synchronous setState in effect" error.
     const timer = setTimeout(() => {
       setMounted(true);
     }, 0);
     return () => clearTimeout(timer);
   }, []);
 
-  // 3. Derived State (Calculated only when mounted)
   const studentName = mounted
     ? localStorage.getItem("studentName") || "Guest Explorer"
     : "Guest Explorer";
@@ -140,20 +120,16 @@ const MainContent = () => {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
 
-  const handleUpload = async () => {
-    // Logic placeholder
-  };
+  const handleUpload = async () => {};
 
   return (
     <div className="bg-black text-white selection:bg-purple-500/30 overflow-x-hidden">
-      {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/20 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-900/20 blur-[120px] rounded-full" />
       </div>
 
       <div className="relative z-10 min-h-screen flex flex-col justify-center pb-20">
-        {/* HERO */}
         <section className="pt-32 pb-20 flex flex-col items-center justify-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -181,7 +157,6 @@ const MainContent = () => {
           </motion.div>
         </section>
 
-        {/* POLAROID SHOWCASE */}
         <section className="px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 opacity-60">
@@ -219,7 +194,6 @@ const MainContent = () => {
         </section>
       </div>
 
-      {/* WHITE TINT SECTION */}
       <section className="relative z-20 py-32 px-4 bg-neutral-50 text-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 opacity-60">
@@ -256,7 +230,6 @@ const MainContent = () => {
         </div>
       </section>
 
-      {/* Floating Action Button */}
       <div className="fixed bottom-8 right-8 z-50">
         <motion.button
           whileHover={{ scale: 1.1 }}
@@ -268,7 +241,6 @@ const MainContent = () => {
         </motion.button>
       </div>
 
-      {/* Modals */}
       <AnimatePresence>
         {uploadModalOpen && (
           <UploadModal
@@ -292,9 +264,6 @@ const MainContent = () => {
   );
 };
 
-// --------------------------------------------------------------------------
-// MAIN PAGE EXPORT (The Switcher)
-// --------------------------------------------------------------------------
 export default function ExplorePage() {
   if (IS_COMING_SOON) {
     return <ComingSoon />;

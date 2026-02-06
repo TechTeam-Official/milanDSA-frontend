@@ -130,9 +130,8 @@ export function SponsorsSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="max-w-2xl text-xl md:text-2xl text-neutral-400 font-light leading-relaxed relative z-10">
-          Collaborating with industry leaders to create unforgettable
-          experiences. <br className="hidden md:block" />
-          Powering the spirit of Milan 2026.
+          We extend our deepest gratitude to all our sponsors who have made
+          MILAN possible through their generous support and partnership.
         </motion.p>
       </section>
 

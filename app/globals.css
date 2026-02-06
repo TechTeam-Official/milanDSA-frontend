@@ -8,13 +8,13 @@ html,
 body {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE & Edge */
-  scroll-behavior: smooth; /* Smooth scrolling */
-  -webkit-overflow-scrolling: touch; /* iOS inertial scroll */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
-  display: none; /* Chrome, Safari */
+  display: none;
 }
 /* ------------------------------------------------------------- */
 
@@ -136,7 +136,6 @@ body::-webkit-scrollbar {
     font-family: var(--font-grotesk), sans-serif;
   }
 
-  /* Restore normal cursor on admin pages */
   body:has([data-admin-page]) *,
   body:has([data-admin-page]) {
     cursor: auto !important;
@@ -156,4 +155,40 @@ body::-webkit-scrollbar {
   .animate-scroll {
     animation: scroll 40s linear infinite;
   }
+}
+
+/* ==========================================================
+   Custom Scrollbar – Milan Modal (OPT-IN)
+   ========================================================== */
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(168, 85, 247, 0.6) transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 16px 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba(168, 85, 247, 0.9),
+    rgba(59, 130, 246, 0.9)
+  );
+  border-radius: 999px;
+  border: 2px solid rgba(24, 24, 27, 0.95);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba(192, 132, 252, 1),
+    rgba(96, 165, 250, 1)
+  );
 }
