@@ -188,6 +188,18 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+/* 🌳 SPONSORS ONLY — “Royal Emerald Garden” */
+.indian-sponsors-bg {
+  background: radial-gradient(circle at top center,
+      #064E3B 0%,
+      /* Deep Emerald */
+      #022C22 40%,
+      /* Dark Green */
+      #050505 85%) !important;
+  /* Almost Black */
+  position: relative;
+}
+
 .indian-noise {
   position: absolute;
   inset: 0;
@@ -303,4 +315,23 @@ body::-webkit-scrollbar {
   background: linear-gradient(90deg, transparent, var(--im-antique-gold), transparent);
   width: 100%;
   opacity: 0.4;
+}
+
+/* Marquee Animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }

@@ -2,6 +2,7 @@
 
 import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 // Components
 import { BentoCard } from "@/components/event/BentoGrid";
@@ -111,27 +112,39 @@ export default function EventsPage() {
     : [];
 
   return (
-    <main className="min-h-screen overflow-x-hidden selection:bg-purple-500/30 bg-[#F5F5F7]">
-      {/* 1. HERO — UPDATED WITH SUBTEXT */}
-      <section className="relative h-screen flex flex-col items-center justify-center px-6 text-center z-20 bg-neutral-950 w-full rounded-b-[4rem] shadow-2xl overflow-hidden">
-        <div className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] bg-purple-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px]" />
+    <main className="min-h-screen overflow-x-hidden selection:bg-[#C9A24D]/30 selection:text-[#3A2A5E] indian-light-bg">
+      <div className="indian-texture-light" />
+      {/* 1. HERO — INDIAN MAXIMALISM CROWD */}
+      <section className="relative h-screen flex flex-col items-center justify-center px-6 text-center z-20 w-full rounded-b-[4rem] shadow-2xl overflow-hidden indian-dark-bg">
+
+        {/* 🎆 Background Image (Crowd) - Matches Landing Page Opacity */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/BackgroundImages/Events.png"
+            alt="Milan Events Crowd"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Gradient Overlay for better text readability (Matches Landing Page) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 z-10" />
+        </div>
 
         {/* Small Pill Label */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mb-6 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-300 text-[10px] font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(168,85,247,0.2)]">
-          Experience the Magic
+          className="relative z-30 mb-6 px-4 py-1.5 rounded-full border border-[#C9A24D]/30 bg-[#C9A24D]/10 text-[#C9A24D] text-[10px] font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(201,162,77,0.2)]">
+          Experience the Royal Magic
         </motion.div>
 
         {/* Main Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-8xl md:text-[10rem] font-black text-white leading-[0.9] tracking-tighter mb-8">
-          Events<span className="text-purple-600">.</span>
+          className="relative z-30 text-8xl md:text-[10rem] font-black text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
+          Events<span className="text-[#D97706]">.</span>
         </motion.h1>
 
         {/* ✅ NEW SUBTEXT ADDED HERE */}
@@ -139,16 +152,16 @@ export default function EventsPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="text-neutral-400 text-lg md:text-xl font-medium max-w-2xl leading-relaxed">
+          className="relative z-30 text-neutral-200 text-lg md:text-xl font-medium max-w-2xl leading-relaxed drop-shadow-md">
           Experience 40+ exhilarating events at MILAN’26!{" "}
           <br className="hidden md:block" />
           And win Cash Prizes worth{" "}
-          <span className="text-white font-bold">10 Lakhs+</span>
+          <span className="text-[#C9A24D] font-bold">10 Lakhs+</span>
         </motion.p>
       </section>
 
       {/* 2. DISCOVER CATEGORIES */}
-      <section className="relative z-10 bg-[#F5F5F7] py-32 -mt-12 pt-44">
+      <section className="relative z-10 indian-light-bg py-32 -mt-12 pt-44 border-t border-[#C9A24D]/20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col gap-8">
             {bentoRows.map((row, rowIndex) => (
@@ -164,13 +177,11 @@ export default function EventsPage() {
                       key={key}
                       whileHover={{ y: -8, scale: 1.01 }}
                       onClick={() => setActiveCategoryKey(key)}
-                      className={`cursor-pointer ${
-                        span > 1 ? `md:col-span-${span}` : ""
-                      }`}>
+                      className={`cursor-pointer ${span > 1 ? `md:col-span-${span}` : ""
+                        }`}>
                       <BentoCard
                         name={meta.title}
                         description={meta.description}
-                        href="#"
                         cta="View Events"
                         Icon={meta.icon}
                         background={
@@ -193,7 +204,8 @@ export default function EventsPage() {
       {/* 3. CALENDAR */}
       <section
         id="schedule"
-        className="relative z-20 py-40 bg-neutral-950 text-white rounded-t-[5rem]">
+        className="relative z-20 py-40 indian-dark-bg text-white rounded-t-[5rem] border-t-4 border-[#C9A24D]">
+        <div className="indian-gold-divider absolute top-0 left-0 right-0 transform -translate-y-1/2" />
         <div className="max-w-7xl mx-auto px-6">
           <MilanCalendar />
         </div>

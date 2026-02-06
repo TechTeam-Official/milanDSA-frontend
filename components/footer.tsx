@@ -3,12 +3,11 @@ import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="relative indian-dark-bg text-white pt-10 pb-6">
+    <footer className="relative bg-[#0B0B0F] text-white pt-10 pb-6 border-t border-[#C9A24D]/20">
       <div className="indian-noise" />
       <div className="indian-gold-divider absolute top-0 left-0 right-0" />
 
-      {/* Subtle Copper Glow */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#B87333]/10 blur-[100px] pointer-events-none" />
+      {/* Glow removed for seamless transition */}
 
       {/* Subtle Accent Dot */}
       <div className="im-accent-dot top-0 left-1/2 -translate-x-1/2 opacity-50 bg-[#C9A24D]" />

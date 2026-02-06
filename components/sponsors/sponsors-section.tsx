@@ -76,7 +76,6 @@ const PAST_SPONSORS = [
   { name: "Fever FM", image: "/sponsors/fever-fm.png", year: "2023" },
   { name: "Zebronics", image: "/sponsors/zebronics.png", year: "2024" },
   { name: "Eazydiner", image: "/sponsors/eazydiner.png", year: "2023" },
-  { name: "Snitch", image: "/sponsors/snitch.png", year: "2025" },
   { name: "WCC", image: "/sponsors/wcc.png", year: "2024" },
   { name: "Dabur Honey", image: "/sponsors/dabur-honey.png", year: "2022" },
   { name: "Unschool", image: "/sponsors/unschool.png", year: "2023" },
@@ -101,182 +100,184 @@ export function SponsorsSection() {
   const row2 = PAST_SPONSORS.slice(mid);
 
   return (
-    <main className="min-h-screen bg-[#F5F5F7] text-neutral-900 overflow-x-hidden selection:bg-purple-200">
+    <main className="min-h-screen bg-[#021812] text-neutral-900 overflow-x-hidden selection:bg-[#556B2F]/30 selection:text-[#C9A24D]">
+      <div className="fixed inset-0 pointer-events-none indian-noise opacity-20 mix-blend-overlay z-0" />
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center z-10 bg-neutral-950 w-full rounded-b-[3rem] shadow-xl overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[100px] pointer-events-none" />
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center z-30 bg-transparent w-full rounded-b-[4rem] shadow-2xl overflow-hidden border-b border-[#556B2F]/30">
 
+        {/* 🎆 Background Image with Cinematic Green Overlay */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/BackgroundImages/Sponsors.png"
+            alt="Sponsors Background"
+            fill
+            className="object-cover opacity-80"
+            priority
+          />
+          {/* Cinematic Deep Emerald Vignette */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#022C22]/80 via-[#064E3B]/40 to-[#022C22] z-10" />
+          {/* Gold Dust Particles (Simulated via Noise) */}
+          <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay z-10" />
+        </div>
+
+        {/* Small Pill Label */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1 }}
-          className="mb-8 relative z-10">
-          <span className="px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur text-sm font-medium tracking-wide uppercase text-neutral-300">
-            OUR PARTNERS
-          </span>
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="relative z-30 mb-6 px-4 py-1.5 rounded-full border border-[#C9A24D]/30 bg-[#C9A24D]/10 text-[#C9A24D] text-[10px] font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(201,162,77,0.2)]">
+          OUR PARTNERS
         </motion.div>
 
+        {/* Main Title */}
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-7xl md:text-9xl font-bold tracking-tighter text-white mb-8 relative z-10">
-          Sponsors<span className="text-purple-500">.</span>
+          className="relative z-30 text-8xl md:text-[10rem] font-black text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
+          Sponsors<span className="text-[#556B2F]">.</span>
         </motion.h1>
 
+        {/* Description */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-2xl text-xl md:text-2xl text-neutral-400 font-light leading-relaxed relative z-10">
+          transition={{ delay: 0.2 }}
+          className="relative z-30 text-lg md:text-xl font-medium text-neutral-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
           We extend our deepest gratitude to all our sponsors who have made
           MILAN possible through their generous support and partnership.
         </motion.p>
       </section>
 
-      {/* 3. GRID SECTION */}
-      <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
-        <div className="mb-12 flex items-center justify-between">
-          <h2 className="text-3xl md:text-5xl font-bold text-neutral-900">
-            Current Partners
-          </h2>
-          <div className="hidden md:block h-px flex-1 bg-neutral-200 ml-8" />
+      {/* 3. GRID SECTION — CURRENT PARTNERS (LIGHT) */}
+      <section className="relative z-10 w-full bg-[#EFF2EE] py-24 -mt-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="mb-12 flex items-center justify-between">
+            <h2 className="text-3xl md:text-5xl font-black text-[#022C22] tracking-tighter">
+              Current Partners<span className="text-[#C9A24D]">.</span>
+            </h2>
+            <div className="hidden md:block h-px flex-1 bg-[#556B2F]/20 ml-8" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+            {CURRENT_SPONSORS.map((sponsor, idx) => (
+              <motion.div
+                key={`${sponsor.name}-${idx}`}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                // Linter Fix: min-h-[240px] -> min-h-60
+                className={`${sponsor.span} relative min-h-60 rounded-[2.5rem] bg-white border border-[#556B2F]/10 shadow-sm hover:shadow-[0_4px_20px_rgba(6,78,59,0.1)] hover:border-[#556B2F]/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden group flex flex-col md:flex-row items-center justify-between p-8 gap-6`}>
+                {/* Left Side: Content */}
+                <div className="relative z-10 flex flex-col items-start space-y-3 w-full md:w-3/5 h-full justify-between">
+                  <div>
+
+                    <h3 className="text-2xl font-bold text-[#022C22] tracking-tight mt-3 group-hover:text-[#C9A24D] transition-colors">
+                      {sponsor.name}
+                    </h3>
+                  </div>
+
+                  <div className="inline-flex items-center gap-1.5 text-[#556B2F] text-[10px] font-bold uppercase tracking-wide border-b border-transparent pb-0.5 mt-auto cursor-default group-hover:text-[#C9A24D] transition-colors">
+                    Stay Tuned
+                  </div>
+                </div>
+
+                {/* Right Side: Logo or Mystery Icon */}
+                <div className="relative z-10 w-full md:w-2/5 h-32 md:h-full flex items-center justify-center md:justify-end">
+                  <div
+                    // Linter Fix: max-h-[80px] -> max-h-20
+                    className={`relative w-full h-full ${sponsor.span === "md:col-span-2" ? "max-h-[140px]" : "max-h-20"} transition-all duration-500 flex items-center justify-center md:justify-end`}>
+                    {/* TS Error Fixed: image is now optional on the interface, so accessing it is valid */}
+                    {sponsor.image ? (
+                      <Image
+                        src={sponsor.image}
+                        alt={sponsor.name}
+                        fill
+                        className="object-contain object-center md:object-right opacity-80 group-hover:opacity-100 transition-opacity"
+                      />
+                    ) : (
+                      <div className="w-20 h-20 bg-neutral-50 rounded-2xl flex items-center justify-center border border-neutral-100 group-hover:border-[#C9A24D]/30 transition-colors">
+                        <Timer
+                          className="text-[#556B2F] group-hover:text-[#C9A24D] transition-colors"
+                          size={32}
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
-          {CURRENT_SPONSORS.map((sponsor, idx) => (
-            <motion.div
-              key={`${sponsor.name}-${idx}`}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              // Linter Fix: min-h-[240px] -> min-h-60
-              className={`${sponsor.span} relative min-h-60 rounded-[2.5rem] bg-white border border-neutral-100 shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_10px_40px_rgb(0,0,0,0.06)] hover:-translate-y-1 transition-all duration-300 overflow-hidden group flex flex-col md:flex-row items-center justify-between p-8 gap-6`}>
-              {/* Left Side: Content */}
-              <div className="relative z-10 flex flex-col items-start space-y-3 w-full md:w-3/5 h-full justify-between">
-                <div>
-                  <span className="px-3 py-1 bg-neutral-50 border border-neutral-100 rounded-full text-[9px] font-bold text-neutral-400 uppercase tracking-widest">
-                    {sponsor.role}
-                  </span>
-                  <h3 className="text-2xl font-bold text-neutral-900 tracking-tight mt-3">
-                    {sponsor.name}
-                  </h3>
-                  {sponsor.description && (
-                    <p className="text-neutral-400 text-sm font-medium leading-relaxed mt-2 max-w-sm">
-                      {sponsor.description}
-                    </p>
-                  )}
-                </div>
+      {/* Past Sponsors (Legacy) — DARK SECTION */}
+      <section className="relative z-20 py-32 bg-[#031E18] text-white flex flex-col justify-center rounded-t-[5rem] -mt-12 border-t-4 border-[#C9A24D] shadow-[0_-4px_20px_rgba(0,0,0,0.2)] overflow-hidden">
+        {/* 🌟 Top Glow / Spot "Bright at any spot" */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 md:w-1/2 h-64 bg-[#556B2F]/30 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
 
-                <div className="inline-flex items-center gap-1.5 text-neutral-300 text-[10px] font-bold uppercase tracking-wide border-b border-transparent pb-0.5 mt-auto cursor-default">
-                  Stay Tuned
-                </div>
-              </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
 
-              {/* Right Side: Logo or Mystery Icon */}
-              <div className="relative z-10 w-full md:w-2/5 h-32 md:h-full flex items-center justify-center md:justify-end">
+          {/* Header */}
+          <div className="relative z-10 text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter mb-6 im-text-shadow">
+              Legacy Partners<span className="text-[#C9A24D]">.</span>
+            </h2>
+            <p className="text-[#E2D4B7]/80 text-xl font-serif max-w-2xl mx-auto">
+              Trusted by over 100+ brands throughout our history.
+            </p>
+          </div>
+
+          {/* Marquee Container */}
+          <div className="w-full overflow-hidden relative flex flex-col gap-10">
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#031E18] to-transparent z-20 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#031E18] to-transparent z-20 pointer-events-none" />
+
+            {/* Row 1 */}
+            <div className="flex w-max animate-scroll gap-6 hover:[animation-play-state:paused]">
+              {[...row1, ...row1, ...row1, ...row1].map((sponsor, idx) => (
                 <div
-                  // Linter Fix: max-h-[80px] -> max-h-20
-                  className={`relative w-full h-full ${sponsor.span === "md:col-span-2" ? "max-h-[140px]" : "max-h-20"} transition-all duration-500 flex items-center justify-center md:justify-end`}>
-                  {/* TS Error Fixed: image is now optional on the interface, so accessing it is valid */}
-                  {sponsor.image ? (
+                  key={`row1-${sponsor.name}-${idx}`}
+                  className="w-[240px] h-36 bg-[#041D16] rounded-2xl border border-[#556B2F]/20 flex items-center justify-center p-6 transition-all duration-300 hover:bg-[#064E3B]/20 hover:border-[#C9A24D]/60 hover:shadow-[0_0_15px_rgba(201,162,77,0.1)] transform-gpu">
+                  <div className="relative w-full h-full">
                     <Image
                       src={sponsor.image}
                       alt={sponsor.name}
                       fill
-                      className="object-contain object-center md:object-right"
+                      sizes="200px"
+                      className="object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
                     />
-                  ) : (
-                    <div className="w-20 h-20 bg-neutral-50 rounded-2xl flex items-center justify-center border border-neutral-100/50">
-                      <Timer
-                        className="text-neutral-300"
-                        size={32}
-                      />
-                    </div>
-                  )}
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+              ))}
+            </div>
 
-      {/* Past Sponsors (Legacy) */}
-      <section className="relative z-10 py-40 bg-neutral-950 text-white flex flex-col justify-center">
-        <div className="max-w-7xl mx-auto px-6 mb-20 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Legacy Partners
-          </h2>
-          <p className="text-neutral-400 text-lg font-light">
-            Trusted by over 100+ brands throughout our history.
-          </p>
-        </div>
-
-        <div className="w-full overflow-hidden relative flex flex-col gap-10">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-neutral-950 to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-neutral-950 to-transparent z-20 pointer-events-none" />
-
-          {/* Row 1 */}
-          <div className="flex w-max animate-scroll gap-8">
-            {[...row1, ...row1, ...row1, ...row1].map((sponsor, idx) => (
-              <div
-                key={`row1-${sponsor.name}-${idx}`}
-                // Linter Fix: h-[160px] -> h-40
-                className="w-[280px] h-40 bg-neutral-900/30 rounded-2xl border border-neutral-800 flex items-center justify-center p-8 transition-all duration-500 hover:bg-neutral-900 hover:border-neutral-700 hover:scale-105">
-                <div className="relative w-full h-full">
-                  <Image
-                    src={sponsor.image}
-                    alt={sponsor.name}
-                    fill
-                    className="object-contain"
-                  />
+            {/* Row 2 - Reverse Scroll */}
+            <div
+              className="flex w-max animate-scroll gap-6"
+              style={{ animationDirection: "reverse" }}>
+              {[...row2, ...row2, ...row2, ...row2].map((sponsor, idx) => (
+                <div
+                  key={`row2-${sponsor.name}-${idx}`}
+                  className="w-[240px] h-36 bg-[#041D16] rounded-2xl border border-[#556B2F]/20 flex items-center justify-center p-6 transition-all duration-300 hover:bg-[#064E3B]/20 hover:border-[#C9A24D]/60 hover:shadow-[0_0_15px_rgba(201,162,77,0.1)] transform-gpu">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={sponsor.image}
+                      alt={sponsor.name}
+                      fill
+                      sizes="200px"
+                      className="object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+                    />
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
 
-          {/* Row 2 - Reverse Scroll */}
-          <div
-            className="flex w-max animate-scroll gap-8"
-            style={{ animationDirection: "reverse" }}>
-            {[...row2, ...row2, ...row2, ...row2].map((sponsor, idx) => (
-              <div
-                key={`row2-${sponsor.name}-${idx}`}
-                // Linter Fix: h-[160px] -> h-40
-                className="w-[280px] h-40 bg-neutral-900/30 rounded-2xl border border-neutral-800 flex items-center justify-center p-8 transition-all duration-500 hover:bg-neutral-900 hover:border-neutral-700 hover:scale-105">
-                <div className="relative w-full h-full">
-                  <Image
-                    src={sponsor.image}
-                    alt={sponsor.name}
-                    fill
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="relative z-10 py-24 px-6 bg-[#F5F5F7]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-6 tracking-tight">
-            Want to Partner With Milan?
-          </h2>
-          <p className="text-xl text-neutral-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Connect with a vibrant community of over 50,000 students. Let&apos;s
-            create something impactful together.
-          </p>
-          <a
-            href="mailto:sponsorship@milan.srm"
-            className="inline-flex h-12 items-center justify-center rounded-full bg-neutral-900 px-8 text-sm font-medium text-white transition-colors hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2 gap-2 shadow-lg hover:shadow-xl">
-            Become a Partner <ArrowRight size={16} />
-          </a>
-        </div>
-      </section>
+
     </main>
   );
 }
