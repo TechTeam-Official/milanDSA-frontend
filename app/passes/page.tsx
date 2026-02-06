@@ -4,11 +4,12 @@ import React from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
+  Crown,
   Sparkles,
   ArrowRight,
   ShieldCheck,
   Ban,
-  University,
+  Ticket,
   CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -32,31 +33,29 @@ const PASSES: PassOption[] = [
   {
     id: "events",
     title: "Events Pass",
-    price: "₹499",
+    price: "₹299",
     description: "Access to all technical and non-technical events.",
     features: [
-      "All Technical Events",
-      "All Non-Tech Events",
-      "Workshops Entry",
-      "Certificate of Participation",
+      "One pass. Access to 40+ events",
+      "Compete for a ₹10+ lakh prize pool",
+      "Experience the biggest student festival atmosphere",
     ],
     restriction: "open",
-    icon: University,
+    icon: Ticket,
     color: "from-blue-400 to-cyan-400",
   },
   {
     id: "pro",
     title: "Pro-Show Pass",
-    price: "₹899",
+    price: "₹999",
     description: "Exclusive access to the star-studded nights.",
     features: [
-      "All Pro-Shows",
-      "VIP Standing Area",
-      "Meet & Greet Opportunities",
-      "Priority Entry",
+      "Access to all Pro-Shows",
+      "Exclusive meet & greet opportunities",
+      "Unforgettable live performances",
     ],
     restriction: "srm",
-    icon: Sparkles,
+    icon: Crown,
     color: "from-amber-400 to-orange-400",
   },
 ];
@@ -134,12 +133,12 @@ export default function Passes() {
         <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-24 flex flex-col items-center">
+      <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 flex flex-col items-center">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16 space-y-4">
+          className="text-center mb-8 space-y-2">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-medium text-purple-200 mb-2">
             <Sparkles
               size={14}
@@ -148,11 +147,10 @@ export default function Passes() {
             <span>Secure Your Spot</span>
           </div>
           <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white via-neutral-200 to-neutral-500">
-            Choose Your Access
+            Student Festival Pass
           </h1>
           <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
-            Unlock the ultimate experience with our verified pass system. Select
-            the tier that suits you best.
+            One festival. Multiple ways to experience it.
           </p>
         </motion.div>
 
@@ -174,16 +172,19 @@ export default function Passes() {
                 className={`absolute -inset-0.5 bg-linear-to-b ${pass.color} opacity-0 group-hover:opacity-20 transition duration-500 blur-xl rounded-3xl`}
               />
 
-              <div className="relative flex flex-col h-full bg-neutral-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-8 hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1">
+              <div className="relative flex flex-col h-full bg-neutral-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1">
                 {/* Header */}
-                <div className="mb-6">
-                  <div
-                    className={`w-14 h-14 rounded-2xl bg-linear-to-br ${pass.color} p-3 mb-6 shadow-lg shadow-purple-900/20`}>
-                    <pass.icon className="w-full h-full text-white" />
+                <div className="mb-4">
+                  <div className="flex items-center gap-4 mb-4">
+                    <div
+                      className={`w-14 h-14 rounded-2xl bg-linear-to-br ${pass.color} p-3 shadow-lg shadow-purple-900/20 shrink-0`}>
+                      <pass.icon className="w-full h-full text-white" />
+                    </div>
+                    <h3 className="text-2xl font-bold text-white leading-none">
+                      {pass.title}
+                    </h3>
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    {pass.title}
-                  </h3>
+
                   <div className="flex items-baseline gap-1">
                     <span className="text-4xl font-extrabold text-white">
                       {pass.price}
@@ -195,16 +196,16 @@ export default function Passes() {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px w-full bg-white/5 mb-6" />
+                <div className="h-px w-full bg-white/5 mb-4" />
 
                 {/* Features */}
-                <ul className="space-y-4 mb-8 grow">
+                <ul className="space-y-3 mb-6 grow">
                   {pass.features.map((feature, i) => (
                     <li
                       key={i}
                       className="flex items-start gap-3 text-neutral-300">
-                      <CheckCircle2
-                        className={`w-5 h-5 shrink-0 bg-clip-text text-transparent bg-linear-to-r ${pass.color}`}
+                      <div
+                        className={`w-2 h-2 rounded-full mt-2 shrink-0 bg-linear-to-r ${pass.color}`}
                       />
                       <span className="text-sm">{feature}</span>
                     </li>
@@ -212,7 +213,7 @@ export default function Passes() {
                 </ul>
 
                 {/* Restriction Badge */}
-                <div className="mb-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 bg-neutral-950/50 p-3 rounded-xl border border-white/5">
+                <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 bg-neutral-950/50 p-3 rounded-xl border border-white/5">
                   {pass.restriction === "srm" ? (
                     <>
                       <ShieldCheck className="w-4 h-4 text-purple-400" />
@@ -247,7 +248,7 @@ export default function Passes() {
                       <Button
                         onClick={() => handleBuyPass(pass)}
                         disabled={!!user && !isEligible}
-                        className={`w-full font-bold py-6 rounded-xl group/btn overflow-hidden relative ${user && !isEligible
+                        className={`w-full font-bold py-4 rounded-xl group/btn overflow-hidden relative ${user && !isEligible
                           ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5"
                           : "bg-white text-black hover:bg-neutral-200"
                           }`}>
