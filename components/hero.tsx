@@ -68,7 +68,7 @@ export function Hero() {
             {/* Description / Date */}
             <div className="mt-6 max-w-4xl">
               <p className="text-lg md:text-xl text-neutral-300 leading-relaxed font-light max-w-3xl mx-auto">
-                <span className="text-white font-semibold block text-2xl md:text-3xl tracking-wide">19th February to 22nd February</span>
+                <span className="text-white font-semibold block text-xl md:text-2xl tracking-wide">19th February to 22nd February</span>
               </p>
             </div>
 

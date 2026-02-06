@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, ArrowRight, Hourglass } from "lucide-react";
+import { Sparkles, Hourglass } from "lucide-react";
 import { UploadModal } from "@/components/explore/upload-modal";
 import { AIGeneratorModal } from "@/components/explore/ai-generator-modal";
 
