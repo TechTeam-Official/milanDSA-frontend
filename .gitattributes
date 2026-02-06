@@ -7,3 +7,4 @@
 
 # Disable LFS globally
 * !filter !diff !merge
+*.png !text !filter !merge !diff
