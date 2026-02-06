@@ -37,8 +37,8 @@ const PASSES: PassOption[] = [
     description: "Access to all technical and non-technical events.",
     features: [
       "One pass. Access to 40+ events",
-      "Compete for a ₹10+ lakh prize pool",
-      "Experience the biggest student festival atmosphere",
+      "Compete for a cash prize worth ₹10+ lakhs",
+      "Learn, compete & level up",
     ],
     restriction: "open",
     icon: Ticket,
@@ -150,7 +150,7 @@ export default function Passes() {
             Student Festival Pass
           </h1>
           <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
-            One festival. Multiple ways to experience it.
+            Unlock the Festival Experience
           </p>
         </motion.div>
 
