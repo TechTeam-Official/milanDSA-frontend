@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import { LucideIcon } from "lucide-react";
@@ -38,24 +40,54 @@ export function BentoCard({
   className,
   background,
 }: BentoCardProps) {
+  const hasBackground = Boolean(background);
+
   return (
     <div
       className={cn(
-        "group relative h-full overflow-hidden rounded-3xl border border-neutral-200 bg-white p-6 transition-all hover:shadow-xl",
+        // 🔑 IMPORTANT: min-h added so Image `fill` works
+        "group relative min-h-[260px] h-full overflow-hidden rounded-3xl border transition-all hover:shadow-xl",
+        hasBackground
+          ? "border-white/10 bg-transparent"
+          : "border-neutral-200 bg-white",
         className,
       )}>
+      {/* Background image */}
       {background}
 
-      <div className="relative z-10 flex h-full flex-col justify-between">
+      {/* Content */}
+      <div className="relative z-10 flex h-full flex-col justify-between p-6">
         <div>
-          <Icon className="h-8 w-8 text-neutral-900 mb-4" />
-          <h3 className="text-xl font-semibold tracking-tight">{name}</h3>
-          <p className="mt-2 text-sm text-neutral-600">{description}</p>
+          <Icon
+            className={cn(
+              "mb-4 h-8 w-8",
+              hasBackground ? "text-white" : "text-neutral-900",
+            )}
+          />
+          <h3
+            className={cn(
+              "text-xl font-semibold tracking-tight",
+              hasBackground ? "text-white" : "text-neutral-900",
+            )}>
+            {name}
+          </h3>
+          <p
+            className={cn(
+              "mt-2 text-sm",
+              hasBackground ? "text-neutral-200" : "text-neutral-600",
+            )}>
+            {description}
+          </p>
         </div>
 
         <a
           href={href}
-          className="mt-6 inline-flex items-center text-sm font-medium text-purple-600 group-hover:underline">
+          className={cn(
+            "mt-6 inline-flex items-center text-sm font-medium transition-colors",
+            hasBackground
+              ? "text-purple-300 hover:text-purple-200"
+              : "text-purple-600 hover:underline",
+          )}>
           {cta} →
         </a>
       </div>

@@ -140,7 +140,7 @@ export function SponsorsSection() {
       <section className="relative z-10 max-w-7xl mx-auto px-6 py-24">
         <div className="mb-12 flex items-center justify-between">
           <h2 className="text-3xl md:text-5xl font-bold text-neutral-900">
-            2026 Partners
+            Current Partners
           </h2>
           <div className="hidden md:block h-px flex-1 bg-neutral-200 ml-8" />
         </div>
