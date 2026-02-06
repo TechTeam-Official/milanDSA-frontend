@@ -7,20 +7,20 @@ import * as THREE from 'three'
 
 const editions = [
   {
-  year: "Milan '25",
-  facts: ['Time Travel Theme', '₹15 Lakh Mega Prize Pool', '40+ Electrifying Events'],
-  image: '/milan/timeline/2025.png'
-},
-{
-  year: "Milan '24",
-  facts: ['Streets Theme', '₹12 Lakh Power-Packed Prize Pool', '150+ High-Octane Events'],
-  image: '/milan/timeline/2024.png'
-},
-{
-  year: "Milan '23",
-  facts: ['Paralogism Theme', '₹9 Lakh Action-Filled Prize Pool', '80+ Crowd-Roaring Events'],
-  image: '/milan/timeline/2023.png'
-},
+    year: "Milan '25",
+    facts: ['Time Travel Theme', '₹15 Lakh Mega Prize Pool', '40+ Electrifying Events'],
+    image: '/milan/timeline/2025.png'
+  },
+  {
+    year: "Milan '24",
+    facts: ['Streets Theme', '₹12 Lakh Power-Packed Prize Pool', '150+ High-Octane Events'],
+    image: '/milan/timeline/2024.png'
+  },
+  {
+    year: "Milan '23",
+    facts: ['Paralogism Theme', '₹9 Lakh Action-Filled Prize Pool', '80+ Crowd-Roaring Events'],
+    image: '/milan/timeline/2023.png'
+  },
 
 
 ]
@@ -116,7 +116,7 @@ export function MilanTimelineSection() {
     >
       <canvas
         ref={canvasRef}
-        className="fixed inset-0 z-0"
+        className="absolute inset-0 z-0 pointer-events-none"
       />
 
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black z-10" />
@@ -154,25 +154,25 @@ export function MilanTimelineSection() {
       <div className="relative z-30 max-w-7xl mx-auto flex flex-col gap-32 px-6">
         {/* Section Header */}
         <div className="text-center mb-20 space-y-4 pt-10">
-             <motion.h2 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-4xl md:text-6xl font-black tracking-tighter uppercase"
-             >
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
-                  Timeline
-                </span>
-             </motion.h2>
-             <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-neutral-400 max-w-2xl mx-auto text-lg font-light"
-             >
-               Journey through the years of excellence
-             </motion.p>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-6xl font-black tracking-tighter uppercase"
+          >
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
+              Timeline
+            </span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-neutral-400 max-w-2xl mx-auto text-lg font-light"
+          >
+            Journey through the years of excellence
+          </motion.p>
         </div>
         {editions.map((item, index) => {
           const left = index % 2 === 0
@@ -183,38 +183,37 @@ export function MilanTimelineSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className={`flex flex-col md:flex-row items-center gap-12 md:gap-24 ${
-                left ? 'md:flex-row-reverse' : ''
-              }`}
+              className={`flex flex-col md:flex-row items-center gap-12 md:gap-24 ${left ? 'md:flex-row-reverse' : ''
+                }`}
             >
               {/* Content Side */}
               <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
                 <div className="space-y-6">
-                    <h3 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-100 to-cyan-500 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                  <h3 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-100 to-cyan-500 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
                     {item.year}
-                    </h3>
-                    <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" />
-                    <ul className="space-y-4">
+                  </h3>
+                  <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" />
+                  <ul className="space-y-4">
                     {item.facts.map((f) => (
-                        <li key={f} className="text-lg md:text-xl text-neutral-300 font-light tracking-wide flex items-center gap-3">
-                            <span className="h-1.5 w-1.5 min-h-[6px] min-w-[6px] rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
-                            {f}
-                        </li>
+                      <li key={f} className="text-lg md:text-xl text-neutral-300 font-light tracking-wide flex items-center gap-3">
+                        <span className="h-1.5 w-1.5 min-h-[6px] min-w-[6px] rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                        {f}
+                      </li>
                     ))}
-                    </ul>
+                  </ul>
                 </div>
               </div>
 
               {/* Image Side */}
               <div className="relative w-full md:w-1/2 group">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl skew-y-1 transition-transform duration-700 group-hover:skew-y-0 group-hover:scale-[1.02]">
-                    <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
-                    <Image
+                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                  <Image
                     src={item.image}
                     alt={item.year}
                     fill
                     className="object-cover"
-                    />
+                  />
                 </div>
                 {/* Decorative border offset */}
                 <div className={`absolute inset-0 border-2 border-cyan-500/30 rounded-2xl -z-10 translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 ${left ? '-skew-y-1' : 'skew-y-1'}`} />
