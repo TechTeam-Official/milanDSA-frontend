@@ -13,7 +13,6 @@ import {
 
 const YEAR = 2026;
 const DAYS_IN_MONTH = 28;
-// February 1st, 2026 is a Sunday, so offset is 0.
 const FIRST_DAY_OFFSET = 0;
 const DAYS_OF_WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
@@ -28,6 +27,31 @@ const INAUGURAL_EVENT: CalendarEvent = {
   location: "Main Auditorium",
 };
 
+/* ---------------- HELPER: TIME SORTING ---------------- */
+
+/* ---------------- HELPER: TIME SORTING ---------------- */
+
+// ✅ FIXED: Now handles "8.30 AM" (dots) AND "8:30 AM" (colons)
+const parseTime = (timeStr: string) => {
+  // 1. Remove extra spaces and force uppercase for safety
+  const normalized = timeStr.trim().toUpperCase();
+
+  // 2. Split into Time and Modifier (AM/PM)
+  // This regex splits by space, handling "8.30 AM" or "8.30AM"
+  const [timePart, modifier] = normalized.split(/\s+/);
+
+  // 3. Split hours and minutes using EITHER dot (.) OR colon (:)
+  const [rawHours, rawMinutes] = timePart.split(/[.:]/).map(Number);
+
+  let hours = rawHours;
+  const minutes = rawMinutes || 0; // Default to 0 if minutes are missing
+
+  // 4. Convert to 24-hour format for sorting
+  if (hours === 12 && modifier === "AM") hours = 0;
+  if (modifier === "PM" && hours !== 12) hours += 12;
+
+  return hours * 60 + minutes;
+};
 /* ---------------- MODAL COMPONENT (TIMELINE DESIGN) ---------------- */
 
 function ScheduleModal({
@@ -43,7 +67,11 @@ function ScheduleModal({
 }) {
   if (!isOpen || day === null) return null;
 
-  const events = schedule[day] ?? [];
+  // ✅ SORTING LOGIC: sort events chronologically
+  const rawEvents = schedule[day] ?? [];
+  const events = [...rawEvents].sort((a, b) => {
+    return parseTime(a.time) - parseTime(b.time);
+  });
 
   return (
     <AnimatePresence>
