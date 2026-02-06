@@ -11,10 +11,10 @@ export default function PaymentGatewayPage() {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-3xl relative">
+        className="w-full max-w-7xl relative">
 
         {/* HEADER */}
-        <div className="mb-8 text-center space-y-2">
+        <div className="mb-4 text-center space-y-2">
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight bg-clip-text text-transparent bg-linear-to-r from-white via-cyan-100 to-white/60">
             Complete Payment
           </h1>
@@ -29,9 +29,10 @@ export default function PaymentGatewayPage() {
               title="Register for MILAN 2026 Events"
               id="konfhub-widget"
               className="w-full rounded-xl"
-              height="500"
+              height="700"
+              scrolling="no"
               src="https://konfhub.com/widget/milan-events-2026?desc=false&secondaryBg=F7F7F7&ticketBg=F7F7F7&borderCl=F7F7F7&bg=FFFFFF&fontColor=1e1f24&ticketCl=1e1f24&btnColor=002E6E&fontFamily=Hind&borderRadius=10&widget_type=quick&screen=2&tickets=74449&ticketId=74449%7C1"
-              style={{ border: "none", backgroundColor: "#FFFFFF" }}
+              style={{ border: "none", backgroundColor: "#FFFFFF", overflow: "hidden" }}
             />
           </div>
         </div>
