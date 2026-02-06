@@ -12,15 +12,26 @@ export default function LoginPage() {
   const [otpSent, setOtpSent] = useState(false);
   const [otp, setOtp] = useState("");
   const [verifying, setVerifying] = useState(false);
-  const { sendOtp, verifyOtp, loginWithGoogle, user } = useAuth();
+  const { sendOtp, verifyOtp, loginWithGoogle, user, isLoading } = useAuth();
   const router = useRouter();
 
-  // Redirect if already logged in
+  // Redirect if already logged in - Centralized Logic
   useEffect(() => {
-    if (user) {
-      router.push("/");
+    if (!isLoading && user) {
+      // Check for return URL in query params or local storage
+      const params = new URLSearchParams(window.location.search);
+      const returnUrl =
+        params.get("returnUrl") || localStorage.getItem("redirectAfterLogin");
+
+      if (returnUrl) {
+        // Clear storage to prevent sticky redirects
+        localStorage.removeItem("redirectAfterLogin");
+        router.push(returnUrl);
+      } else {
+        router.push("/");
+      }
     }
-  }, [user, router]);
+  }, [user, isLoading, router]);
 
   const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -45,16 +56,10 @@ export default function LoginPage() {
     const res = await verifyOtp(email, otp);
     setVerifying(false);
 
-    if (res.success) {
-      // Redirect to dashboard or home on success
-      // Check for returnUrl or default to event-register
-      const returnUrl = new URLSearchParams(window.location.search).get(
-        "returnUrl",
-      );
-      router.push(returnUrl || "/event-register");
-    } else {
+    if (!res.success) {
       alert(res.message || "Invalid OTP");
     }
+    // If success, 'user' state updates -> useEffect triggers redirect
   };
 
   const handleGoogleLogin = async () => {
@@ -63,8 +68,7 @@ export default function LoginPage() {
       if (!res.success) {
         alert(res.message || "Google Login Failed");
       }
-      // If success, the AuthContext state change will trigger the useEffect redirect
-      // or the OAuth flow will redirect the page.
+      // If success, 'user' state updates -> useEffect triggers redirect
     } catch (error) {
       console.error(error);
       alert("Something went wrong with Google Login");

@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section className="relative h-screen w-full overflow-hidden">
       {/* Background Image with Scale Animation */}
-      <motion.div 
+      <motion.div
         initial={{ scale: 1.1 }}
         animate={{ scale: 1 }}
         transition={{ duration: 1.5, ease: "easeOut" }}
@@ -28,17 +28,17 @@ export function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-transparent to-transparent" />
 
       <div className="relative z-10 flex h-full flex-col items-center justify-start text-center px-4 md:px-6 pt-24 md:pt-32 select-none">
-        
+
         {/* Main Content Wrapper with Entrance & Float Animation */}
         <motion.div
-           initial={{ opacity: 0, y: 100 }}
-           animate={{ opacity: 1, y: 0 }}
-           transition={{ 
-             duration: 1.2, 
-             ease: [0.22, 1, 0.36, 1] 
-           }}
-           style={{ willChange: 'transform' }}
-           className="flex flex-col items-center w-full max-w-5xl mx-auto"
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 1.2,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+          style={{ willChange: 'transform' }}
+          className="flex flex-col items-center w-full max-w-5xl mx-auto"
         >
           {/* Anti-gravity Float Layer - Animation Removed as per request */}
           <div className="flex flex-col items-center w-full">
@@ -56,9 +56,9 @@ export function Hero() {
 
             {/* Main Title Image */}
             <div className="relative w-full max-w-5xl h-32 md:h-56 mx-auto my-2">
-              <Image 
-                src="/milan/milan-logo-main.png" 
-                alt="MILAN 2026" 
+              <Image
+                src="/milan/milan-logo-main.png"
+                alt="MILAN 2026"
                 fill
                 className="object-contain"
                 priority
@@ -67,9 +67,9 @@ export function Hero() {
 
             {/* Description / Date */}
             <div className="mt-6 max-w-4xl">
-                <p className="text-lg md:text-xl text-neutral-300 leading-relaxed font-light max-w-3xl mx-auto">
-                    <span className="text-white font-semibold block text-2xl md:text-3xl tracking-wide">19th February to 22nd February</span>
-                </p>
+              <p className="text-lg md:text-xl text-neutral-300 leading-relaxed font-light max-w-3xl mx-auto">
+                <span className="text-white font-semibold block text-2xl md:text-3xl tracking-wide">19th February to 22nd February</span>
+              </p>
             </div>
 
             {/* Buttons */}
@@ -96,7 +96,7 @@ export function Hero() {
       </div>
 
       {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}

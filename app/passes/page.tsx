@@ -67,62 +67,69 @@ export default function Passes() {
   // Removed unused state vars
 
   const handleBuyPass = async (pass: PassOption) => {
-    // Removed unused state clearers
-
-    // Case 1: Events Pass Logic
+    // Determine the target URL based on pass type
+    let targetUrl = "";
     if (pass.id === "events") {
-      if (!user) {
-        // Force Login before showing Registration Form
-        localStorage.setItem("redirectAfterLogin", "/event-register");
-        router.push("/login?returnUrl=/event-register");
-      } else {
-        // Logged in user goes to Registration Form
-        router.push("/event-register");
-      }
-      return;
+      targetUrl = "/checkout/events";
+    } else if (pass.id === "pro") {
+      targetUrl = "/checkout/proshow";
+    } else if (pass.id === "single") {
+      targetUrl = "/checkout/single-day";
     }
 
-    // Case 2 & 3: Single Day & Pro Show (SRM Only)
-    // Common Logic: Login Required -> Email Domain Check -> Redirect/Block
-
+    // 1. Not Logged In -> Redirect to Login with returnUrl = Target Checkout Page
     if (!user) {
-      // Not logged in: Redirect to login with return url
-      const targetUrl =
-        pass.id === "single" ? "/checkout/single-day" : "/checkout/proshow";
-      // Saving to localStorage as backup/redundancy for "Redirection Memory"
       localStorage.setItem("redirectAfterLogin", targetUrl);
       router.push(`/login?returnUrl=${targetUrl}`);
       return;
     }
 
-    // User is logged in, check eligibility
+    // 2. Logged In -> Check Eligibility & Redirect Directly
     const isSrmEmail = user.email?.endsWith("@srmist.edu.in");
 
-    if (!isSrmEmail) {
-      // Fallback for button state bypass attempt
+    // Events Pass: Open to all
+    if (pass.id === "events") {
+      router.push(targetUrl);
       return;
     }
 
-    // Eligible SRM User
-    if (pass.id === "single") {
-      router.push("/checkout/single-day");
-    } else if (pass.id === "pro") {
-      router.push("/checkout/proshow");
+    // Pro / Single: SRM Only
+    if (isSrmEmail) {
+      router.push(targetUrl);
+    } else {
+      // If logged in but ineligible (e.g. non-SRM email trying to buy Pro),
+      // they shouldn't have been able to click this if the UI hid it,
+      // but if they did (or logic flow brought them here), stay/do nothing.
+      return;
     }
   };
 
+  const filteredPasses = PASSES.filter((pass) => {
+    // If not logged in, show all
+    if (!user) return true;
+
+    // If logged in:
+    // 1. Show 'pro' ONLY if email is srmist.edu.in
+    if (pass.id === "pro") {
+      return user.email?.endsWith("@srmist.edu.in");
+    }
+
+    // 2. Show other passes (e.g., 'events') for everyone
+    return true;
+  });
+
   return (
-    <main className="relative min-h-screen bg-neutral-950 text-white overflow-x-hidden selection:bg-purple-500/30">
+    <main className="relative min-h-screen bg-neutral-950 text-white selection:bg-purple-500/30">
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/BackgroundImages/PassBackgroundImage.png"
           alt="Pass Background"
           fill
-          className="object-cover opacity-40"
+          className="object-cover opacity-60"
           priority
         />
-        <div className="absolute inset-0 bg-linear-to-b from-neutral-950/90 via-neutral-950/80 to-neutral-950" />
+        <div className="absolute inset-0 bg-linear-to-b from-neutral-950/80 via-neutral-950/60 to-neutral-950" />
         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px]" />
       </div>
@@ -150,8 +157,12 @@ export default function Passes() {
         </motion.div>
 
         {/* Pass Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
-          {PASSES.map((pass, index) => (
+        <div
+          className={`grid gap-8 w-full ${filteredPasses.length === 1
+            ? "grid-cols-1 max-w-md mx-auto"
+            : "grid-cols-1 md:grid-cols-2 max-w-5xl"
+            }`}>
+          {filteredPasses.map((pass, index) => (
             <motion.div
               key={pass.id}
               initial={{ opacity: 0, y: 30 }}
@@ -236,11 +247,10 @@ export default function Passes() {
                       <Button
                         onClick={() => handleBuyPass(pass)}
                         disabled={!!user && !isEligible}
-                        className={`w-full font-bold py-6 rounded-xl group/btn overflow-hidden relative ${
-                          user && !isEligible
-                            ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5"
-                            : "bg-white text-black hover:bg-neutral-200"
-                        }`}>
+                        className={`w-full font-bold py-6 rounded-xl group/btn overflow-hidden relative ${user && !isEligible
+                          ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5"
+                          : "bg-white text-black hover:bg-neutral-200"
+                          }`}>
                         <span className="relative z-10 flex items-center justify-center gap-2">
                           <>
                             {buttonText}

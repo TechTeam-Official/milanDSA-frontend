@@ -33,7 +33,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
         if (session?.user) {
           const email = session.user.email || ''
-          
+
           setUser({
             email,
             name: session.user.user_metadata?.full_name || email.split('@')[0],
@@ -61,11 +61,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const storedUser = localStorage.getItem('srm_user')
       if (storedUser) {
         try {
-            const parsed = JSON.parse(storedUser);
-            // Simulate async load
-            setTimeout(() => setUser(parsed), 100);
+          const parsed = JSON.parse(storedUser);
+          // Simulate async load
+          setTimeout(() => setUser(parsed), 100);
         } catch {
-            localStorage.removeItem('srm_user');
+          localStorage.removeItem('srm_user');
         }
       }
       setTimeout(() => setIsLoading(false), 200)
@@ -81,43 +81,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         body: JSON.stringify({ email }),
       })
       const data = await res.json()
-      
+
       if (!res.ok) {
         return { success: false, message: data.message || 'Failed to send OTP' }
       }
 
       return { success: true, message: data.message }
     } catch (err) {
-       return { success: false, message: 'Network error sending OTP' }
+      return { success: false, message: 'Network error sending OTP' }
     }
   }
 
   const verifyOtp = async (email: string, token: string) => {
     try {
-        const res = await fetch('/api/auth/verify-otp', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, otp: token }),
-        })
-        const data = await res.json()
+      const res = await fetch('/api/auth/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp: token }),
+      })
+      const data = await res.json()
 
-        if (!res.ok) {
-            return { success: false, message: data.message || 'Invalid code' }
-        }
+      if (!res.ok) {
+        return { success: false, message: data.message || 'Invalid code' }
+      }
 
-        // Successfully verified
-        const newUser = data.user || {
-            email,
-            name: email.split('@')[0],
-            id: 'custom-otp-user'
-        }
-        
-        setUser(newUser)
-        localStorage.setItem('srm_user', JSON.stringify(newUser))
-        
-        return { success: true }
+      // Successfully verified
+      const newUser = data.user || {
+        email,
+        name: email.split('@')[0],
+        id: 'custom-otp-user'
+      }
+
+      setUser(newUser)
+      localStorage.setItem('srm_user', JSON.stringify(newUser))
+
+      return { success: true }
     } catch (err) {
-        return { success: false, message: 'Verification error' }
+      return { success: false, message: 'Verification error' }
     }
   }
 
@@ -126,22 +126,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
-          redirectTo: `${window.location.origin}/login`,
+          redirectTo: `${window.location.origin}/login${window.location.search}`,
           queryParams: {
             access_type: 'offline',
             prompt: 'consent',
           },
         },
       })
-      
+
       if (error) return { success: false, message: error.message }
       return { success: true }
     } else {
       // MOCK OAUTH
       await new Promise(resolve => setTimeout(resolve, 2000))
-      
-      const mockGoogleEmail = "student@srmist.edu.in" 
-      
+
+      const mockGoogleEmail = "student@srmist.edu.in"
+
       const newUser = {
         email: mockGoogleEmail,
         name: "SRM Student"
@@ -177,7 +177,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     const events = ['mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart']
     events.forEach(event => window.addEventListener(event, resetTimer))
-    
+
     resetTimer()
 
     return () => {
