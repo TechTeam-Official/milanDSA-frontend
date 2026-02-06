@@ -1,13 +1,89 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles, Wand2, ArrowRight, Palette } from "lucide-react";
+import { Sparkles, ArrowRight, Hourglass } from "lucide-react";
 import { UploadModal } from "@/components/explore/upload-modal";
 import { AIGeneratorModal } from "@/components/explore/ai-generator-modal";
 
-// Interface for props to ensure type safety
+// --------------------------------------------------------------------------
+// CONFIGURATION
+// --------------------------------------------------------------------------
+// Set this to false when you are ready to launch the real page
+const IS_COMING_SOON = true;
+
+// --------------------------------------------------------------------------
+// COMPONENT 1: COMING SOON (Updated with SRMIST Text)
+// --------------------------------------------------------------------------
+const ComingSoon = () => {
+  return (
+    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center relative overflow-hidden px-4">
+      {/* Background Ambience */}
+      <div className="fixed inset-0 pointer-events-none">
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-purple-900/30 blur-[120px] rounded-full animate-pulse" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-indigo-900/30 blur-[120px] rounded-full animate-pulse" />
+      </div>
+
+      {/* Content */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        className="relative z-10 text-center max-w-5xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
+          className="inline-block mb-8">
+          <span className="flex items-center gap-2 px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-medium tracking-[0.2em] uppercase text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
+            <Hourglass className="w-3 h-3 animate-spin-slow" />
+            In The Works
+          </span>
+        </motion.div>
+
+        <h1 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8 text-white leading-none">
+          Brewing<span className="text-purple-500">.</span>
+        </h1>
+
+        {/* Updated SRMIST Text */}
+        <p className="text-base md:text-xl text-neutral-400 font-light max-w-4xl mx-auto leading-relaxed mb-10">
+          As SRMIST celebrates 40 years of excellence, create your own memories
+          by blending creativity with responsible AI.
+          <br className="hidden md:block" />
+          Come together to honour four decades of memories, milestones, and
+          innovations.
+        </p>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="relative group w-full sm:w-auto">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              className="w-full sm:w-80 px-6 py-4 rounded-full bg-white/5 border border-white/10 text-white placeholder-neutral-500 focus:outline-none focus:border-purple-500/50 focus:bg-white/10 transition-all backdrop-blur-sm"
+            />
+            <div className="absolute inset-0 rounded-full bg-purple-500/20 blur-md opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
+          </div>
+          <button className="px-8 py-4 rounded-full bg-white text-black font-medium hover:scale-105 transition-transform flex items-center gap-2 group">
+            Notify Me
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </motion.div>
+      </motion.div>
+
+      <div className="absolute bottom-8 text-neutral-600 text-xs tracking-widest uppercase text-center w-full">
+        © 2024 Design Collective
+      </div>
+    </div>
+  );
+};
+
+// --------------------------------------------------------------------------
+// COMPONENT 2: POLAROID HELPER
+// --------------------------------------------------------------------------
 interface PolaroidProps {
   rotate: string;
   label: string;
@@ -24,7 +100,6 @@ const Polaroid = ({ rotate, label, delay, artId }: PolaroidProps) => (
     className="relative group cursor-pointer"
     style={{ rotate }}>
     <div className="w-64 bg-white p-4 pb-16 shadow-2xl transform transition-transform duration-300 hover:scale-105 hover:z-10 hover:rotate-0 border border-neutral-200">
-      {/* Fixed aspect ratio and gradient syntax */}
       <div className="aspect-4/5 bg-neutral-200 overflow-hidden relative">
         <div className="absolute inset-0 bg-linear-to-br from-neutral-200 to-neutral-300 group-hover:from-purple-200 group-hover:to-blue-200 transition-colors duration-500" />
         <div className="absolute inset-0 flex items-center justify-center text-neutral-400 font-mono text-xs uppercase tracking-widest">
@@ -40,36 +115,45 @@ const Polaroid = ({ rotate, label, delay, artId }: PolaroidProps) => (
   </motion.div>
 );
 
-export default function ExplorePage() {
-  const [student] = useState<{ full_name: string } | null>(() => {
-    if (typeof window === "undefined") return null;
-    const storedName = localStorage.getItem("studentName");
-    return { full_name: storedName || "Guest Explorer" };
-  });
+// --------------------------------------------------------------------------
+// COMPONENT 3: MAIN CONTENT (The Real Page)
+// --------------------------------------------------------------------------
+const MainContent = () => {
+  // 1. Mounted State
+  const [mounted, setMounted] = useState(false);
+
+  // 2. Safe Hydration Fix
+  useEffect(() => {
+    // We use setTimeout to push the state update to the next tick
+    // ensuring we don't trigger the "synchronous setState in effect" error.
+    const timer = setTimeout(() => {
+      setMounted(true);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 3. Derived State (Calculated only when mounted)
+  const studentName = mounted
+    ? localStorage.getItem("studentName") || "Guest Explorer"
+    : "Guest Explorer";
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
 
-  // Prefixed unused variables with underscore to satisfy linter
-  const handleUpload = async (_file: File, _hashtags: string[]) => {
-    if (!student) return;
-    // Upload logic placeholder
+  const handleUpload = async () => {
+    // Logic placeholder
   };
 
   return (
     <div className="bg-black text-white selection:bg-purple-500/30 overflow-x-hidden">
-      {/* Background Ambience (Fixed) */}
+      {/* Background Ambience */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/20 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-900/20 blur-[120px] rounded-full" />
       </div>
 
-      {/* WRAPPER: DARK SECTION 
-          This wrapper has min-h-screen, ensuring the white section 
-          is pushed below the fold initially.
-      */}
       <div className="relative z-10 min-h-screen flex flex-col justify-center pb-20">
-        {/* 1. HERO SECTION */}
+        {/* HERO */}
         <section className="pt-32 pb-20 flex flex-col items-center justify-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -97,7 +181,7 @@ export default function ExplorePage() {
           </motion.div>
         </section>
 
-        {/* 2. POLAROID SHOWCASE (Dark Background) */}
+        {/* POLAROID SHOWCASE */}
         <section className="px-4">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16 opacity-60">
@@ -135,7 +219,7 @@ export default function ExplorePage() {
         </section>
       </div>
 
-      {/* 3. WHITE TINT SECTION (Reveals on Scroll) */}
+      {/* WHITE TINT SECTION */}
       <section className="relative z-20 py-32 px-4 bg-neutral-50 text-black">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 opacity-60">
@@ -144,7 +228,6 @@ export default function ExplorePage() {
             </p>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-12 md:gap-8 perspective-1000">
-            {/* New set of 4 Polaroids with different rotations/IDs */}
             <Polaroid
               rotate="3deg"
               label="Minimalist Geo"
@@ -180,7 +263,6 @@ export default function ExplorePage() {
           whileTap={{ scale: 0.9 }}
           onClick={() => setAiModalOpen(true)}
           className="w-16 h-16 rounded-full bg-white text-black shadow-[0_0_40px_rgba(255,255,255,0.3)] flex items-center justify-center relative overflow-hidden group border-2 border-transparent hover:border-purple-500 transition-colors">
-          {/* Fixed gradient syntax */}
           <div className="absolute inset-0 bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
           <Sparkles className="w-6 h-6 text-purple-600 group-hover:scale-110 transition-transform" />
         </motion.button>
@@ -193,7 +275,7 @@ export default function ExplorePage() {
             isOpen={uploadModalOpen}
             onClose={() => setUploadModalOpen(false)}
             onUpload={handleUpload}
-            studentName={student?.full_name}
+            studentName={studentName}
           />
         )}
       </AnimatePresence>
@@ -208,4 +290,14 @@ export default function ExplorePage() {
       </AnimatePresence>
     </div>
   );
+};
+
+// --------------------------------------------------------------------------
+// MAIN PAGE EXPORT (The Switcher)
+// --------------------------------------------------------------------------
+export default function ExplorePage() {
+  if (IS_COMING_SOON) {
+    return <ComingSoon />;
+  }
+  return <MainContent />;
 }
