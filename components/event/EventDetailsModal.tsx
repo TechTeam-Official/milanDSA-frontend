@@ -14,7 +14,6 @@ export type EventItem = {
   description: string;
   is_srm_only: boolean;
 
-  // 👇 NEW (used only if present)
   mode?: string;
   team_size?: string;
   participation_type?: string;
@@ -131,7 +130,7 @@ export default function EventDetailsModal({
                           {item.is_srm_only ? (
                             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-500 text-xs font-medium">
                               <CheckCircle2 className="w-3.5 h-3.5" />
-                              <span>SRM Only</span>
+                              <span>Non SRM Students Only</span>
                             </div>
                           ) : (
                             <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-medium">
