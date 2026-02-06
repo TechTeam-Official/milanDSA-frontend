@@ -6,13 +6,15 @@ import { ConditionalFooter } from "@/components/conditional-footer";
 import { AuthProvider } from "@/context/auth-context";
 import IntroSection from "@/components/intro/intro_section";
 
-const grotesk = localFont({
-  src: [
-    { path: "../app/fonts/Grotesk-Regular.ttf", weight: "400" }, // ✅ Stepping up to find fonts
-    { path: "../app/fonts/Grotesk-DemiBold.ttf", weight: "600" },
-    { path: "../app/fonts/Grotesk-Bold.ttf", weight: "700" },
-  ],
-  variable: "--font-grotesk",
+const stampPress = localFont({
+  src: "../app/fonts/StampPressRegular-pgMYy.otf",
+  variable: "--font-stamp-press",
+  display: "swap",
+});
+
+const foglihten = localFont({
+  src: "../app/fonts/Foglihtenno07-e9wz3.otf",
+  variable: "--font-foglihten",
   display: "swap",
 });
 
@@ -31,7 +33,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={grotesk.variable}>
+      className={`${stampPress.variable} ${foglihten.variable}`}>
       <body className="antialiased font-sans">
         <AuthProvider>
           <IntroSection />
