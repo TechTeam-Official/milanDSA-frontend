@@ -3,7 +3,7 @@ import { getTeamData } from "@/lib/team-data";
 
 export const metadata = {
   title: "Our Team",
-  description: "Meet the team behind the event",
+  description: "Crew Behind the magic of Milan'26",
 };
 
 export default function TeamPage() {

@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
+import "@/app/globals.css"; // ✅ Absolute path to CSS
 import { ConditionalLayout } from "@/components/conditional-layout";
 import { ConditionalFooter } from "@/components/conditional-footer";
 import { AuthProvider } from "@/context/auth-context";
+import IntroSection from "@/components/intro/intro_section";
+import { KineticCursor } from "@/components/ui/kinetic-cursor";
 
 const grotesk = localFont({
   src: [
-    { path: "./fonts/Grotesk-Regular.ttf", weight: "400" },
-    { path: "./fonts/Grotesk-DemiBold.ttf", weight: "600" },
-    { path: "./fonts/Grotesk-Bold.ttf", weight: "700" },
+    { path: "../app/fonts/Grotesk-Regular.ttf", weight: "400" }, // ✅ Stepping up to find fonts
+    { path: "../app/fonts/Grotesk-DemiBold.ttf", weight: "600" },
+    { path: "../app/fonts/Grotesk-Bold.ttf", weight: "700" },
   ],
   variable: "--font-grotesk",
   display: "swap",
@@ -33,6 +35,8 @@ export default function RootLayout({
       className={grotesk.variable}>
       <body className="antialiased font-sans">
         <AuthProvider>
+          <KineticCursor />
+          <IntroSection />
           <ConditionalLayout />
           {children}
           <ConditionalFooter />
