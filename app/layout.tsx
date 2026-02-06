@@ -5,7 +5,6 @@ import { ConditionalLayout } from "@/components/conditional-layout";
 import { ConditionalFooter } from "@/components/conditional-footer";
 import { AuthProvider } from "@/context/auth-context";
 import IntroSection from "@/components/intro/intro_section";
-import { KineticCursor } from "@/components/ui/kinetic-cursor";
 
 const grotesk = localFont({
   src: [
@@ -35,7 +34,6 @@ export default function RootLayout({
       className={grotesk.variable}>
       <body className="antialiased font-sans">
         <AuthProvider>
-          <KineticCursor />
           <IntroSection />
           <ConditionalLayout />
           {children}
