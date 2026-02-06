@@ -216,8 +216,8 @@ export function SponsorsSection() {
         </div>
 
         <div className="w-full overflow-hidden relative flex flex-col gap-10">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-neutral-950 to-transparent z-20 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-neutral-950 to-transparent z-20 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-linear-to-r from-neutral-950 to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-linear-to-l from-neutral-950 to-transparent z-20 pointer-events-none" />
 
           {/* Row 1 */}
           <div className="flex w-max animate-scroll gap-8">
