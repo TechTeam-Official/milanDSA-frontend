@@ -4,6 +4,8 @@ import "./globals.css";
 import { ConditionalLayout } from "@/components/conditional-layout";
 import { ConditionalFooter } from "@/components/conditional-footer";
 import { AuthProvider } from "@/context/auth-context";
+// ✅ Import the Intro Component
+import IntroSection from "@/components/intro/intro_section";
 
 const grotesk = localFont({
   src: [
@@ -33,6 +35,9 @@ export default function RootLayout({
       className={grotesk.variable}>
       <body className="antialiased font-sans">
         <AuthProvider>
+          {/* ✅ Add IntroSection here so it overlays everything else */}
+          <IntroSection />
+
           <ConditionalLayout />
           {children}
           <ConditionalFooter />
