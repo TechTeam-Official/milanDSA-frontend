@@ -156,10 +156,11 @@ export default function Passes() {
 
         {/* Pass Grid */}
         <div
-          className={`grid gap-8 w-full ${filteredPasses.length === 1
-            ? "grid-cols-1 max-w-md mx-auto"
-            : "grid-cols-1 md:grid-cols-2 max-w-5xl"
-            }`}>
+          className={`grid gap-8 w-full ${
+            filteredPasses.length === 1
+              ? "grid-cols-1 max-w-md mx-auto"
+              : "grid-cols-1 md:grid-cols-2 max-w-5xl"
+          }`}>
           {filteredPasses.map((pass, index) => (
             <motion.div
               key={pass.id}
@@ -217,7 +218,7 @@ export default function Passes() {
                   {pass.restriction === "srm" ? (
                     <>
                       <ShieldCheck className="w-4 h-4 text-purple-400" />
-                      <span>SRM Verified Only</span>
+                      <span>SRM Students Only</span>
                     </>
                   ) : (
                     <>
@@ -248,10 +249,11 @@ export default function Passes() {
                       <Button
                         onClick={() => handleBuyPass(pass)}
                         disabled={!!user && !isEligible}
-                        className={`w-full font-bold py-4 rounded-xl group/btn overflow-hidden relative ${user && !isEligible
-                          ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5"
-                          : "bg-white text-black hover:bg-neutral-200"
-                          }`}>
+                        className={`w-full font-bold py-4 rounded-xl group/btn overflow-hidden relative ${
+                          user && !isEligible
+                            ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5"
+                            : "bg-white text-black hover:bg-neutral-200"
+                        }`}>
                         <span className="relative z-10 flex items-center justify-center gap-2">
                           <>
                             {buttonText}
