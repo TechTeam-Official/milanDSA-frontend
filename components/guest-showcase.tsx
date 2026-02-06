@@ -154,84 +154,50 @@ export function GuestShowcase() {
   const row2 = [...row2Guests, ...row2Guests, ...row2Guests, ...row2Guests]
 
   return (
-    <section className="relative w-full py-24 overflow-hidden text-neutral-900">
-      {/* Solid Base Background */}
-      <div className="absolute inset-0 bg-neutral-50 -z-20" />
+    <section className="relative w-full py-24 overflow-hidden indian-light-bg text-neutral-900">
+      {/* Texture & Halo */}
+      <div className="indian-texture-light" />
+      <div className="im-halo im-halo-indigo absolute bottom-[-10%] left-[-10%]" />
 
-      {/* Dynamic Animated Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
-          <motion.div 
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-              x: [0, 100, 0],
-              y: [0, -50, 0]
-            }}
-            transition={{ 
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut" 
-            }}
-            className="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-500/20 rounded-full blur-[100px]" 
-          />
-          <motion.div 
-             animate={{ 
-              scale: [1, 1.3, 1],
-              opacity: [0.3, 0.6, 0.3],
-              x: [0, -100, 0],
-              y: [0, 50, 0]
-            }}
-            transition={{ 
-              duration: 15,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 2
-            }}
-            className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-blue-500/20 rounded-full blur-[100px]" 
-          />
-      </div>
-      
+      {/* Ornament */}
+      <div className="im-ornament im-ornament-arch im-ornament-corner-br bottom-0 right-0" />
+
       <div className="w-full flex flex-col space-y-16 relative z-10">
         {/* Section Header */}
         <div className="text-center px-4 max-w-4xl mx-auto">
-             <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-neutral-800 to-blue-600">
-                  Showstoppers over the years
-                </span>
-             </h2>
-             <p className="text-neutral-600 text-lg md:text-xl font-light">
-               Celebrating icons who have graced MILAN with their presence over the years.
-             </p>
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6 im-text-shadow">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-[#0B0B0F] to-[#0F766E]">
+              A Legacy of Legends
+            </span>
+          </h2>
+          <p className="text-neutral-600 text-lg md:text-xl font-light">
+            Celebrating icons who have graced MILAN with their presence over the years.
+          </p>
         </div>
-
-        {/* Marquee Title wrapper if needed, or just remove if redundant with header. 
-            Let's keep the scrolling title as a stylistic background element? 
-            Actually, let's remove the huge scrolling text to make it cleaner and focus on the images.
-        */}
 
         {/* Guest Cards - First Row (Left to Right) - Full Width */}
         <div className="w-full relative">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-neutral-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-neutral-50 to-transparent z-10 pointer-events-none" />
-          
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F5F2EC] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#EFE9DF] to-transparent z-10 pointer-events-none" />
+
           <ScrollVelocity velocity={velocity[0]} className="py-4">
             {row1.map((guest, index) => (
               <div
                 key={`${guest.name}-${index}`}
-                className="relative h-[280px] w-[220px] md:h-[320px] md:w-[260px] flex-shrink-0 group mx-4 rounded-xl overflow-hidden border border-white/10 bg-neutral-900/50 backdrop-blur-sm"
+                className="relative h-[280px] w-[220px] md:h-[320px] md:w-[260px] flex-shrink-0 group mx-4 rounded-xl overflow-hidden border border-[#C9A24D] bg-[#0B0B0F]"
               >
-                  <Image
-                    src={guest.thumbnail}
-                    alt={guest.name}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="font-bold text-lg text-white mb-1 leading-tight">{guest.name}</h3>
-                    <p className="text-xs font-medium text-indigo-400 tracking-wide uppercase">{guest.designation}</p>
-                  </div>
+                <Image
+                  src={guest.thumbnail}
+                  alt={guest.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+
+                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="font-bold text-lg text-white mb-1 leading-tight">{guest.name}</h3>
+                  <p className="text-xs font-medium text-[#C9A24D] tracking-wide uppercase">{guest.designation}</p>
+                </div>
               </div>
             ))}
           </ScrollVelocity>
@@ -239,27 +205,27 @@ export function GuestShowcase() {
 
         {/* Guest Cards - Second Row (Right to Left) - Full Width */}
         <div className="w-full relative">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-neutral-50 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-neutral-50 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F5F2EC] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#EFE9DF] to-transparent z-10 pointer-events-none" />
 
           <ScrollVelocity velocity={velocity[1]} className="py-4">
             {row2.map((guest, index) => (
               <div
                 key={`${guest.name}-reverse-${index}`}
-                 className="relative h-[280px] w-[220px] md:h-[320px] md:w-[260px] flex-shrink-0 group mx-4 rounded-xl overflow-hidden border border-white/10 bg-neutral-900/50 backdrop-blur-sm"
+                className="relative h-[280px] w-[220px] md:h-[320px] md:w-[260px] flex-shrink-0 group mx-4 rounded-xl overflow-hidden border border-[#C9A24D] bg-[#0B0B0F]"
               >
-                  <Image
-                    src={guest.thumbnail}
-                    alt={guest.name}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
-                  
-                  <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="font-bold text-lg text-white mb-1 leading-tight">{guest.name}</h3>
-                    <p className="text-xs font-medium text-pink-400 tracking-wide uppercase">{guest.designation}</p>
-                  </div>
+                <Image
+                  src={guest.thumbnail}
+                  alt={guest.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80" />
+
+                <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="font-bold text-lg text-white mb-1 leading-tight">{guest.name}</h3>
+                  <p className="text-xs font-medium text-[#0F766E] tracking-wide uppercase">{guest.designation}</p>
+                </div>
               </div>
             ))}
           </ScrollVelocity>

@@ -3,13 +3,22 @@ import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="bg-neutral-950 text-white border-t border-white/10 pt-10 pb-6">
-      <div className="container mx-auto px-6">
+    <footer className="relative indian-dark-bg text-white pt-10 pb-6">
+      <div className="indian-noise" />
+      <div className="indian-gold-divider absolute top-0 left-0 right-0" />
+
+      {/* Subtle Copper Glow */}
+      <div className="absolute top-0 left-1/4 w-64 h-64 bg-[#B87333]/10 blur-[100px] pointer-events-none" />
+
+      {/* Subtle Accent Dot */}
+      <div className="im-accent-dot top-0 left-1/2 -translate-x-1/2 opacity-50 bg-[#C9A24D]" />
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8">
           {/* Brand & Slogan */}
           <div className="lg:col-span-4 space-y-3">
             <Link href="/" className="inline-block">
-              <span className="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-purple-400 to-blue-400">
+              <span className="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] to-[#D97706]">
                 MILAN &apos;26
               </span>
             </Link>
@@ -50,7 +59,7 @@ export function Footer() {
             <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Contact Us</h4>
             <ul className="space-y-3 text-sm text-neutral-400">
               <li className="flex items-start gap-3">
-                <MapPin className="text-purple-400 shrink-0 mt-0.5" size={16} />
+                <MapPin className="text-[#C9A24D] shrink-0 mt-0.5" size={16} />
                 <span>
                   SRM Institute of Science and Technology, <br />
                   Kattankulathur, Chennai, <br />
@@ -58,7 +67,7 @@ export function Footer() {
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="text-purple-400 shrink-0" size={16} />
+                <Mail className="text-[#C9A24D] shrink-0" size={16} />
                 <span>techteam.sa@srmist.edu.in</span>
               </li>
             </ul>
@@ -81,7 +90,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-purple-500/20 hover:border-purple-500/50 transition-all duration-300"
+      className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white hover:bg-[#C9A24D]/20 hover:border-[#C9A24D]/50 transition-all duration-300 shadow-[0_0_0_transparent] hover:shadow-[0_0_15px_rgba(201,162,77,0.3)]"
     >
       {icon}
     </a>
@@ -91,7 +100,7 @@ function SocialLink({ href, icon }: { href: string; icon: React.ReactNode }) {
 function FooterLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <li>
-      <Link href={href} className="hover:text-purple-400 transition-colors">
+      <Link href={href} className="hover:text-[#C9A24D] transition-colors">
         {children}
       </Link>
     </li>
