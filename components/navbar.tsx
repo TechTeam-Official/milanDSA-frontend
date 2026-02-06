@@ -19,7 +19,7 @@ export const PillBase = () => {
   const router = useRouter()
   const pathname = usePathname()
   const containerRef = useRef<HTMLDivElement>(null)
-  
+
   const { user, logout } = useAuth()
   const [profileOpen, setProfileOpen] = useState(false)
 
@@ -68,7 +68,7 @@ export const PillBase = () => {
   useEffect(() => {
     if (expanded) {
       // Adjusted width to fit the extra items
-      width.set(isMobile ? 260 : 850) 
+      width.set(isMobile ? 260 : 850)
       height.set(isMobile ? navItems.length * 50 + 24 : 56)
     } else {
       width.set(160)
@@ -126,9 +126,9 @@ export const PillBase = () => {
                       className={`
                         flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300
                         ${isMobile ? 'w-[90%]' : ''}
-                        ${isActive 
-                            ? 'bg-white/20 text-white font-medium' 
-                            : 'text-white/60 hover:text-white hover:bg-white/10'}
+                        ${isActive
+                          ? 'bg-white/20 text-white font-medium'
+                          : 'text-white/60 hover:text-white hover:bg-white/10'}
                       `}
                     >
                       <item.icon size={18} />
@@ -145,67 +145,57 @@ export const PillBase = () => {
       {/* Login / Profile Button - Absolute Right (Hidden on mobile if overlapping, or adapted) */}
       {!isMobile && (
         <div className="absolute right-6 top-0 h-[56px] flex items-center pointer-events-auto z-50">
-           {user ? (
-             <div className="relative">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setProfileOpen(!profileOpen)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-xl hover:bg-black/80 transition-all text-white shadow-lg"
-                >
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-xs font-bold">
-                    {user.name.charAt(0).toUpperCase()}
-                  </div>
-                  <span className="text-sm font-medium pr-1">{user.name.split('(')[0].trim()}</span>
-                </motion.button>
-
-                <AnimatePresence>
-                  {profileOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute right-0 top-full mt-2 w-48 bg-neutral-900/90 border border-white/10 rounded-xl backdrop-blur-xl shadow-xl overflow-hidden p-1"
-                    >
-                      <div className="px-3 py-2 border-b border-white/5 mb-1">
-                        <p className="text-xs text-neutral-400">Signed in as</p>
-                        <p className="text-sm font-medium text-white truncate">{user.email}</p>
-                      </div>
-                      <button 
-                         onClick={() => {
-                           setProfileOpen(false)
-                           router.push('/my-passes')
-                         }}
-                         className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-neutral-300 hover:bg-white/10 hover:text-white transition-colors text-left"
-                      >
-                         <PassIcon size={16} />
-                         My Passes
-                      </button>
-                      <button 
-                         onClick={() => {
-                           setProfileOpen(false)
-                           logout()
-                         }}
-                         className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-300 hover:bg-red-500/10 hover:text-red-200 transition-colors text-left"
-                      >
-                         <LogOut size={16} />
-                         Logout
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-             </div>
-           ) : pathname !== '/login' ? (
-             <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(168, 85, 247, 0.4)" }}
+          {user ? (
+            <div className="relative">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => router.push('/login')}
-                className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-black text-white font-bold text-sm shadow-lg hover:bg-neutral-800 transition-all border border-white/10"
-             >
-                <LogIn size={18} />
-                <span>Login</span>
-             </motion.button>
-           ) : null}
+                onClick={() => setProfileOpen(!profileOpen)}
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-xl hover:bg-black/80 transition-all text-white shadow-lg"
+              >
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-xs font-bold">
+                  {user.name.charAt(0).toUpperCase()}
+                </div>
+                <span className="text-sm font-medium pr-1">{user.name.split('(')[0].trim()}</span>
+              </motion.button>
+
+              <AnimatePresence>
+                {profileOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute right-0 top-full mt-2 w-48 bg-neutral-900/90 border border-white/10 rounded-xl backdrop-blur-xl shadow-xl overflow-hidden p-1"
+                  >
+                    <div className="px-3 py-2 border-b border-white/5 mb-1">
+                      <p className="text-xs text-neutral-400">Signed in as</p>
+                      <p className="text-sm font-medium text-white truncate">{user.email}</p>
+                    </div>
+                    <button
+                      onClick={() => {
+                        setProfileOpen(false)
+                        logout()
+                      }}
+                      className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-300 hover:bg-red-500/10 hover:text-red-200 transition-colors text-left"
+                    >
+                      <LogOut size={16} />
+                      Logout
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          ) : pathname !== '/login' ? (
+            <motion.button
+              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(168, 85, 247, 0.4)" }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => router.push('/login')}
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-black text-white font-bold text-sm shadow-lg hover:bg-neutral-800 transition-all border border-white/10"
+            >
+              <LogIn size={18} />
+              <span>Login</span>
+            </motion.button>
+          ) : null}
         </div>
       )}
     </div>
