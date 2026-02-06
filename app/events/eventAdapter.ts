@@ -10,7 +10,7 @@ export type RawEvent = {
   id: number;
   title: string;
   format: string;
-  is_srm_only: boolean;
+  open_to_all: boolean; // ✅ Changed from 'is_srm_only' to match your raw data
   date: string;
   reporting_time: string;
   venue: string;
@@ -26,6 +26,7 @@ function adaptEventsData() {
   const adapted: Record<string, EventItem[]> = {};
 
   for (const [category, events] of Object.entries(rawEventData)) {
+    // The cast now works because RawEvent matches the data structure
     adapted[category] = (events as RawEvent[]).map((e) => ({
       id: e.id,
       title: e.title,
@@ -34,7 +35,9 @@ function adaptEventsData() {
       description: `${e.date} • ${e.venue}`,
 
       format: e.format,
-      is_srm_only: e.is_srm_only,
+
+      // 👇 Logic adjustment: If it is open to all, it is NOT SRM only.
+      is_srm_only: !e.open_to_all,
 
       // 👇 Keep these for later (calendar / expansion)
       date: e.date,
