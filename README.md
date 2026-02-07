@@ -30,7 +30,7 @@ MILAN 2026 is a comprehensive web platform designed for the annual cultural fest
 - **Team Showcase**: Interactive 3D globe visualization of organizing teams
 - **Explore Gallery**: Draggable canvas with circular image placement
 - **Authentication**: Google OAuth integration via Supabase
-- **Payment Integration**: Razorpay for event registrations and passes
+- **Payment Integration**: Konfuhub for event registrations and passes
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices
 
 ---
@@ -70,7 +70,7 @@ MILAN 2026 is a comprehensive web platform designed for the annual cultural fest
 ### 🎟️ Passes & Payments
 - Digital pass generation
 - QR code integration
-- Razorpay payment gateway
+- Konfuhub payment gateway
 - Payment verification system
 - Pass download functionality
 
@@ -113,7 +113,7 @@ MILAN 2026 is a comprehensive web platform designed for the annual cultural fest
 - **PostgreSQL** - Database (via Supabase)
 
 ### Payment
-- **Razorpay** (^2.9.6)
+- **Konfuhub** - Payment gateway integration
 
 ### Additional Tools
 - **Nodemailer** - Email notifications
@@ -131,7 +131,7 @@ MILAN 2026 is a comprehensive web platform designed for the annual cultural fest
 - **Node.js** 20+ and npm/yarn
 - **Supabase Account** ([Create one](https://supabase.com))
 - **Google Cloud Project** (for OAuth)
-- **Razorpay Account** (for payments)
+- **Konfuhub Account** (for payments)
 
 ### Installation
 
@@ -161,9 +161,9 @@ MILAN 2026 is a comprehensive web platform designed for the annual cultural fest
    # Base URL
    NEXT_PUBLIC_BASE_URL=http://localhost:3000
    
-   # Razorpay (optional, for payments)
-   RAZORPAY_KEY_ID=your_razorpay_key_id
-   RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+   # Konfuhub (optional, for payments)
+   KONFUHUB_KEY_ID=your_konfuhub_key_id
+   KONFUHUB_KEY_SECRET=your_konfuhub_key_secret
    ```
 
 4. **Configure Supabase**
@@ -320,11 +320,11 @@ Google OAuth integration:
 
 ### 4. Payment Integration
 
-Razorpay payment flow:
+Konfuhub payment flow:
 
 1. User selects event/pass
 2. Checkout page with payment details
-3. Razorpay modal integration
+3. Konfuhub modal integration
 4. Payment verification webhook
 5. Pass generation with QR code
 6. Email notification
@@ -361,7 +361,7 @@ Complete registration workflow:
 
 ### Payments
 - `POST /api/check-payment` - Verify payment status
-- `POST /api/webhooks/razorpay` - Payment webhook
+- `POST /api/webhooks/konfuhub` - Payment webhook
 
 ---
 
@@ -402,8 +402,8 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=
 EMAIL_USER=
 EMAIL_PASS=
 NEXT_PUBLIC_BASE_URL=https://your-domain.com
-RAZORPAY_KEY_ID=
-RAZORPAY_KEY_SECRET=
+KONFUHUB_KEY_ID=
+KONFUHUB_KEY_SECRET=
 ```
 
 ---
