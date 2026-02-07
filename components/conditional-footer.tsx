@@ -10,7 +10,7 @@ export function ConditionalFooter() {
     return null
   }
 
-  let variant: "default" | "events" | "sponsors" | "passes" | "gallery" = "default";
+  let variant: "default" | "events" | "sponsors" | "passes" | "gallery" | "team" = "default";
 
   if (pathname?.startsWith("/events")) {
     variant = "events";
@@ -20,6 +20,8 @@ export function ConditionalFooter() {
     variant = "passes";
   } else if (pathname?.startsWith("/gallery")) {
     variant = "gallery";
+  } else if (pathname?.startsWith("/team")) {
+    variant = "team";
   }
 
   return <Footer variant={variant} />

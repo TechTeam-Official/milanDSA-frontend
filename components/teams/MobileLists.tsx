@@ -79,11 +79,11 @@ export default function MobileLists(props: Props) {
             - border-white/60: Subtle crisp edge
             - shadow-xl: Lifts it off the globe
         */}
-        <div className="bg-white/50 border border-white/60 rounded-3xl p-6 shadow-xl">
-          <h3 className="font-black text-4xl mb-6 text-gray-900 tracking-tight border-b border-gray-900/10 pb-4">
+        <div className="bg-[#E0C3A0]/90 backdrop-blur-sm border border-[#1F4D4A]/10 rounded-3xl p-6 shadow-xl shadow-[#1F4D4A]/10">
+          <h3 className="font-black text-4xl mb-6 text-[#2A1E1A] tracking-tight border-b border-[#1F4D4A]/10 pb-4">
             Core Team
           </h3>
-          <div className="space-y-6 text-gray-900 font-medium text-lg">
+          <div className="space-y-6 text-[#2A1E1A] font-medium text-lg">
             {props.coreRoles.map((role) => (
               <ExpandableItem
                 key={role}
@@ -98,11 +98,11 @@ export default function MobileLists(props: Props) {
         </div>
 
         {/* CLUBS SECTION */}
-        <div className="bg-white/50 border border-white/60 rounded-3xl p-6 shadow-xl">
-          <h3 className="font-black text-4xl mb-6 text-gray-900 tracking-tight border-b border-gray-900/10 pb-4">
+        <div className="bg-[#E0C3A0]/90 backdrop-blur-sm border border-[#1F4D4A]/10 rounded-3xl p-6 shadow-xl shadow-[#1F4D4A]/10">
+          <h3 className="font-black text-4xl mb-6 text-[#2A1E1A] tracking-tight border-b border-[#1F4D4A]/10 pb-4">
             Clubs
           </h3>
-          <div className="space-y-6 text-gray-900 font-medium text-lg">
+          <div className="space-y-6 text-[#2A1E1A] font-medium text-lg">
             {props.clubs.map((club) => (
               <ExpandableItem
                 key={club}
