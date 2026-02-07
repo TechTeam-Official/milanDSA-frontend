@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { GalleryHorizontal } from "lucide-react";
 import { BentoGalleryGrid } from "@/components/ui/bento-gallery-grid";
 import { sessionShuffle } from "@/lib/sessionShuffle";
@@ -29,9 +30,26 @@ export function GalleryClient({ initialImages }: { initialImages: string[] }) {
     <div className="w-full snap-y snap-mandatory selection:bg-[#C9A24D]/30 selection:text-[#F1EEE8]">
       {/* ================= HERO SECTION ================= */}
       <section className="h-screen w-full flex items-center justify-center text-center bg-[#1A1A1A] text-[#F1EEE8] snap-start snap-always relative overflow-hidden rounded-b-[4rem] shadow-[0_0_50px_rgba(201,162,77,0.1)] z-20 border-b border-[#8C6A3D]/30">
+
+        {/* BACKGROUND IMAGE */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/BackgroundImages/Gallery.png"
+            alt="Milan Gallery Background"
+            fill
+            className="object-cover opacity-70"
+            priority
+          />
+          {/* Overlay for text readability */}
+          <div className="absolute inset-0 bg-black/60" />
+
+          {/* Subtle Vignette */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)] pointer-events-none" />
+        </div>
+
         {/* Ambient glow (Gold/Bronze - Subtle) */}
-        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-[#C9A24D]/5 blur-[140px] rounded-full" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#8C6A3D]/5 blur-[140px] rounded-full" />
+        <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-[#C9A24D]/10 blur-[140px] rounded-full z-0" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#8C6A3D]/10 blur-[140px] rounded-full z-0" />
 
         <div className="relative z-10 px-6">
           <motion.div
