@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
 
 interface FooterProps {
-  variant?: "default" | "events" | "sponsors";
+  variant?: "default" | "events" | "sponsors" | "passes";
 }
 
 export function Footer({ variant = "default" }: FooterProps) {
@@ -40,6 +40,17 @@ export function Footer({ variant = "default" }: FooterProps) {
       iconHover: "hover:bg-emerald-900/40 hover:border-emerald-500/50 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:text-emerald-300",
       iconColor: "text-[#4F7A6E]",
       linkHover: "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-emerald-300 hover:to-yellow-200",
+    },
+    passes: {
+      bg: "bg-[#14172B]", // Midnight Indigo
+      border: "border-[#E0B65C]/20", // Royal Gold, subtle
+      accent: "text-[#E0B65C]",
+      accentBg: "bg-[#E0B65C]",
+      divider: "from-transparent via-[#E0B65C]/30 to-transparent",
+      brandGradient: "from-[#E0B65C] via-[#F2A900] to-[#E0B65C] bg-[length:200%_auto] hover:bg-right transition-all duration-500",
+      iconHover: "hover:bg-[#E0B65C]/10 hover:border-[#E0B65C]/40 hover:shadow-[0_0_15px_rgba(224,182,92,0.2)] hover:text-[#F2A900]",
+      iconColor: "text-[#E0B65C]",
+      linkHover: "hover:text-[#F2A900]",
     },
   };
 

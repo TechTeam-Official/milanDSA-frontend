@@ -118,19 +118,26 @@ export default function Passes() {
   });
 
   return (
-    <main className="relative min-h-screen bg-neutral-950 text-white selection:bg-purple-500/30">
+    <main className="relative min-h-screen bg-[#14172B] text-white selection:bg-[#E0B65C]/30 overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
+        {/* Deep Gradient Base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#14172B] via-[#1C2140] to-[#14172B]" />
+
+        {/* Subtle Grain Texture Overlay */}
+        <div className="absolute inset-0 opacity-[0.07] bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] mix-blend-overlay" />
+
+        {/* Original Image */}
         <Image
           src="/BackgroundImages/Passes.png"
           alt="Pass Background"
           fill
-          className="object-cover opacity-90"
+          className="object-cover opacity-50"
           priority
         />
-        <div className="absolute inset-0 bg-linear-to-b from-neutral-950/80 via-neutral-950/60 to-neutral-950" />
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 rounded-full blur-[120px]" />
+
+        {/* Cinematic Vignette */}
+        <div className="absolute inset-0 bg-radial-[circle_at_center,_transparent_0%,_#14172B_80%]" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 pt-24 pb-8 flex flex-col items-center">
@@ -138,18 +145,18 @@ export default function Passes() {
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-8 space-y-2">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-sm font-medium text-purple-200 mb-2">
+          className="text-center mb-12 space-y-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[#E0B65C]/20 bg-[#E0B65C]/5 backdrop-blur-md text-xs font-bold tracking-widest uppercase text-[#E0B65C] mb-2 shadow-[0_0_15px_rgba(224,182,92,0.1)]">
             <Sparkles
-              size={14}
-              className="text-yellow-400"
+              size={12}
+              className="text-[#F2A900]"
             />
             <span>Secure Your Spot</span>
           </div>
-          <h1 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-b from-white via-neutral-200 to-neutral-500">
+          <h1 className="text-5xl md:text-7xl font-serif font-medium tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-[#E0B65C] via-[#F2A900] to-[#E0B65C] drop-shadow-lg">
             Student Festival Pass
           </h1>
-          <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
+          <p className="text-lg text-[#E0B65C]/60 max-w-2xl mx-auto font-light tracking-wide">
             Unlock the Festival Experience
           </p>
         </motion.div>
@@ -157,8 +164,8 @@ export default function Passes() {
         {/* Pass Grid */}
         <div
           className={`grid gap-8 w-full ${filteredPasses.length === 1
-              ? "grid-cols-1 max-w-md mx-auto"
-              : "grid-cols-1 md:grid-cols-2 max-w-5xl"
+            ? "grid-cols-1 max-w-md mx-auto"
+            : "grid-cols-1 md:grid-cols-2 max-w-5xl"
             }`}>
           {filteredPasses.map((pass, index) => (
             <motion.div
@@ -167,67 +174,67 @@ export default function Passes() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className="group relative flex flex-col">
-              {/* Card Glow Effect */}
-              <div
-                className={`absolute -inset-0.5 bg-linear-to-b ${pass.color} opacity-0 group-hover:opacity-20 transition duration-500 blur-xl rounded-3xl`}
-              />
 
-              <div className="relative flex flex-col h-full bg-neutral-900/50 backdrop-blur-xl border border-white/10 rounded-3xl p-6 hover:border-white/20 transition-all duration-300 hover:transform hover:-translate-y-1">
+              {/* Premium Card Container */}
+              <div className="relative flex flex-col h-full bg-[#1C2140]/40 backdrop-blur-xl border border-[#E0B65C]/20 rounded-3xl p-8 hover:bg-[#1C2140]/60 hover:border-[#E0B65C]/40 transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(224,182,92,0.05)]">
+
+                {/* Soft Inner Gradient Highlight (Top) */}
+                <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/5 to-transparent opacity-50 pointer-events-none rounded-t-3xl" />
+
                 {/* Header */}
-                <div className="mb-4">
-                  <div className="flex items-center gap-4 mb-4">
+                <div className="mb-6 relative z-10">
+                  <div className="flex items-center gap-5 mb-6">
                     <div
-                      className={`w-14 h-14 rounded-2xl bg-linear-to-br ${pass.color} p-3 shadow-lg shadow-purple-900/20 shrink-0`}>
-                      <pass.icon className="w-full h-full text-white" />
+                      className="w-16 h-16 rounded-2xl bg-[#E0B65C]/10 border border-[#E0B65C]/20 p-4 flex items-center justify-center group-hover:bg-[#E0B65C]/20 transition-colors duration-500">
+                      <pass.icon className="w-full h-full text-[#E0B65C] group-hover:text-[#F2A900] transition-colors duration-500" />
                     </div>
-                    <h3 className="text-2xl font-bold text-white leading-none">
+                    <h3 className="text-3xl font-serif text-white leading-none tracking-tight">
                       {pass.title}
                     </h3>
                   </div>
 
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-extrabold text-white">
+                    <span className="text-4xl font-medium text-white tracking-tight">
                       {pass.price}
                     </span>
-                    <span className="text-neutral-500 font-medium">
-                      /person
+                    <span className="text-[#E0B65C]/60 font-medium text-sm uppercase tracking-wider ml-1">
+                      / person
                     </span>
                   </div>
                 </div>
 
-                {/* Divider */}
-                <div className="h-px w-full bg-white/5 mb-4" />
+                {/* Divider (Gold) */}
+                <div className="h-px w-full bg-gradient-to-r from-transparent via-[#E0B65C]/30 to-transparent mb-6" />
 
                 {/* Features */}
-                <ul className="space-y-3 mb-6 grow">
+                <ul className="space-y-4 mb-8 grow relative z-10">
                   {pass.features.map((feature, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-3 text-neutral-300">
+                      className="flex items-start gap-4 text-neutral-300">
                       <div
-                        className={`w-2 h-2 rounded-full mt-2 shrink-0 bg-linear-to-r ${pass.color}`}
+                        className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-[#E0B65C] shadow-[0_0_8px_#E0B65C]"
                       />
-                      <span className="text-sm">{feature}</span>
+                      <span className="text-sm font-light text-neutral-200 group-hover:text-white transition-colors">{feature}</span>
                     </li>
                   ))}
                 </ul>
 
                 {/* Restriction Badge */}
-                <div className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-neutral-500 bg-neutral-950/50 p-3 rounded-xl border border-white/5">
+                <div className="mb-6 flex items-center justify-center gap-2 text-xs font-bold uppercase tracking-widest text-[#E0B65C] bg-[#E0B65C]/5 p-3 rounded-xl border border-[#E0B65C]/10">
                   {pass.restriction === "srm" ? (
                     <>
-                      <ShieldCheck className="w-4 h-4 text-purple-400" />
+                      <ShieldCheck className="w-3.5 h-3.5" />
                       <span>SRM Students Only</span>
                     </>
                   ) : (
                     <>
-                      <CheckCircle2 className="w-4 h-4 text-blue-400" />
+                      <CheckCircle2 className="w-3.5 h-3.5" />
                       <span>Open to All</span>
                     </>
                   )}
                 </div>
 
-                {/* Action Button */}
                 {/* Action Button */}
                 {(() => {
                   const isSrmPass = pass.restriction === "srm";
@@ -244,35 +251,29 @@ export default function Passes() {
                   }
 
                   return (
-                    <div className="space-y-2">
+                    <div className="space-y-2 relative z-10">
                       <Button
                         onClick={() => handleBuyPass(pass)}
                         disabled={!!user && !isEligible}
-                        className={`w-full font-bold py-4 rounded-xl group/btn overflow-hidden relative ${user && !isEligible
-                            ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5"
-                            : "bg-white text-black hover:bg-neutral-200"
+                        className={`w-full font-bold py-6 rounded-xl group/btn transform transition-all duration-300 ${user && !isEligible
+                          ? "bg-[#14172B] text-neutral-500 cursor-not-allowed border border-white/5"
+                          : "bg-white text-[#14172B] hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:bg-neutral-200 hover:border-white border border-white"
                           }`}>
-                        <span className="relative z-10 flex items-center justify-center gap-2">
+                        <span className="flex items-center justify-center gap-2 font-bold tracking-wide">
                           <>
                             {buttonText}
                             {(user && isEligible) || !user ? (
-                              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                             ) : (
                               <Ban className="w-4 h-4" />
                             )}
                           </>
                         </span>
-                        {/* Hover Gradient only if active */}
-                        {(!user || isEligible) && (
-                          <div
-                            className={`absolute inset-0 bg-linear-to-r ${pass.color} opacity-0 group-hover/btn:opacity-10 transition-opacity duration-300`}
-                          />
-                        )}
                       </Button>
 
                       {/* Ineligibility Warning */}
                       {user && !isEligible && (
-                        <p className="text-center text-xs text-red-400/80 font-medium">
+                        <p className="text-center text-[10px] text-red-400/80 font-medium tracking-wide uppercase mt-2">
                           Requires @srmist.edu.in email address
                         </p>
                       )}
