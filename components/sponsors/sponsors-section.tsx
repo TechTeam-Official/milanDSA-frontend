@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Timer } from "lucide-react";
 
@@ -99,6 +99,9 @@ export function SponsorsSection() {
   const row1 = PAST_SPONSORS.slice(0, mid);
   const row2 = PAST_SPONSORS.slice(mid);
 
+  const { scrollYProgress } = useScroll();
+  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
+
   return (
     <main className="min-h-screen bg-[#021812] text-neutral-900 overflow-x-hidden selection:bg-[#556B2F]/30 selection:text-[#C9A24D]">
       <div className="fixed inset-0 pointer-events-none indian-noise opacity-20 mix-blend-overlay z-0" />
@@ -133,7 +136,7 @@ export function SponsorsSection() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative z-30 text-8xl md:text-[10rem] font-serif text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
+          className="relative z-30 text-5xl sm:text-7xl md:text-[10rem] font-serif text-white leading-[0.9] tracking-tighter mb-4 sm:mb-8 im-text-shadow">
           Sponsors<span className="text-[#556B2F]">.</span>
         </motion.h1>
 
@@ -142,10 +145,40 @@ export function SponsorsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="relative z-30 text-lg md:text-xl font-medium text-neutral-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          className="relative z-30 text-sm sm:text-base md:text-xl font-medium text-neutral-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
           We extend our deepest gratitude to all our sponsors who have made
           MILAN possible through their generous support and partnership.
         </motion.p>
+
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: 140 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative z-30 h-1 bg-[#556B2F] rounded-full mx-auto mt-12"
+        />
+
+        {/* Scroll Indicator */}
+        <motion.div
+          style={{ opacity: indicatorOpacity }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30">
+          <div className="w-[30px] h-[50px] border-2 border-[#556B2F]/40 rounded-full flex justify-center p-2 backdrop-blur-sm">
+            <motion.div
+              animate={{
+                y: [0, 16, 0],
+                opacity: [1, 0.4, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="w-1.5 h-1.5 bg-[#556B2F] rounded-full shadow-[0_0_8px_#556B2F]"
+            />
+          </div>
+          <span className="text-[9px] uppercase tracking-[0.4em] font-semibold text-[#556B2F]/80">
+            Scroll
+          </span>
+        </motion.div>
       </section>
 
       {/* 3. GRID SECTION — CURRENT PARTNERS (LIGHT) */}

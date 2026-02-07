@@ -221,9 +221,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
             className={`absolute inset-0 flex items-center justify-center md:pr-96 ${isMobile ? "z-0 opacity-100" : "z-10 pointer-events-none"
               }`}>
             <div
-              className={
-                isMobile ? "pointer-events-none" : "pointer-events-auto"
-              }>
+              className="pointer-events-auto">
               <SphereImageGrid
                 images={sphereImages}
                 containerSize={dimensions.width}
@@ -241,7 +239,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
           </div>
 
           {isMobile ? (
-            <div className="absolute inset-0 z-30 overflow-y-auto scrollbar-hide">
+            <div className="absolute inset-0 z-30 overflow-y-auto scrollbar-hide pointer-events-none">
               <MobileLists
                 isMobile
                 expandedItems={expandedItems}
@@ -277,14 +275,15 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
             />
           )}
 
-          {selectedConvenor && (
-            <ConvenorModal
-              convenor={selectedConvenor}
-              onClose={() => setSelectedConvenor(null)}
-            />
-          )}
         </main>
       </motion.section>
+
+      {selectedConvenor && (
+        <ConvenorModal
+          convenor={selectedConvenor}
+          onClose={() => setSelectedConvenor(null)}
+        />
+      )}
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function ConvenorModal({
   if (!convenor) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 max-w-md w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
+    <div className="fixed bottom-6 left-0 right-0 mx-auto md:left-6 md:right-auto md:mx-0 z-[100] max-w-md w-[calc(100%-3rem)] md:w-full animate-in fade-in slide-in-from-bottom-4 duration-300">
       <div className="bg-[#F3E8D7] rounded-3xl shadow-[0_25px_50px_-12px_rgba(31,77,74,0.25)] overflow-hidden border border-[#B89B5E]">
         {/* IMAGE */}
         <div className="relative aspect-square">
