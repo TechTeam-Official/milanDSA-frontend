@@ -141,9 +141,9 @@ export function MilanTimelineSection() {
           <motion.path
             vectorEffect="non-scaling-stroke"
             d="M300 350
-               C 500 550, 100 850, 300 1100
-               C 500 1350, 100 1650, 300 1900
-               C 500 2150, 100 2350, 300 2400"
+               C 450 550, 150 850, 300 1100
+               C 450 1350, 150 1650, 300 1900
+               C 450 2150, 150 2350, 300 2400"
             stroke="url(#pulse)"
             strokeWidth="6"
             strokeLinecap="round"
@@ -166,8 +166,8 @@ export function MilanTimelineSection() {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-5xl md:text-7xl tracking-tighter uppercase im-text-shadow-dark"
+            viewport={{ once: true, margin: "-100px" }}
+            className="text-5xl md:text-7xl tracking-tighter uppercase font-serif"
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#0F766E]">
               Timeline
@@ -176,7 +176,7 @@ export function MilanTimelineSection() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{ delay: 0.1 }}
             className="text-neutral-400 max-w-2xl mx-auto text-lg font-light"
           >
