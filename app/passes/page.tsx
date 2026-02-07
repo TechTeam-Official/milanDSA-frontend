@@ -122,10 +122,10 @@ export default function Passes() {
       {/* Background Ambience */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
-          src="/BackgroundImages/PassBackgroundImage.png"
+          src="/BackgroundImages/Passes.png"
           alt="Pass Background"
           fill
-          className="object-cover opacity-60"
+          className="object-cover opacity-90"
           priority
         />
         <div className="absolute inset-0 bg-linear-to-b from-neutral-950/80 via-neutral-950/60 to-neutral-950" />
@@ -156,11 +156,10 @@ export default function Passes() {
 
         {/* Pass Grid */}
         <div
-          className={`grid gap-8 w-full ${
-            filteredPasses.length === 1
+          className={`grid gap-8 w-full ${filteredPasses.length === 1
               ? "grid-cols-1 max-w-md mx-auto"
               : "grid-cols-1 md:grid-cols-2 max-w-5xl"
-          }`}>
+            }`}>
           {filteredPasses.map((pass, index) => (
             <motion.div
               key={pass.id}
@@ -249,11 +248,10 @@ export default function Passes() {
                       <Button
                         onClick={() => handleBuyPass(pass)}
                         disabled={!!user && !isEligible}
-                        className={`w-full font-bold py-4 rounded-xl group/btn overflow-hidden relative ${
-                          user && !isEligible
+                        className={`w-full font-bold py-4 rounded-xl group/btn overflow-hidden relative ${user && !isEligible
                             ? "bg-neutral-800 text-neutral-500 cursor-not-allowed border border-white/5"
                             : "bg-white text-black hover:bg-neutral-200"
-                        }`}>
+                          }`}>
                         <span className="relative z-10 flex items-center justify-center gap-2">
                           <>
                             {buttonText}
