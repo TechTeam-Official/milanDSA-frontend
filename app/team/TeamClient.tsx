@@ -95,8 +95,8 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
     const update = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      // Treat tablet (< 1024px) as "mobile-like" layout (sequential flow)
-      const mobileOrTablet = w < 1024;
+      // Treat tablet and iPad Pro (<= 1024px) as "mobile-like" layout (sequential flow)
+      const mobileOrTablet = w <= 1024;
       setIsMobile(mobileOrTablet);
       const size = mobileOrTablet ? Math.min(w, h) : Math.min(w, h) * 0.9;
       setDimensions({ width: size, height: size });
