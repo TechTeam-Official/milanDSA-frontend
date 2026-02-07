@@ -18,14 +18,17 @@ interface Sponsor {
 // Typed explicitly so TS knows 'image' is optional but valid to access
 const CURRENT_SPONSORS: Sponsor[] = [
   {
-    name: "Revealing Soon",
-    role: "Lead Partner",
-    description: "Announcement incoming.",
+    name: "Farmley",
+    role: "Snack Partner",
+    description: "Healthy snacking made fun.",
+    image: "/current-sponsors/farmley.png",
     span: "md:col-span-2",
   },
   {
-    name: "Revealing Soon",
-    role: "Beverage Partner",
+    name: "Date The Bite",
+    role: "Snack Partner",
+    description: "Guilt-free date snacks.",
+    image: "/current-sponsors/date-bite.png",
     span: "md:col-span-1",
   },
   {
@@ -200,33 +203,53 @@ export function SponsorsSection() {
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
                 // Linter Fix: min-h-[240px] -> min-h-60
-                className={`${sponsor.span} relative min-h-60 rounded-[2.5rem] bg-white border border-[#556B2F]/10 shadow-sm hover:shadow-[0_4px_20px_rgba(6,78,59,0.1)] hover:border-[#556B2F]/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden group flex flex-col md:flex-row items-center justify-between p-8 gap-6`}>
+                className={`${sponsor.span} relative min-h-60 rounded-[2.5rem] border border-[#556B2F]/10 shadow-sm hover:shadow-[0_4px_20px_rgba(6,78,59,0.1)] hover:border-[#556B2F]/40 hover:-translate-y-1 transition-all duration-300 overflow-hidden group flex flex-col md:flex-row items-center justify-between p-8 gap-6 ${sponsor.name !== "Revealing Soon" ? "bg-gradient-to-br from-white via-[#FDFDFD] to-[#E8ECE7]" : "bg-white"}`}>
                 {/* Left Side: Content */}
-                <div className="relative z-10 flex flex-col items-start space-y-3 w-full md:w-3/5 h-full justify-between">
+                <div className="relative z-10 flex flex-col items-start space-y-2 w-full md:w-3/5 h-full justify-between">
                   <div>
+                    {/* Role Label */}
+                    {sponsor.name !== "Revealing Soon" && (
+                      <div className="text-[10px] uppercase tracking-widest font-bold text-[#556B2F]/70 mb-1">
+                        {sponsor.role}
+                      </div>
+                    )}
 
-                    <h3 className="text-2xl font-bold text-[#022C22] tracking-tight mt-3 group-hover:text-[#C9A24D] transition-colors">
+                    <h3 className="text-2xl md:text-3xl font-bold text-[#022C22] tracking-tight group-hover:text-[#C9A24D] transition-colors">
                       {sponsor.name}
                     </h3>
+
+                    {/* Description */}
+                    {sponsor.description && (
+                      <p className="text-sm text-neutral-600 leading-relaxed mt-2 max-w-[90%]">
+                        {sponsor.description}
+                      </p>
+                    )}
                   </div>
 
-                  <div className="inline-flex items-center gap-1.5 text-[#556B2F] text-[10px] font-bold uppercase tracking-wide border-b border-transparent pb-0.5 mt-auto cursor-default group-hover:text-[#C9A24D] transition-colors">
-                    Stay Tuned
-                  </div>
+                  {/* "Revealing Soon" vs Real Sponsor Footer */}
+                  {sponsor.name === "Revealing Soon" ? (
+                    <div className="inline-flex items-center gap-1.5 text-[#556B2F] text-[10px] font-bold uppercase tracking-wide border-b border-transparent pb-0.5 mt-auto cursor-default opacity-60">
+                      Stay Tuned
+                    </div>
+                  ) : (
+                    // Optional decoration for real sponsors to fill space
+                    <div className="mt-auto pt-4">
+                      <div className="h-1 w-12 bg-[#556B2F]/20 rounded-full group-hover:w-20 group-hover:bg-[#C9A24D] transition-all duration-300" />
+                    </div>
+                  )}
                 </div>
 
                 {/* Right Side: Logo or Mystery Icon */}
                 <div className="relative z-10 w-full md:w-2/5 h-32 md:h-full flex items-center justify-center md:justify-end">
                   <div
-                    // Linter Fix: max-h-[80px] -> max-h-20
-                    className={`relative w-full h-full ${sponsor.span === "md:col-span-2" ? "max-h-[140px]" : "max-h-20"} transition-all duration-500 flex items-center justify-center md:justify-end`}>
+                    className={`relative w-full h-full ${sponsor.span === "md:col-span-2" ? "max-h-[140px]" : "max-h-24"} transition-all duration-500 flex items-center justify-center md:justify-end`}>
                     {/* TS Error Fixed: image is now optional on the interface, so accessing it is valid */}
                     {sponsor.image ? (
                       <Image
                         src={sponsor.image}
                         alt={sponsor.name}
                         fill
-                        className="object-contain object-center md:object-right opacity-80 group-hover:opacity-100 transition-opacity"
+                        className="object-contain object-center md:object-right opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
                       />
                     ) : (
                       <div className="w-20 h-20 bg-neutral-50 rounded-2xl flex items-center justify-center border border-neutral-100 group-hover:border-[#C9A24D]/30 transition-colors">
