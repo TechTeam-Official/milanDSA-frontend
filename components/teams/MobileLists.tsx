@@ -72,14 +72,15 @@ export default function MobileLists(props: Props) {
 
   return (
     <div className="relative w-full px-6 pb-40 pointer-events-none">
-      <div className="flex flex-col gap-8 mt-0 pointer-events-auto">
+      <div className="flex flex-col md:flex-row gap-8 mt-0 pointer-events-auto justify-center w-full">
         {/* CORE TEAM SECTION */}
         {/* CLEAR GLASS EFFECT: 
             - bg-white/50: 50% opacity (no blur)
             - border-white/60: Subtle crisp edge
             - shadow-xl: Lifts it off the globe
         */}
-        <div className="bg-[#E0C3A0]/90 backdrop-blur-sm border border-[#1F4D4A]/10 rounded-3xl p-6 shadow-xl shadow-[#1F4D4A]/10 pointer-events-auto">
+        {/* CORE TEAM SECTION */}
+        <div className="w-full md:w-auto md:flex-1 bg-[#E0C3A0]/90 backdrop-blur-sm border border-[#1F4D4A]/10 rounded-3xl p-6 shadow-xl shadow-[#1F4D4A]/10 pointer-events-auto min-w-0 flex flex-col">
           <h3 className="font-black text-4xl mb-6 text-[#2A1E1A] tracking-tight border-b border-[#1F4D4A]/10 pb-4">
             Core Team
           </h3>
@@ -98,7 +99,8 @@ export default function MobileLists(props: Props) {
         </div>
 
         {/* CLUBS SECTION */}
-        <div className="bg-[#E0C3A0]/90 backdrop-blur-sm border border-[#1F4D4A]/10 rounded-3xl p-6 shadow-xl shadow-[#1F4D4A]/10 pointer-events-auto">
+        {/* CLUBS SECTION */}
+        <div className="w-full md:w-auto md:flex-1 bg-[#E0C3A0]/90 backdrop-blur-sm border border-[#1F4D4A]/10 rounded-3xl p-6 shadow-xl shadow-[#1F4D4A]/10 pointer-events-auto min-w-0 flex flex-col">
           <h3 className="font-black text-4xl mb-6 text-[#2A1E1A] tracking-tight border-b border-[#1F4D4A]/10 pb-4">
             Clubs
           </h3>
