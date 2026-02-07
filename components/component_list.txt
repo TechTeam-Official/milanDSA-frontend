@@ -1,0 +1,64 @@
+
+# COMPONENT SEGREGATION BY PAGE AND FUNCTIONALITY
+
+## 🏠 HOME PAGE COMPONENTS
+components/home/hero.tsx
+components/home/introduction-section.tsx
+components/home/milan-timeline-section.tsx
+components/home/directors-managers-section.tsx
+components/home/guest-showcase.tsx
+components/home/poster-generator-section.tsx
+
+## 🏗️ LAYOUT COMPONENTS (Global)
+components/layout/navbar.tsx
+components/layout/footer.tsx
+components/layout/conditional-footer.tsx
+components/layout/conditional-layout.tsx
+components/ui/mobile-header.tsx (Likely used in layout)
+
+## 👥 TEAMS PAGE COMPONENTS
+components/teams/DesktopLists.tsx
+components/teams/MobileLists.tsx
+components/teams/ExpandableItem.tsx
+components/teams/HoverPreview.tsx
+components/teams/ConvenorModal.tsx
+components/teams/TeamHeading.tsx
+components/teams/TeamLists.tsx
+components/teams/TeamSphere.tsx
+components/ui/img-sphere.tsx (Used heavily in Teams)
+
+## 📅 EVENTS PAGE COMPONENTS
+components/event/BentoGrid.tsx
+components/event/EventDetailsModal.tsx
+components/event/MilanCalendar.tsx
+components/event/PosterBackground.tsx
+
+## 🤝 SPONSORS PAGE COMPONENTS
+components/sponsors/sponsors-section.tsx
+
+## 🧭 EXPLORE PAGE COMPONENTS
+components/explore/explore-feed.tsx
+components/explore/ai-generator-modal.tsx
+components/explore/upload-modal.tsx
+
+## 🎬 INTRO / PRELOADER COMPONENTS
+components/intro/intro_section.tsx
+components/intro/intro_fallback.tsx
+components/intro/README.md
+
+## 🧩 UI / SHARED COMPONENTS
+components/ui/button.tsx
+components/ui/bento-grid.tsx
+components/ui/bento-gallery-grid.tsx
+components/ui/framer-carousel.tsx
+components/ui/image-gallery.tsx
+components/ui/image-trail.tsx
+components/ui/kinetic-cursor.tsx
+components/ui/CustomCursor.tsx
+components/ui/milan-glass-surface.tsx
+components/ui/scroll-velocity.tsx
+components/draggable-canvas.tsx (Root component)
+
+## 🛠️ HOOKS & PROVIDERS
+components/hooks/use-mouse-vector.ts
+components/providers/smooth-scroll-provider.tsx
