@@ -107,9 +107,9 @@ export function SponsorsSection() {
 
   return (
     <main className="min-h-screen bg-[#021812] text-neutral-900 overflow-x-hidden selection:bg-[#556B2F]/30 selection:text-[#C9A24D]">
-      <div className="fixed inset-0 pointer-events-none indian-noise opacity-20 mix-blend-overlay z-0" />
+
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center z-30 bg-transparent w-full rounded-b-[4rem] shadow-2xl overflow-hidden border-b border-[#556B2F]/30">
+      <section className="relative min-h-screen flex flex-col items-center justify-center px-6 text-center z-30 bg-[#021812] w-full rounded-b-[4rem] shadow-2xl overflow-hidden">
 
         {/* 🎆 Background Image with Cinematic Green Overlay */}
         <div className="absolute inset-0 z-0">
@@ -268,7 +268,7 @@ export function SponsorsSection() {
       </section>
 
       {/* Past Sponsors (Legacy) — DARK SECTION */}
-      <section className="relative z-20 py-32 bg-[#031E18] text-white flex flex-col justify-center rounded-t-[5rem] -mt-12 border-t-4 border-[#C9A24D] shadow-[0_-4px_20px_rgba(0,0,0,0.2)] overflow-hidden">
+      <section className="relative z-20 py-32 bg-[#031E18] text-white flex flex-col justify-center rounded-t-[5rem] -mt-12 overflow-hidden">
         {/* 🌟 Top Glow / Spot "Bright at any spot" */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 md:w-1/2 h-64 bg-[#556B2F]/30 blur-[100px] rounded-full pointer-events-none mix-blend-screen" />
 

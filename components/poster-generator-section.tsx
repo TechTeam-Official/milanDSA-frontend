@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Download, Share2, History } from "lucide-react"
+import { Download, Share2, History } from "lucide-react"
 import { useState, useEffect } from "react"
 import Image from 'next/image'
 
@@ -100,9 +100,8 @@ export function PosterGeneratorSection() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4"
             >
-              <button className="px-8 py-4 bg-white text-black font-bold rounded-full hover:shadow-[0_0_20px_rgba(201,162,77,0.5)] transition-all flex items-center gap-2 group">
-                Generate Legacy Poster
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <button disabled className="px-8 py-4 bg-white/80 text-neutral-600 font-bold rounded-full cursor-not-allowed flex items-center gap-2 shadow-sm">
+                Coming Soon...
               </button>
             </motion.div>
           </div>
