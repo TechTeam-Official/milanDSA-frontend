@@ -7,13 +7,13 @@ import { AuthProvider } from "@/context/auth-context";
 import IntroSection from "@/components/intro/intro_section";
 
 const stampPress = localFont({
-  src: "../app/fonts/StampPressRegular-pgMYy.otf",
+  src: "./fonts/StampPressRegular-pgMYy.otf",
   variable: "--font-stamp-press",
   display: "swap",
 });
 
 const foglihten = localFont({
-  src: "../app/fonts/Foglihtenno07-e9wz3.otf",
+  src: "./fonts/Foglihtenno07-e9wz3.otf",
   variable: "--font-foglihten",
   display: "swap",
 });

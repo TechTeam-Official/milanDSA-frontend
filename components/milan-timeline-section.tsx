@@ -72,7 +72,7 @@ export function MilanTimelineSection() {
     geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
 
     const material = new THREE.PointsMaterial({
-      color: 0x06b6d4,
+      color: 0xC9A24D,
       size: 0.05,
       transparent: true,
       opacity: 0.6
@@ -112,14 +112,21 @@ export function MilanTimelineSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-black text-white py-32 overflow-hidden"
+      className="relative indian-timeline-bg text-white py-32 overflow-hidden"
     >
+      <div className="indian-noise" />
+
+      {/* Floating Accent Dots (Teal & Copper) */}
+      <div className="im-accent-dot top-32 left-10 opacity-70 bg-[#0F3D3E] shadow-[0_0_12px_#0F3D3E]" />
+      <div className="im-accent-dot bottom-32 right-10 opacity-50 bg-[#B87333] shadow-[0_0_12px_#B87333]" />
+
       <canvas
         ref={canvasRef}
         className="absolute inset-0 z-0 pointer-events-none"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/70 to-black z-10" />
+      {/* Simplified dark gradient overlay to blend canvas */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F]/40 via-[#0C1F20]/50 to-[#0B0B0F] z-10" />
 
       <div className="absolute inset-0 flex justify-center pointer-events-none z-20">
         <svg
@@ -144,7 +151,7 @@ export function MilanTimelineSection() {
           <defs>
             <linearGradient id="pulse" x1="0" y1="0" x2="0" y2="2400">
               <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="50%" stopColor="#06b6d4" />
+              <stop offset="50%" stopColor="#D97706" />
               <stop offset="100%" stopColor="#ffffff" />
             </linearGradient>
           </defs>
@@ -158,9 +165,9 @@ export function MilanTimelineSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-4xl md:text-6xl font-black tracking-tighter uppercase"
+            className="text-5xl md:text-7xl tracking-tighter uppercase im-text-shadow-dark"
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#0F766E]">
               Timeline
             </span>
           </motion.h2>
@@ -189,14 +196,14 @@ export function MilanTimelineSection() {
               {/* Content Side */}
               <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
                 <div className="space-y-6">
-                  <h3 className="text-5xl md:text-7xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-cyan-100 to-cyan-500 drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">
+                  <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]">
                     {item.year}
                   </h3>
-                  <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-blue-500 rounded-full" />
+                  <div className="h-1 w-24 bg-gradient-to-r from-[#0F766E] to-[#C9A24D] rounded-full" />
                   <ul className="space-y-4">
                     {item.facts.map((f) => (
                       <li key={f} className="text-lg md:text-xl text-neutral-300 font-light tracking-wide flex items-center gap-3">
-                        <span className="h-1.5 w-1.5 min-h-[6px] min-w-[6px] rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
+                        <span className="h-1.5 w-1.5 min-h-[6px] min-w-[6px] rounded-full bg-[#0F766E] shadow-[0_0_10px_rgba(15,118,110,0.8)]" />
                         {f}
                       </li>
                     ))}
@@ -206,8 +213,8 @@ export function MilanTimelineSection() {
 
               {/* Image Side */}
               <div className="relative w-full md:w-1/2 group">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-2xl skew-y-1 transition-transform duration-700 group-hover:skew-y-0 group-hover:scale-[1.02]">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-purple-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[#C9A24D]/20 bg-white/5 backdrop-blur-sm shadow-2xl skew-y-1 transition-transform duration-700 group-hover:skew-y-0 group-hover:scale-[1.02]">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-[#3B2D5F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                   <Image
                     src={item.image}
                     alt={item.year}
@@ -216,12 +223,13 @@ export function MilanTimelineSection() {
                   />
                 </div>
                 {/* Decorative border offset */}
-                <div className={`absolute inset-0 border-2 border-cyan-500/30 rounded-2xl -z-10 translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 ${left ? '-skew-y-1' : 'skew-y-1'}`} />
+                <div className={`absolute inset-0 border-2 border-[#C9A24D]/30 rounded-2xl -z-10 translate-x-4 translate-y-4 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2 ${left ? '-skew-y-1' : 'skew-y-1'}`} />
               </div>
             </motion.div>
           )
         })}
       </div>
+      <div className="indian-gold-divider absolute bottom-0 left-0 right-0" />
     </section>
   )
 }

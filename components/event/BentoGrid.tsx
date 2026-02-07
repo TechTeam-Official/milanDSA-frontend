@@ -24,7 +24,7 @@ export function BentoGrid({ children, className }: BentoGridProps) {
 interface BentoCardProps {
   name: string;
   description: string;
-  href: string;
+  href?: string;
   cta: string;
   Icon: LucideIcon;
   className?: string;
@@ -48,8 +48,8 @@ export function BentoCard({
         // 🔑 IMPORTANT: min-h added so Image `fill` works
         "group relative min-h-[260px] h-full overflow-hidden rounded-3xl border transition-all hover:shadow-xl",
         hasBackground
-          ? "border-white/10 bg-transparent"
-          : "border-neutral-200 bg-white",
+          ? "border-[#C9A24D]/20 bg-transparent"
+          : "border-[#C9A24D]/20 bg-[#FDFBF7] shadow-[0_4px_20px_-10px_rgba(201,162,77,0.1)]",
         className,
       )}>
       {/* Background image */}
@@ -61,35 +61,46 @@ export function BentoCard({
           <Icon
             className={cn(
               "mb-4 h-8 w-8",
-              hasBackground ? "text-white" : "text-neutral-900",
+              hasBackground ? "text-white" : "text-[#0F766E]",
             )}
           />
           <h3
             className={cn(
               "text-xl font-semibold tracking-tight",
-              hasBackground ? "text-white" : "text-neutral-900",
+              hasBackground ? "text-white" : "text-[#3A2A5E]",
             )}>
             {name}
           </h3>
           <p
             className={cn(
               "mt-2 text-sm",
-              hasBackground ? "text-neutral-200" : "text-neutral-600",
+              hasBackground ? "text-neutral-200" : "text-[#5D4037]",
             )}>
             {description}
           </p>
         </div>
 
-        <a
-          href={href}
-          className={cn(
-            "mt-6 inline-flex items-center text-sm font-medium transition-colors",
-            hasBackground
-              ? "text-purple-300 hover:text-purple-200"
-              : "text-purple-600 hover:underline",
-          )}>
-          {cta} →
-        </a>
+        {href ? (
+          <a
+            href={href}
+            className={cn(
+              "mt-6 inline-flex items-center text-sm font-medium transition-colors",
+              hasBackground
+                ? "text-[#C9A24D] hover:text-[#FFD700]"
+                : "text-[#C9A24D] hover:text-[#B87333] hover:underline",
+            )}>
+            {cta} →
+          </a>
+        ) : (
+          <div
+            className={cn(
+              "mt-6 inline-flex items-center text-sm font-medium transition-colors pointer-events-none",
+              // Unified color to Antique Gold for consistency
+              "text-[#C9A24D]",
+            )}>
+            {cta} →
+          </div>
+        )}
       </div>
     </div>
   );

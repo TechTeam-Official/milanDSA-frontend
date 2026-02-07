@@ -6,6 +6,7 @@
 /* ---------- Scrollbar Hide + Smooth Inertial Scroll ---------- */
 html,
 body {
+  font-family: var(--font-stamp-press), sans-serif;
   scrollbar-width: none;
   /* Firefox */
   -ms-overflow-style: none;
@@ -18,13 +19,33 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
+*::-webkit-scrollbar {
+  display: none;
+}
 
+* {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE & Edge */
+}
 /* ------------------------------------------------------------- */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-stamp-press), ui-sans-serif, system-ui, sans-serif;
+  /* ... */
+  --font-sans: var(--font-stamp-press),
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+  --font-serif: var(--font-foglihten),
+    ui-serif,
+    Georgia,
+    Cambria,
+    "Times New Roman",
+    Times,
+    serif;
+  --font-foglihten: var(--font-foglihten);
+  --font-stamp: var(--font-stamp-press);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -60,6 +81,19 @@ body::-webkit-scrollbar {
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-foglihten), serif;
+    font-weight: normal;
+  }
+}
+
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
@@ -93,111 +127,243 @@ body::-webkit-scrollbar {
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* Indian Maximalism Theme Variables */
+  --im-royal-indigo: #3A2A5E;
+  /* Deprecated for BG, kept for accents if needed */
+  --im-peacock-teal: #0F766E;
+  --im-deep-peacock: #0F3D3E;
+  --im-burnt-saffron: #D97706;
+  --im-rani-pink: #BE185D;
+  /* Added from illustration */
+  --im-antique-gold: #C9A24D;
+  --im-muted-copper: #B87333;
+
+  /* Light Paper Palette */
+  --im-paper-100: #F6F1E8;
+  --im-paper-200: #EFE6DA;
+  --im-paper-300: #E9DED1;
+
+  /* New Dark Bases */
+  --im-dark-base: #0B0B0F;
+  --im-light-start: #F5F2EC;
+  --im-light-end: #EFE9DF;
+  --im-bg-umber: #4B2E2B;
+  --im-bg-warm-black: #2A1B1A;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+/* 🌕 LIGHT SECTIONS — “Heritage Block Print” */
+.indian-light-bg {
+  background: linear-gradient(135deg,
+      var(--im-paper-100) 0%,
+      var(--im-paper-200) 50%,
+      var(--im-paper-300) 100%) !important;
+  position: relative;
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply bg-background text-foreground font-sans overflow-x-hidden;
-    font-family: var(--font-stamp-press), sans-serif;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-foglihten), sans-serif;
-  }
-
-  body:has([data-admin-page]) *,
-  body:has([data-admin-page]) {
-    cursor: auto !important;
-  }
+/* Textile Grain Texture */
+.indian-texture-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' query='textile' viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
 }
 
-@layer utilities {
-  @keyframes scroll {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  .animate-scroll {
-    animation: scroll 40s linear infinite;
-  }
+/* 🧱 NEW: Block Print Motif Overlay (Subtle) */
+.im-pattern-textile {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-size: 60px 60px;
+  background-image: radial-gradient(circle, var(--im-rani-pink) 1px, transparent 1px), radial-gradient(circle, var(--im-peacock-teal) 1px, transparent 1px);
+  background-position: 0 0, 30px 30px;
+  mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+  /* Fade edges */
 }
 
-/* ==========================================================
-   Custom Scrollbar – Milan Modal (OPT-IN)
-   ========================================================== */
 
-.custom-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(168, 85, 247, 0.6) transparent;
+/* 🌑 DARK SECTIONS — “Mirror Palace (Sheesh Mahal) Night” */
+.indian-dark-bg {
+  background: radial-gradient(circle at top left,
+      var(--im-bg-umber) 0%,
+      var(--im-bg-warm-black) 30%,
+      #0E0B0B 65%,
+      #0B0B0F 100%) !important;
+  position: relative;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+/* Mirror Lattice Overlay */
+.im-pattern-mirror {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image:
+    linear-gradient(30deg, var(--im-antique-gold) 12%, transparent 12.5%, transparent 87%, var(--im-antique-gold) 87.5%, var(--im-antique-gold)),
+    linear-gradient(150deg, var(--im-antique-gold) 12%, transparent 12.5%, transparent 87%, var(--im-antique-gold) 87.5%, var(--im-antique-gold)),
+    linear-gradient(30deg, var(--im-antique-gold) 12%, transparent 12.5%, transparent 87%, var(--im-antique-gold) 87.5%, var(--im-antique-gold)),
+    linear-gradient(150deg, var(--im-antique-gold) 12%, transparent 12.5%, transparent 87%, var(--im-antique-gold) 87.5%, var(--im-antique-gold)),
+    linear-gradient(60deg, var(--im-muted-copper) 25%, transparent 25.5%, transparent 75%, var(--im-muted-copper) 75%, var(--im-muted-copper)),
+    linear-gradient(60deg, var(--im-muted-copper) 25%, transparent 25.5%, transparent 75%, var(--im-muted-copper) 75%, var(--im-muted-copper));
+  background-size: 80px 140px;
+  background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-track {
+/* 🌑 TIMELINE ONLY — “Peacock Midnight” */
+.indian-timeline-bg {
+  background: radial-gradient(circle at center,
+      var(--im-deep-peacock) 0%,
+      #0C1F20 35%,
+      #0B0B0F 70%) !important;
+  position: relative;
+}
+
+/* 🌳 SPONSORS ONLY — “Royal Emerald Garden” */
+.indian-sponsors-bg {
+  background: radial-gradient(circle at top center,
+      #064E3B 0%,
+      /* Deep Emerald */
+      #022C22 40%,
+      /* Dark Green */
+      #050505 85%) !important;
+  /* Almost Black */
+  position: relative;
+}
+
+.indian-noise {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 1️⃣ SECTION HALO */
+.im-halo {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--im-antique-gold) 0%, transparent 70%);
+  opacity: 0.08;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.im-halo-teal {
+  background: radial-gradient(circle, var(--im-peacock-teal) 0%, transparent 70%);
+}
+
+.im-halo-indigo {
+  background: radial-gradient(circle, var(--im-royal-indigo) 0%, transparent 70%);
+}
+
+/* 2️⃣ ORNAMENTAL EDGE MOTIFS */
+.im-ornament {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  opacity: 0.08;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* Abstract Geometric Arch Motif */
+.im-ornament-arch {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 90 C10 40 40 10 90 10' stroke='%23C9A24D' stroke-width='2'/%3E%3Cpath d='M20 90 C20 50 50 20 90 20' stroke='%23C9A24D' stroke-width='1'/%3E%3Ccircle cx='90' cy='10' r='3' fill='%23C9A24D'/%3E%3Ccircle cx='10' cy='90' r='3' fill='%23C9A24D'/%3E%3C/svg%3E");
+}
+
+.im-ornament-corner-tl {
+  top: 0;
+  left: 0;
+  transform: rotate(0deg);
+}
+
+.im-ornament-corner-br {
+  bottom: 0;
+  right: 0;
+  transform: rotate(180deg);
+}
+
+
+/* 3️⃣ VERTICAL / CURVED RHYTHM LINES */
+.im-rhythm-line {
+  position: absolute;
+  background-color: var(--im-antique-gold);
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.im-line-v {
+  width: 1px;
+  height: 100px;
+}
+
+.im-line-curved {
+  width: 200px;
+  height: 100px;
   background: transparent;
-  margin: 16px 0;
+  border: 1px solid var(--im-antique-gold);
+  border-radius: 50%;
+  border-left-color: transparent;
+  border-bottom-color: transparent;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg,
-      rgba(168, 85, 247, 0.9),
-      rgba(59, 130, 246, 0.9));
-  border-radius: 999px;
-  border: 2px solid rgba(24, 24, 27, 0.95);
+
+/* 4️⃣ FLOATING ACCENT DOTS */
+.im-accent-dot {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--im-antique-gold);
+  box-shadow: 0 0 8px var(--im-antique-gold);
+  pointer-events: none;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg,
-      rgba(192, 132, 252, 1),
-      rgba(96, 165, 250, 1));
+/* 5️⃣ FRAMED WHITESPACE */
+.im-frame-faint {
+  position: absolute;
+  border: 1px solid var(--im-antique-gold);
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* 6️⃣ TYPOGRAPHIC DEPTH */
+.im-text-shadow {
+  text-shadow: 0 4px 12px rgba(201, 162, 77, 0.2);
+}
+
+.im-text-shadow-dark {
+  text-shadow: 0 4px 12px rgba(11, 11, 15, 0.3);
+}
+
+/* Divider Override from previous step */
+.indian-gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--im-antique-gold), transparent);
+  width: 100%;
+  opacity: 0.4;
+}
+
+/* Marquee Animation */
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
 }

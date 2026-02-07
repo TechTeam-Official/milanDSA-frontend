@@ -90,18 +90,18 @@ function ScheduleModal({
           initial={{ scale: 0.9, y: 20, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.9, y: 20, opacity: 0 }}
-          className="relative bg-[#18181B] border border-white/10 w-full max-w-xl max-h-[85vh] rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col">
+          className="relative indian-dark-bg border border-[#C9A24D]/20 w-full max-w-xl max-h-[85vh] rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col">
           {/* Header */}
-          <div className="p-8 border-b border-white/5 bg-white/2 flex justify-between items-center">
+          <div className="p-8 border-b border-[#C9A24D]/10 bg-[#FDFBF7]/5 flex justify-between items-center">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-purple-500/10 rounded-2xl">
-                <CalIcon className="w-6 h-6 text-purple-500" />
+              <div className="p-3 bg-[#C9A24D]/10 rounded-2xl">
+                <CalIcon className="w-6 h-6 text-[#C9A24D]" />
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white tracking-tight">
                   February {day}, {YEAR}
                 </h3>
-                <p className="text-neutral-500 text-sm font-medium">
+                <p className="text-[#C9A24D]/80 text-sm font-medium">
                   {events.length} {events.length === 1 ? "event" : "events"}{" "}
                   scheduled
                 </p>
@@ -109,7 +109,7 @@ function ScheduleModal({
             </div>
             <button
               onClick={onClose}
-              className="p-2 bg-white/10 hover:bg-white/20 rounded-full text-neutral-400 hover:text-white transition-colors">
+              className="p-2 bg-white/5 hover:bg-white/10 rounded-full text-neutral-400 hover:text-white transition-colors">
               <X className="w-5 h-5" />
             </button>
           </div>
@@ -119,7 +119,7 @@ function ScheduleModal({
             {events.length > 0 ? (
               <div className="relative">
                 {/* Vertical Timeline Line */}
-                <div className="absolute left-[13px] top-6 bottom-6 w-0.5 bg-linear-to-b from-purple-500/50 via-purple-500/20 to-transparent" />
+                <div className="absolute left-[13px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-[#C9A24D]/50 via-[#C9A24D]/20 to-transparent" />
 
                 <div className="space-y-6">
                   {events.map((event, idx) => (
@@ -130,12 +130,12 @@ function ScheduleModal({
                       transition={{ delay: idx * 0.1 }}
                       className="relative pl-12">
                       {/* Timeline Node (Circle) */}
-                      <div className="absolute -left-0.5 top-5 w-4 h-4 rounded-full bg-[#18181B] border-[3px] border-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.4)] z-10" />
+                      <div className="absolute -left-0.5 top-5 w-4 h-4 rounded-full bg-[#2A1B1A] border-[3px] border-[#D97706] shadow-[0_0_10px_#D97706] z-10" />
 
                       {/* Event Card */}
-                      <div className="group bg-neutral-900/40 border border-white/5 p-6 rounded-4xl hover:bg-neutral-800/60 transition-all duration-300">
+                      <div className="group bg-[#0B0B0F]/60 border border-[#C9A24D]/10 p-6 rounded-4xl hover:bg-[#0B0B0F]/80 hover:border-[#C9A24D]/30 transition-all duration-300">
                         <div className="flex justify-between items-center mb-4">
-                          <div className="flex items-center gap-2 text-purple-400 font-bold text-xs tracking-widest uppercase">
+                          <div className="flex items-center gap-2 text-[#C9A24D] font-bold text-xs tracking-widest uppercase">
                             <Clock className="w-3.5 h-3.5" /> {event.time}
                           </div>
                           <span className="px-3 py-1 rounded-lg bg-neutral-800 text-[10px] text-neutral-400 uppercase font-black tracking-tight">
@@ -143,7 +143,7 @@ function ScheduleModal({
                           </span>
                         </div>
 
-                        <h4 className="text-white font-bold text-xl mb-3 group-hover:text-purple-400 transition-colors leading-tight">
+                        <h4 className="text-white font-bold text-xl mb-3 group-hover:text-[#C9A24D] transition-colors leading-tight">
                           {event.title}
                         </h4>
 
@@ -200,29 +200,29 @@ export default function MilanCalendar() {
   }, []);
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-10 bg-[#0F0F0F] border border-white/5 rounded-[3rem] shadow-3xl">
+    <div className="w-full max-w-5xl mx-auto p-10 indian-dark-bg border border-[#C9A24D]/30 rounded-[3rem] shadow-3xl relative overflow-hidden">
       {/* Header */}
-      <div className="text-center mb-14">
+      <div className="text-center mb-14 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-6xl font-black text-white tracking-tighter">
           February{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-purple-500 to-blue-500">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] to-[#D97706]">
             {YEAR}
           </span>
         </motion.h2>
-        <p className="text-[11px] text-neutral-500 mt-4 tracking-[0.3em] font-bold uppercase">
+        <p className="text-[11px] text-[#C9A24D]/80 mt-4 tracking-[0.3em] font-bold uppercase">
           OFFICIAL SCHEDULE · SRM IST
         </p>
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-7 gap-4">
+      <div className="grid grid-cols-7 gap-4 relative z-10">
         {DAYS_OF_WEEK.map((d) => (
           <div
             key={d}
-            className="text-center text-[10px] font-black text-neutral-600 pb-6 uppercase tracking-widest">
+            className="text-center text-[10px] font-black text-[#B87333] pb-6 uppercase tracking-widest">
             {d}
           </div>
         ))}
@@ -238,24 +238,23 @@ export default function MilanCalendar() {
               onClick={() => isHighlighted && setSelectedDay(day)}
               className={`
                 aspect-square rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative
-                ${
-                  isHighlighted
-                    ? "bg-linear-to-br from-purple-600/30 to-blue-600/30 border border-purple-500/40 text-white shadow-xl shadow-purple-500/10"
-                    : "bg-white/3 border border-white/5 text-neutral-700 hover:bg-white/8"
+                ${isHighlighted
+                  ? "bg-gradient-to-br from-[#C9A24D]/20 to-[#B87333]/20 border border-[#C9A24D] text-white shadow-[0_0_15px_rgba(201,162,77,0.2)]"
+                  : "bg-[#FDFBF7]/5 border border-[#C9A24D]/10 text-neutral-400 hover:bg-[#C9A24D]/5 hover:border-[#C9A24D]/30"
                 }
               `}>
               <span
-                className={`text-2xl font-black ${isHighlighted ? "text-white" : "opacity-30"}`}>
+                className={`text-2xl font-black ${isHighlighted ? "text-[#C9A24D]" : "opacity-30"}`}>
                 {day}
               </span>
 
               {isHighlighted && (
                 <>
-                  <span className="text-[8px] mt-1 font-bold opacity-60 uppercase tracking-tighter">
+                  <span className="text-[8px] mt-1 font-bold opacity-80 uppercase tracking-tighter text-[#FDFBF7]">
                     View Events
                   </span>
                   {/* Status Indicator Dot */}
-                  <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-green-400 shadow-[0_0_8px_rgba(74,222,128,0.7)]" />
+                  <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-[#0F766E] shadow-[0_0_8px_#0F766E]" />
                 </>
               )}
             </motion.div>
@@ -271,7 +270,7 @@ export default function MilanCalendar() {
       {/* Legend */}
       <div className="mt-12 pt-8 border-t border-white/5 flex justify-center gap-8">
         <div className="flex items-center gap-3">
-          <div className="w-3 h-3 rounded-full bg-purple-500/40 border border-purple-500" />
+          <div className="w-3 h-3 rounded-full bg-[#C9A24D]/40 border border-[#C9A24D]" />
           <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest">
             Events Available
           </span>
