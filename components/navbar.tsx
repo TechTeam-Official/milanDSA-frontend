@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useSpring } from 'framer-motion'
 // ADDED: Pass import
 import { Home, Image as ImageIcon, Users, Calendar, Menu, Handshake, Compass, Ticket as PassIcon, LogIn, LogOut } from 'lucide-react'
 import { useAuth } from '@/context/auth-context'
+import { useModal } from '@/context/ui-context'
 
 interface NavItem {
   label: string
@@ -19,6 +20,9 @@ export const PillBase = () => {
   const router = useRouter()
   const pathname = usePathname()
   const containerRef = useRef<HTMLDivElement>(null)
+
+  /* New Hook to control visibility when modals open */
+  const { isModalOpen } = useModal()
 
   const { user, logout } = useAuth()
   const [profileOpen, setProfileOpen] = useState(false)
@@ -78,7 +82,7 @@ export const PillBase = () => {
     }
   }, [expanded, isMobile, navItems.length, width, height, user])
 
-  if (pathname?.startsWith('/operator')) return null
+  if (pathname?.startsWith('/operator') || isModalOpen) return null
 
   return (
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">

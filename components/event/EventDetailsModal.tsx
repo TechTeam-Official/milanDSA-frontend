@@ -4,6 +4,10 @@ import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, CheckCircle2, Globe2 } from "lucide-react";
 
+import { useModal } from "@/context/ui-context";
+
+
+
 /* ----------------------------------
    Updated EventItem (extended safely)
 ----------------------------------- */
@@ -34,17 +38,22 @@ export default function EventDetailsModal({
   description,
   events,
 }: EventDetailsModalProps) {
+  const { setModalOpen } = useModal();
+
   // Re-enabled scroll lock
   React.useEffect(() => {
     if (isOpen) {
+      setModalOpen(true);
       document.body.style.overflow = "hidden";
     } else {
+      setModalOpen(false);
       document.body.style.overflow = "";
     }
     return () => {
+      setModalOpen(false);
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen, setModalOpen]);
 
   if (!isOpen) return null;
 
