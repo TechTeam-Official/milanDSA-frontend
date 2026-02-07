@@ -247,9 +247,8 @@ export function TeamSphere() {
         </button>
 
         <div
-          className={`overflow-visible transition-all duration-300 ease-in-out ${
-            isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`overflow-visible transition-all duration-300 ease-in-out ${isExpanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            }`}
           style={{ overflow: isExpanded ? "visible" : "hidden" }}>
           <div className="pl-6 pt-2 space-y-2">
             {members.map((member) => {
@@ -371,91 +370,28 @@ export function TeamSphere() {
         .overflow-y-auto { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      <main className="w-full h-screen flex flex-col justify-end items-center bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-hidden md:min-h-screen md:justify-center md:items-center md:pt-22 animate-in fade-in duration-1000">
-        <h1 className="absolute top-18 left-4 text-6xl font-bold text-gray-900 tracking-tight md:top-15 md:left-10 md:text-[10rem] z-50 animate-in fade-in duration-1000">
+      <main className="w-full min-h-screen flex flex-col justify-start items-center bg-gradient-to-br from-gray-50 to-gray-100 relative overflow-y-auto overflow-x-hidden md:h-screen md:overflow-hidden md:justify-center md:items-center md:pt-22 animate-in fade-in duration-1000">
+        <h1 className="hidden md:block absolute top-18 left-4 text-6xl font-bold text-gray-900 tracking-tight md:top-15 md:left-10 md:text-[10rem] z-50 animate-in fade-in duration-1000">
           Our
         </h1>
-        <h1 className="absolute top-30 left-5 text-6xl font-bold text-gray-900 tracking-tight md:top-46 md:left-12 md:text-[10rem] z-50 animate-in fade-in duration-1000">
+        <h1 className="hidden md:block absolute top-30 left-5 text-6xl font-bold text-gray-900 tracking-tight md:top-46 md:left-12 md:text-[10rem] z-50 animate-in fade-in duration-1000">
           Team<span className="text-purple-600">.</span>
         </h1>
 
-        {/* 📱 MOBILE LISTS (Core/Club Toggle) */}
-        <div className="flex md:hidden w-full px-4 mt-24 mb-0 justify-end">
-          <div className="flex flex-col items-end max-w-[50%]">
-            <div className="text-xs font-medium text-gray-400 mb-1 mr-3">
-              {mobileView === "core" ? "Open Clubs ⤵" : "Open Core Team ⤵"}
-            </div>
-
-            <div className="flex items-center gap-2 mb-2">
-              <h2 className="text-base font-bold text-gray-900">
-                {mobileView === "core" ? "Core Team" : "Club Convenors"}
-              </h2>
-              <button
-                onClick={() => {
-                  setIsViewTransitioning(true);
-                  setTimeout(() => {
-                    setMobileView((prev) =>
-                      prev === "core" ? "club" : "core",
-                    );
-                    setTimeout(() => setIsViewTransitioning(false), 50);
-                  }, 200);
-                }}
-                className="p-1 hover:bg-gray-100 rounded transition-colors">
-                <RefreshCw
-                  size={16}
-                  className="text-gray-600 refresh-icon"
-                />
-              </button>
-            </div>
-
-            <div className="space-y-1 relative min-h-[200px] w-full">
-              {/* Mobile List Rendering Logic (Simplified for brevity - follows same pattern as Desktop) */}
-              {mobileView === "core"
-                ? CORE_TEAM_ROLES.slice(
-                    corePage * itemsPerPage,
-                    (corePage + 1) * itemsPerPage,
-                  ).map((role) => renderExpandableItem(role, "core", true))
-                : CLUB_CONVENORS.slice(
-                    clubPage * itemsPerPage,
-                    (clubPage + 1) * itemsPerPage,
-                  ).map((club) => renderExpandableItem(club, "club", true))}
-            </div>
-
-            {/* Pagination Controls... (Keep existing logic or simplify) */}
-            <div className="flex gap-2 mt-2">
-              <button
-                onClick={() =>
-                  mobileView === "core"
-                    ? setCorePage(Math.max(0, corePage - 1))
-                    : setClubPage(Math.max(0, clubPage - 1))
-                }
-                disabled={
-                  mobileView === "core" ? corePage === 0 : clubPage === 0
-                }
-                className="text-xs text-gray-500 disabled:opacity-30">
-                Prev
-              </button>
-              <button
-                onClick={() => {
-                  const list =
-                    mobileView === "core" ? CORE_TEAM_ROLES : CLUB_CONVENORS;
-                  const curr = mobileView === "core" ? corePage : clubPage;
-                  const max = Math.ceil(list.length / itemsPerPage) - 1;
-                  if (curr < max) {
-                    mobileView === "core"
-                      ? setCorePage(curr + 1)
-                      : setClubPage(curr + 1);
-                  }
-                }}
-                className="text-xs text-gray-500">
-                Next
-              </button>
-            </div>
-          </div>
+        {/* 📱 MOBILE HEADER (Standard Flow) */}
+        <div className="flex md:hidden flex-col items-start w-full pt-20 px-6 mb-8 z-30">
+          <h1 className="text-6xl font-bold text-gray-900 tracking-tight animate-in fade-in duration-1000">
+            Our
+          </h1>
+          <h1 className="text-6xl font-bold text-gray-900 tracking-tight animate-in fade-in duration-1000">
+            Team<span className="text-purple-600">.</span>
+          </h1>
         </div>
 
+
+
         {/* 🌎 SPHERE */}
-        <div className="flex flex-col items-center justify-center gap-8 pb-0 md:pb-0 md:w-full">
+        <div className="flex flex-col items-center justify-center gap-8 mt-0 pb-10 md:mt-0 md:pb-0 md:w-full z-10 shrink-0 relative overflow-hidden">
           <SphereImageGrid
             images={sphereImages}
             containerSize={dimensions.width}
@@ -473,6 +409,92 @@ export function TeamSphere() {
               if (image) setSelectedConvenor(null);
             }}
           />
+        </div>
+
+        {/* 📱 MOBILE LISTS (Core/Club Toggle) */}
+        <div className="flex flex-col md:hidden w-full px-4 mt-8 mb-12 z-20 relative">
+          <div className="flex flex-col items-center w-full">
+            <div className="flex items-center justify-between w-full max-w-sm mb-4">
+              <h2 className="text-xl font-bold text-gray-900 font-serif">
+                {mobileView === "core" ? "Core Team" : "Club Convenors"}
+              </h2>
+              <div className="flex items-center gap-3">
+                <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">
+                  {mobileView === "core" ? "Switch to Clubs" : "Switch to Core"}
+                </span>
+                <button
+                  onClick={() => {
+                    setIsViewTransitioning(true);
+                    setTimeout(() => {
+                      setMobileView((prev) =>
+                        prev === "core" ? "club" : "core",
+                      );
+                      setTimeout(() => setIsViewTransitioning(false), 50);
+                    }, 200);
+                  }}
+                  className="p-2 bg-white border border-gray-200 shadow-sm rounded-full hover:bg-gray-50 transition-all active:scale-95">
+                  <RefreshCw
+                    size={16}
+                    className="text-gray-600"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <div className="w-full max-w-sm bg-white/50 backdrop-blur-sm rounded-2xl border border-gray-100 p-4 shadow-sm">
+              <div className="space-y-1 relative min-h-[200px] w-full">
+                {/* Mobile List Rendering Logic */}
+                {mobileView === "core"
+                  ? CORE_TEAM_ROLES.slice(
+                    corePage * itemsPerPage,
+                    (corePage + 1) * itemsPerPage,
+                  ).map((role) => renderExpandableItem(role, "core", true))
+                  : CLUB_CONVENORS.slice(
+                    clubPage * itemsPerPage,
+                    (clubPage + 1) * itemsPerPage,
+                  ).map((club) => renderExpandableItem(club, "club", true))}
+              </div>
+
+              {/* Pagination Controls */}
+              <div className="flex justify-between items-center mt-4 pt-3 border-t border-gray-100">
+                <button
+                  onClick={() =>
+                    mobileView === "core"
+                      ? setCorePage(Math.max(0, corePage - 1))
+                      : setClubPage(Math.max(0, clubPage - 1))
+                  }
+                  disabled={
+                    mobileView === "core" ? corePage === 0 : clubPage === 0
+                  }
+                  className="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-md disabled:opacity-30 hover:bg-gray-200 transition-colors">
+                  Previous
+                </button>
+                <div className="text-xs text-gray-400 font-medium">
+                  Page {mobileView === "core" ? corePage + 1 : clubPage + 1}
+                </div>
+                <button
+                  onClick={() => {
+                    const list =
+                      mobileView === "core" ? CORE_TEAM_ROLES : CLUB_CONVENORS;
+                    const curr = mobileView === "core" ? corePage : clubPage;
+                    const max = Math.ceil(list.length / itemsPerPage) - 1;
+                    if (curr < max) {
+                      mobileView === "core"
+                        ? setCorePage(curr + 1)
+                        : setClubPage(curr + 1);
+                    }
+                  }}
+                  disabled={
+                    mobileView === "core"
+                      ? corePage >= Math.ceil(CORE_TEAM_ROLES.length / itemsPerPage) - 1
+                      : clubPage >= Math.ceil(CLUB_CONVENORS.length / itemsPerPage) - 1
+                  }
+                  className="px-3 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-md disabled:opacity-30 hover:bg-gray-200 transition-colors">
+                  Next
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 🖥 DESKTOP SIDEBAR */}

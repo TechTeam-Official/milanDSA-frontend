@@ -72,7 +72,7 @@ export default function MobileLists(props: Props) {
 
   return (
     <div className="relative w-full px-6 pb-40 pointer-events-none">
-      <div className="flex flex-col gap-8 mt-[25vh] pointer-events-auto">
+      <div className="flex flex-col gap-8 mt-0 pointer-events-auto">
         {/* CORE TEAM SECTION */}
         {/* CLEAR GLASS EFFECT: 
             - bg-white/50: 50% opacity (no blur)
