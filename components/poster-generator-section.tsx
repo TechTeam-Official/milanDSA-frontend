@@ -50,7 +50,7 @@ export function PosterGeneratorSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0F] via-[#0B0B0F]/80 to-[#0B0B0F]/40" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 md:px-16 lg:px-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* Left Content */}

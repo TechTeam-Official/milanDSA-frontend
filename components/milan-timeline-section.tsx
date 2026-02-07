@@ -139,8 +139,8 @@ export function MilanTimelineSection() {
         preserveAspectRatio="none"
       >
         {/* Mobile Path */}
+        {/* Unified Mobile/Tablet Path */}
         <motion.path
-          className="md:hidden"
           vectorEffect="non-scaling-stroke"
           d="M300 350
              C 450 550, 150 850, 300 1100
@@ -148,21 +148,6 @@ export function MilanTimelineSection() {
              C 450 2150, 150 2350, 300 2400"
           stroke="url(#pulse)"
           strokeWidth="4"
-          strokeLinecap="round"
-          fill="none"
-          style={{ pathLength }}
-        />
-
-        {/* Tablet Path */}
-        <motion.path
-          className="hidden md:block"
-          vectorEffect="non-scaling-stroke"
-          d="M300 100
-             C 50 500, 50 800, 300 1100
-             C 550 1400, 550 1700, 300 2000
-             C 100 2150, 100 2250, 180 2300"
-          stroke="url(#pulse)"
-          strokeWidth="5"
           strokeLinecap="round"
           fill="none"
           style={{ pathLength }}
@@ -205,7 +190,7 @@ export function MilanTimelineSection() {
         </svg>
       </div>
 
-      <div className="relative z-30 max-w-7xl mx-auto flex flex-col gap-32 px-6">
+      <div className="relative z-30 max-w-7xl mx-auto flex flex-col gap-32 px-8 md:px-16 lg:px-24">
         {/* Section Header */}
         <div className="text-center mb-20 space-y-4 pt-10">
           <motion.h2
@@ -237,11 +222,11 @@ export function MilanTimelineSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className={`flex flex-col md:flex-row items-center gap-12 md:gap-24 ${left ? 'md:flex-row-reverse' : ''
+              className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-24 ${left ? 'lg:flex-row-reverse' : ''
                 }`}
             >
               {/* Content Side */}
-              <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start bg-black/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 md:border-none md:bg-transparent md:p-0 md:backdrop-blur-none ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
+              <div className={`w-full lg:w-1/2 flex flex-col justify-center text-left items-start bg-black/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 lg:border-none lg:bg-transparent lg:p-0 lg:backdrop-blur-none ${left ? 'lg:pl-12 xl:pl-16' : 'lg:pr-12 xl:pr-16'}`}>
                 <div className="space-y-6">
                   <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)] py-2">
                     {item.year}
@@ -259,7 +244,7 @@ export function MilanTimelineSection() {
               </div>
 
               {/* Image Side */}
-              <div className="relative w-full md:w-1/2 group">
+              <div className="relative w-full lg:w-1/2 group">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[#C9A24D]/20 bg-white/5 backdrop-blur-sm shadow-2xl skew-y-1 transition-transform duration-700 group-hover:skew-y-0 group-hover:scale-[1.02]">
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#3B2D5F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                   <Image
