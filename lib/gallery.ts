@@ -26,3 +26,6 @@ const galleryRoot = path.join(process.cwd(), "public/GalleryPage");
 export const galleryImages: string[] = fs.existsSync(galleryRoot)
   ? getImagesRecursively(galleryRoot, "/GalleryPage")
   : [];
+
+// Force regeneration helper
+console.log(`[Gallery] Loaded ${galleryImages.length} images from ${galleryRoot}`);

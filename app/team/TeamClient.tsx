@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 
 import type { ImageData } from "@/components/ui/img-sphere";
 import { TeamJSON, Member } from "@/lib/team-data";
@@ -52,6 +53,7 @@ const CLUB_CONVENORS = [
 ];
 
 export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
+  console.log("TeamClient rendered with new colors");
   const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
   const [isMobile, setIsMobile] = useState(false);
 
@@ -139,26 +141,44 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
      */
     <div className="w-full snap-y snap-mandatory">
       {/* ================= HERO SECTION ================= */}
-      <section className="h-screen w-full relative z-10 flex items-center justify-center text-center bg-linear-to-br from-purple-950 via-black to-black text-white snap-start snap-always">
-        <div className="px-6">
-          <div className="inline-block px-4 py-1 mb-6 text-xs tracking-widest uppercase rounded-full border border-purple-500/40 text-purple-300">
+      <section
+        className="h-screen w-full relative z-20 flex items-center justify-center text-center text-[#2A1E1A] snap-start snap-always rounded-b-[4rem] shadow-[0_0_50px_rgba(31,77,74,0.1)] border-b border-[#1F4D4A]/10 overflow-hidden">
+
+        {/* BACKGROUND IMAGE */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/BackgroundImages/Teams.png"
+            alt="Milan Team Background"
+            fill
+            className="object-cover opacity-90"
+            priority
+          />
+          {/* Subtle Vignette for Focus & Depth */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_30%,rgba(0,0,0,0.5)_100%)] mix-blend-multiply pointer-events-none" />
+
+          {/* Soft Bottom Fade for Text Contrast */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-80 pointer-events-none" />
+        </div>
+
+        <div className="px-6 relative z-10 text-white drop-shadow-lg -translate-y-12">
+          <div className="inline-block px-4 py-1 mb-6 text-xs tracking-widest uppercase rounded-full border border-white/20 bg-black/20 backdrop-blur-md text-[#B89B5E] shadow-lg">
             Milan&apos;26
           </div>
 
-          <h1 className="text-6xl md:text-9xl font-bold tracking-tight">
-            Our Team<span className="text-purple-500">.</span>
+          <h1 className="text-6xl md:text-9xl font-bold tracking-tight text-white drop-shadow-xl">
+            Our Team<span className="text-[#B89B5E]">.</span>
           </h1>
 
-          <p className="mt-6 max-w-2xl mx-auto text-neutral-400 text-lg md:text-xl">
-            Crew Behind the magic of Milan&apos;26
+          <p className="mt-6 max-w-2xl mx-auto text-white/90 text-lg md:text-xl drop-shadow-md font-medium">
+            Crew Behind the magic
           </p>
         </div>
 
         {/* --- SCROLL INDICATOR (Animated Mouse) --- */}
         <motion.div
           style={{ opacity: indicatorOpacity }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-          <div className="w-[30px] h-[50px] border-2 border-white/20 rounded-full flex justify-center p-2">
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30">
+          <div className="w-[30px] h-[50px] border-2 border-white/40 rounded-full flex justify-center p-2 backdrop-blur-sm">
             <motion.div
               animate={{
                 y: [0, 16, 0],
@@ -169,10 +189,10 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-              className="w-1.5 h-1.5 bg-white rounded-full"
+              className="w-1.5 h-1.5 bg-[#B89B5E] rounded-full shadow-[0_0_8px_#B89B5E]"
             />
           </div>
-          <span className="text-[9px] uppercase tracking-[0.4em] font-semibold text-white/30">
+          <span className="text-[9px] uppercase tracking-[0.4em] font-semibold text-white/60">
             Scroll
           </span>
         </motion.div>
@@ -184,28 +204,22 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="h-screen w-full bg-[#F5F5F7] text-neutral-900 relative overflow-hidden snap-start snap-always">
+        style={{ backgroundColor: "#F3E8D7" }}
+        className="h-[110vh] w-full text-[#2A1E1A] relative overflow-hidden snap-start snap-always z-10 -mt-12">
         <main className="w-full h-full relative overflow-hidden">
           {/* Ambient Background */}
           <div className="absolute inset-0 pointer-events-none z-0">
-            <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-purple-200/40 blur-[120px]" />
-            <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-blue-200/40 blur-[120px]" />
+            <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-[#E0C3A0]/40 blur-[120px]" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-[#B89B5E]/30 blur-[120px]" />
           </div>
 
           {/* Header */}
-          <div className="absolute top-8 left-6 md:top-12 md:left-12 z-20 pointer-events-none">
-            <h1 className="text-6xl md:text-9xl font-bold tracking-tighter text-gray-900 leading-[0.85]">
-              Our
-              <br />
-              Team<span className="text-purple-600">.</span>
-            </h1>
-          </div>
+
 
           {/* Globe */}
           <div
-            className={`absolute inset-0 flex items-center justify-center ${
-              isMobile ? "z-0 opacity-100" : "z-10 pointer-events-none"
-            }`}>
+            className={`absolute inset-0 flex items-center justify-center md:pr-96 ${isMobile ? "z-0 opacity-100" : "z-10 pointer-events-none"
+              }`}>
             <div
               className={
                 isMobile ? "pointer-events-none" : "pointer-events-auto"

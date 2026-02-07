@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
 
 interface FooterProps {
-  variant?: "default" | "events" | "sponsors" | "passes";
+  variant?: "default" | "events" | "sponsors" | "passes" | "gallery" | "team";
 }
 
 export function Footer({ variant = "default" }: FooterProps) {
@@ -18,6 +18,10 @@ export function Footer({ variant = "default" }: FooterProps) {
       iconHover: "hover:bg-white/10 hover:border-white/30 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]",
       iconColor: "text-indigo-200",
       linkHover: "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-indigo-400 hover:via-rose-400 hover:to-teal-400",
+      text: "text-neutral-300",
+      heading: "text-white",
+      subtext: "text-neutral-400",
+      copyright: "text-neutral-500",
     },
     events: {
       bg: "bg-[#0B0B0F]",
@@ -29,6 +33,10 @@ export function Footer({ variant = "default" }: FooterProps) {
       iconHover: "hover:bg-[#C9A24D]/20 hover:border-[#C9A24D]/50 hover:shadow-[0_0_15px_rgba(201,162,77,0.3)]",
       iconColor: "text-[#C9A24D]",
       linkHover: "hover:text-[#C9A24D]",
+      text: "text-neutral-300",
+      heading: "text-white",
+      subtext: "text-neutral-400",
+      copyright: "text-neutral-500",
     },
     sponsors: {
       bg: "bg-[#021C15]",
@@ -40,6 +48,10 @@ export function Footer({ variant = "default" }: FooterProps) {
       iconHover: "hover:bg-emerald-900/40 hover:border-emerald-500/50 hover:shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:text-emerald-300",
       iconColor: "text-[#4F7A6E]",
       linkHover: "hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-emerald-300 hover:to-yellow-200",
+      text: "text-neutral-300",
+      heading: "text-white",
+      subtext: "text-neutral-400",
+      copyright: "text-neutral-500",
     },
     passes: {
       bg: "bg-[#14172B]", // Midnight Indigo
@@ -51,6 +63,40 @@ export function Footer({ variant = "default" }: FooterProps) {
       iconHover: "hover:bg-[#E0B65C]/10 hover:border-[#E0B65C]/40 hover:shadow-[0_0_15px_rgba(224,182,92,0.2)] hover:text-[#F2A900]",
       iconColor: "text-[#E0B65C]",
       linkHover: "hover:text-[#F2A900]",
+      text: "text-neutral-300",
+      heading: "text-white",
+      subtext: "text-neutral-400",
+      copyright: "text-neutral-500",
+    },
+    gallery: {
+      bg: "bg-[#1A1A1A]", // Warm Charcoal (Matches Gallery Section)
+      border: "border-[#8C6A3D]/30", // Dusty Bronze
+      accent: "text-[#C9A24D]", // Brushed Gold
+      accentBg: "bg-[#C9A24D]",
+      divider: "from-transparent via-[#8C6A3D] to-transparent",
+      brandGradient: "from-[#C9A24D] to-[#8C6A3D]",
+      iconHover: "hover:bg-[#C9A24D]/20 hover:border-[#C9A24D]/50 hover:shadow-[0_0_15px_rgba(201,162,77,0.3)]",
+      iconColor: "text-[#8C6A3D]",
+      linkHover: "hover:text-[#C9A24D]",
+      text: "text-neutral-300",
+      heading: "text-white",
+      subtext: "text-neutral-400",
+      copyright: "text-neutral-500",
+    },
+    team: {
+      bg: "bg-gradient-to-b from-[#EEDFC8] to-[#E6D6BE]", // Seamless Light Gradient
+      border: "border-t border-[#1F4D4A]/5 shadow-[0_-10px_40px_rgba(0,0,0,0.02)]", // Soft feather
+      accent: "text-[#1F4D4A]",
+      accentBg: "bg-[#B89B5E]",
+      divider: "from-transparent via-[#1F4D4A]/10 to-transparent",
+      brandGradient: "from-[#1F4D4A] via-[#2A1E1A] to-[#1F4D4A] bg-[length:200%_auto] hover:bg-right transition-all duration-500",
+      iconHover: "hover:bg-[#B89B5E] hover:text-[#2A1E1A] hover:shadow-[0_0_15px_rgba(184,155,94,0.3)]",
+      iconColor: "text-[#1F4D4A]",
+      linkHover: "hover:text-[#B89B5E] hover:underline underline-offset-4 decoration-[#B89B5E]",
+      text: "text-[#2A1E1A]/80",
+      heading: "text-[#2A1E1A]",
+      subtext: "text-[#2A1E1A]/70",
+      copyright: "text-[#2A1E1A]/50",
     },
   };
 
@@ -75,7 +121,8 @@ export function Footer({ variant = "default" }: FooterProps) {
                 MILAN &apos;26
               </span>
             </Link>
-            <p className="text-lg font-light text-neutral-300 leading-relaxed max-w-sm">
+
+            <p className={`text-lg font-light leading-relaxed max-w-sm ${theme.text}`}>
               #Live the Change
             </p>
             <div className="flex gap-3">
@@ -88,8 +135,8 @@ export function Footer({ variant = "default" }: FooterProps) {
 
           {/* Quick Links */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Quick Links</h4>
-            <ul className="space-y-2 text-sm text-neutral-400">
+            <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Quick Links</h4>
+            <ul className={`space-y-2 text-sm ${theme.subtext}`}>
               <FooterLink href="/events" theme={theme}>Events</FooterLink>
               <FooterLink href="/sponsors" theme={theme}>Sponsors</FooterLink>
               <FooterLink href="/gallery" theme={theme}>Gallery</FooterLink>
@@ -99,8 +146,8 @@ export function Footer({ variant = "default" }: FooterProps) {
 
           {/* Legal */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-sm font-semibold text-white uppercase tracking-wider">Legal</h4>
-            <ul className="space-y-2 text-sm text-neutral-400">
+            <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Legal</h4>
+            <ul className={`space-y-2 text-sm ${theme.subtext}`}>
               <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
               <FooterLink href="#" theme={theme}>Terms of Service</FooterLink>
               <FooterLink href="#" theme={theme}>Code of Conduct</FooterLink>
@@ -109,8 +156,8 @@ export function Footer({ variant = "default" }: FooterProps) {
 
           {/* Contact */}
           <div className="lg:col-span-4 space-y-3">
-            <h4 className="text-sm text-white uppercase tracking-wider">Contact Us</h4>
-            <ul className="space-y-3 text-sm text-neutral-400">
+            <h4 className={`text-sm uppercase tracking-wider ${theme.heading}`}>Contact Us</h4>
+            <ul className={`space-y-3 text-sm ${theme.subtext}`}>
               <li className="flex items-start gap-3">
                 <MapPin className={`${theme.iconColor} shrink-0 mt-0.5`} size={16} />
                 <span>
@@ -128,12 +175,12 @@ export function Footer({ variant = "default" }: FooterProps) {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-6 border-t border-white/5 flex flex-col items-center justify-center gap-2 text-neutral-500 text-xs text-center">
+        <div className={`pt-6 border-t ${variant === 'team' ? 'border-[#1F4D4A]/5' : 'border-white/5'} flex flex-col items-center justify-center gap-2 text-xs text-center ${theme.copyright}`}>
           <p>© Copyright Directorate of Student Affairs, SRMIST. All rights reserved.</p>
-          <p className="font-medium text-neutral-400">Developed By DSA Tech and Graphic Design Team.</p>
+          <p className="font-medium opacity-80">Developed By DSA Tech and Graphic Design Team.</p>
         </div>
-      </div>
-    </footer>
+      </div >
+    </footer >
   );
 }
 
@@ -143,7 +190,7 @@ function SocialLink({ href, icon, theme }: { href: string; icon: React.ReactNode
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-neutral-400 hover:text-white ${theme.iconHover} transition-all duration-300 shadow-[0_0_0_transparent]`}
+      className={`w-10 h-10 rounded-full ${theme.bg === 'bg-[#14172B]' ? 'bg-white/5' : 'bg-black/5'} border ${theme.border} flex items-center justify-center ${theme.subtext} hover:text-white ${theme.iconHover} transition-all duration-300 shadow-[0_0_0_transparent]`}
     >
       {icon}
     </a>

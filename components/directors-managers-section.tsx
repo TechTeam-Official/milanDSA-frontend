@@ -138,7 +138,7 @@ export function DirectorsManagersSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 + idx * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-6 group bg-[#FFFFF0] border border-[#C9A24D] shadow-lg shadow-[#3B2D5F]/5 rounded-full pr-12 py-4 pl-4 hover:border-[#D97706] hover:shadow-[#D97706]/10 transiton-all duration-300">
+                className="flex items-center gap-6 group bg-[#FFFFF0] border border-[#C9A24D] shadow-lg shadow-[#3B2D5F]/5 rounded-full pr-12 py-4 pl-4 hover:border-[#D97706] hover:shadow-[#D97706]/10 transiton-all duration-300 w-full md:w-[480px]">
                 <div className="relative w-32 h-32 rounded-full overflow-hidden border border-[#C9A24D]/20">
                   <Image
                     src={person.image}

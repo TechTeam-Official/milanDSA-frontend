@@ -167,7 +167,7 @@ export function GuestShowcase() {
         <div className="text-center px-4 max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-6 im-text-shadow">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-[#0B0B0F] to-[#0F766E]">
-              A Legacy of Legends
+              Legacy of Legends
             </span>
           </h2>
           <p className="text-neutral-600 text-lg md:text-xl font-light">

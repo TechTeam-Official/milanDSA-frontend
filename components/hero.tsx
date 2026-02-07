@@ -1,12 +1,15 @@
 'use client'
 
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 import { Ticket, History } from "lucide-react"
 
 export function Hero() {
+  const { scrollYProgress } = useScroll()
+  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0])
+
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden rounded-b-[4rem] shadow-[0_0_50px_rgba(58,42,94,0.4)] border-b border-[#3A2A5E]/40 z-20">
       {/* Background Image with Scale Animation */}
       <motion.div
         initial={{ scale: 1.1 }}
@@ -97,14 +100,26 @@ export function Hero() {
 
       {/* Scroll Indicator */}
       <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+        style={{ opacity: indicatorOpacity }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30"
       >
-        <div className="h-10 w-6 rounded-full border-2 border-white/30 flex justify-center p-1 backdrop-blur-sm">
-          <div className="h-2 w-1.5 rounded-full bg-white animate-bounce" />
+        <div className="w-[30px] h-[50px] border-2 border-[#C9A24D]/40 rounded-full flex justify-center p-2 backdrop-blur-sm">
+          <motion.div
+            animate={{
+              y: [0, 16, 0],
+              opacity: [1, 0.4, 1],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="w-1.5 h-1.5 bg-[#C9A24D] rounded-full shadow-[0_0_8px_#C9A24D]"
+          />
         </div>
+        <span className="text-[9px] uppercase tracking-[0.4em] font-semibold text-white/60">
+          Scroll
+        </span>
       </motion.div>
     </section>
   )

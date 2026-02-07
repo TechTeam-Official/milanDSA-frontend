@@ -94,15 +94,16 @@ export default function DesktopLists({
     <aside
       className="
         hidden md:block
-        absolute right-10 top-24
-        w-[320px]
-        max-h-[calc(100vh-6rem)]
+        absolute right-10 top-1/2 -translate-y-1/2
+        w-[350px]
+        max-h-[calc(100vh-12rem)]
         overflow-y-auto
-        pr-2
+        p-6
+        bg-[#E0C3A0] backdrop-blur-md rounded-3xl border border-[#1F4D4A]/10 shadow-xl shadow-[#1F4D4A]/10
       ">
       {/* CORE TEAM */}
       <section className="mb-10">
-        <h2 className="text-xl font-semibold mb-4">Core Team Convenors</h2>
+        <h2 className="text-xl font-semibold mb-4 text-[#2A1E1A]">Core Team Convenors</h2>
         <div className="space-y-1">
           {props.coreRoles.map((role) => (
             <ExpandableItem
@@ -131,7 +132,7 @@ export default function DesktopLists({
 
       {/* CLUB CONVENORS */}
       <section>
-        <h2 className="text-xl font-semibold mb-4">Club Convenors</h2>
+        <h2 className="text-xl font-semibold mb-4 text-[#2A1E1A]">Club Convenors</h2>
         <div className="space-y-1">
           {props.clubs.map((club) => (
             <ExpandableItem

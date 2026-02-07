@@ -54,13 +54,13 @@ export default function ExpandableItem({
     <div className="mb-2">
       <button
         onClick={toggle}
-        className="flex items-center gap-2 w-full text-left hover:text-gray-900 transition-colors">
+        className="flex items-center gap-2 w-full text-left hover:text-[#1F4D4A] transition-colors">
         <ChevronRight
           size={16}
-          className="text-gray-600 transition-transform"
+          className="text-[#1F4D4A] transition-transform"
           style={{ transform: isExpanded ? "rotate(90deg)" : "rotate(0deg)" }}
         />
-        <span className="text-gray-700">{item}</span>
+        <span className="text-[#2A1E1A] font-medium">{item}</span>
       </button>
 
       {isExpanded && (
@@ -80,7 +80,7 @@ export default function ExpandableItem({
             return (
               <div
                 key={member.code}
-                className="cursor-pointer text-gray-600 hover:text-gray-900"
+                className="cursor-pointer text-[#2A1E1A]/80 hover:text-[#1F4D4A] py-1 px-2 rounded-r-md transition-all border-l-2 border-transparent hover:border-[#B89B5E] hover:bg-[#1F4D4A]/10"
                 onMouseEnter={(e) =>
                   !disableHover &&
                   onHover?.(
@@ -93,9 +93,10 @@ export default function ExpandableItem({
                   setSelectedConvenor(img);
                   setSelectedSphereImage(img);
                 }}>
-                ⤷ {member.name}{" "}
-                <span className="text-xs text-gray-400">
-                  ({member.position})
+                <span className="mr-2">⤷</span>
+                {member.name}{" "}
+                <span className="text-xs text-[#1F4D4A]/60 block ml-6">
+                  {member.position}
                 </span>
               </div>
             );

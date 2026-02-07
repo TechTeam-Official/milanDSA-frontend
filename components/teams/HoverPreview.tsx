@@ -27,7 +27,7 @@ export default function HoverPreview({
         top: popupPosition.y,
         transform: "translateY(-50%)", // Centers the box vertically relative to the mouse/item
       }}>
-      <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-gray-200 shadow-xl bg-white">
+      <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-[#B89B5E] shadow-[0_20px_25px_-5px_rgba(31,77,74,0.25)] bg-[#F3E8D7]">
         <Image
           src={img.src}
           alt={img.alt}
