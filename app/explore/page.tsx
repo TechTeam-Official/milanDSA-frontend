@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Sparkles, Hourglass } from "lucide-react";
@@ -18,7 +19,18 @@ const ComingSoon = () => {
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center relative overflow-hidden px-4">
       {/* Background Ambience */}
-      <div className="fixed inset-0 pointer-events-none">
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/BackgroundImages/Exlpore.png"
+          alt="Explore Background"
+          fill
+          className="object-cover opacity-40"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
+      <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-20%] left-[-10%] w-[60%] h-[60%] bg-purple-900/30 blur-[120px] rounded-full animate-pulse" />
         <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[60%] bg-indigo-900/30 blur-[120px] rounded-full animate-pulse" />
       </div>
@@ -58,6 +70,13 @@ const ComingSoon = () => {
           transition={{ delay: 0.5 }}
           className="flex justify-center"></motion.div>
       </motion.div>
+<<<<<<< HEAD
+=======
+
+      <div className="absolute bottom-8 text-neutral-600 text-xs tracking-widest uppercase text-center w-full">
+        © 2026 Design Collective
+      </div>
+>>>>>>> kaustubh-updates
     </div>
   );
 };
@@ -116,10 +135,22 @@ const MainContent = () => {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
 
-  const handleUpload = async () => {};
+  const handleUpload = async () => { };
 
   return (
-    <div className="bg-black text-white selection:bg-purple-500/30 overflow-x-hidden">
+    <div className="bg-black text-white selection:bg-purple-500/30 overflow-x-hidden relative min-h-screen">
+      {/* Background Image */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <Image
+          src="/BackgroundImages/Exlpore.png"
+          alt="Explore Background"
+          fill
+          className="object-cover opacity-40"
+          priority
+        />
+        <div className="absolute inset-0 bg-black/60" />
+      </div>
+
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-purple-900/20 blur-[120px] rounded-full" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-900/20 blur-[120px] rounded-full" />
