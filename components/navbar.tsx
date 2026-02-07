@@ -90,7 +90,7 @@ export const PillBase = () => {
       <motion.nav
         ref={containerRef}
         style={{ width, height }}
-        className="pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-[#C9A24D]/15 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl bg-[linear-gradient(to_right,rgba(20,10,25,0.85),rgba(10,15,20,0.85))] rounded-full z-50 transition-all duration-300 ease-out"
+        className={`pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-[#C9A24D]/15 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl bg-[linear-gradient(to_right,rgba(20,10,25,0.85),rgba(10,15,20,0.85))] z-50 transition-all duration-300 ease-out ${isMobile && expanded ? 'rounded-3xl' : 'rounded-full'}`}
         onClick={() => {
           if (isMobile) setExpanded(!expanded)
         }}
