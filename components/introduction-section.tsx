@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 export function IntroductionSection() {
   return (
-    <section className="relative indian-light-bg text-neutral-900 py-24 md:py-32 overflow-hidden">
+    <section className="relative bg-[#FDFBF7] text-neutral-900 pt-40 pb-24 md:pt-56 md:pb-32 overflow-hidden -mt-20 z-10">
       {/* Texture & Halo */}
       <div className="indian-texture-light" />
       {/* Large Soft Heritage Halo (Warm Ivory/Gold) */}
