@@ -84,7 +84,7 @@ export const PillBase = () => {
       <motion.nav
         ref={containerRef}
         style={{ width, height }}
-        className="pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-white/10 shadow-2xl backdrop-blur-xl bg-black/60 rounded-[50px] z-50"
+        className="pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-[#C9A24D]/15 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl bg-[linear-gradient(to_right,rgba(20,10,25,0.85),rgba(10,15,20,0.85))] rounded-full z-50 transition-all duration-300 ease-out"
         onClick={() => {
           if (isMobile) setExpanded(!expanded)
         }}
@@ -99,11 +99,11 @@ export const PillBase = () => {
               exit={{ opacity: 0 }}
               className="absolute inset-0 flex items-center justify-center gap-2"
             >
-              <activeItem.icon size={18} className="text-white" />
-              <span className="text-sm font-semibold tracking-wide text-white">
+              <activeItem.icon size={18} className="text-[#F6F2EA]/80" />
+              <span className="text-sm font-semibold tracking-wide text-[#F6F2EA]">
                 {activeItem.label}
               </span>
-              {isMobile && <Menu size={16} className="text-white/50 ml-2" />}
+              {isMobile && <Menu size={16} className="text-[#F6F2EA]/50 ml-2" />}
             </motion.div>
           )}
           <AnimatePresence>
@@ -124,15 +124,25 @@ export const PillBase = () => {
                         handleNavigate(item.path)
                       }}
                       className={`
-                        flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300
-                        ${isMobile ? 'w-[90%]' : ''}
+                        flex flex-col items-center justify-center px-4 py-2 rounded-full transition-all duration-300 relative group
+                        ${isMobile ? 'w-[90%] flex-row gap-3 justify-start' : ''}
                         ${isActive
-                          ? 'bg-white/20 text-white font-medium'
-                          : 'text-white/60 hover:text-white hover:bg-white/10'}
+                          ? 'bg-[#C9A24D]/15 text-[#F6F2EA]'
+                          : 'text-[#F6F2EA]/70 hover:text-[#F6F2EA] hover:bg-[#C9A24D]/10'}
                       `}
                     >
-                      <item.icon size={18} />
-                      <span className="text-sm">{item.label}</span>
+                      <div className="flex items-center gap-2">
+                        <item.icon size={18} className={isActive ? "text-[#C9A24D]" : "opacity-80"} />
+                        <span className="text-sm font-medium">{item.label}</span>
+                      </div>
+
+                      {/* Active Indicator - Dot */}
+                      {isActive && !isMobile && (
+                        <motion.div
+                          layoutId="nav-pill"
+                          className="absolute bottom-1.5 w-1 h-1 bg-[#C9A24D] rounded-full"
+                        />
+                      )}
                     </button>
                   )
                 })}
@@ -148,12 +158,12 @@ export const PillBase = () => {
           {user ? (
             <div className="relative">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02, backgroundColor: "rgba(30, 30, 30, 0.9)" }}
+                whileTap={{ scale: 0.98 }}
                 onClick={() => setProfileOpen(!profileOpen)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/60 border border-white/10 backdrop-blur-xl hover:bg-black/80 transition-all text-white shadow-lg"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#121212]/90 border border-[#C9A24D]/30 hover:border-[#C9A24D]/60 transition-all text-[#F6F2EA] shadow-lg backdrop-blur-md"
               >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-xs font-bold">
+                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#C9A24D] to-[#8C6A3D] flex items-center justify-center text-xs font-bold text-black border border-[#F6F2EA]/20">
                   {user.name.charAt(0).toUpperCase()}
                 </div>
                 <span className="text-sm font-medium pr-1">{user.name.split('(')[0].trim()}</span>
@@ -165,18 +175,18 @@ export const PillBase = () => {
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    className="absolute right-0 top-full mt-2 w-48 bg-neutral-900/90 border border-white/10 rounded-xl backdrop-blur-xl shadow-xl overflow-hidden p-1"
+                    className="absolute right-0 top-full mt-2 w-48 bg-[#121212] border border-[#C9A24D]/20 rounded-xl backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)] overflow-hidden p-1 z-[60]"
                   >
-                    <div className="px-3 py-2 border-b border-white/5 mb-1">
-                      <p className="text-xs text-neutral-400">Signed in as</p>
-                      <p className="text-sm font-medium text-white truncate">{user.email}</p>
+                    <div className="px-3 py-2 border-b border-[#C9A24D]/10 mb-1">
+                      <p className="text-xs text-[#C9A24D]/70 uppercase tracking-widest">Signed in as</p>
+                      <p className="text-sm font-medium text-[#F6F2EA] truncate">{user.email}</p>
                     </div>
                     <button
                       onClick={() => {
                         setProfileOpen(false)
                         logout()
                       }}
-                      className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-red-300 hover:bg-red-500/10 hover:text-red-200 transition-colors text-left"
+                      className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[#F6F2EA]/80 hover:bg-red-500/10 hover:text-red-200 transition-colors text-left"
                     >
                       <LogOut size={16} />
                       Logout
@@ -187,13 +197,17 @@ export const PillBase = () => {
             </div>
           ) : pathname !== '/login' ? (
             <motion.button
-              whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(168, 85, 247, 0.4)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 0 15px rgba(201, 162, 77, 0.2)",
+                background: "linear-gradient(135deg, #1A1A1A, #2A2312)"
+              }}
               whileTap={{ scale: 0.95 }}
               onClick={() => router.push('/login')}
-              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-black text-white font-bold text-sm shadow-lg hover:bg-neutral-800 transition-all border border-white/10"
+              className="flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#121212] text-[#F6F2EA] font-medium text-sm shadow-lg border border-[#C9A24D]/35 transition-all"
             >
-              <LogIn size={18} />
-              <span>Login</span>
+              <LogIn size={16} className="text-[#C9A24D]" />
+              <span className="tracking-wide">Login</span>
             </motion.button>
           ) : null}
         </div>
