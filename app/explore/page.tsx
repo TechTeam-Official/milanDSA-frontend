@@ -70,13 +70,10 @@ const ComingSoon = () => {
           transition={{ delay: 0.5 }}
           className="flex justify-center"></motion.div>
       </motion.div>
-<<<<<<< HEAD
-=======
 
       <div className="absolute bottom-8 text-neutral-600 text-xs tracking-widest uppercase text-center w-full">
         © 2026 Design Collective
       </div>
->>>>>>> kaustubh-updates
     </div>
   );
 };
@@ -135,7 +132,7 @@ const MainContent = () => {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [aiModalOpen, setAiModalOpen] = useState(false);
 
-  const handleUpload = async () => { };
+  const handleUpload = async () => {};
 
   return (
     <div className="bg-black text-white selection:bg-purple-500/30 overflow-x-hidden relative min-h-screen">

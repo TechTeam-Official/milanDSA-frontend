@@ -137,7 +137,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
      * Added 'scrollbar-hide' to ensure internal scrollbar doesn't show.
      * Added 'snap-y snap-mandatory' for the page-to-page effect.
      */
-    <div className="w-full h-screen overflow-y-auto snap-y snap-mandatory scrollbar-hide selection:bg-purple-200">
+    <div className="w-full snap-y snap-mandatory">
       {/* ================= HERO SECTION ================= */}
       <section className="h-screen w-full relative z-10 flex items-center justify-center text-center bg-linear-to-br from-purple-950 via-black to-black text-white snap-start snap-always">
         <div className="px-6">

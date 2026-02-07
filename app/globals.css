@@ -19,7 +19,14 @@ html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
+*::-webkit-scrollbar {
+  display: none;
+}
 
+* {
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE & Edge */
+}
 /* ------------------------------------------------------------- */
 
 @theme inline {
