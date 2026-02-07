@@ -139,7 +139,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
      */
     <div className="w-full snap-y snap-mandatory">
       {/* ================= HERO SECTION ================= */}
-      <section className="h-screen w-full relative z-10 flex items-center justify-center text-center bg-linear-to-br from-purple-950 via-black to-black text-white snap-start snap-always">
+      <section className="h-screen w-full relative z-20 flex items-center justify-center text-center bg-linear-to-br from-purple-950 via-black to-black text-white snap-start snap-always rounded-b-[4rem] shadow-[0_0_50px_rgba(168,85,247,0.2)] border-b border-purple-500/20">
         <div className="px-6">
           <div className="inline-block px-4 py-1 mb-6 text-xs tracking-widest uppercase rounded-full border border-purple-500/40 text-purple-300">
             Milan&apos;26
@@ -184,7 +184,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
         whileInView={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
-        className="h-screen w-full bg-[#F5F5F7] text-neutral-900 relative overflow-hidden snap-start snap-always">
+        className="h-[110vh] w-full bg-[#F5F5F7] text-neutral-900 relative overflow-hidden snap-start snap-always z-10 -mt-12">
         <main className="w-full h-full relative overflow-hidden">
           {/* Ambient Background */}
           <div className="absolute inset-0 pointer-events-none z-0">
@@ -193,19 +193,12 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
           </div>
 
           {/* Header */}
-          <div className="absolute top-8 left-6 md:top-12 md:left-12 z-20 pointer-events-none">
-            <h1 className="text-6xl md:text-9xl font-bold tracking-tighter text-gray-900 leading-[0.85]">
-              Our
-              <br />
-              Team<span className="text-purple-600">.</span>
-            </h1>
-          </div>
+
 
           {/* Globe */}
           <div
-            className={`absolute inset-0 flex items-center justify-center ${
-              isMobile ? "z-0 opacity-100" : "z-10 pointer-events-none"
-            }`}>
+            className={`absolute inset-0 flex items-center justify-center md:pr-96 ${isMobile ? "z-0 opacity-100" : "z-10 pointer-events-none"
+              }`}>
             <div
               className={
                 isMobile ? "pointer-events-none" : "pointer-events-auto"

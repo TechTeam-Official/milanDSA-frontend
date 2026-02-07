@@ -53,6 +53,8 @@ export function BentoGalleryGrid({ images, className }: BentoGalleryGridProps) {
             key={idx}
             className={cn(
               "relative overflow-hidden rounded-xl cursor-pointer group",
+              "bg-[#2A1F1A] border border-[#8C6A3D]/30", // New background & border
+              "hover:shadow-[0_0_30px_rgba(201,162,77,0.15)] transition-shadow duration-500", // Soft Gold Hover Glow
               getSpanClass(idx)
             )}
             initial={{ opacity: 0, y: 20 }}
@@ -64,7 +66,7 @@ export function BentoGalleryGrid({ images, className }: BentoGalleryGridProps) {
             {isVideo(src) ? (
               <video
                 src={src}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 autoPlay
                 muted
                 loop
@@ -75,44 +77,44 @@ export function BentoGalleryGrid({ images, className }: BentoGalleryGridProps) {
                 src={src}
                 alt={`Gallery image ${idx + 1}`}
                 fill
-                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
             )}
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+            {/* Removed the black darkening overlay as per "No color shifts" instruction */}
           </motion.div>
         ))}
       </div>
 
       {/* Lightbox */}
       {selectedImage && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#1A1A1A]/95 p-4 backdrop-blur-md"
           onClick={() => setSelectedImage(null)}
         >
-          <button 
-            className="absolute top-4 right-4 text-white hover:text-gray-300 z-50 p-2"
+          <button
+            className="absolute top-4 right-4 text-[#F1EEE8] hover:text-[#C9A24D] z-50 p-2 transition-colors"
             onClick={() => setSelectedImage(null)}
           >
             <X className="h-8 w-8" />
           </button>
           <div className="relative w-full max-w-5xl h-[80vh]" onClick={e => e.stopPropagation()}>
-             {isVideo(selectedImage) ? (
-                <video
-                  src={selectedImage}
-                  className="w-full h-full object-contain"
-                  controls
-                  autoPlay
-                />
-             ) : (
-                <Image
-                  src={selectedImage}
-                  alt="Selected gallery image"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-             )}
+            {isVideo(selectedImage) ? (
+              <video
+                src={selectedImage}
+                className="w-full h-full object-contain"
+                controls
+                autoPlay
+              />
+            ) : (
+              <Image
+                src={selectedImage}
+                alt="Selected gallery image"
+                fill
+                className="object-contain"
+                priority
+              />
+            )}
           </div>
         </div>
       )}

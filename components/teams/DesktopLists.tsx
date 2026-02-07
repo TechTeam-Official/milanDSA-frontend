@@ -94,11 +94,12 @@ export default function DesktopLists({
     <aside
       className="
         hidden md:block
-        absolute right-10 top-24
-        w-[320px]
-        max-h-[calc(100vh-6rem)]
+        absolute right-10 top-1/2 -translate-y-1/2
+        w-[350px]
+        max-h-[calc(100vh-12rem)]
         overflow-y-auto
-        pr-2
+        p-6
+        bg-white/30 backdrop-blur-md rounded-3xl border border-white/40 shadow-xl
       ">
       {/* CORE TEAM */}
       <section className="mb-10">

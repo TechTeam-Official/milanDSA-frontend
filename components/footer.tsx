@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
 
 interface FooterProps {
-  variant?: "default" | "events" | "sponsors" | "passes";
+  variant?: "default" | "events" | "sponsors" | "passes" | "gallery";
 }
 
 export function Footer({ variant = "default" }: FooterProps) {
@@ -51,6 +51,17 @@ export function Footer({ variant = "default" }: FooterProps) {
       iconHover: "hover:bg-[#E0B65C]/10 hover:border-[#E0B65C]/40 hover:shadow-[0_0_15px_rgba(224,182,92,0.2)] hover:text-[#F2A900]",
       iconColor: "text-[#E0B65C]",
       linkHover: "hover:text-[#F2A900]",
+    },
+    gallery: {
+      bg: "bg-[#1A1A1A]", // Warm Charcoal (Matches Gallery Section)
+      border: "border-[#8C6A3D]/30", // Dusty Bronze
+      accent: "text-[#C9A24D]", // Brushed Gold
+      accentBg: "bg-[#C9A24D]",
+      divider: "from-transparent via-[#8C6A3D] to-transparent",
+      brandGradient: "from-[#C9A24D] to-[#8C6A3D]",
+      iconHover: "hover:bg-[#C9A24D]/20 hover:border-[#C9A24D]/50 hover:shadow-[0_0_15px_rgba(201,162,77,0.3)]",
+      iconColor: "text-[#8C6A3D]",
+      linkHover: "hover:text-[#C9A24D]",
     },
   };
 
