@@ -30,9 +30,8 @@
 /* Mobile scroll lock */
 @media (max-width: 767px) {
   html, body {
-    overflow: hidden !important;
-    height: 100vh;
-    width: 100vw;
+    overflow-x: hidden;
+    /* Removed overflow: hidden and fixed dimensions to allow scrolling */
   }
 }
 

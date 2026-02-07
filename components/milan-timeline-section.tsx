@@ -135,9 +135,11 @@ export function MilanTimelineSection() {
           viewBox="0 0 600 2400"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="opacity-80"
+          className="opacity-80 w-full h-full"
+          preserveAspectRatio="none"
         >
           <motion.path
+            vectorEffect="non-scaling-stroke"
             d="M300 350
                C 500 550, 100 850, 300 1100
                C 500 1350, 100 1650, 300 1900
@@ -194,7 +196,7 @@ export function MilanTimelineSection() {
                 }`}
             >
               {/* Content Side */}
-              <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
+              <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start bg-black/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 md:border-none md:bg-transparent md:p-0 md:backdrop-blur-none ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
                 <div className="space-y-6">
                   <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]">
                     {item.year}

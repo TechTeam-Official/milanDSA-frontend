@@ -90,18 +90,18 @@ function ScheduleModal({
           initial={{ scale: 0.9, y: 20, opacity: 0 }}
           animate={{ scale: 1, y: 0, opacity: 1 }}
           exit={{ scale: 0.9, y: 20, opacity: 0 }}
-          className="relative indian-dark-bg border border-[#C9A24D]/20 w-full max-w-xl max-h-[85vh] rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col">
+          className="relative indian-dark-bg border border-[#C9A24D]/20 w-full max-w-xl max-h-[85vh] rounded-xl md:rounded-[2.5rem] shadow-3xl overflow-hidden flex flex-col">
           {/* Header */}
-          <div className="p-8 border-b border-[#C9A24D]/10 bg-[#FDFBF7]/5 flex justify-between items-center">
+          <div className="p-4 md:p-8 border-b border-[#C9A24D]/10 bg-[#FDFBF7]/5 flex justify-between items-center">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-[#C9A24D]/10 rounded-2xl">
-                <CalIcon className="w-6 h-6 text-[#C9A24D]" />
+              <div className="p-2 md:p-3 bg-[#C9A24D]/10 rounded-2xl">
+                <CalIcon className="w-5 h-5 md:w-6 md:h-6 text-[#C9A24D]" />
               </div>
               <div>
-                <h3 className="text-2xl font-bold text-white tracking-tight">
+                <h3 className="text-xl md:text-2xl font-bold text-white tracking-tight">
                   February {day}, {YEAR}
                 </h3>
-                <p className="text-[#C9A24D]/80 text-sm font-medium">
+                <p className="text-[#C9A24D]/80 text-xs md:text-sm font-medium">
                   {events.length} {events.length === 1 ? "event" : "events"}{" "}
                   scheduled
                 </p>
@@ -115,7 +115,7 @@ function ScheduleModal({
           </div>
 
           {/* Timeline Body */}
-          <div className="flex-1 overflow-y-auto p-8 relative custom-scrollbar">
+          <div className="flex-1 overflow-y-auto p-4 md:p-8 relative custom-scrollbar">
             {events.length > 0 ? (
               <div className="relative">
                 {/* Vertical Timeline Line */}
@@ -133,7 +133,7 @@ function ScheduleModal({
                       <div className="absolute -left-0.5 top-5 w-4 h-4 rounded-full bg-[#2A1B1A] border-[3px] border-[#D97706] shadow-[0_0_10px_#D97706] z-10" />
 
                       {/* Event Card */}
-                      <div className="group bg-[#0B0B0F]/60 border border-[#C9A24D]/10 p-6 rounded-4xl hover:bg-[#0B0B0F]/80 hover:border-[#C9A24D]/30 transition-all duration-300">
+                      <div className="group bg-[#0B0B0F]/60 border border-[#C9A24D]/10 p-4 md:p-6 rounded-3xl md:rounded-4xl hover:bg-[#0B0B0F]/80 hover:border-[#C9A24D]/30 transition-all duration-300">
                         <div className="flex justify-between items-center mb-4">
                           <div className="flex items-center gap-2 text-[#C9A24D] font-bold text-xs tracking-widest uppercase">
                             <Clock className="w-3.5 h-3.5" /> {event.time}
@@ -143,7 +143,7 @@ function ScheduleModal({
                           </span>
                         </div>
 
-                        <h4 className="text-white font-bold text-xl mb-3 group-hover:text-[#C9A24D] transition-colors leading-tight">
+                        <h4 className="text-white font-bold text-lg md:text-xl mb-3 group-hover:text-[#C9A24D] transition-colors leading-tight">
                           {event.title}
                         </h4>
 
@@ -200,13 +200,13 @@ export default function MilanCalendar() {
   }, []);
 
   return (
-    <div className="w-full max-w-5xl mx-auto p-10 indian-dark-bg border border-[#C9A24D]/30 rounded-[3rem] shadow-3xl relative overflow-hidden">
+    <div className="w-full max-w-5xl mx-auto p-4 md:p-10 indian-dark-bg border border-[#C9A24D]/30 rounded-2xl md:rounded-[3rem] shadow-3xl relative overflow-hidden">
       {/* Header */}
-      <div className="text-center mb-14 relative z-10">
+      <div className="text-center mb-8 md:mb-14 relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-6xl font-black text-white tracking-tighter">
+          className="text-4xl md:text-6xl font-black text-white tracking-tighter">
           February{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] to-[#D97706]">
             {YEAR}
@@ -218,11 +218,11 @@ export default function MilanCalendar() {
       </div>
 
       {/* Grid */}
-      <div className="grid grid-cols-7 gap-4 relative z-10">
+      <div className="grid grid-cols-7 gap-2 md:gap-4 relative z-10">
         {DAYS_OF_WEEK.map((d) => (
           <div
             key={d}
-            className="text-center text-[10px] font-black text-[#B87333] pb-6 uppercase tracking-widest">
+            className="text-center text-[8px] md:text-[10px] font-black text-[#B87333] pb-2 md:pb-6 uppercase tracking-widest">
             {d}
           </div>
         ))}
@@ -237,24 +237,24 @@ export default function MilanCalendar() {
               whileTap={isHighlighted ? { scale: 0.95 } : {}}
               onClick={() => isHighlighted && setSelectedDay(day)}
               className={`
-                aspect-square rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative
+                aspect-square rounded-xl md:rounded-3xl flex flex-col items-center justify-center cursor-pointer transition-all duration-500 relative
                 ${isHighlighted
                   ? "bg-gradient-to-br from-[#C9A24D]/20 to-[#B87333]/20 border border-[#C9A24D] text-white shadow-[0_0_15px_rgba(201,162,77,0.2)]"
                   : "bg-[#FDFBF7]/5 border border-[#C9A24D]/10 text-neutral-400 hover:bg-[#C9A24D]/5 hover:border-[#C9A24D]/30"
                 }
               `}>
               <span
-                className={`text-2xl font-black ${isHighlighted ? "text-[#C9A24D]" : "opacity-30"}`}>
+                className={`text-lg md:text-2xl font-black ${isHighlighted ? "text-[#C9A24D]" : "opacity-30"}`}>
                 {day}
               </span>
 
               {isHighlighted && (
                 <>
-                  <span className="text-[8px] mt-1 font-bold opacity-80 uppercase tracking-tighter text-[#FDFBF7]">
+                  <span className="hidden md:block text-[8px] mt-1 font-bold opacity-80 uppercase tracking-tighter text-[#FDFBF7]">
                     View Events
                   </span>
                   {/* Status Indicator Dot */}
-                  <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-[#0F766E] shadow-[0_0_8px_#0F766E]" />
+                  <div className="absolute top-1 right-1 md:top-3 md:right-3 w-1.5 h-1.5 md:w-1.5 md:h-1.5 rounded-full bg-[#0F766E] shadow-[0_0_8px_#0F766E]" />
                 </>
               )}
             </motion.div>

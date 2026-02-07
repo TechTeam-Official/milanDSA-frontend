@@ -133,7 +133,7 @@ export function SponsorsSection() {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative z-30 text-8xl md:text-[10rem] font-serif text-white leading-[0.9] tracking-tighter mb-8 im-text-shadow">
+          className="relative z-30 text-5xl sm:text-7xl md:text-[10rem] font-serif text-white leading-[0.9] tracking-tighter mb-4 sm:mb-8 im-text-shadow">
           Sponsors<span className="text-[#556B2F]">.</span>
         </motion.h1>
 
@@ -142,7 +142,7 @@ export function SponsorsSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="relative z-30 text-lg md:text-xl font-medium text-neutral-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+          className="relative z-30 text-sm sm:text-base md:text-xl font-medium text-neutral-200 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
           We extend our deepest gratitude to all our sponsors who have made
           MILAN possible through their generous support and partnership.
         </motion.p>

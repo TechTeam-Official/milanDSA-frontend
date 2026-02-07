@@ -69,12 +69,14 @@ export const PillBase = () => {
     if (expanded) {
       // Adjusted width to fit the extra items
       width.set(isMobile ? 260 : 850)
-      height.set(isMobile ? navItems.length * 50 + 24 : 56)
+      // Calculate height: base nav items + auth section if mobile
+      const authHeight = isMobile ? (user ? 100 : 60) : 0
+      height.set(isMobile ? navItems.length * 50 + 24 + authHeight : 56)
     } else {
       width.set(160)
       height.set(56)
     }
-  }, [expanded, isMobile, navItems.length, width, height])
+  }, [expanded, isMobile, navItems.length, width, height, user])
 
   if (pathname?.startsWith('/operator')) return null
 
@@ -136,6 +138,42 @@ export const PillBase = () => {
                     </button>
                   )
                 })}
+
+                {/* Mobile Auth Section */}
+                {isMobile && (
+                  <div className="w-[90%] border-t border-white/10 pt-3 mt-2 flex flex-col items-center">
+                    {user ? (
+                      <div className="flex items-center justify-between w-full px-1">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-sm font-bold text-white shadow-sm shrink-0">
+                            {user.name?.charAt(0).toUpperCase()}
+                          </div>
+                          <span className="text-sm font-medium text-white truncate">
+                            {user.name?.split('(')[0]}
+                          </span>
+                        </div>
+                        <button
+                          onClick={() => {
+                            setExpanded(false)
+                            logout()
+                          }}
+                          className="p-2 ml-2 rounded-full text-red-300 hover:bg-red-500/20 hover:text-red-200 transition-colors shrink-0"
+                          title="Logout"
+                        >
+                          <LogOut size={20} />
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => handleNavigate('/login')}
+                        className="flex items-center justify-center gap-2 px-3 py-2 rounded-full w-full text-white/80 hover:text-white hover:bg-white/10 transition-all"
+                      >
+                        <LogIn size={18} />
+                        <span className="text-sm font-medium">Login</span>
+                      </button>
+                    )}
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>

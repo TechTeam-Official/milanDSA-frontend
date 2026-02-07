@@ -1,5 +1,23 @@
 import Link from 'next/link'
-import { Facebook, Instagram, Youtube, Mail, MapPin, Phone } from 'lucide-react'
+import { Facebook, Instagram, Youtube, Mail, MapPin, ChevronDown } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useState } from 'react'
+
+interface FooterTheme {
+  bg: string;
+  border: string;
+  accent: string;
+  accentBg: string;
+  divider: string;
+  brandGradient: string;
+  iconHover: string;
+  iconColor: string;
+  linkHover: string;
+  text: string;
+  heading: string;
+  subtext: string;
+  copyright: string;
+}
 
 interface FooterProps {
   variant?: "default" | "events" | "sponsors" | "passes" | "gallery" | "team";
@@ -103,26 +121,26 @@ export function Footer({ variant = "default" }: FooterProps) {
   const theme = themes[variant];
 
   return (
-    <footer className={`relative ${theme.bg} text-white pt-10 pb-6 border-t ${theme.border} transition-colors duration-300`}>
+    <footer className={`relative ${theme.bg} text-white pt-6 pb-4 md:pt-10 md:pb-6 border-t ${theme.border} transition-colors duration-300`}>
       <div className="indian-noise" />
 
       {/* Dynamic Divider */}
-      <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r ${theme.divider} opacity-40`} />
+      <div className={`absolute top-0 left-0 right-0 h-px bg-linear-to-r ${theme.divider} opacity-40`} />
 
       {/* Subtle Accent Dot */}
       <div className={`absolute top-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full opacity-50 ${theme.accentBg} ${theme.accent} shadow-[0_0_8px_currentColor]`} />
 
       <div className="container mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 mb-8">
-          {/* Brand & Slogan */}
-          <div className="lg:col-span-4 space-y-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 mb-6 md:gap-8 md:mb-8">
+          {/* Brand & Slogan - Always visible, spanning full width on mobile, 4 cols on desktop */}
+          <div className="md:col-span-2 lg:col-span-4 space-y-2 md:space-y-3">
             <Link href="/" className="inline-block group">
-              <span className={`text-3xl font-serif tracking-tighter text-transparent bg-clip-text bg-gradient-to-r ${theme.brandGradient}`}>
+              <span className={`text-2xl md:text-3xl font-serif tracking-tighter text-transparent bg-clip-text bg-linear-to-r ${theme.brandGradient}`}>
                 MILAN &apos;26
               </span>
             </Link>
 
-            <p className={`text-lg font-light leading-relaxed max-w-sm ${theme.text}`}>
+            <p className={`text-base md:text-lg font-light leading-relaxed max-w-sm ${theme.text}`}>
               #Live the Change
             </p>
             <div className="flex gap-3">
@@ -133,8 +151,49 @@ export function Footer({ variant = "default" }: FooterProps) {
             </div>
           </div>
 
+          {/* Mobile Accordion Sections (< md) */}
+          <div className="col-span-1 md:hidden space-y-4">
+            {/* Quick Links */}
+            <MobileFooterSection title="Quick Links" theme={theme}>
+              <ul className={`space-y-2 text-sm ${theme.subtext}`}>
+                <FooterLink href="/events" theme={theme}>Events</FooterLink>
+                <FooterLink href="/sponsors" theme={theme}>Sponsors</FooterLink>
+                <FooterLink href="/gallery" theme={theme}>Gallery</FooterLink>
+                <FooterLink href="/team" theme={theme}>Team</FooterLink>
+              </ul>
+            </MobileFooterSection>
+
+            {/* Legal */}
+            <MobileFooterSection title="Legal" theme={theme}>
+              <ul className={`space-y-2 text-sm ${theme.subtext}`}>
+                <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
+                <FooterLink href="#" theme={theme}>Terms of Service</FooterLink>
+                <FooterLink href="#" theme={theme}>Code of Conduct</FooterLink>
+              </ul>
+            </MobileFooterSection>
+
+            {/* Contact */}
+            <MobileFooterSection title="Contact Us" theme={theme}>
+              <ul className={`space-y-2 text-sm ${theme.subtext}`}>
+                <li className="flex items-start gap-3">
+                  <MapPin className={`${theme.iconColor} shrink-0 mt-0.5`} size={16} />
+                  <span>
+                    SRM Institute of Science and Technology, <br />
+                    Kattankulathur, Chennai, <br />
+                    Tamil Nadu - 603203
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className={`${theme.iconColor} shrink-0`} size={16} />
+                  <span>techteam.sa@srmist.edu.in</span>
+                </li>
+              </ul>
+            </MobileFooterSection>
+          </div>
+
+          {/* Desktop/Tablet Columns (>= md) */}
           {/* Quick Links */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="hidden md:block lg:col-span-2 space-y-2 md:space-y-3">
             <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Quick Links</h4>
             <ul className={`space-y-2 text-sm ${theme.subtext}`}>
               <FooterLink href="/events" theme={theme}>Events</FooterLink>
@@ -145,7 +204,7 @@ export function Footer({ variant = "default" }: FooterProps) {
           </div>
 
           {/* Legal */}
-          <div className="lg:col-span-2 space-y-3">
+          <div className="hidden md:block lg:col-span-2 space-y-2 md:space-y-3">
             <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Legal</h4>
             <ul className={`space-y-2 text-sm ${theme.subtext}`}>
               <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
@@ -155,9 +214,9 @@ export function Footer({ variant = "default" }: FooterProps) {
           </div>
 
           {/* Contact */}
-          <div className="lg:col-span-4 space-y-3">
+          <div className="hidden md:block lg:col-span-4 space-y-2 md:space-y-3">
             <h4 className={`text-sm uppercase tracking-wider ${theme.heading}`}>Contact Us</h4>
-            <ul className={`space-y-3 text-sm ${theme.subtext}`}>
+            <ul className={`space-y-2 md:space-y-3 text-sm ${theme.subtext}`}>
               <li className="flex items-start gap-3">
                 <MapPin className={`${theme.iconColor} shrink-0 mt-0.5`} size={16} />
                 <span>
@@ -175,7 +234,7 @@ export function Footer({ variant = "default" }: FooterProps) {
         </div>
 
         {/* Bottom Bar */}
-        <div className={`pt-6 border-t ${variant === 'team' ? 'border-[#1F4D4A]/5' : 'border-white/5'} flex flex-col items-center justify-center gap-2 text-xs text-center ${theme.copyright}`}>
+        <div className={`pt-4 md:pt-6 border-t ${variant === 'team' ? 'border-[#1F4D4A]/5' : 'border-white/5'} flex flex-col items-center justify-center gap-2 text-xs text-center ${theme.copyright}`}>
           <p>© Copyright Directorate of Student Affairs, SRMIST. All rights reserved.</p>
           <p className="font-medium opacity-80">Developed By DSA Tech and Graphic Design Team.</p>
         </div>
@@ -184,7 +243,41 @@ export function Footer({ variant = "default" }: FooterProps) {
   );
 }
 
-function SocialLink({ href, icon, theme }: { href: string; icon: React.ReactNode; theme: any }) {
+function MobileFooterSection({ title, children, theme }: { title: string; children: React.ReactNode; theme: FooterTheme }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className={`border-b ${theme.border} last:border-0`}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`w-full flex items-center justify-between py-2 text-left ${theme.heading} font-medium text-sm uppercase tracking-wider focus:outline-none`}
+      >
+        {title}
+        <ChevronDown
+          size={16}
+          className={`transition-transform duration-300 ${isOpen ? "rotate-180" : ""} ${theme.iconColor}`}
+        />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="pb-3 pt-1">
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+function SocialLink({ href, icon, theme }: { href: string; icon: React.ReactNode; theme: FooterTheme }) {
   return (
     <a
       href={href}
@@ -197,7 +290,7 @@ function SocialLink({ href, icon, theme }: { href: string; icon: React.ReactNode
   )
 }
 
-function FooterLink({ href, children, theme }: { href: string; children: React.ReactNode; theme: any }) {
+function FooterLink({ href, children, theme }: { href: string; children: React.ReactNode; theme: FooterTheme }) {
   const hoverClass = theme.linkHover || `hover:${theme.accent}`;
   return (
     <li>
