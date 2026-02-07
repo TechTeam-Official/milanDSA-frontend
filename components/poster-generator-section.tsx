@@ -70,10 +70,10 @@ export function PosterGeneratorSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl tracking-tighter text-white leading-[1.1] drop-shadow-[0_4px_12px_rgba(201,162,77,0.3)]"
+              className="text-4xl md:text-6xl tracking-tighter text-white leading-[1.3] drop-shadow-[0_4px_12px_rgba(201,162,77,0.3)]"
             >
               Celebrate <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#B87333]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#B87333] py-2 inline-block">
                 40 Years Of SRM
               </span>
             </motion.h2>

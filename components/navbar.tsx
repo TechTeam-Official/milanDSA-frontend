@@ -142,13 +142,7 @@ export const PillBase = () => {
                         <span className="text-sm font-medium">{item.label}</span>
                       </div>
 
-                      {/* Active Indicator - Dot */}
-                      {isActive && !isMobile && (
-                        <motion.div
-                          layoutId="nav-pill"
-                          className="absolute bottom-1.5 w-1 h-1 bg-[#C9A24D] rounded-full"
-                        />
-                      )}
+
                     </button>
                   )
                 })}

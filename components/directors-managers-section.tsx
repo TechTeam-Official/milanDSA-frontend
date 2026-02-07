@@ -70,7 +70,7 @@ export function DirectorsManagersSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-serif tracking-tighter uppercase im-text-shadow">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-[#0B0B0F] to-[#0F766E]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-[#0B0B0F] to-[#0F766E] py-2 inline-block">
               The Visionaries
             </span>
           </motion.h2>

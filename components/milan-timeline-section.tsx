@@ -214,7 +214,7 @@ export function MilanTimelineSection() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-5xl md:text-7xl tracking-tighter uppercase font-serif"
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#0F766E]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#0F766E] py-2 inline-block">
               Timeline
             </span>
           </motion.h2>
@@ -243,7 +243,7 @@ export function MilanTimelineSection() {
               {/* Content Side */}
               <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start bg-black/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 md:border-none md:bg-transparent md:p-0 md:backdrop-blur-none ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
                 <div className="space-y-6">
-                  <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]">
+                  <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)] py-2">
                     {item.year}
                   </h3>
                   <div className="h-1 w-24 bg-gradient-to-r from-[#0F766E] to-[#C9A24D] rounded-full" />
