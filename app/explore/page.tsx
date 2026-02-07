@@ -60,7 +60,7 @@ const ComingSoon = () => {
       </motion.div>
 
       <div className="absolute bottom-8 text-neutral-600 text-xs tracking-widest uppercase text-center w-full">
-        © 2024 Design Collective
+        © 2026 Design Collective
       </div>
     </div>
   );

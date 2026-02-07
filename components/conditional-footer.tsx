@@ -10,5 +10,13 @@ export function ConditionalFooter() {
     return null
   }
 
-  return <Footer />
+  let variant: "default" | "events" | "sponsors" = "default";
+
+  if (pathname?.startsWith("/events")) {
+    variant = "events";
+  } else if (pathname?.startsWith("/sponsors")) {
+    variant = "sponsors";
+  }
+
+  return <Footer variant={variant} />
 }
