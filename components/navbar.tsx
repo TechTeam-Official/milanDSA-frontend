@@ -31,7 +31,7 @@ export const PillBase = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    const checkMobile = () => setIsMobile(window.innerWidth < 1200)
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
@@ -90,7 +90,7 @@ export const PillBase = () => {
       <motion.nav
         ref={containerRef}
         style={{ width, height }}
-        className="pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-[#C9A24D]/15 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl bg-[linear-gradient(to_right,rgba(20,10,25,0.85),rgba(10,15,20,0.85))] rounded-full z-50 transition-all duration-300 ease-out"
+        className={`pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-[#C9A24D]/15 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl bg-[linear-gradient(to_right,rgba(20,10,25,0.85),rgba(10,15,20,0.85))] z-50 transition-all duration-300 ease-out ${isMobile && expanded ? 'rounded-3xl' : 'rounded-full'}`}
         onClick={() => {
           if (isMobile) setExpanded(!expanded)
         }}
@@ -142,13 +142,7 @@ export const PillBase = () => {
                         <span className="text-sm font-medium">{item.label}</span>
                       </div>
 
-                      {/* Active Indicator - Dot */}
-                      {isActive && !isMobile && (
-                        <motion.div
-                          layoutId="nav-pill"
-                          className="absolute bottom-1.5 w-1 h-1 bg-[#C9A24D] rounded-full"
-                        />
-                      )}
+
                     </button>
                   )
                 })}

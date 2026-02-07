@@ -78,7 +78,7 @@ export function Hero() {
             ease: [0.22, 1, 0.36, 1],
             delay: 0.2
           }}
-          className="absolute bottom-28 md:bottom-32 left-0 right-0 z-20 flex flex-col items-center gap-6 px-4"
+          className="absolute bottom-36 md:bottom-32 left-0 right-0 z-20 flex flex-col items-center gap-6 px-4"
         >
           {/* Date */}
           <div className="text-center">
@@ -88,10 +88,10 @@ export function Hero() {
           </div>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-6">
             <a
               href="/passes"
-              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white px-8 py-3 text-base font-bold text-black transition-all hover:scale-105 hover:bg-neutral-100 active:scale-95 w-64 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              className="group relative inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-2.5 md:px-8 md:py-3 text-base font-bold text-black transition-all hover:scale-105 hover:bg-neutral-100 active:scale-95 w-64 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             >
               Grab Your Passes
               <Ticket className="h-4 w-4 transition-transform group-hover:rotate-12" />
@@ -100,7 +100,7 @@ export function Hero() {
 
             <a
               href="#legacy"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 px-8 py-3 text-base font-bold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/50 hover:scale-105 active:scale-95 w-64 whitespace-nowrap"
+              className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/5 px-6 py-2.5 md:px-8 md:py-3 text-base font-bold text-white backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/50 hover:scale-105 active:scale-95 w-64 whitespace-nowrap"
             >
               40 Years of SRMIST
               <History className="h-4 w-4" />
@@ -112,7 +112,7 @@ export function Hero() {
       {/* Scroll Indicator */}
       <motion.div
         style={{ opacity: indicatorOpacity }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30"
+        className="absolute bottom-4 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30"
       >
         <div className="w-[30px] h-[50px] border-2 border-[#C9A24D]/40 rounded-full flex justify-center p-2 backdrop-blur-sm">
           <motion.div

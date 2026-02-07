@@ -191,9 +191,51 @@ export function Footer({ variant = "default" }: FooterProps) {
             </MobileFooterSection>
           </div>
 
-          {/* Desktop/Tablet Columns (>= md) */}
+          {/* Tablet Specific Layout (md to lg) */}
+          <div className="hidden md:grid lg:hidden col-span-2 grid-cols-3 gap-8">
+            {/* Quick Links */}
+            <div className="space-y-3">
+              <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Quick Links</h4>
+              <ul className={`space-y-2 text-sm ${theme.subtext}`}>
+                <FooterLink href="/events" theme={theme}>Events</FooterLink>
+                <FooterLink href="/sponsors" theme={theme}>Sponsors</FooterLink>
+                <FooterLink href="/gallery" theme={theme}>Gallery</FooterLink>
+                <FooterLink href="/team" theme={theme}>Team</FooterLink>
+              </ul>
+            </div>
+
+            {/* Legal */}
+            <div className="space-y-3">
+              <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Legal</h4>
+              <ul className={`space-y-2 text-sm ${theme.subtext}`}>
+                <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
+                <FooterLink href="#" theme={theme}>Terms of Service</FooterLink>
+                <FooterLink href="#" theme={theme}>Code of Conduct</FooterLink>
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div className="space-y-3">
+              <h4 className={`text-sm uppercase tracking-wider ${theme.heading}`}>Contact Us</h4>
+              <ul className={`space-y-2 text-sm ${theme.subtext}`}>
+                <li className="flex items-start gap-3">
+                  <MapPin className={`${theme.iconColor} shrink-0 mt-0.5`} size={16} />
+                  <span>
+                    SRMIST, <br />
+                    Chennai - 603203
+                  </span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Mail className={`${theme.iconColor} shrink-0`} size={16} />
+                  <span className="break-all">techteam.sa@srmist.edu.in</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Desktop Columns (>= lg) */}
           {/* Quick Links */}
-          <div className="hidden md:block lg:col-span-2 space-y-2 md:space-y-3">
+          <div className="hidden lg:block lg:col-span-2 space-y-2 md:space-y-3">
             <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Quick Links</h4>
             <ul className={`space-y-2 text-sm ${theme.subtext}`}>
               <FooterLink href="/events" theme={theme}>Events</FooterLink>
@@ -204,7 +246,7 @@ export function Footer({ variant = "default" }: FooterProps) {
           </div>
 
           {/* Legal */}
-          <div className="hidden md:block lg:col-span-2 space-y-2 md:space-y-3">
+          <div className="hidden lg:block lg:col-span-2 space-y-2 md:space-y-3">
             <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Legal</h4>
             <ul className={`space-y-2 text-sm ${theme.subtext}`}>
               <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
@@ -214,7 +256,7 @@ export function Footer({ variant = "default" }: FooterProps) {
           </div>
 
           {/* Contact */}
-          <div className="hidden md:block lg:col-span-4 space-y-2 md:space-y-3">
+          <div className="hidden lg:block lg:col-span-4 space-y-2 md:space-y-3">
             <h4 className={`text-sm uppercase tracking-wider ${theme.heading}`}>Contact Us</h4>
             <ul className={`space-y-2 md:space-y-3 text-sm ${theme.subtext}`}>
               <li className="flex items-start gap-3">

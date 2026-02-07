@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { ArrowRight, Download, Share2, History } from "lucide-react"
+import { Download, Share2, History } from "lucide-react"
 import { useState, useEffect } from "react"
 import Image from 'next/image'
 
@@ -50,7 +50,7 @@ export function PosterGeneratorSection() {
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0F] via-[#0B0B0F]/80 to-[#0B0B0F]/40" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 md:px-16 lg:px-24 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
           {/* Left Content */}
@@ -70,10 +70,10 @@ export function PosterGeneratorSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl tracking-tighter text-white leading-[1.1] drop-shadow-[0_4px_12px_rgba(201,162,77,0.3)]"
+              className="text-4xl md:text-6xl tracking-tighter text-white leading-[1.3] drop-shadow-[0_4px_12px_rgba(201,162,77,0.3)]"
             >
               Celebrate <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#B87333]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#B87333] py-2 inline-block">
                 40 Years Of SRM
               </span>
             </motion.h2>
@@ -100,9 +100,8 @@ export function PosterGeneratorSection() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4"
             >
-              <button className="px-8 py-4 bg-white text-black font-bold rounded-full hover:shadow-[0_0_20px_rgba(201,162,77,0.5)] transition-all flex items-center gap-2 group">
-                Generate Legacy Poster
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              <button disabled className="px-8 py-4 bg-white/80 text-neutral-600 font-bold rounded-full cursor-not-allowed flex items-center gap-2 shadow-sm">
+                Coming Soon...
               </button>
             </motion.div>
           </div>

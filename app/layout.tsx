@@ -17,6 +17,7 @@ const foglihten = localFont({
   src: "./fonts/Foglihtenno07-e9wz3.otf",
   variable: "--font-foglihten",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
