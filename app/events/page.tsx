@@ -15,6 +15,7 @@ import EventDetailsModal, {
 // Data & Helpers
 import { adaptedEventsData } from "./eventAdapter";
 import { buildBentoRows } from "@/lib/bentoLayout";
+import { getRulebookUrl } from "@/lib/rulebook";
 
 import {
   Music,
@@ -224,6 +225,7 @@ export default function EventsPage() {
                           />
                         }
                         className="h-80 rounded-[2.5rem]"
+                        rulebook={getRulebookUrl(key) || undefined}
                       />
                     </motion.div>
                   );

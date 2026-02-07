@@ -29,6 +29,7 @@ interface BentoCardProps {
   Icon: LucideIcon;
   className?: string;
   background?: ReactNode;
+  rulebook?: string;
 }
 
 export function BentoCard({
@@ -39,6 +40,7 @@ export function BentoCard({
   Icon,
   className,
   background,
+  rulebook,
 }: BentoCardProps) {
   const hasBackground = Boolean(background);
 
@@ -92,13 +94,31 @@ export function BentoCard({
             {cta} →
           </a>
         ) : (
-          <div
-            className={cn(
-              "mt-6 inline-flex items-center text-sm font-medium transition-colors pointer-events-none",
-              // Unified color to Antique Gold for consistency
-              "text-[#C9A24D]",
-            )}>
-            {cta} →
+          <div className="mt-6 flex items-center justify-between w-full">
+            <div
+              className={cn(
+                "inline-flex items-center text-sm font-medium transition-colors pointer-events-none",
+                // Unified color to Antique Gold for consistency
+                "text-[#C9A24D]",
+              )}>
+              {cta} →
+            </div>
+
+            {rulebook && (
+              <a
+                href={rulebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className={cn(
+                  "z-20 px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg backdrop-blur-md border border-[#C9A24D]/30",
+                  hasBackground
+                    ? "bg-black/40 text-[#C9A24D] hover:bg-black/60 hover:text-[#FFD700]"
+                    : "bg-[#C9A24D]/10 text-[#C9A24D] hover:bg-[#C9A24D]/20 hover:text-[#B87333]"
+                )}>
+                Rulebook ↗
+              </a>
+            )}
           </div>
         )}
       </div>

@@ -34,7 +34,17 @@ export default function EventDetailsModal({
   description,
   events,
 }: EventDetailsModalProps) {
-  // 🚫 SCROLL LOCK REMOVED: prevents jumping to top of page
+  // Re-enabled scroll lock
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

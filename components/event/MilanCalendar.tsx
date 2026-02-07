@@ -65,6 +65,18 @@ function ScheduleModal({
   day: number | null;
   schedule: Record<number, CalendarEvent[]>;
 }) {
+  // Fixed: Hook must be before any early return
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
   if (!isOpen || day === null) return null;
 
   // ✅ SORTING LOGIC: sort events chronologically
