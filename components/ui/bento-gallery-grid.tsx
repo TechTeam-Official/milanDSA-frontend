@@ -3,7 +3,8 @@
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { createPortal } from "react-dom"
 import { X } from "lucide-react"
 
 interface BentoGalleryGridProps {
@@ -13,6 +14,11 @@ interface BentoGalleryGridProps {
 
 export function BentoGalleryGrid({ images, className }: BentoGalleryGridProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   // Pattern for grid spans
   // 0: Large Square (2x2)
@@ -87,9 +93,10 @@ export function BentoGalleryGrid({ images, className }: BentoGalleryGridProps) {
       </div>
 
       {/* Lightbox */}
-      {selectedImage && (
+      {/* Lightbox - Use Portal to escape parent stacking context */}
+      {selectedImage && mounted && createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[#1A1A1A]/95 p-4 backdrop-blur-md"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1A1A1A] p-4 backdrop-blur-md"
           onClick={() => setSelectedImage(null)}
         >
           <button
@@ -116,7 +123,8 @@ export function BentoGalleryGrid({ images, className }: BentoGalleryGridProps) {
               />
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

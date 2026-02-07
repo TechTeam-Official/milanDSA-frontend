@@ -27,6 +27,7 @@ interface PassOption {
   restriction: "open" | "srm";
   icon: React.ElementType;
   color: string;
+  comingSoon?: boolean;
 }
 
 const PASSES: PassOption[] = [
@@ -57,6 +58,7 @@ const PASSES: PassOption[] = [
     restriction: "srm",
     icon: Crown,
     color: "from-amber-400 to-orange-400",
+    comingSoon: true,
   },
 ];
 
@@ -66,6 +68,9 @@ export default function Passes() {
   // Removed unused state vars
 
   const handleBuyPass = async (pass: PassOption) => {
+    // Prevent action if coming soon
+    if (pass.comingSoon) return;
+
     // Determine the target URL based on pass type
     let targetUrl = "";
     if (pass.id === "events") {
@@ -194,12 +199,14 @@ export default function Passes() {
                   </div>
 
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-medium text-white tracking-tight">
-                      {pass.price}
+                    <span className={`${pass.comingSoon ? "text-2xl" : "text-4xl"} font-medium text-white tracking-tight`}>
+                      {pass.comingSoon ? "Coming Soon" : pass.price}
                     </span>
-                    <span className="text-[#E0B65C]/60 font-medium text-sm uppercase tracking-wider ml-1">
-                      / person
-                    </span>
+                    {!pass.comingSoon && (
+                      <span className="text-[#E0B65C]/60 font-medium text-sm uppercase tracking-wider ml-1">
+                        / person
+                      </span>
+                    )}
                   </div>
                 </div>
 
@@ -250,29 +257,35 @@ export default function Passes() {
                     buttonText = "SRM Verified Only";
                   }
 
+                  if (pass.comingSoon) {
+                    buttonText = "Coming Soon...";
+                  }
+
                   return (
                     <div className="space-y-2 relative z-10">
                       <Button
                         onClick={() => handleBuyPass(pass)}
-                        disabled={!!user && !isEligible}
+                        disabled={(!!user && !isEligible) || !!pass.comingSoon}
                         className={`w-full font-bold py-6 rounded-xl group/btn transform transition-all duration-300 ${user && !isEligible
                           ? "bg-[#14172B] text-neutral-500 cursor-not-allowed border border-white/5"
-                          : "bg-white text-[#14172B] hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:bg-neutral-200 hover:border-white border border-white"
+                          : pass.comingSoon
+                            ? "bg-[#14172B]/60 text-neutral-400 cursor-not-allowed border border-dashed border-white/20"
+                            : "bg-white text-[#14172B] hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:bg-neutral-200 hover:border-white border border-white"
                           }`}>
                         <span className="flex items-center justify-center gap-2 font-bold tracking-wide">
                           <>
                             {buttonText}
-                            {(user && isEligible) || !user ? (
-                              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
-                            ) : (
+                            {(pass.comingSoon || (user && !isEligible)) ? (
                               <Ban className="w-4 h-4" />
+                            ) : (
+                              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
                             )}
                           </>
                         </span>
                       </Button>
 
                       {/* Ineligibility Warning */}
-                      {user && !isEligible && (
+                      {user && !isEligible && !pass.comingSoon && (
                         <p className="text-center text-[10px] text-red-400/80 font-medium tracking-wide uppercase mt-2">
                           Requires @srmist.edu.in email address
                         </p>

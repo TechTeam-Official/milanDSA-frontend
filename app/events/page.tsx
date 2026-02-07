@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 
 // Components
@@ -99,6 +99,9 @@ const CATEGORY_META = {
 type CategoryKey = keyof typeof CATEGORY_META;
 
 export default function EventsPage() {
+  const { scrollYProgress } = useScroll();
+  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
+
   const [activeCategoryKey, setActiveCategoryKey] =
     useState<CategoryKey | null>(null);
 
@@ -158,6 +161,36 @@ export default function EventsPage() {
           And win Cash Prizes worth{" "}
           <span className="text-[#C9A24D] font-bold">10 Lakhs+</span>
         </motion.p>
+
+        <motion.div
+          initial={{ width: 0 }}
+          animate={{ width: 140 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative z-30 h-1 bg-[#D97706] rounded-full mx-auto mt-12"
+        />
+
+        {/* Scroll Indicator */}
+        <motion.div
+          style={{ opacity: indicatorOpacity }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30">
+          <div className="w-[30px] h-[50px] border-2 border-[#D97706]/40 rounded-full flex justify-center p-2 backdrop-blur-sm">
+            <motion.div
+              animate={{
+                y: [0, 16, 0],
+                opacity: [1, 0.4, 1],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="w-1.5 h-1.5 bg-[#D97706] rounded-full shadow-[0_0_8px_#D97706]"
+            />
+          </div>
+          <span className="text-[9px] uppercase tracking-[0.4em] font-semibold text-[#D97706]/80">
+            Scroll
+          </span>
+        </motion.div>
       </section>
 
       {/* 2. DISCOVER CATEGORIES */}
