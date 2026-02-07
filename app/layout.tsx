@@ -4,6 +4,7 @@ import "@/app/globals.css"; // ✅ Absolute path to CSS
 import { ConditionalLayout } from "@/components/conditional-layout";
 import { ConditionalFooter } from "@/components/conditional-footer";
 import { AuthProvider } from "@/context/auth-context";
+import { ModalProvider } from "@/context/ui-context";
 import IntroSection from "@/components/intro/intro_section";
 
 const stampPress = localFont({
@@ -36,10 +37,12 @@ export default function RootLayout({
       className={`${stampPress.variable} ${foglihten.variable}`}>
       <body className="antialiased font-sans">
         <AuthProvider>
-          <IntroSection />
-          <ConditionalLayout />
-          {children}
-          <ConditionalFooter />
+          <ModalProvider>
+            <IntroSection />
+            <ConditionalLayout />
+            {children}
+            <ConditionalFooter />
+          </ModalProvider>
         </AuthProvider>
       </body>
     </html>
