@@ -20,7 +20,7 @@ interface Props {
 // 🔥 MAP: UI Sidebar Name -> JSON Label Name
 const LABEL_MAP: Record<string, string> = {
   // CORE
-  "Operations & Resources": "Operations and Resource Management",
+  "Operations & Resource Management": "Operations and Resource Management",
   "Publicity & Social Media": "Publicity",
   "Public Relations": "Public Relations",
   Media: "Media",
@@ -28,9 +28,9 @@ const LABEL_MAP: Record<string, string> = {
   Hospitality: "Hospitality",
   Sponsorship: "Sponsorship",
   Content: "Content",
-  "Transport & Acc": "Transportation and Accommodation",
-  "Tech Team and GD": "Tech and Graphic Design",
-  "Certificate & Prizes": "Certificate and Prize Distribution",
+  "Transportation & Accommodation": "Transportation and Accommodation",
+  "Tech & Graphic Design": "Tech and Graphic Design",
+  "Certificate & Prize Distribution": "Certificate and Prize Distribution",
   Treasurer: "Treasurer",
   Discipline: "Discipline",
 
