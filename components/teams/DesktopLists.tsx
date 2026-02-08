@@ -10,6 +10,7 @@ interface Props {
   setExpandedItems: React.Dispatch<React.SetStateAction<Set<string>>>;
   coreRoles: string[];
   clubs: string[];
+  webRoles: string[];
   getRandomImage: (id: string) => ImageData;
   setSelectedConvenor: (img: ImageData | null) => void;
   setSelectedSphereImage: (img: ImageData | null) => void;
@@ -49,6 +50,8 @@ const LABEL_MAP: Record<string, string> = {
   "Social Club": "Social",
   "Women Empowerment Club": "Women Empowerment",
   "Festival Club": "Festival",
+
+  // WEB
 };
 
 export default function DesktopLists({
@@ -101,9 +104,10 @@ export default function DesktopLists({
         overflow-y-auto
         p-6
         bg-[#E0C3A0] backdrop-blur-md rounded-3xl border border-[#1F4D4A]/10 shadow-xl shadow-[#1F4D4A]/10
+        no-scrollbar
       ">
       {/* CORE TEAM */}
-      <section className="mb-10">
+      <section className="mb-15">
         <h2 className="text-xl font-semibold mb-4 text-[#2A1E1A]">Core Team Convenors</h2>
         <div className="space-y-1">
           {props.coreRoles.map((role) => (
@@ -132,7 +136,7 @@ export default function DesktopLists({
       </section>
 
       {/* CLUB CONVENORS */}
-      <section>
+      <section className="mb-15">
         <h2 className="text-xl font-semibold mb-4 text-[#2A1E1A]">Club Convenors</h2>
         <div className="space-y-1">
           {props.clubs.map((club) => (
@@ -141,6 +145,33 @@ export default function DesktopLists({
               item={club}
               category="club"
               members={getMembersForLabel(club)}
+              {...props}
+              onHover={(id, rect) => {
+                setHoveredConvenor(id);
+                setPopupPosition({
+                  x: rect.left - 140,
+                  y: rect.top + rect.height / 2,
+                });
+              }}
+              onLeave={() => {
+                setHoveredConvenor(null);
+                setPopupPosition(null);
+              }}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* WEBSITE TEAM */}
+      <section>
+        <h2 className="text-xl font-semibold mb-4 text-[#2A1E1A]">Website Crew</h2>
+        <div className="space-y-1">
+          {props.webRoles.map((role) => (
+            <ExpandableItem
+              key={role}
+              item={role}
+              category="web"
+              members={getMembersForLabel(role)}
               {...props}
               onHover={(id, rect) => {
                 setHoveredConvenor(id);

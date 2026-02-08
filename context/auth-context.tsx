@@ -30,6 +30,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (supabase) {
       // SUPABASE MODE
+      // 1. Check initial session and handle potential errors (like invalid refresh token)
+      supabase.auth.getSession().then(({ data, error }) => {
+        if (error) {
+          console.error("Error restoring session:", error.message);
+          supabase?.auth.signOut();
+        }
+      });
+
       const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
         if (session?.user) {
           const email = session.user.email || ''

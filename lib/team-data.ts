@@ -1,11 +1,13 @@
 ﻿import clubTeamData from "@/app/team/club-team.json";
 import coreTeamData from "@/app/team/core-team.json";
+import webTeamData from "@/app/team/web-team.json";
 
 // --- TYPES ---
 type RawMember = {
   code: string;
   name: string;
   position: string;
+  customImage?: string;
 };
 
 type RawTeamBlock = {
@@ -54,11 +56,15 @@ const KEY_TO_FOLDER: Record<string, string> = {
   CP: "CERTIFICATES AND PRIZE DISTRIBUTION",
   TR: "TREASURER",
   DS: "DISCIPLINE",
+  WEB_DEV: "WEBSITE",
+  WEB_DES: "WEBSITE",
+  WEB_CON: "WEBSITE",
 };
 
 const RAW_DATA = {
   ...clubTeamData,
   ...coreTeamData,
+  ...webTeamData,
 } as Record<string, RawTeamBlock>;
 
 /**
@@ -75,8 +81,8 @@ export function getTeamData(): TeamJSON {
       label: teamData.label,
       members: teamData.members.map((m) => {
         // Ensure the file exists (optional, but prevents 404)
-        const thumbPath = `/Teams/thumbs/${folder}/${m.code}.JPG`;
-        const fullPath = `/Teams/full/${folder}/${m.code}.JPG`;
+        const thumbPath = m.customImage ?? `/Teams/thumbs/${folder}/${m.code}.JPG`;
+        const fullPath = m.customImage ?? `/Teams/full/${folder}/${m.code}.JPG`;
 
         return {
           ...m,

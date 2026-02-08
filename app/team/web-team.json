@@ -1,0 +1,83 @@
+{
+    "WEB_DEV": {
+        "label": "Developers",
+        "members": [
+            {
+                "code": "WEB_DEV1",
+                "name": "Prathmesh Desai",
+                "position": "Committee Head",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_DEV1.jpg"
+            },
+            {
+                "code": "WEB_DEV2",
+                "name": "Kaustubh Mane",
+                "position": "Committee Head",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_DEV2.jpg"
+            },
+            {
+                "code": "WEB_DEV3",
+                "name": "Krish D Shah",
+                "position": "Committee Member",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_DEV3.jpg"
+            },
+            {
+                "code": "WEB_DEV4",
+                "name": "Syed Mohammad Anas",
+                "position": "Committee Member",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_DEV4.jpg"
+            }
+        ]
+    },
+    "WEB_DES": {
+        "label": "Designers",
+        "members": [
+            {
+                "code": "WEB_DES1",
+                "name": "M U Sriram Harigesh",
+                "position": "Committee Head",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_DES1.jpg"
+            },
+            {
+                "code": "WEB_DES2",
+                "name": "Azhara KS",
+                "position": "Committee Member",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_DES2.jpg"
+            }
+        ]
+    },
+    "WEB_CON": {
+        "label": "Contributors",
+        "members": [
+            {
+                "code": "WEB_CON1",
+                "name": "Avinash Sastry",
+                "position": "Volunteer",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON1.jpg"
+            },
+            {
+                "code": "WEB_CON2",
+                "name": "Meghna Das",
+                "position": "Volunteer",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON2.jpg"
+            },
+            {
+                "code": "WEB_CON3",
+                "name": "Pinakini Darshan Mahajan",
+                "position": "Volunteer",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON3.jpg"
+            },
+            {
+                "code": "WEB_CON4",
+                "name": "Sam Gladson A",
+                "position": "Volunteer",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON4.jpg"
+            },
+            {
+                "code": "WEB_CON5",
+                "name": "V Sreshta",
+                "position": "Volunteer",
+                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON5.jpg"
+            }
+        ]
+    }
+}

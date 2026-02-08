@@ -15,7 +15,7 @@ interface Member {
 
 interface Props {
   item: string;
-  category: "core" | "club";
+  category: "core" | "club" | "web";
   members: Member[];
 
   expandedItems: Set<string>;
