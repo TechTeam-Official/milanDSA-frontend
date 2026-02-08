@@ -128,39 +128,69 @@ export function MilanTimelineSection() {
       {/* Simplified dark gradient overlay to blend canvas */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0B0B0F]/40 via-[#0C1F20]/50 to-[#0B0B0F] z-10" />
 
-      <div className="absolute inset-0 flex justify-center pointer-events-none z-20">
+      {/* Mobile/Tablet SVG (Animated) */}
+      <svg
+        width="600"
+        height="2400"
+        viewBox="0 0 600 2400"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute inset-0 z-0 pointer-events-none opacity-80 w-full h-full lg:hidden"
+        preserveAspectRatio="none"
+      >
+        {/* Mobile Path */}
+        {/* Unified Mobile/Tablet Path */}
+        <motion.path
+          vectorEffect="non-scaling-stroke"
+          d="M300 350
+             C 450 550, 150 850, 300 1100
+             C 450 1350, 150 1650, 300 1900
+             C 450 2150, 150 2350, 300 2400"
+          stroke="url(#pulse)"
+          strokeWidth="4"
+          strokeLinecap="round"
+          fill="none"
+          style={{ pathLength }}
+        />
+        <defs>
+          <linearGradient id="pulse" x1="0" y1="0" x2="0" y2="2400" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stopColor="#FCD34D" stopOpacity="0" />
+            <stop offset="15%" stopColor="#FCD34D" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="#FFFFFF" stopOpacity="1" />
+            <stop offset="85%" stopColor="#FCD34D" stopOpacity="0.4" />
+            <stop offset="100%" stopColor="#FCD34D" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      {/* Desktop SVG (Static, Single Curve) */}
+      <div className="absolute inset-0 z-0 pointer-events-none hidden lg:block">
         <svg
           width="600"
           height="2400"
           viewBox="0 0 600 2400"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
-          className="opacity-80 w-full h-full"
+          className="w-full h-full"
           preserveAspectRatio="none"
         >
-          <motion.path
-            vectorEffect="non-scaling-stroke"
-            d="M300 350
-               C 450 550, 150 850, 300 1100
-               C 450 1350, 150 1650, 300 1900
-               C 450 2150, 150 2350, 300 2400"
-            stroke="url(#pulse)"
-            strokeWidth="6"
+          <path
+            d="M 300 400 
+               C 300 475, 252 475, 252 624 
+               C 252 936, 348 984, 348 1296 
+               C 348 1608, 252 1656, 252 1968 
+               Q 252 2112, 264 2280"
+            stroke="#C9A24D"
+            strokeWidth="3"
             strokeLinecap="round"
             fill="none"
-            style={{ pathLength }}
+            vectorEffect="non-scaling-stroke"
+            className="opacity-80 drop-shadow-[0_0_8px_rgba(201,162,77,0.5)]"
           />
-          <defs>
-            <linearGradient id="pulse" x1="0" y1="0" x2="0" y2="2400">
-              <stop offset="0%" stopColor="#ffffff" />
-              <stop offset="50%" stopColor="#D97706" />
-              <stop offset="100%" stopColor="#ffffff" />
-            </linearGradient>
-          </defs>
         </svg>
       </div>
 
-      <div className="relative z-30 max-w-7xl mx-auto flex flex-col gap-32 px-6">
+      <div className="relative z-30 max-w-7xl mx-auto flex flex-col gap-32 px-8 md:px-16 lg:px-24">
         {/* Section Header */}
         <div className="text-center mb-20 space-y-4 pt-10">
           <motion.h2
@@ -169,7 +199,7 @@ export function MilanTimelineSection() {
             viewport={{ once: true, margin: "-100px" }}
             className="text-5xl md:text-7xl tracking-tighter uppercase font-serif"
           >
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#0F766E]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9A24D] via-[#D97706] to-[#0F766E] py-2 inline-block">
               Timeline
             </span>
           </motion.h2>
@@ -192,20 +222,20 @@ export function MilanTimelineSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
-              className={`flex flex-col md:flex-row items-center gap-12 md:gap-24 ${left ? 'md:flex-row-reverse' : ''
+              className={`flex flex-col lg:flex-row items-center gap-12 lg:gap-24 ${left ? 'lg:flex-row-reverse' : ''
                 }`}
             >
               {/* Content Side */}
-              <div className={`w-full md:w-1/2 flex flex-col justify-center text-left items-start bg-black/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 md:border-none md:bg-transparent md:p-0 md:backdrop-blur-none ${left ? 'md:pl-12 lg:pl-16' : 'md:pr-12 lg:pr-16'}`}>
+              <div className={`w-full lg:w-1/2 flex flex-col justify-center text-left items-start bg-black/80 backdrop-blur-sm p-6 rounded-2xl border border-white/5 lg:border-none lg:bg-transparent lg:p-0 lg:backdrop-blur-none ${left ? 'lg:pl-12 xl:pl-16' : 'lg:pr-12 xl:pr-16'}`}>
                 <div className="space-y-6">
-                  <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)]">
+                  <h3 className="text-5xl md:text-7xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-br from-white via-[#C9A24D] to-[#D97706] drop-shadow-[0_0_15px_rgba(217,119,6,0.3)] py-2">
                     {item.year}
                   </h3>
                   <div className="h-1 w-24 bg-gradient-to-r from-[#0F766E] to-[#C9A24D] rounded-full" />
                   <ul className="space-y-4">
                     {item.facts.map((f) => (
-                      <li key={f} className="text-lg md:text-xl text-neutral-300 font-light tracking-wide flex items-center gap-3">
-                        <span className="h-1.5 w-1.5 min-h-[6px] min-w-[6px] rounded-full bg-[#0F766E] shadow-[0_0_10px_rgba(15,118,110,0.8)]" />
+                      <li key={f} className="text-xl md:text-2xl text-white font-light tracking-wide flex items-center gap-4">
+                        <span className="h-2 w-2 min-h-[8px] min-w-[8px] rounded-full bg-[#2DD4BF] shadow-[0_0_12px_#2DD4BF]" />
                         {f}
                       </li>
                     ))}
@@ -214,7 +244,7 @@ export function MilanTimelineSection() {
               </div>
 
               {/* Image Side */}
-              <div className="relative w-full md:w-1/2 group">
+              <div className="relative w-full lg:w-1/2 group">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[#C9A24D]/20 bg-white/5 backdrop-blur-sm shadow-2xl skew-y-1 transition-transform duration-700 group-hover:skew-y-0 group-hover:scale-[1.02]">
                   <div className="absolute inset-0 bg-gradient-to-tr from-[#3B2D5F]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10" />
                   <Image

@@ -95,9 +95,10 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
     const update = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
-      const mobile = w < 768;
-      setIsMobile(mobile);
-      const size = mobile ? Math.min(w, h) : Math.min(w, h) * 0.9;
+      // Treat tablet and iPad Pro (<= 1024px) as "mobile-like" layout (sequential flow)
+      const mobileOrTablet = w <= 1024;
+      setIsMobile(mobileOrTablet);
+      const size = mobileOrTablet ? Math.min(w, h) : Math.min(w, h) * 0.9;
       setDimensions({ width: size, height: size });
     };
     update();
@@ -139,10 +140,10 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
      * Added 'scrollbar-hide' to ensure internal scrollbar doesn't show.
      * Added 'snap-y snap-mandatory' for the page-to-page effect.
      */
-    <div className="w-full snap-y snap-mandatory">
+    <div className="w-full overflow-x-hidden bg-[#F3E8D7]">
       {/* ================= HERO SECTION ================= */}
       <section
-        className="h-screen w-full relative z-20 flex items-center justify-center text-center text-[#2A1E1A] snap-start snap-always rounded-b-[4rem] shadow-[0_0_50px_rgba(31,77,74,0.1)] border-b border-[#1F4D4A]/10 overflow-hidden">
+        className="h-screen w-full relative z-20 flex items-center justify-center text-center text-[#2A1E1A] rounded-b-[4rem] shadow-[0_0_50px_rgba(31,77,74,0.1)] border-b border-[#1F4D4A]/10 overflow-hidden">
 
         {/* BACKGROUND IMAGE */}
         <div className="absolute inset-0 z-0">
@@ -205,7 +206,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         style={{ backgroundColor: "#F3E8D7" }}
-        className="h-[110vh] w-full text-[#2A1E1A] relative overflow-hidden snap-start snap-always z-10 -mt-12">
+        className={`w-full text-[#2A1E1A] relative overflow-hidden z-10 ${isMobile ? "min-h-screen flex flex-col" : "h-[110vh] -mt-12 snap-start snap-always"}`}>
         <main className="w-full h-full relative overflow-hidden">
           {/* Ambient Background */}
           <div className="absolute inset-0 pointer-events-none z-0">
@@ -218,10 +219,12 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
 
           {/* Globe */}
           <div
-            className={`absolute inset-0 flex items-center justify-center md:pr-96 ${isMobile ? "z-0 opacity-100" : "z-10 pointer-events-none"
-              }`}>
+            className={isMobile
+              ? "relative w-full shrink-0 z-10 flex items-center justify-center py-16"
+              : "absolute inset-0 z-10 pointer-events-none"
+            }>
             <div
-              className="pointer-events-auto">
+              className={`pointer-events-auto ${isMobile ? "" : "w-full h-full flex items-center justify-center md:pr-64"}`}>
               <SphereImageGrid
                 images={sphereImages}
                 containerSize={dimensions.width}
@@ -239,7 +242,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
           </div>
 
           {isMobile ? (
-            <div className="absolute inset-0 z-30 overflow-y-auto scrollbar-hide pointer-events-none">
+            <div className="relative w-full z-20 pointer-events-auto">
               <MobileLists
                 isMobile
                 expandedItems={expandedItems}

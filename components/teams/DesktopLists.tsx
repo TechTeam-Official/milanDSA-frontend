@@ -95,6 +95,7 @@ export default function DesktopLists({
       className="
         hidden md:block
         absolute right-10 top-1/2 -translate-y-1/2
+        z-50
         w-[350px]
         max-h-[calc(100vh-12rem)]
         overflow-y-auto

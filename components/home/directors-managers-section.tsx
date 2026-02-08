@@ -70,7 +70,7 @@ export function DirectorsManagersSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-serif tracking-tighter uppercase im-text-shadow">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-[#0B0B0F] to-[#0F766E]">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-[#0B0B0F] to-[#0F766E] py-2 inline-block">
               The Visionaries
             </span>
           </motion.h2>
@@ -126,7 +126,7 @@ export function DirectorsManagersSection() {
         </div>
 
         <div className="relative border-t border-[#C9A24D]/30 pt-16">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FFFFF0] px-6 py-1 text-[#C9A24D] text-sm tracking-widest uppercase font-semibold border border-[#C9A24D] rounded-full shadow-sm">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#FFFFF0] px-6 py-1 text-[#C9A24D] text-sm tracking-widest uppercase font-semibold border border-[#C9A24D] rounded-full shadow-sm whitespace-nowrap">
             Event Operations
           </div>
 
@@ -138,8 +138,8 @@ export function DirectorsManagersSection() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 + idx * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-center gap-6 group bg-[#FFFFF0] border border-[#C9A24D] shadow-lg shadow-[#3B2D5F]/5 rounded-full pr-12 py-4 pl-4 hover:border-[#D97706] hover:shadow-[#D97706]/10 transiton-all duration-300 w-full md:w-[480px]">
-                <div className="relative w-32 h-32 rounded-full overflow-hidden border border-[#C9A24D]/20">
+                className="flex items-center gap-3 md:gap-6 group bg-[#FFFFF0] border border-[#C9A24D] shadow-lg shadow-[#3B2D5F]/5 rounded-full pr-6 md:pr-12 py-3 md:py-4 pl-3 md:pl-4 hover:border-[#D97706] hover:shadow-[#D97706]/10 transiton-all duration-300 w-full md:w-[480px]">
+                <div className="relative w-20 h-20 md:w-32 md:h-32 shrink-0 rounded-full overflow-hidden border border-[#C9A24D]/20">
                   <Image
                     src={person.image}
                     alt={person.name}
@@ -147,11 +147,11 @@ export function DirectorsManagersSection() {
                     className="object-cover transition-all duration-500"
                   />
                 </div>
-                <div className="text-left">
-                  <h4 className="text-neutral-900 text-xl group-hover:text-purple-600 transition-colors">
+                <div className="text-left min-w-0">
+                  <h4 className="text-neutral-900 text-lg md:text-xl group-hover:text-purple-600 transition-colors break-words">
                     {person.name}
                   </h4>
-                  <p className="text-neutral-500 text-sm uppercase tracking-wider">
+                  <p className="text-neutral-500 text-xs md:text-sm uppercase tracking-wider">
                     {person.role}
                   </p>
                 </div>

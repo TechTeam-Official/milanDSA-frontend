@@ -20,7 +20,7 @@ export function IntroductionSection() {
       <div className="im-accent-dot top-1/2 left-[5%] bg-[#C9A24D] shadow-[0_0_8px_#C9A24D] opacity-40" />
       <div className="im-accent-dot bottom-32 right-[15%] bg-[#0F766E] opacity-30" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-6 md:px-16 lg:px-24 relative z-10">
         <div className="relative max-w-4xl mx-auto text-center space-y-12">
 
           {/* 🏛️ Heritage Architectural Panel (Royal Scroll Mode) */}
@@ -86,7 +86,7 @@ export function IntroductionSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-5xl md:text-7xl font-serif tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-neutral-800 to-[#0F766E] mb-4 im-text-shadow">
+            <h2 className="text-5xl md:text-7xl font-serif tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-[#3A2A5E] via-neutral-800 to-[#0F766E] mb-4 im-text-shadow py-2">
               About MILAN
             </h2>
             <div className="inline-block relative">

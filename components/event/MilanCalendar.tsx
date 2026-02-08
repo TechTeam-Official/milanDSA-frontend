@@ -9,6 +9,8 @@ import {
   type CalendarEvent,
 } from "../../app/events/calendarAdapter";
 
+import { useModal } from "@/context/ui-context";
+
 /* ---------------- CONFIG ---------------- */
 
 const YEAR = 2026;
@@ -65,17 +67,22 @@ function ScheduleModal({
   day: number | null;
   schedule: Record<number, CalendarEvent[]>;
 }) {
+  const { setModalOpen } = useModal();
+
   // Fixed: Hook must be before any early return
   React.useEffect(() => {
     if (isOpen) {
+      setModalOpen(true);
       document.body.style.overflow = "hidden";
     } else {
+      setModalOpen(false);
       document.body.style.overflow = "";
     }
     return () => {
+      setModalOpen(false);
       document.body.style.overflow = "";
     };
-  }, [isOpen]);
+  }, [isOpen, setModalOpen]);
 
   if (!isOpen || day === null) return null;
 

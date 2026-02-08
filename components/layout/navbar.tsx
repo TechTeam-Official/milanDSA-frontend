@@ -7,6 +7,7 @@ import { motion, AnimatePresence, useSpring } from 'framer-motion'
 // ADDED: Pass import
 import { Home, Image as ImageIcon, Users, Calendar, Menu, Handshake, Compass, Ticket as PassIcon, LogIn, LogOut } from 'lucide-react'
 import { useAuth } from '@/context/auth-context'
+import { useModal } from '@/context/ui-context'
 
 interface NavItem {
   label: string
@@ -20,6 +21,9 @@ export const PillBase = () => {
   const pathname = usePathname()
   const containerRef = useRef<HTMLDivElement>(null)
 
+  /* New Hook to control visibility when modals open */
+  const { isModalOpen } = useModal()
+
   const { user, logout } = useAuth()
   const [profileOpen, setProfileOpen] = useState(false)
 
@@ -27,7 +31,7 @@ export const PillBase = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768)
+    const checkMobile = () => setIsMobile(window.innerWidth < 1200)
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
@@ -78,7 +82,7 @@ export const PillBase = () => {
     }
   }, [expanded, isMobile, navItems.length, width, height, user])
 
-  if (pathname?.startsWith('/operator')) return null
+  if (pathname?.startsWith('/operator') || isModalOpen) return null
 
   return (
     <div className="fixed top-6 left-0 right-0 z-50 flex justify-center pointer-events-none px-4">
@@ -86,7 +90,7 @@ export const PillBase = () => {
       <motion.nav
         ref={containerRef}
         style={{ width, height }}
-        className="pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-[#C9A24D]/15 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl bg-[linear-gradient(to_right,rgba(20,10,25,0.85),rgba(10,15,20,0.85))] rounded-full z-50 transition-all duration-300 ease-out"
+        className={`pointer-events-auto relative flex flex-col items-center justify-center overflow-hidden border border-[#C9A24D]/15 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-xl bg-[linear-gradient(to_right,rgba(20,10,25,0.85),rgba(10,15,20,0.85))] z-50 transition-all duration-300 ease-out ${isMobile && expanded ? 'rounded-3xl' : 'rounded-full'}`}
         onClick={() => {
           if (isMobile) setExpanded(!expanded)
         }}
@@ -138,13 +142,7 @@ export const PillBase = () => {
                         <span className="text-sm font-medium">{item.label}</span>
                       </div>
 
-                      {/* Active Indicator - Dot */}
-                      {isActive && !isMobile && (
-                        <motion.div
-                          layoutId="nav-pill"
-                          className="absolute bottom-1.5 w-1 h-1 bg-[#C9A24D] rounded-full"
-                        />
-                      )}
+
                     </button>
                   )
                 })}

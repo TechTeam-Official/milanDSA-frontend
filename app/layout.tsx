@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "@/app/globals.css"; // ✅ Absolute path to CSS
-import { ConditionalLayout } from "@/components/conditional-layout";
-import { ConditionalFooter } from "@/components/conditional-footer";
+import { ConditionalLayout } from "@/components/layout/conditional-layout";
+import { ConditionalFooter } from "@/components/layout/conditional-footer";
 import { AuthProvider } from "@/context/auth-context";
+import { ModalProvider } from "@/context/ui-context";
 import IntroSection from "@/components/intro/intro_section";
 
 const stampPress = localFont({
@@ -16,6 +17,7 @@ const foglihten = localFont({
   src: "./fonts/Foglihtenno07-e9wz3.otf",
   variable: "--font-foglihten",
   display: "swap",
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -36,9 +38,12 @@ export default function RootLayout({
       className={`${stampPress.variable} ${foglihten.variable}`}>
       <body className="antialiased font-sans">
         <AuthProvider>
-          <ConditionalLayout />
-          {children}
-          <ConditionalFooter />
+          <ModalProvider>
+            <IntroSection />
+            <ConditionalLayout />
+            {children}
+            <ConditionalFooter />
+          </ModalProvider>
         </AuthProvider>
       </body>
     </html>
