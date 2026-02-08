@@ -34,7 +34,7 @@ const PASSES: PassOption[] = [
   {
     id: "events",
     title: "Events Pass",
-    price: "₹299",
+    price: "₹300",
     description: "Access to all technical and non-technical events.",
     features: [
       "One pass. Access to 40+ events",
