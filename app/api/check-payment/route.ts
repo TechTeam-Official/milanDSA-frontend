@@ -1,35 +1,32 @@
 import { NextResponse } from "next/server";
 
-// 👇 FIX: This tells TypeScript that 'lastPaymentData' exists on the global object
-declare global {
-  var lastPaymentData:
-    | {
-        status: string;
-        timestamp: number;
-        data: Record<string, unknown>; // Better than 'any'
-      }
-    | undefined;
-}
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    // Now TypeScript knows this property exists
-    const memory = global.lastPaymentData;
+    // Get the email from the query string (e.g., ?email=test)
+    const { searchParams } = new URL(request.url);
+    const email = searchParams.get("email");
 
-    // Check if data exists AND if it is "COMPLETED"
-    if (memory && memory.status === "COMPLETED") {
-      // Optional: Check if the payment happened recently (e.g., within 60 seconds)
-      // This prevents old payments from triggering new redirects if the server hasn't restarted
-      const timeDiff = Date.now() - memory.timestamp;
-
-      if (timeDiff < 60000) {
-        // 60 seconds
-        return NextResponse.json({ paid: true, data: memory.data });
-      }
+    if (!email) {
+      return NextResponse.json({ paid: false, error: "Email missing" });
     }
 
-    return NextResponse.json({ paid: false });
+    // 🚀 Ask AWS: "Did this person pay?"
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/payment/check-payment?email=${email}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // We don't verify SSL in dev/test if using IP, but for production domains it's fine.
+        cache: "no-store", // Important: Don't cache this!
+      },
+    );
+
+    const data = await res.json();
+    return NextResponse.json(data, { status: res.status });
   } catch (error) {
-    console.error("Check-Payment Error:", error);
-    return NextResponse.json({ paid: false });
+    console.error("Proxy Error:", error);
+    return NextResponse.json({ paid: false }, { status: 500 });
   }
 }
