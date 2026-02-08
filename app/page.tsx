@@ -1,13 +1,15 @@
-import { Hero } from "@/components/hero"
-import { DirectorsManagersSection } from "@/components/directors-managers-section"
-import { MilanTimelineSection } from "@/components/milan-timeline-section"
-import { GuestShowcase } from "@/components/guest-showcase"
-import { PosterGeneratorSection } from "@/components/poster-generator-section"
-import { IntroductionSection } from "@/components/introduction-section"
+import { Hero } from "@/components/home/hero"
+import { DirectorsManagersSection } from "@/components/home/directors-managers-section"
+import { MilanTimelineSection } from "@/components/home/milan-timeline-section"
+import { GuestShowcase } from "@/components/home/guest-showcase"
+import { PosterGeneratorSection } from "@/components/home/poster-generator-section"
+import { IntroductionSection } from "@/components/home/introduction-section"
+import { IntroVideo } from "@/components/home/intro-video"
 
 export default function Home() {
   return (
     <>
+      <IntroVideo />
       <Hero />
       <IntroductionSection />
       <PosterGeneratorSection />
