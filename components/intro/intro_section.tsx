@@ -81,11 +81,11 @@ export default function IntroSection() {
           ) : (
             <>
               <source
-                src="/intro/desktop/milan_intro_video.webm"
+                src="/intro/desktop/intro_video_desktop.webm"
                 type="video/webm"
               />
               <source
-                src="/intro/desktop/milan_intro_video.mp4"
+                src="/intro/desktop/intro_video_desktop.mp4"
                 type="video/mp4"
               />
             </>

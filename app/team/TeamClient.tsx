@@ -20,16 +20,16 @@ const SphereImageGrid = dynamic(() => import("@/components/ui/img-sphere"), {
 });
 
 const CORE_TEAM_ROLES = [
-  "Operations & Resources",
-  "Tech Team and GD",
+  "Operations & Resource Management",
+  "Tech & Graphic Design",
   "Hospitality",
   "Public Relations",
   "Publicity & Social Media",
-  "Transport & Acc",
+  "Transportation & Accommodation",
   "Content",
   "EMCEE",
   "Media",
-  "Certificate & Prizes",
+  "Certificate & Prize Distribution",
   "Sponsorship",
   "Treasurer",
   "Discipline",
@@ -173,7 +173,15 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
           <p className="mt-6 max-w-2xl mx-auto text-white/90 text-lg md:text-xl drop-shadow-md font-medium">
             Crew Behind the magic
           </p>
+
+          <motion.div
+            initial={{ width: 0 }}
+            animate={{ width: 140 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="h-1 bg-[#B89B5E] rounded-full mx-auto mt-12"
+          />
         </div>
+
 
         {/* --- SCROLL INDICATOR (Animated Mouse) --- */}
         <motion.div
