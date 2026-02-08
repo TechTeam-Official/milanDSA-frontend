@@ -1,20 +1,36 @@
 'use client'
 
 import React from 'react'
-import GlassSurface, { GlassSurfaceProps } from '@/components/GlassSurface'
+import { cn } from '@/lib/utils'
 
-interface MilanGlassSurfaceProps extends Omit<GlassSurfaceProps, 'mixBlendMode'> {
-  variant?: 'default' | 'pass' | 'card' | 'hero' | 'interactive'
-  festivalAccent?: boolean
+interface GlassConfig {
+  opacity: number
+  blur: number
+  brightness: number
+  borderRadius: number
+  saturation?: number
+  distortionScale?: number
+  mixBlendMode: React.CSSProperties['mixBlendMode']
 }
 
-const variantConfigs = {
+interface MilanGlassSurfaceProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'default' | 'pass' | 'card' | 'hero' | 'interactive'
+  festivalAccent?: boolean
+  opacity?: number
+  blur?: number
+  brightness?: number
+  saturation?: number
+  borderRadius?: number
+  distortionScale?: number
+}
+
+const variantConfigs: Record<string, GlassConfig> = {
   default: {
     opacity: 0.93,
     blur: 11,
     brightness: 50,
     borderRadius: 20,
-    mixBlendMode: 'difference' as const,
+    mixBlendMode: 'difference',
   },
   pass: {
     opacity: 0.95,
@@ -22,14 +38,14 @@ const variantConfigs = {
     brightness: 60,
     borderRadius: 24,
     saturation: 1.2,
-    mixBlendMode: 'screen' as const,
+    mixBlendMode: 'screen',
   },
   card: {
     opacity: 0.9,
     blur: 10,
     brightness: 55,
     borderRadius: 16,
-    mixBlendMode: 'normal' as const,
+    mixBlendMode: 'normal',
   },
   hero: {
     opacity: 0.97,
@@ -37,14 +53,14 @@ const variantConfigs = {
     brightness: 45,
     borderRadius: 30,
     distortionScale: -180,
-    mixBlendMode: 'screen' as const,
+    mixBlendMode: 'screen',
   },
   interactive: {
     opacity: 0.92,
     blur: 9,
     brightness: 52,
     borderRadius: 18,
-    mixBlendMode: 'overlay' as const,
+    mixBlendMode: 'overlay',
   },
 }
 
@@ -53,28 +69,30 @@ export const MilanGlassSurface: React.FC<MilanGlassSurfaceProps> = ({
   festivalAccent = false,
   className = '',
   children,
+  style,
   ...props
 }) => {
-  const config = variantConfigs[variant]
+  const config = variantConfigs[variant] || variantConfigs.default
 
-  const milanClassName = festivalAccent
-    ? `${className} milan-glass-surface--festival`
-    : `${className} milan-glass-surface`
+  const minimalStyle: React.CSSProperties = {
+    ...style,
+    backdropFilter: `blur(${config.blur}px) brightness(${config.brightness}%) ${config.saturation ? `saturate(${config.saturation})` : ''}`,
+    backgroundColor: `rgba(255, 255, 255, ${1 - config.opacity})`, // Approximate inverse opacity for background
+    borderRadius: config.borderRadius,
+    mixBlendMode: config.mixBlendMode as any,
+    background: festivalAccent
+      ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(219, 39, 119, 0.1))'
+      : undefined,
+  }
 
   return (
-    <GlassSurface
-      {...config}
+    <div
+      className={cn("relative overflow-hidden", className)}
+      style={minimalStyle}
       {...props}
-      className={milanClassName}
-      style={{
-        ...props.style,
-        background: festivalAccent
-          ? 'linear-gradient(135deg, rgba(147, 51, 234, 0.1), rgba(219, 39, 119, 0.1))'
-          : undefined,
-      }}
     >
       {children}
-    </GlassSurface>
+    </div>
   )
 }
 
