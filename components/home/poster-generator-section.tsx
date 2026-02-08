@@ -107,7 +107,7 @@ export function PosterGeneratorSection() {
           </div>
 
           {/* Right Preview - Kept the poster preview but styled for Legacy */}
-          <div className="relative flex justify-center lg:justify-end">
+          <div className="relative flex justify-center lg:justify-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9, rotate: -2 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
