@@ -68,7 +68,7 @@ export function GalleryClient({ initialImages }: { initialImages: string[] }) {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.9, type: "spring" }}
             className="text-6xl md:text-8xl font-black tracking-tighter text-[#F1EEE8]">
-            Gallery
+            Gallery<span className="text-[#C9A24D]">.</span>
           </motion.h1>
 
           <motion.p
@@ -76,7 +76,7 @@ export function GalleryClient({ initialImages }: { initialImages: string[] }) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-[#F1EEE8]/80 font-light leading-relaxed">
-            A visual archive of energy, expression, and unforgettable nights —
+            A visual archive of energy, expression, and unforgettable nights
             where <span className="text-[#C9A24D]">culture</span>,{" "}
             <span className="text-[#F1EEE8]">music</span>,{" "}
             <span className="text-[#F1EEE8]">memories</span> collide.

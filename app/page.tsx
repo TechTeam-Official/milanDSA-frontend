@@ -4,12 +4,11 @@ import { MilanTimelineSection } from "@/components/home/milan-timeline-section"
 import { GuestShowcase } from "@/components/home/guest-showcase"
 import { PosterGeneratorSection } from "@/components/home/poster-generator-section"
 import { IntroductionSection } from "@/components/home/introduction-section"
-import { IntroVideo } from "@/components/home/intro-video"
+
 
 export default function Home() {
   return (
     <>
-      <IntroVideo />
       <Hero />
       <IntroductionSection />
       <PosterGeneratorSection />
