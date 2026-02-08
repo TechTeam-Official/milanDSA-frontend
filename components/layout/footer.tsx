@@ -166,9 +166,9 @@ export function Footer({ variant = "default" }: FooterProps) {
             {/* Legal */}
             <MobileFooterSection title="Legal" theme={theme}>
               <ul className={`space-y-2 text-sm ${theme.subtext}`}>
-                <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
-                <FooterLink href="#" theme={theme}>Terms of Service</FooterLink>
-                <FooterLink href="#" theme={theme}>Code of Conduct</FooterLink>
+                <FooterLink href="/docs/privacy-policy.pdf" theme={theme}>Privacy Policy</FooterLink>
+                <FooterLink href="/docs/terms-of-service.pdf" theme={theme}>Terms of Service</FooterLink>
+                <FooterLink href="/docs/code-of-conduct.pdf" theme={theme}>Code of Conduct</FooterLink>
               </ul>
             </MobileFooterSection>
 
@@ -208,9 +208,9 @@ export function Footer({ variant = "default" }: FooterProps) {
             <div className="space-y-3">
               <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Legal</h4>
               <ul className={`space-y-2 text-sm ${theme.subtext}`}>
-                <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
-                <FooterLink href="#" theme={theme}>Terms of Service</FooterLink>
-                <FooterLink href="#" theme={theme}>Code of Conduct</FooterLink>
+                <FooterLink href="/docs/privacy-policy.pdf" theme={theme}>Privacy Policy</FooterLink>
+                <FooterLink href="/docs/terms-of-service.pdf" theme={theme}>Terms of Service</FooterLink>
+                <FooterLink href="/docs/code-of-conduct.pdf" theme={theme}>Code of Conduct</FooterLink>
               </ul>
             </div>
 
@@ -249,9 +249,9 @@ export function Footer({ variant = "default" }: FooterProps) {
           <div className="hidden lg:block lg:col-span-2 space-y-2 md:space-y-3">
             <h4 className={`text-sm font-semibold uppercase tracking-wider ${theme.heading}`}>Legal</h4>
             <ul className={`space-y-2 text-sm ${theme.subtext}`}>
-              <FooterLink href="#" theme={theme}>Privacy Policy</FooterLink>
-              <FooterLink href="#" theme={theme}>Terms of Service</FooterLink>
-              <FooterLink href="#" theme={theme}>Code of Conduct</FooterLink>
+              <FooterLink href="/docs/privacy-policy.pdf" theme={theme}>Privacy Policy</FooterLink>
+              <FooterLink href="/docs/terms-of-service.pdf" theme={theme}>Terms of Service</FooterLink>
+              <FooterLink href="/docs/code-of-conduct.pdf" theme={theme}>Code of Conduct</FooterLink>
             </ul>
           </div>
 
@@ -277,8 +277,8 @@ export function Footer({ variant = "default" }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className={`pt-4 md:pt-6 border-t ${variant === 'team' ? 'border-[#1F4D4A]/5' : 'border-white/5'} flex flex-col items-center justify-center gap-2 text-xs text-center ${theme.copyright}`}>
-          <p>© Copyright Directorate of Student Affairs, SRMIST. All rights reserved.</p>
-          <p className="font-medium opacity-80">Developed By DSA Tech and Graphic Design Team.</p>
+          <p>Survived the SRM Wi-Fi to bring you this site. — The Tech & Graphic Design Team.</p>
+          <p className="font-medium opacity-80">© 2026 Directorate of Student Affairs, SRMIST. All rights reserved.</p>
         </div>
       </div >
     </footer >

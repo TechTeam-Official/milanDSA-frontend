@@ -52,6 +52,12 @@ const CLUB_CONVENORS = [
   "Festival Club",
 ];
 
+const WEB_TEAM_ROLES = [
+  "Developers",
+  "Designers",
+  "Contributors",
+];
+
 export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
   console.log("TeamClient rendered with new colors");
   const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
@@ -73,7 +79,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
   const { scrollYProgress } = useScroll();
   const indicatorOpacity = useTransform(scrollYProgress, [0, 0.05], [1, 0]);
 
-  const sphereImages = useMemo<ImageData[]>(() => {
+  const allMemberImages = useMemo<ImageData[]>(() => {
     const images: ImageData[] = [];
     Object.values(teamData).forEach((team: TeamJSON[string]) => {
       team.members.forEach((member: Member) => {
@@ -84,12 +90,18 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
             alt: member.name,
             title: member.name,
             description: member.position,
-          });
+            // Keep track if it's customImage for filtering
+            custom: !!member.customImage,
+          } as ImageData & { custom?: boolean });
         }
       });
     });
     return images;
   }, [teamData]);
+
+  const sphereImages = useMemo(() => {
+    return allMemberImages.filter((img) => !(img as any).custom);
+  }, [allMemberImages]);
 
   useEffect(() => {
     const update = () => {
@@ -110,7 +122,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
   const baseImageScale = isMobile ? 0.16 : 0.2;
 
   const getMemberImage = (id: string): ImageData => {
-    const found = sphereImages.find((img) => img.id === id);
+    const found = allMemberImages.find((img) => img.id === id);
     if (found) return found;
     return {
       id: "placeholder",
@@ -257,6 +269,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
                 setExpandedItems={setExpandedItems}
                 coreRoles={CORE_TEAM_ROLES}
                 clubs={CLUB_CONVENORS}
+                webRoles={WEB_TEAM_ROLES}
                 getRandomImage={getMemberImage}
                 setSelectedConvenor={handleMemberSelect}
                 setSelectedSphereImage={setSelectedSphereImage}
@@ -270,6 +283,7 @@ export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
               setExpandedItems={setExpandedItems}
               coreRoles={CORE_TEAM_ROLES}
               clubs={CLUB_CONVENORS}
+              webRoles={WEB_TEAM_ROLES}
               getRandomImage={getMemberImage}
               setSelectedConvenor={handleMemberSelect}
               setSelectedSphereImage={setSelectedSphereImage}
