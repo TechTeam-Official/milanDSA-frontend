@@ -71,9 +71,6 @@ const ComingSoon = () => {
           className="flex justify-center"></motion.div>
       </motion.div>
 
-      <div className="absolute bottom-8 text-neutral-600 text-xs tracking-widest uppercase text-center w-full">
-        © 2026 Design Collective
-      </div>
     </div>
   );
 };
