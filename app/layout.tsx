@@ -36,7 +36,6 @@ export default function RootLayout({
       className={`${stampPress.variable} ${foglihten.variable}`}>
       <body className="antialiased font-sans">
         <AuthProvider>
-          <IntroSection />
           <ConditionalLayout />
           {children}
           <ConditionalFooter />
