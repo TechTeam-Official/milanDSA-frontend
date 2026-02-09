@@ -58,7 +58,7 @@ const PASSES: PassOption[] = [
     restriction: "srm",
     icon: Crown,
     color: "from-amber-400 to-orange-400",
-    comingSoon: true,
+    comingSoon: false,
   },
 ];
 
@@ -108,19 +108,7 @@ export default function Passes() {
     }
   };
 
-  const filteredPasses = PASSES.filter((pass) => {
-    // If not logged in, show all
-    if (!user) return true;
-
-    // If logged in:
-    // 1. Show 'pro' ONLY if email is srmist.edu.in
-    if (pass.id === "pro") {
-      return user.email?.endsWith("@srmist.edu.in");
-    }
-
-    // 2. Show other passes (e.g., 'events') for everyone
-    return true;
-  });
+  const filteredPasses = PASSES;
 
   return (
     <main className="relative min-h-screen bg-[#14172B] text-white selection:bg-[#E0B65C]/30 overflow-hidden">

@@ -95,7 +95,7 @@ export default function PaymentGatewayPage() {
               id="konfhub-widget"
               className="w-full rounded-xl bg-white"
               height="700"
-              scrolling="no"
+              scrolling="yes"
               src="https://konfhub.com/widget/milan-events-2026-84fc6d93?desc=false&secondaryBg=F7F7F7&ticketBg=F7F7F7&borderCl=F7F7F7&bg=FFFFFF&fontColor=1e1f24&ticketCl=1e1f24&btnColor=002E6E&fontFamily=Hind&borderRadius=10&widget_type=quick&screen=2&tickets=75151&ticketId=75151%7C1"
               style={{ border: "none", overflow: "hidden" }}
             />
