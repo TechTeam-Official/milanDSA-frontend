@@ -11,39 +11,46 @@ export default function PaymentGatewayPage() {
     "pending",
   );
 
-  // 🔄 POLLING LOGIC
+  // 🔄 POLLING LOGIC: Checks for payment every 3 seconds
   useEffect(() => {
     const checkPaymentStatus = async () => {
       try {
+        // Ask our internal API if the webhook has arrived
         const res = await fetch("/api/check-payment");
         const data = await res.json();
 
         if (data.paid) {
+          console.log("✅ Payment Confirmed! Redirecting...");
           setPaymentStatus("success");
+
+          // Wait 3 seconds to show success message, then go to home/dashboard
           setTimeout(() => {
-            router.push("/");
+            router.push("/"); // 👈 CHANGE THIS to your desired success URL
           }, 3000);
         }
       } catch (error) {
-        console.error("Polling error:", error);
+        console.error("Polling error (ignoring...)", error);
       }
     };
 
+    // Start the interval
+    // ⭐️ FIX: Changed 'let' to 'const'
     const intervalId = setInterval(checkPaymentStatus, 3000);
+
+    // Cleanup when user leaves page
     return () => clearInterval(intervalId);
   }, [router]);
 
   return (
-    /* Removed 'overflow-hidden' to allow scrolling */
-    <main className="min-h-screen w-full bg-black flex flex-col items-center justify-start md:justify-center p-4 relative">
-      {/* SUCCESS OVERLAY */}
+    <main className="min-h-screen w-full bg-black flex items-center justify-center p-4 relative overflow-hidden">
+      {/* SUCCESS OVERLAY (Shows when payment is detected) */}
       <AnimatePresence>
         {paymentStatus === "success" && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md text-center p-6">
+            className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md text-center p-6">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -61,14 +68,14 @@ export default function PaymentGatewayPage() {
         )}
       </AnimatePresence>
 
-      {/* MAIN CONTENT CONTAINER */}
+      {/* MAIN PAYMENT FORM */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.95 }}
+        animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5 }}
-        className="w-full max-w-5xl relative z-10 py-8">
+        className="w-full max-w-7xl relative">
         {/* HEADER */}
-        <div className="mb-8 text-center space-y-2">
+        <div className="mb-4 text-center space-y-2">
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-cyan-100 to-white/60">
             Complete Payment
           </h1>
@@ -87,16 +94,16 @@ export default function PaymentGatewayPage() {
               title="Register for MILAN 2026 Events"
               id="konfhub-widget"
               className="w-full rounded-xl bg-white"
-              height="700"
-              scrolling="yes"
+              height="600"
+              width="100%"
               src="https://konfhub.com/widget/milan-events-2026-84fc6d93?desc=false&secondaryBg=F7F7F7&ticketBg=F7F7F7&borderCl=F7F7F7&bg=FFFFFF&fontColor=1e1f24&ticketCl=1e1f24&btnColor=002E6E&fontFamily=Hind&borderRadius=10&widget_type=quick&screen=2&tickets=75151&ticketId=75151%7C1"
-              style={{ border: "none" }}
+              style={{ border: "none", overflow: "hidden" }}
             />
           </div>
         </div>
 
         {/* TRUST BADGES */}
-        <div className="mt-8 flex items-center justify-center gap-6 text-xs text-neutral-500 font-medium pb-4">
+        <div className="mt-6 flex items-center justify-center gap-6 text-xs text-neutral-500 font-medium">
           <span className="flex items-center gap-2">
             <Lock className="h-3 w-3" />
             SSL Encrypted
