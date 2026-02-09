@@ -1,5 +1,5 @@
 import { Hero } from "@/components/home/hero"
-import { DirectorsManagersSection } from "@/components/home/directors-managers-section"
+import { ArtistsSection } from "@/components/home/artists-section"
 import { MilanTimelineSection } from "@/components/home/milan-timeline-section"
 import { GuestShowcase } from "@/components/home/guest-showcase"
 import { PosterGeneratorSection } from "@/components/home/poster-generator-section"
@@ -12,7 +12,7 @@ export default function Home() {
       <Hero />
       <IntroductionSection />
       <PosterGeneratorSection />
-      <DirectorsManagersSection />
+      <ArtistsSection />
       <MilanTimelineSection />
       <GuestShowcase />
     </>
