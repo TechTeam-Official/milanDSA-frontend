@@ -55,7 +55,6 @@ const CLUB_CONVENORS = [
 const WEB_TEAM_ROLES = [
   "Developers",
   "Designers",
-  "Contributors",
 ];
 
 export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
