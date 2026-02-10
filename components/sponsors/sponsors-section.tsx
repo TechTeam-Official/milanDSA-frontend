@@ -25,7 +25,7 @@ const CURRENT_SPONSORS: Sponsor[] = [
     span: "md:col-span-2",
   },
   {
-    name: "Date The Bite",
+    name: "Date Bites",
     role: "Snack Partner",
     description: "Guilt-free date snacks.",
     image: "/current-sponsors/date-bite.png",

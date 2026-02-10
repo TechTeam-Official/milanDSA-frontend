@@ -13,7 +13,7 @@ const people = [
         type: "headliner",
         landscape: true,
         fit: "cover",
-        date: "TBA",
+        date: "19.02.2026",
     },
     {
         name: "Santhosh Narayanan",
