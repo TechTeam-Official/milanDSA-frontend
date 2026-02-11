@@ -44,40 +44,5 @@
                 "customImage": "/Teams/thumbs/WEBSITE/WEB_DES2.jpg"
             }
         ]
-    },
-    "WEB_CON": {
-        "label": "Contributors",
-        "members": [
-            {
-                "code": "WEB_CON1",
-                "name": "Avinash Sastry",
-                "position": "Volunteer",
-                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON1.jpg"
-            },
-            {
-                "code": "WEB_CON2",
-                "name": "Meghna Das",
-                "position": "Volunteer",
-                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON2.jpg"
-            },
-            {
-                "code": "WEB_CON3",
-                "name": "Pinakini Darshan Mahajan",
-                "position": "Volunteer",
-                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON3.jpg"
-            },
-            {
-                "code": "WEB_CON4",
-                "name": "Sam Gladson A",
-                "position": "Volunteer",
-                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON4.jpg"
-            },
-            {
-                "code": "WEB_CON5",
-                "name": "V Sreshta",
-                "position": "Volunteer",
-                "customImage": "/Teams/thumbs/WEBSITE/WEB_CON5.jpg"
-            }
-        ]
     }
 }
