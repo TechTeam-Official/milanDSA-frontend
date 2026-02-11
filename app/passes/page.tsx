@@ -38,7 +38,7 @@ const PASSES: PassOption[] = [
     description: "Access to all technical and non-technical events.",
     features: [
       "One pass. Access to 40+ events",
-      "Compete for a cash prize worth ₹10+ lakhs",
+      "Compete for a prize pool of worth ₹10 lakhs+",
       "Learn, compete & level up",
     ],
     restriction: "open",
