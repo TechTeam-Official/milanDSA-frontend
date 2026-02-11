@@ -38,7 +38,7 @@ const PASSES: PassOption[] = [
     description: "Access to all technical and non-technical events.",
     features: [
       "One pass. Access to 40+ events",
-      "Compete for a cash prize worth ₹10+ lakhs",
+      "Compete for a prize pool of worth ₹10 lakhs+",
       "Learn, compete & level up",
     ],
     restriction: "open",
@@ -50,11 +50,7 @@ const PASSES: PassOption[] = [
     title: "Pro-Show Pass",
     price: "₹999",
     description: "Exclusive access to the star-studded nights.",
-    features: [
-      "Access to all Pro-Shows",
-      "Exclusive meet & greet opportunities",
-      "Unforgettable live performances",
-    ],
+    features: ["Access to all Pro-Shows", "Unforgettable live performances"],
     restriction: "srm",
     icon: Crown,
     color: "from-amber-400 to-orange-400",
@@ -156,10 +152,11 @@ export default function Passes() {
 
         {/* Pass Grid */}
         <div
-          className={`grid gap-8 w-full ${filteredPasses.length === 1
-            ? "grid-cols-1 max-w-md mx-auto"
-            : "grid-cols-1 md:grid-cols-2 max-w-5xl"
-            }`}>
+          className={`grid gap-8 w-full ${
+            filteredPasses.length === 1
+              ? "grid-cols-1 max-w-md mx-auto"
+              : "grid-cols-1 md:grid-cols-2 max-w-5xl"
+          }`}>
           {filteredPasses.map((pass, index) => (
             <motion.div
               key={pass.id}
@@ -167,18 +164,15 @@ export default function Passes() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               className="group relative flex flex-col">
-
               {/* Premium Card Container */}
               <div className="relative flex flex-col h-full bg-[#1C2140]/40 backdrop-blur-xl border border-[#E0B65C]/20 rounded-3xl p-8 hover:bg-[#1C2140]/60 hover:border-[#E0B65C]/40 transition-all duration-500 ease-out hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(224,182,92,0.05)]">
-
                 {/* Soft Inner Gradient Highlight (Top) */}
                 <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-white/5 to-transparent opacity-50 pointer-events-none rounded-t-3xl" />
 
                 {/* Header */}
                 <div className="mb-6 relative z-10">
                   <div className="flex items-center gap-5 mb-6">
-                    <div
-                      className="w-16 h-16 rounded-2xl bg-[#E0B65C]/10 border border-[#E0B65C]/20 p-4 flex items-center justify-center group-hover:bg-[#E0B65C]/20 transition-colors duration-500">
+                    <div className="w-16 h-16 rounded-2xl bg-[#E0B65C]/10 border border-[#E0B65C]/20 p-4 flex items-center justify-center group-hover:bg-[#E0B65C]/20 transition-colors duration-500">
                       <pass.icon className="w-full h-full text-[#E0B65C] group-hover:text-[#F2A900] transition-colors duration-500" />
                     </div>
                     <h3 className="text-3xl font-serif text-white leading-none tracking-tight">
@@ -187,7 +181,8 @@ export default function Passes() {
                   </div>
 
                   <div className="flex items-baseline gap-1">
-                    <span className={`${pass.comingSoon ? "text-2xl" : "text-4xl"} font-medium text-white tracking-tight`}>
+                    <span
+                      className={`${pass.comingSoon ? "text-2xl" : "text-4xl"} font-medium text-white tracking-tight`}>
                       {pass.comingSoon ? "Coming Soon" : pass.price}
                     </span>
                     {!pass.comingSoon && (
@@ -207,10 +202,10 @@ export default function Passes() {
                     <li
                       key={i}
                       className="flex items-start gap-4 text-neutral-300">
-                      <div
-                        className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-[#E0B65C] shadow-[0_0_8px_#E0B65C]"
-                      />
-                      <span className="text-sm font-light text-neutral-200 group-hover:text-white transition-colors">{feature}</span>
+                      <div className="w-1.5 h-1.5 rounded-full mt-2 shrink-0 bg-[#E0B65C] shadow-[0_0_8px_#E0B65C]" />
+                      <span className="text-sm font-light text-neutral-200 group-hover:text-white transition-colors">
+                        {feature}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -254,16 +249,17 @@ export default function Passes() {
                       <Button
                         onClick={() => handleBuyPass(pass)}
                         disabled={(!!user && !isEligible) || !!pass.comingSoon}
-                        className={`w-full font-bold py-6 rounded-xl group/btn transform transition-all duration-300 ${user && !isEligible
-                          ? "bg-[#14172B] text-neutral-500 cursor-not-allowed border border-white/5"
-                          : pass.comingSoon
-                            ? "bg-[#14172B]/60 text-neutral-400 cursor-not-allowed border border-dashed border-white/20"
-                            : "bg-white text-[#14172B] hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:bg-neutral-200 hover:border-white border border-white"
-                          }`}>
+                        className={`w-full font-bold py-6 rounded-xl group/btn transform transition-all duration-300 ${
+                          user && !isEligible
+                            ? "bg-[#14172B] text-neutral-500 cursor-not-allowed border border-white/5"
+                            : pass.comingSoon
+                              ? "bg-[#14172B]/60 text-neutral-400 cursor-not-allowed border border-dashed border-white/20"
+                              : "bg-white text-[#14172B] hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:bg-neutral-200 hover:border-white border border-white"
+                        }`}>
                         <span className="flex items-center justify-center gap-2 font-bold tracking-wide">
                           <>
                             {buttonText}
-                            {(pass.comingSoon || (user && !isEligible)) ? (
+                            {pass.comingSoon || (user && !isEligible) ? (
                               <Ban className="w-4 h-4" />
                             ) : (
                               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
