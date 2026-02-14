@@ -58,8 +58,8 @@ const WEB_TEAM_ROLES = [
 ];
 
 export default function TeamClient({ teamData }: { teamData: TeamJSON }) {
-  console.log("TeamClient rendered with new colors");
   const [dimensions, setDimensions] = useState({ width: 800, height: 800 });
+
   const [isMobile, setIsMobile] = useState(false);
 
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
