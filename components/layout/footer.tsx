@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Facebook, Instagram, Youtube, Mail, MapPin, ChevronDown } from 'lucide-react'
+import { Facebook, Instagram, Youtube, Mail, MapPin, ChevronDown, MessageCircle } from 'lucide-react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useState } from 'react'
 
@@ -187,6 +187,12 @@ export function Footer({ variant = "default" }: FooterProps) {
                   <Mail className={`${theme.iconColor} shrink-0`} size={16} />
                   <span>techteam.sa@srmist.edu.in</span>
                 </li>
+                <li className="flex items-center gap-3">
+                  <MessageCircle className={`${theme.iconColor} shrink-0`} size={16} />
+                  <a href="https://chat.whatsapp.com/DTz25FsTovgHMSzP56Pnxt?mode=gi_t" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    Join WhatsApp Group
+                  </a>
+                </li>
               </ul>
             </MobileFooterSection>
           </div>
@@ -229,6 +235,12 @@ export function Footer({ variant = "default" }: FooterProps) {
                   <Mail className={`${theme.iconColor} shrink-0`} size={16} />
                   <span className="break-all">techteam.sa@srmist.edu.in</span>
                 </li>
+                <li className="flex items-center gap-3">
+                  <MessageCircle className={`${theme.iconColor} shrink-0`} size={16} />
+                  <a href="https://chat.whatsapp.com/DTz25FsTovgHMSzP56Pnxt?mode=gi_t" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    Join WhatsApp Group
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -270,6 +282,12 @@ export function Footer({ variant = "default" }: FooterProps) {
               <li className="flex items-center gap-3">
                 <Mail className={`${theme.iconColor} shrink-0`} size={16} />
                 <span>techteam.sa@srmist.edu.in</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <MessageCircle className={`${theme.iconColor} shrink-0`} size={16} />
+                <a href="https://chat.whatsapp.com/DTz25FsTovgHMSzP56Pnxt?mode=gi_t" target="_blank" rel="noopener noreferrer" className="hover:underline">
+                  Join WhatsApp Group
+                </a>
               </li>
             </ul>
           </div>

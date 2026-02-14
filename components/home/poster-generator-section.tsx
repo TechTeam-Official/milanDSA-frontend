@@ -100,9 +100,14 @@ export function PosterGeneratorSection() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4"
             >
-              <button disabled className="px-8 py-4 bg-white/80 text-neutral-600 font-bold rounded-full cursor-not-allowed flex items-center gap-2 shadow-sm">
-                Coming Soon...
-              </button>
+              <a 
+                href="https://www.srmmilan.aaruush.org/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-8 py-4 bg-[#C9A24D] text-black font-bold rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(201,162,77,0.4)] hover:bg-[#D97706] transition-all hover:scale-105 active:scale-95 group"
+              >
+                <span>Generate Poster</span>
+              </a>
             </motion.div>
           </div>
 
