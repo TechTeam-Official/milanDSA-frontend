@@ -7,7 +7,7 @@ import { ArrowRight, Timer } from "lucide-react";
 // Define strict types to satisfy TypeScript without @ts-ignore
 interface Sponsor {
   name: string;
-  role: string;
+  role?: string;
   span: string;
   description?: string;
   image?: string; // Made optional to prevent TS errors on mystery cards
@@ -19,47 +19,42 @@ interface Sponsor {
 const CURRENT_SPONSORS: Sponsor[] = [
   {
     name: "Farmley",
-    role: "Snack Partner",
-    description: "Healthy snacking made fun.",
     image: "/current-sponsors/farmley.png",
     span: "md:col-span-2",
   },
   {
     name: "Date Bites",
-    role: "Snack Partner",
-    description: "Guilt-free date snacks.",
     image: "/current-sponsors/date-bite.png",
     span: "md:col-span-1",
   },
   {
-    name: "Revealing Soon",
-    role: "Music Partner",
+    name: "Barzell",
+    image: "/current-sponsors/barzell.png",
     span: "md:col-span-1",
   },
   {
-    name: "Revealing Soon",
-    role: "Energy Partner",
-    description: "Powering the event.",
+    name: "Ultraviolette",
+    image: "/current-sponsors/ultraviolette.png",
     span: "md:col-span-2",
   },
   {
     name: "Revealing Soon",
-    role: "Media Partner",
+    span: "md:col-span-2",
+  },
+  {
+    name: "Revealing Soon",
     span: "md:col-span-1",
   },
   {
     name: "Revealing Soon",
-    role: "Food Partner",
     span: "md:col-span-1",
   },
   {
     name: "Revealing Soon",
-    role: "Social Partner",
     span: "md:col-span-1",
   },
   {
     name: "Revealing Soon",
-    role: "Food Partner",
     span: "md:col-span-1",
   },
 ];

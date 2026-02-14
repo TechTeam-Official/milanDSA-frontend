@@ -215,7 +215,7 @@ export default function Passes() {
                   {pass.restriction === "srm" ? (
                     <>
                       <ShieldCheck className="w-3.5 h-3.5" />
-                      <span>SRM Students Only</span>
+                      <span>SRMIST Students Only</span>
                     </>
                   ) : (
                     <>

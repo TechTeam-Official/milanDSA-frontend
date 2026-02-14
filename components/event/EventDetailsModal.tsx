@@ -165,7 +165,7 @@ export default function EventDetailsModal({
               {/* Footer */}
               <div className="p-4 border-t border-[#C9A24D]/20 bg-[#0B0B0F]/90 text-center relative z-10">
                 <p className="text-xs text-[#C9A24D]/60 tracking-widest uppercase font-bold">
-                  Select an event to view registration details (Coming Soon)
+                  To participate for events buy events pass and fill in your details in the google-form to confirm your spot
                 </p>
               </div>
             </motion.div>

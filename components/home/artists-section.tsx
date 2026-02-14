@@ -21,6 +21,7 @@ const people = [
         // Removed subRole
         image: "/ProShowPasses/SaNa.png",
         type: "headliner",
+        size: "large",
         fit: "cover",
         date: "20.02.2026",
     },
@@ -35,12 +36,14 @@ const people = [
         date: "19.02.2026",
     },
     {
-        name: "Coming Soon",
-        role: "Stay Tuned",
-        subRole: "More Artists",
-        image: "/milan/milan-logo-main.png",
+        name: "Office Gaana",
+        role: "Live Band",
+        // Removed subRole
+        image: "/ProShowPasses/Office-Gaana.png",
         type: "opener",
-        fit: "contain",
+        landscape: true,
+        fit: "cover",
+        date: "21.02.2026",
     },
 
 ];
@@ -82,17 +85,19 @@ export function ArtistsSection() {
                 </div>
 
                 {/* Bento Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:gap-6 max-w-6xl mx-auto auto-rows-[300px] md:auto-rows-auto md:h-[600px]">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 max-w-6xl mx-auto auto-rows-[300px]">
                     {/* Re-organize artists for the grid: Featured first, then others mixed */}
                     {[
                         people.find((p) => p.featured),
-                        ...people.filter((p) => !p.featured && p.type === "headliner"),
-                        ...people.filter((p) => p.type === "opener"),
+                        people.find((p) => p.name === "Mithoon"),
+                        people.find((p) => p.name === "Santhosh Narayanan"),
+                        people.find((p) => p.name === "Office Gaana"),
                     ]
                         .filter(Boolean)
                         .map((person, idx) => {
-                            // First item (Thaman) is 2x2. Others are 1x1.
-                            const isLarge = idx === 0;
+                            // Determine if item should be large (2x2)
+                            // @ts-ignore
+                            const isLarge = person?.featured || person?.size === "large";
 
                             return (
                                 <motion.div
