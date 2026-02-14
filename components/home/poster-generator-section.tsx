@@ -100,9 +100,9 @@ export function PosterGeneratorSection() {
               transition={{ delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start pt-4"
             >
-              <a 
-                href="https://www.srmmilan.aaruush.org/" 
-                target="_blank" 
+              <a
+                href="https://www.srmmilan.aaruush.org/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-[#C9A24D] text-black font-bold rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(201,162,77,0.4)] hover:bg-[#D97706] transition-all hover:scale-105 active:scale-95 group"
               >
@@ -121,43 +121,15 @@ export function PosterGeneratorSection() {
               className="relative w-[320px] h-[480px] md:w-[360px] md:h-[540px] bg-neutral-900 rounded-lg overflow-hidden shadow-[0_0_50px_-10px_rgba(184,115,51,0.2)] border border-[#B87333] ring-1 ring-[#B87333]/50 group cursor-pointer"
             >
 
-              {/* Vintage/Legacy Background Mockup - Umber Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#4B2E2B] to-black" />
-              <div className="absolute inset-0 z-0 opacity-40 mix-blend-overlay">
-                <Image src="/milan/timeline/2023.png" alt="Legacy Texture" fill className="object-cover grayscale sepia-[0.4]" />
-              </div>
-              <div className="indian-noise" />
-
-              {/* Poster Content Overlay */}
-              <div className="absolute inset-0 flex flex-col justify-between p-8 z-20 border-[1px] border-[#C9A24D]/30 m-4 shadow-[inset_0_0_20px_rgba(201,162,77,0.1)]">
-                <div className="text-center pt-8">
-                  <div className="text-[10px] font-bold tracking-[0.4em] text-[#C9A24D] uppercase mb-3">Est. 1985</div>
-                  <h3 className="text-5xl text-white drop-shadow-lg font-serif">
-                    40
-                  </h3>
-                  <p className="text-xl text-[#F5F2EC] font-serif italic">Years of Excellence</p>
-                </div>
-
-                <div className="text-center pb-8 space-y-2">
-                  <p className="text-sm text-neutral-400 uppercase tracking-widest">Celebrating</p>
-                  <p className="text-2xl font-bold text-white uppercase tracking-tight">
-                    YOUR NAME
-                  </p>
-                  <p className="text-xs text-[#C9A24D]/80 pt-2">#SRMIST40 #MILAN26</p>
-                </div>
-              </div>
+              <Image
+                src="/milan/poster-example.png"
+                alt="First Day Confusion Poster"
+                fill
+                className="object-cover"
+              />
 
               {/* Glitch Overlay Effect (Subtle) */}
               <div className="absolute inset-0 bg-gradient-to-t from-[#D97706]/20 to-transparent pointer-events-none mix-blend-overlay" />
-
-              <div className="absolute bottom-4 right-4 z-40 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <button className="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
-                  <Download size={16} />
-                </button>
-                <button className="w-10 h-10 rounded-full bg-black/60 backdrop-blur border border-white/20 text-white flex items-center justify-center hover:scale-110 transition-transform">
-                  <Share2 size={16} />
-                </button>
-              </div>
             </motion.div>
           </div>
         </div>
