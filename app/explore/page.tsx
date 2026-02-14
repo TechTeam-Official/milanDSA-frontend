@@ -221,68 +221,7 @@ const MainContent = () => {
         </motion.div>
       </section>
 
-      <div className="relative z-10 -mt-12 pt-24 flex flex-col justify-center pb-20 bg-neutral-50 text-black">
-        <section className="px-4">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-12 flex items-center justify-between">
-              <h2 className="text-3xl md:text-5xl font-serif text-black tracking-tighter">
-                Community Gallery<span className="text-purple-500">.</span>
-              </h2>
-              <div className="hidden md:block h-px flex-1 bg-purple-500/20 ml-8" />
-            </div>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-8 perspective-1000">
-              <Polaroid
-                rotate="-6deg"
-                label="Cyberpunk City"
-                delay={0.2}
-                artId={842}
-              />
-              <Polaroid
-                rotate="6deg"
-                label="Abstract Fluids"
-                delay={0.4}
-                artId={159}
-              />
-              <Polaroid
-                rotate="-3deg"
-                label="Neon Portrait"
-                delay={0.6}
-                artId={304}
-              />
-              <Polaroid
-                rotate="4deg"
-                label="Retro Wave"
-                delay={0.8}
-                artId={991}
-              />
-              <Polaroid
-                rotate="3deg"
-                label="Minimalist Geo"
-                delay={0.2}
-                artId={124}
-              />
-              <Polaroid
-                rotate="-5deg"
-                label="Vaporwave"
-                delay={0.4}
-                artId={567}
-              />
-              <Polaroid
-                rotate="5deg"
-                label="Glitch Art"
-                delay={0.6}
-                artId={890}
-              />
-              <Polaroid
-                rotate="-4deg"
-                label="Surreal Dream"
-                delay={0.8}
-                artId={231}
-              />
-            </div>
-          </div>
-        </section>
-      </div>
+      {/* Community Gallery Section Hidden */}
 
 
 
