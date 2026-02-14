@@ -3,14 +3,14 @@
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Sparkles, Hourglass } from "lucide-react";
+import { Sparkles, Hourglass, Share2 } from "lucide-react";
 import { UploadModal } from "@/components/explore/upload-modal";
 import { AIGeneratorModal } from "@/components/explore/ai-generator-modal";
 
 // --------------------------------------------------------------------------
 // CONFIGURATION
 // --------------------------------------------------------------------------
-const IS_COMING_SOON = true;
+const IS_COMING_SOON = false;
 
 // --------------------------------------------------------------------------
 // COMPONENT 1: COMING SOON (Email Section Removed)
@@ -153,31 +153,48 @@ const MainContent = () => {
         <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-indigo-900/20 blur-[120px] rounded-full" />
       </div>
 
-      <section className="relative h-screen flex flex-col items-center justify-center px-4 text-center z-20 w-full rounded-b-[4rem] shadow-[0_0_50px_rgba(168,85,247,0.2)] overflow-hidden border-b border-purple-500/30 backdrop-blur-sm">
+      {/* 1. HERO — MATCHING EVENTS PAGE STRUCTURE */}
+      <section className="relative h-screen flex flex-col items-center justify-center px-6 text-center z-20 w-full rounded-b-[4rem] shadow-2xl overflow-hidden bg-black border-b border-purple-500/20">
+
+        {/* 🎆 Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/BackgroundImages/Exlpore.png"
+            alt="Explore Background"
+            fill
+            className="object-cover opacity-60"
+            priority
+          />
+          {/* Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 z-10" />
+        </div>
+
+        {/* Small Pill Label */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center max-w-4xl mx-auto relative z-10">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-block mb-8">
-            <span className="px-5 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-xs font-medium tracking-[0.2em] uppercase text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.15)]">
-              Experience The Magic
-            </span>
-          </motion.div>
-
-          <h1 className="text-7xl md:text-9xl font-bold tracking-tighter mb-6 text-white leading-none">
-            Design<span className="text-purple-500">.</span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed">
-            Self-design posters with AI. <br className="hidden md:block" />
-            Explore the celebrations that define our culture.
-          </p>
+          transition={{ delay: 0.2 }}
+          className="relative z-30 mb-6 px-4 py-1.5 rounded-full border border-purple-500/30 bg-purple-500/10 text-purple-400 text-[10px] font-bold tracking-widest uppercase shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+          Experience The Magic
         </motion.div>
+
+        {/* Main Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-30 text-8xl md:text-[10rem] font-serif text-white leading-[0.9] tracking-tighter mb-8 drop-shadow-lg">
+          Design<span className="text-purple-500">.</span>
+        </motion.h1>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="relative z-30 text-neutral-200 text-lg md:text-xl font-medium max-w-2xl leading-relaxed drop-shadow-md">
+          Self-design posters with AI. <br className="hidden md:block" />
+          Explore the celebrations that define our culture.
+        </motion.p>
 
         <motion.div
           initial={{ width: 0 }}
@@ -186,37 +203,32 @@ const MainContent = () => {
           className="relative z-30 h-1 bg-purple-500 rounded-full mx-auto mt-12"
         />
 
-        {/* Scroll Indicator */}
+        {/* Generate Button (Replaces Scroll Indicator) */}
         <motion.div
-          style={{ opacity: indicatorOpacity }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-30">
-          <div className="w-[30px] h-[50px] border-2 border-purple-500/40 rounded-full flex justify-center p-2 backdrop-blur-sm">
-            <motion.div
-              animate={{
-                y: [0, 16, 0],
-                opacity: [1, 0.4, 1],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              className="w-1.5 h-1.5 bg-purple-500 rounded-full shadow-[0_0_8px_#A855F7]"
-            />
-          </div>
-          <span className="text-[9px] uppercase tracking-[0.4em] font-semibold text-purple-500/80">
-            Scroll
-          </span>
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="absolute bottom-20 left-1/2 -translate-x-1/2 z-30"
+        >
+          <a
+            href="https://www.srmmilan.aaruush.org/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-8 py-4 bg-[#A855F7] text-white font-bold rounded-full flex items-center gap-2 shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:bg-[#9333EA] transition-all hover:scale-105 active:scale-95 group"
+          >
+            <span>Generate Poster</span>
+          </a>
         </motion.div>
       </section>
 
-      <div className="relative z-10 -mt-12 pt-12 flex flex-col justify-center pb-20">
+      <div className="relative z-10 -mt-12 pt-24 flex flex-col justify-center pb-20 bg-neutral-50 text-black">
         <section className="px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16 opacity-60">
-              <p className="text-sm uppercase tracking-widest text-neutral-500">
-                Recent Creations
-              </p>
+            <div className="mb-12 flex items-center justify-between">
+              <h2 className="text-3xl md:text-5xl font-serif text-black tracking-tighter">
+                Community Gallery<span className="text-purple-500">.</span>
+              </h2>
+              <div className="hidden md:block h-px flex-1 bg-purple-500/20 ml-8" />
             </div>
             <div className="flex flex-wrap justify-center items-center gap-12 md:gap-8 perspective-1000">
               <Polaroid
@@ -243,57 +255,36 @@ const MainContent = () => {
                 delay={0.8}
                 artId={991}
               />
+              <Polaroid
+                rotate="3deg"
+                label="Minimalist Geo"
+                delay={0.2}
+                artId={124}
+              />
+              <Polaroid
+                rotate="-5deg"
+                label="Vaporwave"
+                delay={0.4}
+                artId={567}
+              />
+              <Polaroid
+                rotate="5deg"
+                label="Glitch Art"
+                delay={0.6}
+                artId={890}
+              />
+              <Polaroid
+                rotate="-4deg"
+                label="Surreal Dream"
+                delay={0.8}
+                artId={231}
+              />
             </div>
           </div>
         </section>
       </div>
 
-      <section className="relative z-20 py-32 px-4 bg-neutral-50 text-black">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 opacity-60">
-            <p className="text-sm uppercase tracking-widest text-neutral-500">
-              Community Gallery
-            </p>
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-8 perspective-1000">
-            <Polaroid
-              rotate="3deg"
-              label="Minimalist Geo"
-              delay={0.2}
-              artId={124}
-            />
-            <Polaroid
-              rotate="-5deg"
-              label="Vaporwave"
-              delay={0.4}
-              artId={567}
-            />
-            <Polaroid
-              rotate="5deg"
-              label="Glitch Art"
-              delay={0.6}
-              artId={890}
-            />
-            <Polaroid
-              rotate="-4deg"
-              label="Surreal Dream"
-              delay={0.8}
-              artId={231}
-            />
-          </div>
-        </div>
-      </section>
 
-      <div className="fixed bottom-8 right-8 z-50">
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={() => setAiModalOpen(true)}
-          className="w-16 h-16 rounded-full bg-white text-black shadow-[0_0_40px_rgba(255,255,255,0.3)] flex items-center justify-center relative overflow-hidden group border-2 border-transparent hover:border-purple-500 transition-colors">
-          <div className="absolute inset-0 bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-          <Sparkles className="w-6 h-6 text-purple-600 group-hover:scale-110 transition-transform" />
-        </motion.button>
-      </div>
 
       <AnimatePresence>
         {uploadModalOpen && (
