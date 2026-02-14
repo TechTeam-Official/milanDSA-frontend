@@ -7,14 +7,56 @@
         "name": "Bugata Chanakya Sri Vinayaka",
         "position": "Domain Secretary"
       },
-
+      {
+        "code": "ORM3",
+        "name": "NandhaKumar R",
+        "position": "Convenor"
+      },
+      {
+        "code": "ORM4",
+        "name": "Naveen Kumar S",
+        "position": "Convenor"
+      },
+      {
+        "code": "ORM5",
+        "name": "M.Mohammed Irfan",
+        "position": "Convenor"
+      },
+      {
+        "code": "ORM6",
+        "name": "Sasikanth. A",
+        "position": "Convenor"
+      },
+      {
+        "code": "ORM7",
+        "name": "Jyothi Shasti Dharan S",
+        "position": "Convenor"
+      },
+      {
+        "code": "ORM8",
+        "name": "Mahendiran M",
+        "position": "Convenor"
+      },
+      {
+        "code": "ORM9",
+        "name": "Sanjay P",
+        "position": "Convenor"
+      },
       {
         "code": "ORM10",
         "name": "N.Guru Vishwal Yadav",
         "position": "Convenor"
       },
-      { "code": "ORM11", "name": "U Hanuth", "position": "Convenor" },
-      { "code": "ORM12", "name": "S.Sivasainathreddy", "position": "Convenor" },
+      {
+        "code": "ORM11",
+        "name": "U Hanuth",
+        "position": "Convenor"
+      },
+      {
+        "code": "ORM12",
+        "name": "S.Sivasainathreddy",
+        "position": "Convenor"
+      },
       {
         "code": "ORM13",
         "name": "Avula Mourya Lakshmikanth Reddy",
@@ -30,7 +72,11 @@
         "name": "Kandanuru Balaji Bhuvan",
         "position": "Convenor"
       },
-      { "code": "ORM16", "name": "Hemanth Nutakki", "position": "Convenor" },
+      {
+        "code": "ORM16",
+        "name": "Hemanth Nutakki",
+        "position": "Convenor"
+      },
       {
         "code": "ORM17",
         "name": "Majeti Pardha Sai Pranav Guptha",
@@ -41,46 +87,106 @@
   "P": {
     "label": "Publicity",
     "members": [
-      { "code": "P1", "name": "Sidharth P M", "position": "Domain Secretary" },
-      { "code": "P2", "name": "Grahisha S", "position": "Domain Secretary" },
+      {
+        "code": "P1",
+        "name": "Sidharth P M",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "P2",
+        "name": "Grahisha S",
+        "position": "Domain Secretary"
+      },
       {
         "code": "P3",
         "name": "Thavappriyan Anbalagan",
         "position": "Domain Secretary"
       },
-      { "code": "P4", "name": "Jerikka J", "position": "Convenor" },
-      { "code": "P5", "name": "M Jayavarthean", "position": "Convenor" },
-      { "code": "P6", "name": "John Maximas JP", "position": "Convenor" }
+      {
+        "code": "P4",
+        "name": "Jerikka J",
+        "position": "Convenor"
+      },
+      {
+        "code": "P5",
+        "name": "M Jayavarthean",
+        "position": "Convenor"
+      },
+      {
+        "code": "P6",
+        "name": "John Maximas JP",
+        "position": "Convenor"
+      }
     ]
   },
   "PR": {
     "label": "Public Relations",
     "members": [
-      { "code": "PR1", "name": "Aruna P", "position": "Domain Secretary" },
+      {
+        "code": "PR1",
+        "name": "Aruna P",
+        "position": "Domain Secretary"
+      },
       {
         "code": "PR2",
         "name": "L Gokula Aravind",
         "position": "Domain Secretary"
       },
-      { "code": "PR3", "name": "G Gnaneshwar", "position": "Convenor" },
+      {
+        "code": "PR3",
+        "name": "G Gnaneshwar",
+        "position": "Convenor"
+      },
       {
         "code": "PR4",
         "name": "Bharghavi Sarwa Priyankani",
         "position": "Convenor"
       },
-      { "code": "PR5", "name": "Bharghav A B", "position": "Convenor" },
-      { "code": "PR6", "name": "JS Reshma", "position": "Convenor" },
-      { "code": "PR7", "name": "S.Subhash", "position": "Convenor" }
+      {
+        "code": "PR5",
+        "name": "Bharghav A B",
+        "position": "Convenor"
+      },
+      {
+        "code": "PR6",
+        "name": "JS Reshma",
+        "position": "Convenor"
+      },
+      {
+        "code": "PR7",
+        "name": "S.Subhash",
+        "position": "Convenor"
+      }
     ]
   },
   "M": {
     "label": "Media",
     "members": [
-      { "code": "M1", "name": "Athul A", "position": "Domain Secretary" },
-      { "code": "M2", "name": "Kanish Kumar", "position": "Domain Secretary" },
-      { "code": "M3", "name": "Suseendiran R", "position": "Convenor" },
-      { "code": "M4", "name": "Bathrinath G", "position": "Convenor" },
-      { "code": "M5", "name": "Syam Kumar Oliganti", "position": "Convenor" }
+      {
+        "code": "M1",
+        "name": "Athul A",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "M2",
+        "name": "Kanish Kumar",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "M3",
+        "name": "Suseendiran R",
+        "position": "Convenor"
+      },
+      {
+        "code": "M4",
+        "name": "Bathrinath G",
+        "position": "Convenor"
+      },
+      {
+        "code": "M5",
+        "name": "Syam Kumar Oliganti",
+        "position": "Convenor"
+      }
     ]
   },
   "E": {
@@ -91,35 +197,91 @@
         "name": "Shreevallabh Shinde",
         "position": "Domain Secretary"
       },
-      { "code": "E2", "name": "K Kushi", "position": "Domain Secretary" },
-      { "code": "E3", "name": "Aniketh Menon", "position": "Convenor" },
-      { "code": "E4", "name": "B Moneesha Reddy", "position": "Convenor" },
+      {
+        "code": "E2",
+        "name": "K Kushi",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "E3",
+        "name": "Aniketh Menon",
+        "position": "Convenor"
+      },
+      {
+        "code": "E4",
+        "name": "B Moneesha Reddy",
+        "position": "Convenor"
+      },
       {
         "code": "E5",
         "name": "Amanpreet Singh Chadha",
         "position": "Convenor"
       },
-      { "code": "E6", "name": "Aditi Mandal", "position": "Convenor" }
+      {
+        "code": "E6",
+        "name": "Aditi Mandal",
+        "position": "Convenor"
+      }
     ]
   },
   "H": {
     "label": "Hospitality",
     "members": [
-      { "code": "H1", "name": "Prasath S", "position": "Domain Secretary" },
+      {
+        "code": "H1",
+        "name": "Prasath S",
+        "position": "Domain Secretary"
+      },
       {
         "code": "H2",
         "name": "K.Kalyan Saran",
         "position": "Domain Secretary"
       },
-      { "code": "H3", "name": "Varshitha.G", "position": "Domain Secretary" },
-      { "code": "H4", "name": "O.Yashwanth Reddy", "position": "Convenor" },
-      { "code": "H5", "name": "Ambarapu Ganavarun", "position": "Convenor" },
-      { "code": "H6", "name": "T.Sravya Likitha", "position": "Convenor" },
-      { "code": "H7", "name": "Rishika Reddy", "position": "Convenor" },
-      { "code": "H8", "name": "Pradeep R", "position": "Convenor" },
-      { "code": "H9", "name": "M. Sai Hasya Reddy", "position": "Convenor" },
-      { "code": "H10", "name": "Hema S", "position": "Convenor" },
-      { "code": "H12", "name": "Manjusha M", "position": "Convenor" }
+      {
+        "code": "H3",
+        "name": "Varshitha.G",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "H4",
+        "name": "O.Yashwanth Reddy",
+        "position": "Convenor"
+      },
+      {
+        "code": "H5",
+        "name": "Ambarapu Ganavarun",
+        "position": "Convenor"
+      },
+      {
+        "code": "H6",
+        "name": "T.Sravya Likitha",
+        "position": "Convenor"
+      },
+      {
+        "code": "H7",
+        "name": "Rishika Reddy",
+        "position": "Convenor"
+      },
+      {
+        "code": "H8",
+        "name": "Pradeep R",
+        "position": "Convenor"
+      },
+      {
+        "code": "H9",
+        "name": "M. Sai Hasya Reddy",
+        "position": "Convenor"
+      },
+      {
+        "code": "H10",
+        "name": "Hema S",
+        "position": "Convenor"
+      },
+      {
+        "code": "H12",
+        "name": "Manjusha M",
+        "position": "Convenor"
+      }
     ]
   },
   "S": {
@@ -135,26 +297,86 @@
         "name": "Puli Srinish Goud",
         "position": "Domain Secretary"
       },
-      { "code": "S4", "name": "Dhiya Raj", "position": "Convenor" },
-      { "code": "S5", "name": "Karthik Sai Ambati", "position": "Convenor" },
-      { "code": "S6", "name": "Divyansh Singh", "position": "Convenor" },
-      { "code": "S7", "name": "Aarya Menon", "position": "Convenor" },
-      { "code": "S8", "name": "Ranjani Doneparthi", "position": "Convenor" },
-      { "code": "S9", "name": "T Suryateja", "position": "Convenor" },
-      { "code": "S10", "name": "Sayoni Sharma", "position": "Convenor" }
+      {
+        "code": "S4",
+        "name": "Dhiya Raj",
+        "position": "Convenor"
+      },
+      {
+        "code": "S5",
+        "name": "Karthik Sai Ambati",
+        "position": "Convenor"
+      },
+      {
+        "code": "S6",
+        "name": "Divyansh Singh",
+        "position": "Convenor"
+      },
+      {
+        "code": "S7",
+        "name": "Aarya Menon",
+        "position": "Convenor"
+      },
+      {
+        "code": "S8",
+        "name": "Ranjani Doneparthi",
+        "position": "Convenor"
+      },
+      {
+        "code": "S9",
+        "name": "T Suryateja",
+        "position": "Convenor"
+      },
+      {
+        "code": "S10",
+        "name": "Sayoni Sharma",
+        "position": "Convenor"
+      }
     ]
   },
   "C": {
     "label": "Content",
     "members": [
-      { "code": "C1", "name": "Deepthiga S", "position": "Domain Secretary" },
-      { "code": "C2", "name": "Dinesh L", "position": "Domain Secretary" },
-      { "code": "C3", "name": "Krishna S R", "position": "Convenor" },
-      { "code": "C4", "name": "N.V.Deepak", "position": "Convenor" },
-      { "code": "C5", "name": "Nivetha P", "position": "Convenor" },
-      { "code": "C6", "name": "Ahaskar", "position": "Convenor" },
-      { "code": "C7", "name": "Dharshini L", "position": "Convenor" },
-      { "code": "C8", "name": "Kenisha Surana", "position": "Convenor" }
+      {
+        "code": "C1",
+        "name": "Deepthiga S",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "C2",
+        "name": "Dinesh L",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "C3",
+        "name": "Krishna S R",
+        "position": "Convenor"
+      },
+      {
+        "code": "C4",
+        "name": "N.V.Deepak",
+        "position": "Convenor"
+      },
+      {
+        "code": "C5",
+        "name": "Nivetha P",
+        "position": "Convenor"
+      },
+      {
+        "code": "C6",
+        "name": "Ahaskar",
+        "position": "Convenor"
+      },
+      {
+        "code": "C7",
+        "name": "Dharshini L",
+        "position": "Convenor"
+      },
+      {
+        "code": "C8",
+        "name": "Kenisha Surana",
+        "position": "Convenor"
+      }
     ]
   },
   "TA": {
@@ -165,9 +387,21 @@
         "name": "Charishma Yadav Palla",
         "position": "Domain Secretary"
       },
-      { "code": "TA2", "name": "Sharagesh R", "position": "Domain Secretary" },
-      { "code": "TA3", "name": "Narindi Koushik", "position": "Convenor" },
-      { "code": "TA4", "name": "N Siva Bhadra", "position": "Convenor" }
+      {
+        "code": "TA2",
+        "name": "Sharagesh R",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "TA3",
+        "name": "Narindi Koushik",
+        "position": "Convenor"
+      },
+      {
+        "code": "TA4",
+        "name": "N Siva Bhadra",
+        "position": "Convenor"
+      }
     ]
   },
   "TG": {
@@ -178,30 +412,86 @@
         "name": "Gouri Parvathy T.S",
         "position": "Domain Secretary"
       },
-      { "code": "TG2", "name": "Sahil Patel", "position": "Domain Secretary" },
-      { "code": "TG3", "name": "Sreemayi", "position": "Convenor" }
+      {
+        "code": "TG2",
+        "name": "Sahil Patel",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "TG3",
+        "name": "Sreemayi",
+        "position": "Convenor"
+      }
     ]
   },
   "CP": {
     "label": "Certificate and Prize Distribution",
     "members": [
-      { "code": "CP1", "name": "Sriharan S A", "position": "Domain Secretary" },
-      { "code": "CP2", "name": "Mithuna G", "position": "Domain Secretary" },
-      { "code": "CP3", "name": "Tharun A", "position": "Convenor" },
-      { "code": "CP4", "name": "Kota Varshith", "position": "Convenor" }
+      {
+        "code": "CP1",
+        "name": "Sriharan S A",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "CP2",
+        "name": "Mithuna G",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "CP3",
+        "name": "Tharun A",
+        "position": "Convenor"
+      },
+      {
+        "code": "CP4",
+        "name": "Kota Varshith",
+        "position": "Convenor"
+      }
     ]
   },
   "TR": {
     "label": "Treasurer",
     "members": [
-      { "code": "TR1", "name": "Harini.R", "position": "Domain Secretary" },
-      { "code": "TR2", "name": "P.Siddhardh", "position": "Domain Secretary" },
-      { "code": "TR3", "name": "R.J.S.R.K.Prakash", "position": "Convenor" },
-      { "code": "TR4", "name": "Tejaswini Nagaselvam", "position": "Convenor" },
-      { "code": "TR5", "name": "Sasikrishna A", "position": "Convenor" },
-      { "code": "TR6", "name": "Ameya Bopparaju", "position": "Convenor" },
-      { "code": "TR7", "name": "Tamil Arasan", "position": "Convenor" },
-      { "code": "TR8", "name": "Vishnu Kovuru", "position": "Convenor" }
+      {
+        "code": "TR1",
+        "name": "Harini.R",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "TR2",
+        "name": "P.Siddhardh",
+        "position": "Domain Secretary"
+      },
+      {
+        "code": "TR3",
+        "name": "R.J.S.R.K.Prakash",
+        "position": "Convenor"
+      },
+      {
+        "code": "TR4",
+        "name": "Tejaswini Nagaselvam",
+        "position": "Convenor"
+      },
+      {
+        "code": "TR5",
+        "name": "Sasikrishna A",
+        "position": "Convenor"
+      },
+      {
+        "code": "TR6",
+        "name": "Ameya Bopparaju",
+        "position": "Convenor"
+      },
+      {
+        "code": "TR7",
+        "name": "Tamil Arasan",
+        "position": "Convenor"
+      },
+      {
+        "code": "TR8",
+        "name": "Vishnu Kovuru",
+        "position": "Convenor"
+      }
     ]
   },
   "DS": {
@@ -212,7 +502,11 @@
         "name": "Rathna Balaji S K",
         "position": "Domain Secretary"
       },
-      { "code": "DS2", "name": "Sri Nidhi A", "position": "Domain Secretary" },
+      {
+        "code": "DS2",
+        "name": "Sri Nidhi A",
+        "position": "Domain Secretary"
+      },
       {
         "code": "DS3",
         "name": "Rishi Tushaar V",
@@ -223,67 +517,211 @@
         "name": "Divya Santhoshi",
         "position": "Domain Secretary"
       },
-      { "code": "DS5", "name": "Gaurav Gupta", "position": "Domain Secretary" },
+      {
+        "code": "DS5",
+        "name": "Gaurav Gupta",
+        "position": "Domain Secretary"
+      },
       {
         "code": "DS6",
         "name": "Beracah Danny Mishra",
         "position": "Domain Secretary"
       },
-      { "code": "DS7", "name": "Sailikhila", "position": "Domain Secretary" },
+      {
+        "code": "DS7",
+        "name": "Sailikhila",
+        "position": "Domain Secretary"
+      },
       {
         "code": "DS8",
         "name": "Mohammed Adhil",
         "position": "Domain Secretary"
       },
-      { "code": "DS9", "name": "Anshil Mithr", "position": "Domain Secretary" },
+      {
+        "code": "DS9",
+        "name": "Anshil Mithr",
+        "position": "Domain Secretary"
+      },
       {
         "code": "DS10",
         "name": "Tummalapalli Jaswanth Nagasairam",
         "position": "Domain Secretary"
       },
-      { "code": "DS11", "name": "Sentamil", "position": "Convenor" },
-      { "code": "DS12", "name": "Harish K A S", "position": "Convenor" },
-      { "code": "DS13", "name": "Ajayraj R", "position": "Convenor" },
-      { "code": "DS14", "name": "G Santhosh Nithi", "position": "Convenor" },
-      { "code": "DS15", "name": "Prasanth S", "position": "Convenor" },
-      { "code": "DS16", "name": "Akash S", "position": "Convenor" },
-      { "code": "DS17", "name": "S Trikanth", "position": "Convenor" },
+      {
+        "code": "DS11",
+        "name": "Sentamil",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS12",
+        "name": "Harish K A S",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS13",
+        "name": "Ajayraj R",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS14",
+        "name": "G Santhosh Nithi",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS15",
+        "name": "Prasanth S",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS16",
+        "name": "Akash S",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS17",
+        "name": "S Trikanth",
+        "position": "Convenor"
+      },
       {
         "code": "DS18",
         "name": "Marthala Nithin Reddy",
         "position": "Convenor"
       },
-      { "code": "DS19", "name": "Rohan Teja", "position": "Convenor" },
-      { "code": "DS20", "name": "Bhupati Hemagirisai", "position": "Convenor" },
-      { "code": "DS21", "name": "Ravi Teja Prasadam", "position": "Convenor" },
-      { "code": "DS22", "name": "Kotha Sairam", "position": "Convenor" },
-      { "code": "DS23", "name": "Ansh Singh", "position": "Convenor" },
-      { "code": "DS24", "name": "Vaibhav", "position": "Convenor" },
-      { "code": "DS25", "name": "Vijay Raja", "position": "Convenor" },
+      {
+        "code": "DS19",
+        "name": "Rohan Teja",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS20",
+        "name": "Bhupati Hemagirisai",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS21",
+        "name": "Ravi Teja Prasadam",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS22",
+        "name": "Kotha Sairam",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS23",
+        "name": "Ansh Singh",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS24",
+        "name": "Vaibhav",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS25",
+        "name": "Vijay Raja",
+        "position": "Convenor"
+      },
       {
         "code": "DS26",
         "name": "Akil Abdul Rehman Haris",
         "position": "Convenor"
       },
-      { "code": "DS27", "name": "Mithilesh.N", "position": "Convenor" },
-      { "code": "DS28", "name": "Vansh Metha", "position": "Convenor" },
-      { "code": "DS29", "name": "Garv Singh Rathore", "position": "Convenor" },
-      { "code": "DS30", "name": "Vinayak Dhal", "position": "Convenor" },
-      { "code": "DS31", "name": "V Harish", "position": "Convenor" },
-      { "code": "DS32", "name": "Lishanth J", "position": "Convenor" },
-      { "code": "DS33", "name": "Aditi Bajpai", "position": "Convenor" },
-      { "code": "DS34", "name": "Riya Fathima", "position": "Convenor" },
-      { "code": "DS35", "name": "Samiksha Singh", "position": "Convenor" },
-      { "code": "DS36", "name": "S Pavithra", "position": "Convenor" },
-      { "code": "DS37", "name": "Ardra E P", "position": "Convenor" },
-      { "code": "DS38", "name": "Pajarla Manogna", "position": "Convenor" },
-      { "code": "DS39", "name": "Gujjula Bhavana", "position": "Convenor" },
-      { "code": "DS40", "name": "Karishma S", "position": "Convenor" },
-      { "code": "DS41", "name": "M Pranita", "position": "Convenor" },
-      { "code": "DS42", "name": "Ishita Ranjan", "position": "Convenor" },
-      { "code": "DS43", "name": "Evangeline Veronica", "position": "Convenor" },
-      { "code": "DS44", "name": "Vikraman N", "position": "Convenor" },
-      { "code": "DS45", "name": "R Raghul Krishna", "position": "Convenor" }
+      {
+        "code": "DS27",
+        "name": "Mithilesh.N",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS28",
+        "name": "Vansh Metha",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS29",
+        "name": "Garv Singh Rathore",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS30",
+        "name": "Vinayak Dhal",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS31",
+        "name": "V Harish",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS32",
+        "name": "Lishanth J",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS33",
+        "name": "Aditi Bajpai",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS34",
+        "name": "Riya Fathima",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS35",
+        "name": "Samiksha Singh",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS36",
+        "name": "S Pavithra",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS37",
+        "name": "Ardra E P",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS38",
+        "name": "Pajarla Manogna",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS39",
+        "name": "Gujjula Bhavana",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS40",
+        "name": "Karishma S",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS41",
+        "name": "M Pranita",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS42",
+        "name": "Ishita Ranjan",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS43",
+        "name": "Evangeline Veronica",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS44",
+        "name": "Vikraman N",
+        "position": "Convenor"
+      },
+      {
+        "code": "DS45",
+        "name": "R Raghul Krishna",
+        "position": "Convenor"
+      }
     ]
   }
 }

@@ -73,6 +73,7 @@ const RAW_DATA = {
 export function getTeamData(): TeamJSON {
   const result: TeamJSON = {};
 
+
   for (const [teamKey, teamData] of Object.entries(RAW_DATA)) {
     // folder name in Teams directory
     const folder = KEY_TO_FOLDER[teamKey] ?? teamKey;

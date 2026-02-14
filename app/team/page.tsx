@@ -6,8 +6,11 @@ export const metadata = {
   description: "Crew Behind the magic of Milan'26",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function TeamPage() {
   const teamData = getTeamData();
+
 
   return <TeamClient teamData={teamData} />;
 }
