@@ -129,7 +129,11 @@ export default function LoginPage() {
                 />
               </div>
               <p className="text-[#F6F2EA]/40 text-[11px] pl-1 tracking-wide">
-                SRM students use <span className="text-[#C9A24D]/70 font-medium">@srmist.edu.in</span> mail id.
+                SRM students use{" "}
+                <span className="text-[#C9A24D]/70 font-medium">
+                  @srmist.edu.in
+                </span>{" "}
+                mail id.
               </p>
             </div>
 
@@ -143,9 +147,7 @@ export default function LoginPage() {
                   Sending...
                 </>
               ) : (
-                <>
-                  Get Verification Code
-                </>
+                <>Get Verification Code</>
               )}
             </button>
           </form>
@@ -172,7 +174,8 @@ export default function LoginPage() {
                 />
               </div>
               <p className="text-[#F6F2EA]/40 text-[11px] pl-1">
-                Sent to <span className="text-[#F6F2EA]/80 font-medium">{email}</span>
+                Sent to{" "}
+                <span className="text-[#F6F2EA]/80 font-medium">{email}</span>
               </p>
             </div>
 
@@ -187,7 +190,7 @@ export default function LoginPage() {
                 </>
               ) : (
                 <>
-                  Enter Milan '26
+                  Enter Milan &apos;26
                   <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </>
               )}
