@@ -26,6 +26,7 @@ import {
   BookOpen,
   Sparkles,
   HelpCircle,
+  Shield,
   type LucideIcon,
 } from "lucide-react";
 
@@ -86,6 +87,12 @@ const CATEGORY_META = {
     description: "Events • Trivia, puzzles and brain teasers",
     icon: HelpCircle,
     poster: "/events/quizbg.png",
+  },
+  self_defence: {
+    title: "Self Defence",
+    description: "2 events • Boxing and Kick-boxing",
+    icon: Shield,
+    poster: "/events/sdbg.png",
   },
 } satisfies Record<
   string,

@@ -11,6 +11,7 @@ export const getRulebookUrl = (categoryKey: string): string | null => {
         literary: "LITERARY.pdf",
         gaming: "GAMING.pdf",
         quiz: "QUIZ.pdf",
+        self_defence: "SELF_DEFENCE_.pdf",
     };
 
     const filename = mapping[categoryKey];
