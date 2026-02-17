@@ -48,7 +48,7 @@ const people = [
     {
         name: "DJ Viola",
         role: "DJ",
-        image: "/ProShowPasses/Viola.jpg",
+        image: "/ProShowPasses/Viola.png",
         type: "opener",
         landscape: true,
         fit: "cover",
