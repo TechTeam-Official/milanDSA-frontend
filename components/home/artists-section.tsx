@@ -110,7 +110,7 @@ export function ArtistsSection() {
                         people.find((p) => p.name === "Santhosh Narayanan"),
                         people.find((p) => p.name === "Coming Soon"),
                         people.find((p) => p.name === "Office Gaana"),
-                        people.find((p) => p.name === "Viola"),
+                        people.find((p) => p.name === "DJ Viola"),
                     ]
                         .filter(Boolean)
                         .map((person, idx) => {
