@@ -28,6 +28,7 @@ interface PassOption {
   icon: React.ElementType;
   color: string;
   comingSoon?: boolean;
+  soldOut?: boolean;
 }
 
 const PASSES: PassOption[] = [
@@ -55,6 +56,7 @@ const PASSES: PassOption[] = [
     icon: Crown,
     color: "from-amber-400 to-orange-400",
     comingSoon: false,
+    soldOut: true,
   },
 ];
 
@@ -64,8 +66,8 @@ export default function Passes() {
   // Removed unused state vars
 
   const handleBuyPass = async (pass: PassOption) => {
-    // Prevent action if coming soon
-    if (pass.comingSoon) return;
+    // Prevent action if coming soon or sold out
+    if (pass.comingSoon || pass.soldOut) return;
 
     // Determine the target URL based on pass type
     let targetUrl = "";
@@ -152,11 +154,10 @@ export default function Passes() {
 
         {/* Pass Grid */}
         <div
-          className={`grid gap-8 w-full ${
-            filteredPasses.length === 1
+          className={`grid gap-8 w-full ${filteredPasses.length === 1
               ? "grid-cols-1 max-w-md mx-auto"
               : "grid-cols-1 md:grid-cols-2 max-w-5xl"
-          }`}>
+            }`}>
           {filteredPasses.map((pass, index) => (
             <motion.div
               key={pass.id}
@@ -240,7 +241,9 @@ export default function Passes() {
                     buttonText = "SRM Verified Only";
                   }
 
-                  if (pass.comingSoon) {
+                  if (pass.soldOut) {
+                    buttonText = "Sold Out";
+                  } else if (pass.comingSoon) {
                     buttonText = "Coming Soon...";
                   }
 
@@ -248,18 +251,17 @@ export default function Passes() {
                     <div className="space-y-2 relative z-10">
                       <Button
                         onClick={() => handleBuyPass(pass)}
-                        disabled={(!!user && !isEligible) || !!pass.comingSoon}
-                        className={`w-full font-bold py-6 rounded-xl group/btn transform transition-all duration-300 ${
-                          user && !isEligible
+                        disabled={(!!user && !isEligible) || !!pass.comingSoon || !!pass.soldOut}
+                        className={`w-full font-bold py-6 rounded-xl group/btn transform transition-all duration-300 ${user && !isEligible
                             ? "bg-[#14172B] text-neutral-500 cursor-not-allowed border border-white/5"
-                            : pass.comingSoon
+                            : pass.comingSoon || pass.soldOut
                               ? "bg-[#14172B]/60 text-neutral-400 cursor-not-allowed border border-dashed border-white/20"
                               : "bg-white text-[#14172B] hover:-translate-y-1 hover:shadow-[0_0_25px_rgba(255,255,255,0.3)] hover:bg-neutral-200 hover:border-white border border-white"
-                        }`}>
+                          }`}>
                         <span className="flex items-center justify-center gap-2 font-bold tracking-wide">
                           <>
                             {buttonText}
-                            {pass.comingSoon || (user && !isEligible) ? (
+                            {pass.comingSoon || pass.soldOut || (user && !isEligible) ? (
                               <Ban className="w-4 h-4" />
                             ) : (
                               <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" />
