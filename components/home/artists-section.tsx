@@ -38,12 +38,29 @@ const people = [
     {
         name: "Office Gaana",
         role: "Live Band",
-        // Removed subRole
         image: "/ProShowPasses/Office-Gaana.png",
+        type: "opener",
+        landscape: false,
+        fit: "cover",
+        position: "object-center",
+        date: "21.02.2026",
+    },
+    {
+        name: "DJ Viola",
+        role: "DJ",
+        image: "/ProShowPasses/Viola.png",
         type: "opener",
         landscape: true,
         fit: "cover",
+        position: "object-center",
         date: "21.02.2026",
+    },
+    {
+        name: "Coming Soon",
+        role: "Stay Tuned",
+        type: "opener",
+        landscape: false,
+        date: "TBA",
     },
 
 ];
@@ -91,7 +108,9 @@ export function ArtistsSection() {
                         people.find((p) => p.featured),
                         people.find((p) => p.name === "Mithoon"),
                         people.find((p) => p.name === "Santhosh Narayanan"),
+                        people.find((p) => p.name === "Coming Soon"),
                         people.find((p) => p.name === "Office Gaana"),
+                        people.find((p) => p.name === "DJ Viola"),
                     ]
                         .filter(Boolean)
                         .map((person, idx) => {
@@ -124,19 +143,24 @@ export function ArtistsSection() {
                                         person?.fit === "cover" ? "p-0" : (isLarge ? "p-8" : "p-4")
                                         }`}>
                                         <div className="relative w-full h-full">
-                                            <Image
-                                                src={person?.image || ""}
-                                                alt={person?.name || ""}
-                                                fill
-                                                className={`${
-                                                    // @ts-ignore
-                                                    person?.fit === "cover" ? "object-cover object-top" :
+                                            {person?.image && (
+                                                <Image
+                                                    src={person.image}
+                                                    alt={person.name}
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                                    quality={person.name === "Office Gaana" ? 60 : 85}
+                                                    className={`transition-all duration-500 ${isLarge ? "group-hover:scale-110" : "group-hover:scale-110"} ${
                                                         // @ts-ignore
-                                                        person?.fit === "contain" ? "object-contain object-center" :
-                                                            "object-contain object-bottom"
-                                                    } transition-all duration-500 ${isLarge ? "group-hover:scale-110" : "group-hover:scale-110"
-                                                    }`}
-                                            />
+                                                        person?.position ? person.position :
+                                                            // @ts-ignore
+                                                            person?.fit === "cover" ? "object-cover object-top" :
+                                                                // @ts-ignore
+                                                                person?.fit === "contain" ? "object-contain object-center" :
+                                                                    "object-contain object-bottom"
+                                                        }`}
+                                                />
+                                            )}
                                         </div>
                                     </div>
 
