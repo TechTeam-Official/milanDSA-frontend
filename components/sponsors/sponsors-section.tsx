@@ -18,7 +18,7 @@ interface Sponsor {
 // Typed explicitly so TS knows 'image' is optional but valid to access
 const CURRENT_SPONSORS: Sponsor[] = [
   {
-    name: "SRM Global",
+    name: "SRM Global Hospital",
     image: "/current-sponsors/SRM Global.png",
     span: "md:col-span-2",
     role: "Healthcare Partner",
