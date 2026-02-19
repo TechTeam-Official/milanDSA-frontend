@@ -18,44 +18,46 @@ interface Sponsor {
 // Typed explicitly so TS knows 'image' is optional but valid to access
 const CURRENT_SPONSORS: Sponsor[] = [
   {
+    name: "SRM Global Hospital",
+    image: "/current-sponsors/SRM Global.png",
+    span: "md:col-span-2",
+    role: "Healthcare Partner",
+  },
+  {
     name: "Farmley",
     image: "/current-sponsors/farmley.png",
+    span: "md:col-span-1",
+    role: "Snacking Partner",
+  },
+  {
+    name: "Plum",
+    image: "/current-sponsors/Plum.png",
     span: "md:col-span-2",
+    role: "Gifting Partner",
   },
   {
     name: "Date Bites",
     image: "/current-sponsors/date-bite.png",
     span: "md:col-span-1",
-  },
-  {
-    name: "Barzell",
-    image: "/current-sponsors/barzell.png",
-    span: "md:col-span-1",
+    role: "Snacking Partner",
   },
   {
     name: "Ultraviolette",
     image: "/current-sponsors/ultraviolette.png",
-    span: "md:col-span-2",
-  },
-  {
-    name: "Revealing Soon",
-    span: "md:col-span-2",
-  },
-  {
-    name: "Revealing Soon",
     span: "md:col-span-1",
+    role: "Featured Sponsor",
   },
   {
-    name: "Revealing Soon",
+    name: "Times of India",
+    image: "/current-sponsors/toi.png",
     span: "md:col-span-1",
+    role: "Media Partner",
   },
   {
-    name: "Revealing Soon",
+    name: "Barzell Gyms",
+    image: "/current-sponsors/barzell.png",
     span: "md:col-span-1",
-  },
-  {
-    name: "Revealing Soon",
-    span: "md:col-span-1",
+    role: "Fitness Partner",
   },
 ];
 
