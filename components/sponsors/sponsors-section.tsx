@@ -18,6 +18,12 @@ interface Sponsor {
 // Typed explicitly so TS knows 'image' is optional but valid to access
 const CURRENT_SPONSORS: Sponsor[] = [
   {
+    name: "KonfHub",
+    image: "/current-sponsors/konfhub.png",
+    span: "md:col-span-1",
+    role: "Ticketing Partner",
+  },
+  {
     name: "SRM Global Hospital",
     image: "/current-sponsors/SRM Global.png",
     span: "md:col-span-2",
@@ -58,6 +64,18 @@ const CURRENT_SPONSORS: Sponsor[] = [
     image: "/current-sponsors/barzell.png",
     span: "md:col-span-1",
     role: "Fitness Partner",
+  },
+  {
+    name: "SVS",
+    image: "/current-sponsors/SVS.png",
+    span: "md:col-span-1",
+    role: "Merchandise Partner",
+  },
+  {
+    name: "Ravi Teja Motors",
+    image: "/current-sponsors/Ravi-Teja-Motors.png",
+    span: "md:col-span-1",
+    role: "Merchandise Partner",
   },
 ];
 
