@@ -56,11 +56,15 @@ const people = [
         date: "21.02.2026",
     },
     {
-        name: "Coming Soon",
-        role: "Stay Tuned",
+        name: "Anishma Anilkumar",
+        role: "Chief Guest",
+        subRole: "Valedictory",
+        image: "/ProShowPasses/Anishma.png",
         type: "opener",
         landscape: false,
-        date: "TBA",
+        fit: "cover",
+        position: "object-top",
+        date: "22.02.2026",
     },
 
 ];
@@ -108,7 +112,7 @@ export function ArtistsSection() {
                         people.find((p) => p.featured),
                         people.find((p) => p.name === "Mithoon"),
                         people.find((p) => p.name === "Santhosh Narayanan"),
-                        people.find((p) => p.name === "Coming Soon"),
+                        people.find((p) => p.name === "Anishma Anilkumar"),
                         people.find((p) => p.name === "Office Gaana"),
                         people.find((p) => p.name === "DJ Viola"),
                     ]
